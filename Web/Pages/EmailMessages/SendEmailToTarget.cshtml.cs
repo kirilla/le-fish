@@ -1,0 +1,81 @@
+using Lefish.Application.Commands.EmailMessages.SendEmailToTarget;
+
+namespace Lefish.Web.Pages.EmailMessages;
+
+public class SendEmailToTargetModel(
+    IUserToken userToken,
+    IDatabaseService database,
+    ISendEmailToTargetCommand command) : UserTokenPageModel(userToken)
+{
+    public EmailTarget EmailTarget { get; set; }
+
+    public List<EmailAccount> EmailAccounts { get; set; }
+    public List<EmailTemplate> EmailTemplates { get; set; }
+    
+    [BindProperty]
+    public SendEmailToTargetCommandModel CommandModel { get; set; }
+
+    public async Task<IActionResult> OnGetAsync(int id)
+    {
+        try
+        {
+            if (!command.IsPermitted(UserToken))
+                throw new NotPermittedException();
+
+            EmailTarget = await database.EmailTargets
+                .Where(x => x.Id == id)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            EmailAccounts = await database.EmailAccounts.ToListAsync();
+            EmailTemplates = await database.EmailTemplates.ToListAsync();
+
+            CommandModel = new SendEmailToTargetCommandModel()
+            {
+                EmailTargetId = id,
+            };
+
+            return Page();
+        }
+        catch (NotFoundException)
+        {
+            return Redirect("/help/notfound");
+        }
+        catch
+        {
+            return Redirect("/help/notpermitted");
+        }
+    }
+
+    public async Task<IActionResult> OnPostAsync(int id)
+    {
+        try
+        {
+            if (!command.IsPermitted(UserToken))
+                throw new NotPermittedException();
+
+            EmailTarget = await database.EmailTargets
+                .Where(x => x.Id == id)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            EmailAccounts = await database.EmailAccounts.ToListAsync();
+            EmailTemplates = await database.EmailTemplates.ToListAsync();
+
+            if (!ModelState.IsValid)
+                return Page();
+
+            await command.Execute(UserToken, CommandModel);
+
+            return Redirect("/desktop");
+        }
+        catch (NotFoundException)
+        {
+            return Redirect("/help/notfound");
+        }
+        catch
+        {
+            return Redirect("/help/notpermitted");
+        }
+    }
+}

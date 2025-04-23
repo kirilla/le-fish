@@ -1,0 +1,13 @@
+global using Lefish.Application.Interfaces;
+global using Lefish.Common.Constants;
+global using Lefish.Common.Exceptions;
+global using Lefish.Common.Extensions;
+global using Lefish.Common.Interfaces;
+global using Lefish.Domain.Entities;
+global using Lefish.Domain.Enums;
+global using Lefish.Web.Common;
+global using Lefish.Web.Models;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Mvc.RazorPages;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Options;

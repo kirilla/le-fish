@@ -1,0 +1,53 @@
+﻿@page "/edit-payload-page/{id:int}"
+@model EditPayloadPageModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera fångstsida -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Redigera fångstsidan:
+        @(Model.PayloadPage.Name)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.PayloadPageId" />
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <label asp-for="CommandModel.UrlRegex">
+            URL-regex
+        </label>
+        <input asp-for="CommandModel.UrlRegex" />
+
+        <label asp-for="CommandModel.Html">
+            HTML
+        </label>
+        <textarea asp-for="CommandModel.Html" rows="10"></textarea>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-payload-page/@(Model.PayloadPage.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

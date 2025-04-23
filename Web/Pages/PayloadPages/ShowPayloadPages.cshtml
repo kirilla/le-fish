@@ -1,0 +1,58 @@
+﻿@page "/show-payload-pages"
+@model ShowPayloadPagesModel
+@{
+}
+
+@section Meta {
+    <title>
+        Fångstsidor -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Fångstsidor
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var page in Model.PayloadPages)
+            {
+                <li>
+                    🕸️
+                    &thinsp;
+                    <a href="/show-payload-page/@(page.Id)">
+                        @(page.Name)
+                    </a>
+                </li>
+            }
+
+            @if (!Model.PayloadPages.Any())
+            {
+                <li>
+                    🕸️
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    @if (Model.CanAddPayloadPage)
+    {
+        <p>
+            <a class="button" href="/add-payload-page">
+                Lägg till en fångstsida
+            </a>
+        </p>
+    }
+
+</main>

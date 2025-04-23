@@ -1,0 +1,48 @@
+﻿@page "/show-user/{id:int}"
+@model ShowUserModel
+@{
+}
+
+@section Meta {
+    <title>@(Model.User.Name) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Användare: 
+        @(Model.User.Name)
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var email in Model.UserEmails)
+            {
+                <li>
+                    @(email.Address)
+                </li>
+            }
+        </ul>
+
+        <p>
+            Konto skapat
+            @(Model.User.Created?.ToFixedFormatDate() ?? "–")
+        </p>
+
+        <a class="button"
+           href="/delete-user/@(Model.User.Id)">
+            Ta bort användaren
+        </a>
+
+        <a class="button"
+           href="/edit-user/@(Model.User.Id)">
+            Redigera
+        </a>
+
+    </div>
+
+</main>

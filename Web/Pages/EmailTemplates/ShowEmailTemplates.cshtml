@@ -1,0 +1,58 @@
+﻿@page "/show-email-templates"
+@model ShowEmailTemplatesModel
+@{
+}
+
+@section Meta {
+    <title>
+        Epostmallar -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Epostmallar
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var Template in Model.EmailTemplates)
+            {
+                <li>
+                    📝
+                    &thinsp;
+                    <a href="/show-email-template/@(Template.Id)">
+                        @(Template.Subject)
+                    </a>
+                </li>
+            }
+
+            @if (!Model.EmailTemplates.Any())
+            {
+                <li>
+                    📝
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    @if (Model.CanAddTemplate)
+    {
+        <p>
+            <a class="button" href="/add-email-template">
+                Lägg till en mall
+            </a>
+        </p>
+    }
+
+</main>

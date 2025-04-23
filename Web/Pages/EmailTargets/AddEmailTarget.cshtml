@@ -1,0 +1,50 @@
+﻿@page "/add-email-target"
+@model AddEmailTargetModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till målkonto -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Lägg till ett målkonto
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <label asp-for="CommandModel.Address">
+            Epostadress
+        </label>
+        <input asp-for="CommandModel.Address" />
+
+        <label asp-for="CommandModel.Identifier">
+            Phishing-id
+        </label>
+        <input asp-for="CommandModel.Identifier" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/show-email-targets">
+            Avbryt
+        </a>
+    </form>
+
+</main>

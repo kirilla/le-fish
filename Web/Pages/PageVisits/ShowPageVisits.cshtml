@@ -1,0 +1,53 @@
+﻿@page "/show-page-visits"
+@model ShowPageVisitsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Sidbesök -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Sidbesök
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var visit in Model.PageVisits)
+            {
+                <li>
+                    🙋
+                    &thinsp;
+                    <a href="/show-page-visit/@(visit.Id)">
+                        @(visit.EmailTarget.Address)
+                        &thinsp;
+                        @(visit.PayloadPage.Name)
+                        &thinsp;
+                        @(visit.Created.ToFixedFormatDateShortTime())
+                    </a>
+                </li>
+            }
+
+            @if (!Model.PageVisits.Any())
+            {
+                <li>
+                    🙋
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+</main>

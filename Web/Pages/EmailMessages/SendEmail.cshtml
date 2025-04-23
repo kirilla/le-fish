@@ -1,0 +1,77 @@
+﻿@page "/send-email"
+@model SendEmailModel
+@{
+}
+
+@section Meta {
+    <title>
+        Skicka meddelande -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Skicka meddelande
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.EmailTargetId">
+            Målkonto
+        </label>
+
+        <select asp-for="CommandModel.EmailTargetId">
+            <option value="">–</option>
+            @foreach (var target in Model.EmailTargets)
+            {
+                <option value="@(target.Id)">
+                    @(target.Name), @(target.Address)
+                </option>
+            }
+        </select>
+
+        <label asp-for="CommandModel.EmailTemplateId">
+            Epostmall
+        </label>
+
+        <select asp-for="CommandModel.EmailTemplateId">
+            <option value="">–</option>
+            @foreach (var target in Model.EmailTemplates)
+            {
+                <option value="@(target.Id)">
+                    @(target.Subject)
+                </option>
+            }
+        </select>
+
+        <label asp-for="CommandModel.EmailAccountId">
+            Epostkonto
+        </label>
+
+        <select asp-for="CommandModel.EmailAccountId">
+            <option value="">–</option>
+            @foreach (var target in Model.EmailAccounts)
+            {
+                <option value="@(target.Id)">
+                    @(target.FromName), @(target.FromAddress)
+                </option>
+            }
+        </select>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Skicka
+        </button>
+
+        <a class="button" href="/desktop">
+            Avbryt
+        </a>
+    </form>
+
+</main>

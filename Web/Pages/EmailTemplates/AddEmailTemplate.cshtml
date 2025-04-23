@@ -1,0 +1,52 @@
+﻿@page "/add-email-template"
+@model AddEmailTemplateModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till epostmall -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Lägg till en epostmall
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.Subject">
+            Ämnesrad
+        </label>
+        <input asp-for="CommandModel.Subject" />
+
+        <label asp-for="CommandModel.HtmlBody">
+            HTML-version
+        </label>
+        <textarea asp-for="CommandModel.HtmlBody" rows="10"
+                  placeholder="HTML här"></textarea>
+
+        <label asp-for="CommandModel.TextBody">
+            Text-version
+        </label>
+        <textarea asp-for="CommandModel.TextBody" rows="10"
+                  placeholder="Text här"></textarea>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/show-email-templates">
+            Avbryt
+        </a>
+    </form>
+
+</main>

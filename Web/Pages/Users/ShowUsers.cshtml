@@ -1,0 +1,46 @@
+﻿@page "/show-users"
+@model ShowUsersModel
+@{
+}
+
+@section Meta {
+    <title>
+        Användarkonton - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Användarkonton
+    </h4>
+
+    <div class="notice">
+        <ul>
+            @foreach (var user in Model.Users)
+            {
+                <li>
+                    👤
+                    &thinsp;
+                    <a href="/show-user/@(user.Id)">
+                        @(user.Name)
+                    </a>
+                </li>
+            }
+
+            @if (!Model.Users.Any())
+            {
+                <li>
+                    👤
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+    </div>
+
+</main>

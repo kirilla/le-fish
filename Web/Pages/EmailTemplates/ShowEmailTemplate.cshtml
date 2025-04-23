@@ -1,0 +1,140 @@
+﻿@page "/show-email-template/{id:int}"
+@model ShowEmailTemplateModel
+@{
+}
+
+@section Meta {
+    <title>Epostmall - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        📝
+        @(Model.EmailTemplate.Subject)
+    </h4>
+
+    <h5>
+        Text-version
+    </h5>
+    <pre class="notice">@(Model.EmailTemplate.TextBody)</pre>
+
+    <h5>
+        HTML-version
+    </h5>
+    <pre class="notice">@(Model.EmailTemplate.HtmlBody)</pre>
+
+    <h5>
+        Bilder
+    </h5>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var image in Model.EmailImages)
+            {
+                <li>
+                    🖼️
+                    &thinsp;
+                    <a href="/show-email-image/@(image.Id)">
+                        @(image.Name)
+                    </a>
+                    &emsp;
+                    Kod:
+                    &thinsp;
+                    <span>
+                        &lt;img src="cid:@(image.Id)"&gt;
+                    </span>
+                </li>
+            }
+
+            @if (!Model.EmailImages.Any())
+            {
+                <li>
+                    🖼️
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    <p>
+        @if (Model.CanUploadEmailImage)
+        {
+            <a class="button" href="/upload-email-image/@(Model.EmailTemplate.Id)">
+                Ladda upp bild
+            </a>
+        }
+    </p>
+
+    <h5>
+        Bilagor
+    </h5>
+    
+    <div class="notice">
+
+        <ul>
+            @foreach (var attachment in Model.EmailAttachments)
+            {
+                <li>
+                    📎
+                    &thinsp;
+                    <a href="/show-email-attachment/@(attachment.Id)">
+                        @(attachment.Name)
+                    </a>
+                    &emsp;
+                    @(attachment.ContentType)
+                </li>
+            }
+
+            @if (!Model.EmailAttachments.Any())
+            {
+                <li>
+                    📎
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    <p>
+        @if (Model.CanUploadEmailAttachment)
+        {
+            <a class="button" href="/upload-email-attachment/@(Model.EmailTemplate.Id)">
+                Ladda upp bilaga
+            </a>
+        }
+    </p>
+
+    <p>
+        @if (Model.CanEditTemplate)
+        {
+            <a class="button" href="/edit-email-template/@(Model.EmailTemplate.Id)">
+                Redigera
+            </a>
+        }
+
+        @if (Model.CanCloneTemplate)
+        {
+            <a class="button" href="/clone-email-template/@(Model.EmailTemplate.Id)">
+                Klona
+            </a>
+        }
+
+        @if (Model.CanRemoveTemplate)
+        {
+            <a class="button" href="/remove-email-template/@(Model.EmailTemplate.Id)">
+                Ta bort mallen
+            </a>
+        }
+    </p>
+
+</main>

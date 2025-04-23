@@ -1,0 +1,69 @@
+﻿@page "/show-email-target/{id:int}"
+@model ShowEmailTargetModel
+@{
+}
+
+@section Meta {
+    <title>Målkonto - @(Model.EmailTarget.Name) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        🎯
+        @(Model.EmailTarget.Address)
+    </h4>
+
+    <div class="notice">
+        <ul>
+            <li>
+                @(Model.EmailTarget.Name)
+            </li>
+            <li>
+                @(Model.EmailTarget.Address)
+            </li>
+            <li>
+                @(Model.EmailTarget.Identifier)
+            </li>
+        </ul>
+
+        <ul>
+            @foreach (var header in Model.EmailHeaders)
+            {
+                <li>
+                    @(header.Created.ToFixedFormatDateShortTime())
+                    @(header.Subject)
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    <p>
+        @if (Model.CanSendEmailToTargetCommand)
+        {
+            <a class="button" href="/send-email-to-target/@(Model.EmailTarget.Id)">
+                Skicka meddelande
+            </a>
+        }
+
+        @if (Model.CanEditTarget)
+        {
+            <a class="button" href="/edit-email-target/@(Model.EmailTarget.Id)">
+                Redigera
+            </a>
+        }
+
+        @if (Model.CanRemoveTarget)
+        {
+            <a class="button" href="/remove-email-target/@(Model.EmailTarget.Id)">
+                Ta bort kontot
+            </a>
+        }
+    </p>
+
+</main>

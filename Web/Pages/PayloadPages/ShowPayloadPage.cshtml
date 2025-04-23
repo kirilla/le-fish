@@ -1,0 +1,54 @@
+﻿@page "/show-payload-page/{id:int}"
+@model ShowPayloadPageModel
+@{
+}
+
+@section Meta {
+    <title>Webbsida - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        🕸️
+        @(Model.PayloadPage.Name)
+    </h4>
+
+    <h5>
+        URL
+    </h5>
+    <pre class="notice">@(Model.PayloadPage.UrlRegex)</pre>
+
+    <h5>
+        HTML
+    </h5>
+    <pre class="notice">@(Model.PayloadPage.Html)</pre>
+
+    <p>
+        @if (Model.CanEditPayloadPage)
+        {
+            <a class="button" href="/edit-payload-page/@(Model.PayloadPage.Id)">
+                Redigera
+            </a>
+        }
+
+        @if (Model.CanClonePayloadPage)
+        {
+            <a class="button" href="/clone-payload-page/@(Model.PayloadPage.Id)">
+                Klona
+            </a>
+        }
+
+        @if (Model.CanRemovePayloadPage)
+        {
+            <a class="button" href="/remove-payload-page/@(Model.PayloadPage.Id)">
+                Ta bort
+            </a>
+        }
+    </p>
+
+</main>

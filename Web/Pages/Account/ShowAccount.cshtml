@@ -1,0 +1,105 @@
+﻿@page "/account/showaccount/"
+@model ShowAccountModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ditt konto -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Ditt konto
+    </h4>
+
+    <div class="notice">
+
+        <h5>
+            Namn
+        </h5>
+
+        <p>
+            🐵
+            &ensp;
+            @(Model.User.Name)
+        </p>
+        
+        @if (Model.CanEditAccount)
+        {
+            <p>
+                <a class="button" href="/account/editaccount">
+                    Ändra
+                </a>
+            </p>
+        }
+
+        <h5>
+            Epost
+        </h5>
+
+        @if (Model.UserEmails.Any())
+        {
+            <p>
+                @foreach (var email in Model.UserEmails)
+                {
+                    <span>
+                        📧
+                        &ensp;
+                        @(email.Address)
+                    </span>
+                    <br />
+                }
+            </p>
+        }
+        else
+        {
+            <p>
+                📧
+                &ensp;
+                &ndash;
+            </p>
+        }
+
+        <p>
+            @if (Model.CanAddUserEmail)
+            {
+                <a class="button" href="/account/email/add">
+                    Lägg till
+                </a>
+            }
+
+            @if (Model.CanRemoveUserEmail &&
+                Model.UserEmails.Count > 1)
+            {
+                <a class="button" href="/account/remove-email">
+                    Ta bort
+                </a>
+            }
+        </p>
+
+    </div>
+
+    <p>
+        @if (Model.CanChangePassword)
+        {
+            <a class="button" href="/account/changepassword">
+                Ändra lösenord
+            </a>
+        }
+
+        @if (Model.CanDeleteAccount)
+        {
+            <a class="button" href="/account/deleteaccount">
+                Ta bort konto
+            </a>
+        }
+    </p>
+
+</main>

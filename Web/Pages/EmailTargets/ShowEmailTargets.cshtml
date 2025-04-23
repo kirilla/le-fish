@@ -1,0 +1,61 @@
+﻿@page "/show-email-targets"
+@model ShowEmailTargetsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Målkonton -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Målkonton
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var target in Model.EmailTargets)
+            {
+                <li>
+                    🎯
+                    &thinsp;
+                    <a href="/show-email-target/@(target.Id)">
+                        @(target.Name)
+                    </a>
+                    &ensp;
+                    @(target.Address)
+                </li>
+            }
+
+            @if (!Model.EmailTargets.Any())
+            {
+                <li>
+                    🎯
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    @if (Model.CanAddTarget)
+    {
+        <p>
+            <a class="button" href="/add-email-target">
+                Lägg till ett konto
+            </a>
+        </p>
+    }
+
+</main>
+

@@ -1,0 +1,48 @@
+﻿@page "/edit-email-attachment/{id:int}"
+@model EditEmailAttachmentModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera bilaga -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Redigera bilaga:
+        @(Model.EmailAttachment.Name)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.EmailAttachmentId" />
+
+        <label asp-for="CommandModel.Name">
+            Filnamn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <label asp-for="CommandModel.ContentType">
+            Filtyp
+        </label>
+        <input asp-for="CommandModel.ContentType" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-email-attachment/@(Model.EmailAttachment.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

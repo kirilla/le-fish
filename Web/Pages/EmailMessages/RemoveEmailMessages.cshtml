@@ -1,0 +1,50 @@
+﻿@page "/remove-email-messages"
+@model RemoveEmailMessagesModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ta bort epostmeddelanden -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Ta bort epostmeddelanden
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.EmailStatus">
+            Status
+        </label>
+
+        <select asp-for="CommandModel.EmailStatus">
+            <option value="">–</option>
+            @foreach (var status in Enum.GetValues(typeof(EmailStatus)))
+            {
+                <option value="@(status)">
+                    @(status)
+                </option>
+            }
+        </select>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Ta bort meddelanden
+        </button>
+
+        <a class="button" href="/show-email-queue">
+            Avbryt
+        </a>
+
+    </form>
+
+</main>

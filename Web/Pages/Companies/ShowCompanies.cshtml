@@ -1,0 +1,60 @@
+﻿@page "/companies"
+@model ShowCompaniesModel
+@{
+}
+
+@section Meta {
+    <title>
+        Företag - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Företag
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var company in Model.Companies)
+            {
+                <li>
+                    🏢
+                    &thinsp;
+                    <a href="/show-company/@(company.Id)">
+                        @(company.Name)
+                    </a>
+                </li>
+            }
+
+            @if (!Model.Companies.Any())
+            {
+                <li>
+                    🏢
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+        <p>@(Model.Companies.Count.ToSwedishSpacing()) företag.</p>
+
+    </div>
+
+    @if (Model.CanAddCompany)
+    {
+        <p>
+            <a class="button" href="/company/add">
+                Lägg till företag
+            </a>
+        </p>
+    }
+
+</main>

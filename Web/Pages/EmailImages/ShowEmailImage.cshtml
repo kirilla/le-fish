@@ -1,0 +1,51 @@
+﻿@page "/show-email-image/{id:int}"
+@model ShowEmailImageModel
+@{
+}
+
+@section Meta {
+    <title>Bild - @(Model.EmailImage.Name) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Bild:
+        @(Model.EmailImage.Name)
+    </h4>
+
+    <div class="notice">
+        <ul>
+            <li>
+                Filnamn: @(Model.EmailImage.Name)
+            </li>
+            <li>
+                Filtyp: @(Model.EmailImage.ContentType)
+            </li>
+        </ul>
+        <p>
+            <img src="/serve-email-image/@(Model.EmailImage.Id)" />
+        </p>
+    </div>
+
+    <p>
+        @if (Model.CanEditEmailImage)
+        {
+            <a class="button" href="/edit-email-image/@(Model.EmailImage.Id)">
+                Redigera
+            </a>
+        }
+
+        @if (Model.CanRemoveEmailImage)
+        {
+            <a class="button" href="/remove-email-image/@(Model.EmailImage.Id)">
+                Ta bort bilden
+            </a>
+        }
+    </p>
+
+</main>

@@ -1,0 +1,31 @@
+﻿@page "/help/already-logged-in"
+@model AlreadyLoggedInModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redan inloggad -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Redan inloggad
+    </h4>
+
+    <div class="notice">
+        
+        <p>
+            Du är tydligen redan inloggad. 🤷🏻
+        </p>
+
+    </div>
+
+</main>

@@ -1,0 +1,45 @@
+﻿@page "/show-company/{id:int}"
+@model ShowCompanyModel
+@{
+}
+
+@section Meta {
+    <title>Företag - @(Model.Company.Name) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        🏢
+        @Model.Company.Name
+    </h4>
+
+    <div class="notice">
+
+        @if (Model.CanEditCompany)
+        {
+            <p>
+                <a class="button" href="/company/edit/@(Model.Company.Id)">
+                    Redigera
+                </a>
+            </p>
+        }
+    </div>
+
+    @if (Model.UserToken.IsAuthenticated)
+    {
+        <p>
+            @if (Model.CanRemoveCompany)
+            {
+                <a class="button" href="/company/remove/@(Model.Company.Id)">
+                    Ta bort företaget
+                </a>
+            }
+        </p>
+    }
+
+</main>

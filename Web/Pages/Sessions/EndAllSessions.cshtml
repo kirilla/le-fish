@@ -1,0 +1,33 @@
+﻿@page "/end-all-sessions"
+@model EndAllSessionsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Avsluta sessioner -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Avsluta alla sessioner?
+    </h4>
+
+    <form method="post">
+
+        <button type="submit">
+            Avsluta sessioner
+        </button>
+
+        <a class="button" href="/desktop">
+            Avbryt
+        </a>
+    </form>
+
+</main>

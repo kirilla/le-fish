@@ -1,0 +1,44 @@
+﻿@page "/upload-email-attachment/{id:int}"
+@model UploadEmailAttachmentModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ladda upp bilaga -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Ladda upp bilaga till epostmallen:<br />
+        @(Model.EmailTemplate.Subject)
+    </h4>
+
+    <div class="notice">
+
+        <form method="post" enctype="multipart/form-data">
+
+            @* <label>Bilaga att ladda upp</label> *@
+
+            <input type="file" asp-for="UploadedFile" />
+
+            @* <span asp-validation-for="UploadedFile"></span> *@
+
+            <div asp-validation-summary="All"></div>
+
+            <button type="submit">Ladda upp</button>
+        </form>
+
+        <a class="button" href="/show-email-template/@(Model.EmailTemplate.Id)">
+            Avbryt
+        </a>
+
+    </div>
+
+</main>

@@ -1,0 +1,49 @@
+﻿@page "/clone-payload-page/{id:int}"
+@model ClonePayloadPageModel
+@{
+}
+
+@section Meta {
+    <title>
+        Klona fångstsida -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Klona fångstsidan:
+        @(Model.PayloadPage.Name)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.PayloadPageId" />
+
+        <label asp-for="CommandModel.CloneName">
+            Namn
+        </label>
+        <input asp-for="CommandModel.CloneName" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Klona
+        </button>
+
+        <a class="button" href="/show-payload-page/@(Model.PayloadPage.Id)">
+            Avbryt
+        </a>
+    </form>
+
+    <p class="notice">
+        The CID values of inline images will change,
+        due to files being cloned.
+        You will need to update the HTML code manually.
+    </p>
+
+</main>

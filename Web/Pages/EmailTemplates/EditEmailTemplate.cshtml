@@ -1,0 +1,55 @@
+﻿@page "/edit-email-template/{id:int}"
+@model EditEmailTemplateModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera epostmall -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Redigera epostmallen:
+        @(Model.EmailTemplate.Subject)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.EmailTemplateId" />
+
+        <label asp-for="CommandModel.Subject">
+            Ämnesrad
+        </label>
+        <input asp-for="CommandModel.Subject" />
+
+        <label asp-for="CommandModel.TextBody">
+            Text-version
+        </label>
+        <textarea asp-for="CommandModel.TextBody" rows="10"
+                  placeholder="Text här"></textarea>
+
+        <label asp-for="CommandModel.HtmlBody">
+            HTML-version
+        </label>
+        <textarea asp-for="CommandModel.HtmlBody" rows="10"
+                  placeholder="HTML här"></textarea>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-email-template/@(Model.EmailTemplate.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

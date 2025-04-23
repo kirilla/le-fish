@@ -1,0 +1,70 @@
+﻿@page "/remove-email/{id:int}"
+@model RemoveEmailMessageModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ta bort epostmeddelande -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Ta bort epostmeddelande
+    </h4>
+
+    <div class="notice">
+        <b>Till</b>
+        <br />
+        @(Model.EmailMessage.EmailTarget?.Name) @(Model.EmailMessage.EmailTarget?.Address)
+        <br />
+        <br />
+        <b>Från</b>
+        <br />
+        @(Model.EmailMessage.EmailAccount?.FromName) @(Model.EmailMessage.EmailAccount?.FromAddress)
+        <br />
+        <br />
+        <b>Svara till</b>
+        <br />
+        @(Model.EmailMessage.EmailAccount?.ReplyToName) @(Model.EmailMessage.EmailAccount?.ReplyToAddress)
+        <br />
+        <br />
+        <b>När</b>
+        <br />
+        @(Model.EmailMessage.Created.ToFixedFormatDateShortTime())
+        <br />
+        <br />
+        <b>Status</b>
+        <br />
+        @(Model.EmailMessage.EmailStatus.ToString())
+    </div>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <div asp-validation-summary="All"></div>
+
+        <p>
+            <label asp-for="CommandModel.Confirmed">
+                <input asp-for="CommandModel.Confirmed" type="checkbox" />
+                Ja, jag är säker
+            </label>
+        </p>
+
+        <button type="submit">
+            Ta bort
+        </button>
+
+        <a class="button" href="/show-email/@(Model.EmailMessage.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

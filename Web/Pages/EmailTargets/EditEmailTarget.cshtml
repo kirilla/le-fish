@@ -1,0 +1,54 @@
+﻿@page "/edit-email-target/{id:int}"
+@model EditEmailTargetModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera målkonto -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Redigera målkonto:
+        @(Model.EmailTarget.Name)
+        @(Model.EmailTarget.Address)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.EmailTargetId" />
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <label asp-for="CommandModel.Address">
+            Epostadress
+        </label>
+        <input asp-for="CommandModel.Address" />
+
+        <label asp-for="CommandModel.Identifier">
+            Phishing-id
+        </label>
+        <input asp-for="CommandModel.Identifier" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-email-target/@(Model.EmailTarget.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

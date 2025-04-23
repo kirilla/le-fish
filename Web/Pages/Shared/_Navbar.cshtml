@@ -1,0 +1,16 @@
+﻿@using Lefish.Domain
+@using Lefish.Domain.Enums
+@using Lefish.Web
+@using Lefish.Web.Common
+@using Lefish.Web.Pages.Shared
+@model IUserToken
+@{
+}
+@if (Model.IsAuthenticated)
+{
+    <partial name="_NavbarLoggedIn" model="Model" />
+}
+else
+{
+    <partial name="_NavbarPublic" model="Model" />
+}

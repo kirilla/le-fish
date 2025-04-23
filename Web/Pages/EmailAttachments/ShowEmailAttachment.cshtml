@@ -1,0 +1,51 @@
+﻿@page "/show-email-attachment/{id:int}"
+@model ShowEmailAttachmentModel
+@{
+}
+
+@section Meta {
+    <title>Bilaga - @(Model.EmailAttachment.Name) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Bilaga:
+        @(Model.EmailAttachment.Name)
+    </h4>
+
+    <div class="notice">
+        <ul>
+            <li>
+                Filnamn: @(Model.EmailAttachment.Name)
+            </li>
+            <li>
+                Filtyp: @(Model.EmailAttachment.ContentType)
+            </li>
+        </ul>
+        <p>
+            <img src="/serve-email-attachment/@(Model.EmailAttachment.Id)" />
+        </p>
+    </div>
+
+    <p>
+        @if (Model.CanEditEmailAttachment)
+        {
+            <a class="button" href="/edit-email-attachment/@(Model.EmailAttachment.Id)">
+                Redigera
+            </a>
+        }
+
+        @if (Model.CanRemoveEmailAttachment)
+        {
+            <a class="button" href="/remove-email-attachment/@(Model.EmailAttachment.Id)">
+                Ta bort bilagan
+            </a>
+        }
+    </p>
+
+</main>

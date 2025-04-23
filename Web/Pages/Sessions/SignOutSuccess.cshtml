@@ -1,0 +1,22 @@
+﻿@page "/session/signed-out"
+@model SignOutSuccessModel
+@{
+}
+
+@section Meta {
+    <title>
+        Utloggad - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Utloggad!
+    </h4>
+
+</main>

@@ -1,0 +1,49 @@
+﻿@page "/clone-email-template/{id:int}"
+@model CloneEmailTemplateModel
+@{
+}
+
+@section Meta {
+    <title>
+        Klona epostmall -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Klona epostmallen:
+        @(Model.EmailTemplate.Subject)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.EmailTemplateId" />
+
+        <label asp-for="CommandModel.CloneSubject">
+            Ämnesrad
+        </label>
+        <input asp-for="CommandModel.CloneSubject" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Klona
+        </button>
+
+        <a class="button" href="/show-email-template/@(Model.EmailTemplate.Id)">
+            Avbryt
+        </a>
+    </form>
+
+    <p class="notice">
+        The CID values of inline images will change,
+        due to files being cloned.
+        You will need to update the HTML code manually.
+    </p>
+
+</main>
