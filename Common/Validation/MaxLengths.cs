@@ -15,11 +15,6 @@ public static class MaxLengths
 
         public const int DbSuperSize = 16_000;
 
-        public static class Company
-        {
-            public const int Name = 80;
-        }
-
         public static class Email
         {
             public const int Address = 70;

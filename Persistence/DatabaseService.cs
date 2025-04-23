@@ -9,7 +9,6 @@ public class DatabaseService(
     ICreatedDateTimeSetter createdDateTimeSetter,
     IUpdatedDateTimeSetter updatedDateTimeSetter) : DbContext(options), IDatabaseService
 {
-    public DbSet<Company> Companies { get; set; }
     public DbSet<EmailAccount> EmailAccounts { get; set; }
     public DbSet<EmailAttachment> EmailAttachments { get; set; }
     public DbSet<EmailImage> EmailImages { get; set; }
@@ -26,7 +25,6 @@ public class DatabaseService(
     {
         base.OnModelCreating(builder);
 
-        new CompanyConfiguration().Configure(builder.Entity<Company>());
         new EmailAccountConfiguration().Configure(builder.Entity<EmailAccount>());
         new EmailAttachmentConfiguration().Configure(builder.Entity<EmailAttachment>());
         new EmailImageConfiguration().Configure(builder.Entity<EmailImage>());
