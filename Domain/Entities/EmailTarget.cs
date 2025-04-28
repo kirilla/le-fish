@@ -8,6 +8,7 @@ public class EmailTarget
     public string Address { get; set; }
     public string Identifier { get; set; }
 
+    public List<DataDump> DataDumps { get; set; }
     public List<EmailMessage> EmailMessages { get; set; }
     public List<PageVisit> PageVisits { get; set; }
 }

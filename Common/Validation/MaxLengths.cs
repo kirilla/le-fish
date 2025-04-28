@@ -65,6 +65,12 @@ public static class MaxLengths
 
     public static class Domain
     {
+        public static class DataDump
+        {
+            public const int Name = 100;
+            public const int ContentType = Common.Mime.ContentType;
+        }
+
         public static class EmailAccount
         {
             public const int FromName = Common.Person.Name;

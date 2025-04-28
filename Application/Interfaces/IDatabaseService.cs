@@ -4,6 +4,7 @@ namespace Lefish.Application.Interfaces;
 
 public interface IDatabaseService
 {
+    DbSet<DataDump> DataDumps { get; set; }
     DbSet<EmailAccount> EmailAccounts { get; set; }
     DbSet<EmailAttachment> EmailAttachments { get; set; }
     DbSet<EmailImage> EmailImages { get; set; }
