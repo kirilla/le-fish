@@ -14,12 +14,8 @@ public class EditPayloadPageCommandModel
         ErrorMessage = "Skriv kortare.")]
     public string Name { get; set; }
 
-	[RegularExpression(Pattern.Common.SomeContent)]
-	[Required(ErrorMessage = "Ange regex för URL-matchning.")]
-	[StringLength(
-		MaxLengths.Domain.PayloadPage.UrlRegex,
-		ErrorMessage = "Skriv kortare.")]
-	public string UrlRegex { get; set; }
+	[Required(ErrorMessage = "Ange phishing-nyckel.")]
+	public int? PageKey { get; set; }
 
 	[RegularExpression(Pattern.Common.AnythingMultiLine)]
     [Required(ErrorMessage = "Skriv HTML.")]

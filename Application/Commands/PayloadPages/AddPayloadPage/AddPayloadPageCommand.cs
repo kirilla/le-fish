@@ -14,9 +14,21 @@ public class AddPayloadPageCommand(IDatabaseService database) : IAddPayloadPageC
         var page = new PayloadPage()
         {
             Name = model.Name,
-            UrlRegex = model.UrlRegex,
             Html = model.Html,
+            PageKey = null,
         };
+
+        var keys = await database.PayloadPages
+            .Select(x => x.PageKey)
+            .ToListAsync();
+
+        while (page.PageKey == null)
+        {
+            page.PageKey = Random.Shared.Next();
+
+            if (keys.Any(x => x == page.PageKey))
+                page.PageKey = null;
+        }
 
         database.PayloadPages.Add(page);
 

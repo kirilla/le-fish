@@ -116,7 +116,7 @@ public class Program
 
         //app.UseEndpoints(endpoints => endpoints.MapControllers());
 
-        app.MapFallbackToPage("/Payload");
+        //app.MapFallbackToPage("/Payload");
 
         app.Use(async (context, next) =>
         {

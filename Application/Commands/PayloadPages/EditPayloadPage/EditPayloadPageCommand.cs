@@ -17,7 +17,7 @@ public class EditPayloadPageCommand(IDatabaseService database) : IEditPayloadPag
             throw new NotFoundException();
 
         page.Name = model.Name;
-        page.UrlRegex = model.UrlRegex;
+        page.PageKey = model.PageKey;
         page.Html = model.Html;
 
         await database.SaveAsync(userToken);

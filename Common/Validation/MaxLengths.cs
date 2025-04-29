@@ -108,7 +108,6 @@ public static class MaxLengths
         {
             public const int Name = 100;
             public const int Address = 100;
-            public const int Identifier = 100;
         }
 
         public static class EmailTemplate
@@ -122,8 +121,6 @@ public static class MaxLengths
         public static class PayloadPage
         {
             public const int Name = 100;
-
-            public const int UrlRegex = 100;
 
             public const int Html = Common.DbSuperSize;
         }

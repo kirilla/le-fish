@@ -6,7 +6,8 @@ public class EmailTarget
 
     public string Name { get; set; }
     public string Address { get; set; }
-    public string Identifier { get; set; }
+
+    public int? PersonKey { get; set; }
 
     public List<DataDump> DataDumps { get; set; }
     public List<EmailMessage> EmailMessages { get; set; }

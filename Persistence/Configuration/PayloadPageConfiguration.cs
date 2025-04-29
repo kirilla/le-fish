@@ -10,10 +10,6 @@ class PayloadPageConfiguration : IEntityTypeConfiguration<PayloadPage>
             .IsRequired()
             .HasMaxLength(MaxLengths.Domain.PayloadPage.Name);
 
-        builder.Property(p => p.UrlRegex)
-            .IsRequired()
-            .HasMaxLength(MaxLengths.Domain.PayloadPage.UrlRegex);
-
         builder.Property(p => p.Html)
             .IsRequired()
             .HasMaxLength(MaxLengths.Domain.PayloadPage.Html);

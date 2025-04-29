@@ -24,7 +24,7 @@ public class EditEmailTargetCommand(IDatabaseService database) : IEditEmailTarge
 
         target.Name = model.Name;
         target.Address = model.Address;
-        target.Identifier = model.Identifier;
+        target.PersonKey = model.PersonKey;
 
         await database.SaveAsync(userToken);
     }

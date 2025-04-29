@@ -27,20 +27,9 @@
                 @(Model.EmailTarget.Address)
             </li>
             <li>
-                @(Model.EmailTarget.Identifier)
+                @(Model.EmailTarget.PersonKey)
             </li>
         </ul>
-
-        <ul>
-            @foreach (var header in Model.EmailHeaders)
-            {
-                <li>
-                    @(header.Created.ToFixedFormatDateShortTime())
-                    @(header.Subject)
-                </li>
-            }
-        </ul>
-
     </div>
 
     <p>
@@ -68,9 +57,23 @@
         @if (Model.CanRemoveTarget)
         {
             <a class="button" href="/remove-email-target/@(Model.EmailTarget.Id)">
-                Ta bort kontot
+                Ta bort
             </a>
         }
     </p>
+
+    <h5>Epost</h5>
+
+    <div class="notice">
+        <ul>
+            @foreach (var header in Model.EmailHeaders)
+            {
+                <li>
+                    @(header.Created.ToFixedFormatDateShortTime())
+                    <a href="/show-email/@(header.Id)">@(header.Subject)</a>
+                </li>
+            }
+        </ul>
+    </div>
 
 </main>

@@ -1,0 +1,6 @@
+﻿@page "/page/{pageKey:int}/{personKey:int}"
+@model PayloadPageModel
+@{
+    Layout = null;
+}
+@Html.Raw(Model.PayloadPage.Html)

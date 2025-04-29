@@ -28,7 +28,7 @@ public class EditPayloadPageModel(
             {
                 PayloadPageId = PayloadPage.Id,
                 Name = PayloadPage.Name,
-				UrlRegex = PayloadPage.UrlRegex,
+				PageKey = PayloadPage.PageKey,
 				Html = PayloadPage.Html,
             };
 

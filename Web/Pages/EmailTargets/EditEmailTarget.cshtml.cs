@@ -29,7 +29,7 @@ public class EditEmailTargetModel(
                 EmailTargetId = EmailTarget.Id,
                 Name = EmailTarget.Name,
                 Address = EmailTarget.Address,
-                Identifier = EmailTarget.Identifier,
+                PersonKey = EmailTarget.PersonKey,
             };
 
             return Page();

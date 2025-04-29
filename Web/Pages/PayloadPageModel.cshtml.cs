@@ -1,12 +1,11 @@
 using Lefish.Application.Extensions;
-using Lefish.Common.Validation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
 
 namespace Lefish.Web.Pages;
 
 [AllowAnonymous]
-public class PayloadModel(
+public class PayloadPageModel(
     IUserToken userToken,
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
@@ -14,46 +13,19 @@ public class PayloadModel(
 
     public List<PayloadPage> PayloadPages { get; set; }
 
-    public async Task<IActionResult> OnGetAsync()
+    public async Task<IActionResult> OnGetAsync(int pageKey, int personKey)
     {
         try
         {
-            var path = HttpContext.Request.Path;
-
-            if (string.IsNullOrWhiteSpace(path))
-                throw new NotFoundException();
-
-            var pages = await database.PayloadPages
-                .OrderBy(x => x.Id)
-                .Select(x => new
-                {
-                    x.Id,
-                    x.UrlRegex,
-                })
-                .ToListAsync();
-
-            var matchingPage = pages
-                .Where(x => !string.IsNullOrWhiteSpace(x.UrlRegex))
-                .Where(x => RegexService.IsMatch(path, x.UrlRegex))
-                .FirstOrDefault();
-
-            if (matchingPage == null)
-                return Redirect("/help/notfound");
-
             PayloadPage = await database.PayloadPages
                 .AsNoTracking()
-                .Where(x => x.Id == matchingPage.Id)
+                .Where(x => x.PageKey == pageKey)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            var identifier = RegexService.GetFirstCaptureGroup(path, matchingPage.UrlRegex);
-
-            if (string.IsNullOrWhiteSpace(identifier))
-                return Redirect("/help/notfound");
-
             var target = await database.EmailTargets
                 .AsNoTracking()
-                .Where(x => x.Identifier == identifier)
+                .Where(x => x.PersonKey == personKey)
                 .FirstOrDefaultAsync();
 
             if (target == null)

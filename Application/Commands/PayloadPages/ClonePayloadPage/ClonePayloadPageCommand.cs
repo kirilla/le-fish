@@ -20,7 +20,7 @@ public class ClonePayloadPageCommand(IDatabaseService database) : IClonePayloadP
         var newPage = new PayloadPage()
         {
             Name = model.CloneName,
-            UrlRegex = page.UrlRegex,
+            PageKey = page.PageKey,
             Html = page.Html,
         };
 
