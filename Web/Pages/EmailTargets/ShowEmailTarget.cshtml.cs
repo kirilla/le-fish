@@ -1,4 +1,5 @@
-﻿using Lefish.Application.Commands.EmailMessages.SendEmailToTarget;
+﻿using Lefish.Application.Commands.DataDumps.UploadDataDump;
+using Lefish.Application.Commands.EmailMessages.SendEmailToTarget;
 using Lefish.Application.Commands.EmailTargets.EditEmailTarget;
 using Lefish.Application.Commands.EmailTargets.RemoveEmailTarget;
 
@@ -9,7 +10,8 @@ public class ShowEmailTargetModel(
     IDatabaseService database,
     IEditEmailTargetCommand editTargetCommand,
     IRemoveEmailTargetCommand removeTargetCommand,
-    ISendEmailToTargetCommand sendEmailToTargetCommand) : UserTokenPageModel(userToken)
+    ISendEmailToTargetCommand sendEmailToTargetCommand,
+    IUploadDataDumpCommand uploadDataDumpCommand) : UserTokenPageModel(userToken)
 {
     public EmailTarget EmailTarget { get; set; }
 
@@ -23,6 +25,9 @@ public class ShowEmailTargetModel(
 
     public bool CanSendEmailToTargetCommand { get; set; }
         = sendEmailToTargetCommand.IsPermitted(userToken);
+
+    public bool CanUploadDataDump { get; set; }
+        = uploadDataDumpCommand.IsPermitted(userToken);
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

@@ -23,16 +23,16 @@
     <div class="notice">
 
         <ul>
-            @foreach (var target in Model.DataDumps)
+            @foreach (var dump in Model.DataDumps)
             {
                 <li>
                     🎯
                     &thinsp;
-                    <a href="/show-email-target/@(target.Id)">
-                        @(target.Name)
+                    <a href="/show-data-dump/@(dump.Id)">
+                        @(dump.Name)
                     </a>
                     &ensp;
-                    @* @(target.Address) *@
+                    @* @(dump.Address) *@
                 </li>
             }
 
@@ -47,14 +47,5 @@
         </ul>
 
     </div>
-
-    @if (Model.CanAddTarget)
-    {
-        <p>
-            <a class="button" href="/upload-data-dump">
-                Ladda upp data
-            </a>
-        </p>
-    }
 
 </main>

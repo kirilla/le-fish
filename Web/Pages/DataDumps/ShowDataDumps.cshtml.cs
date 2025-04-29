@@ -4,13 +4,9 @@ namespace Lefish.Web.Pages.DataDumps;
 
 public class ShowDataDumpsModel(
     IUserToken userToken,
-    IDatabaseService database,
-    IUploadDataDumpCommand addTargetCommand) : UserTokenPageModel(userToken)
+    IDatabaseService database) : UserTokenPageModel(userToken)
 {
     public List<DataDump> DataDumps { get; set; }
-
-    public bool CanAddTarget { get; set; }
-        = addTargetCommand.IsPermitted(userToken);
 
     public async Task<IActionResult> OnGetAsync()
     {

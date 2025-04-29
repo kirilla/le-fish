@@ -58,7 +58,7 @@ public class RemoveDataDumpModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-data-dump/{DataDump.EmailTargetId}");
+            return Redirect($"/show-data-dumps");
         }
         catch (ConfirmationRequiredException)
         {

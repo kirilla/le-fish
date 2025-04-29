@@ -51,6 +51,13 @@
             </a>
         }
 
+        @if (Model.CanUploadDataDump)
+        {
+            <a class="button" href="/upload-data-dump/@(Model.EmailTarget.Id)">
+                Ladda upp data
+            </a>
+        }
+
         @if (Model.CanEditTarget)
         {
             <a class="button" href="/edit-email-target/@(Model.EmailTarget.Id)">
