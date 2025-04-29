@@ -66,7 +66,7 @@ public class EditDataDumpModel(
         {
             ModelState.AddModelError(
                 nameof(CommandModel.Name),
-                "Det finns en annat bilaga med samma namn.");
+                "Det finns en annat datadump med samma namn.");
 
             return Page();
         }

@@ -4,7 +4,7 @@
 }
 
 @section Meta {
-    <title>Bilaga - @(Model.DataDump.Name) - @(Branding.WebsiteTitle)</title>
+    <title>Datadump - @(Model.DataDump.Name) - @(Branding.WebsiteTitle)</title>
 }
 
 @section Header {
@@ -14,7 +14,7 @@
 <main>
 
     <h4>
-        Bilaga:
+        Datadump:
         @(Model.DataDump.Name)
     </h4>
 
@@ -26,10 +26,10 @@
             <li>
                 Filtyp: @(Model.DataDump.ContentType)
             </li>
+            <li>
+                Filstorlek: @(Model.DataDump.ContentLength)
+            </li>
         </ul>
-        <p>
-            <img src="/serve-data-dump/@(Model.DataDump.Id)" />
-        </p>
     </div>
 
     <p>
@@ -43,7 +43,7 @@
         @if (Model.CanRemoveDataDump)
         {
             <a class="button" href="/remove-data-dump/@(Model.DataDump.Id)">
-                Ta bort bilagan
+                Ta bort
             </a>
         }
     </p>

@@ -5,7 +5,7 @@
 
 @section Meta {
     <title>
-        Ladda upp bilaga -
+        Ladda upp datadump -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -16,7 +16,7 @@
 
 <main>
     <h4>
-        Ladda upp bilaga till målkontot:<br />
+        Ladda upp datadump till målkontot:<br />
         @(Model.EmailTarget.Name)
     </h4>
 
@@ -24,11 +24,7 @@
 
         <form method="post" enctype="multipart/form-data">
 
-            @* <label>Bilaga att ladda upp</label> *@
-
             <input type="file" asp-for="UploadedFile" />
-
-            @* <span asp-validation-for="UploadedFile"></span> *@
 
             <div asp-validation-summary="All"></div>
 
