@@ -7,10 +7,11 @@ An email sending web thing.
 ### 0. Prepare a domain
 
 - Register a suitable domain name
-- Find web hosting with asp.net core support, and email.
+- Find web hosting with asp.net core support, email, SQL Server, and dedicated app pool support.
 - Set up DNS records, MX 
 - Prepare the website (SSL, etc)
 - Prepare an email account for sending email.
+- Verify that your SQL Server database is accessible by remote, e.g. using SQL Server Management Studio.
 
 ### 1. Prepare the app settings
 
@@ -71,11 +72,18 @@ In Visual Studio:
 
 ### 4. Prepare the admin account
 
-- Use the Remote config.
+- Select the Remote solution configuration.
 - Run the Web project locally against the producation database.
 - Visit the page /register-account
 - Create your account.
 - Verify that you can log in.
+
+### 5. Publish the website
+
+- Download web deploy publishing settings, e.g. a yourdomain.publishsettings file, from your web host.
+- Import a publishing profile in Visual Studio, or set up a publishing profile manually.
+- Make sure you have a dedicated app pool.
+- Log in the account you registered before while running locally.
 
 ## FAQ
 
