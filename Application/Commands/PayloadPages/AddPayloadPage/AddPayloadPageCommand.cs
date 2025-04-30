@@ -12,18 +12,16 @@ public class AddPayloadPageCommand(IDatabaseService database) : IAddPayloadPageC
         model.SetEmptyStringsToNull();
         model.TruncateByStringLength();
 
+        if (await database.PayloadPages
+            .AnyAsync(x => x.PageKey == model.PageKey))
+            throw new BlockedByKeyException();
+
         var page = new PayloadPage()
         {
             Name = model.Name,
             Html = model.Html,
-            PageKey = null,
+            PageKey = model.PageKey,
         };
-
-        var keys = await database.PayloadPages
-            .Select(x => x.PageKey)
-            .ToListAsync();
-
-        page.GeneratePhishingKey(keys);
 
         database.PayloadPages.Add(page);
 

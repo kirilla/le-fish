@@ -17,6 +17,12 @@ public class EditPayloadPageCommand(IDatabaseService database) : IEditPayloadPag
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
+        if (await database.PayloadPages
+            .AnyAsync(x =>
+                x.PageKey == model.PageKey &&
+                x.Id != model.PayloadPageId))
+            throw new BlockedByKeyException();
+
         page.Name = model.Name;
         page.PageKey = model.PageKey;
         page.Html = model.Html;

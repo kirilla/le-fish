@@ -17,7 +17,10 @@ public class AddPayloadPageModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            CommandModel = new AddPayloadPageCommandModel();
+            CommandModel = new AddPayloadPageCommandModel()
+            {
+                PageKey = Random.Shared.Next().ToString(),
+            };
 
             return Page();
         }
@@ -40,6 +43,14 @@ public class AddPayloadPageModel(
             var id = await command.Execute(UserToken, CommandModel);
 
             return Redirect($"/show-payload-page/{id}");
+        }
+        catch (BlockedByKeyException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.PageKey),
+                "Det finns en annan sida med samma phishing-nyckel.");
+
+            return Page();
         }
         catch
         {

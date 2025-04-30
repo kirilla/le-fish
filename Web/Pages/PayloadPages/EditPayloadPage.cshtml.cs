@@ -63,6 +63,14 @@ public class EditPayloadPageModel(
 
             return Redirect($"/show-payload-page/{id}");
         }
+        catch (BlockedByKeyException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.PageKey),
+                "Det finns en annan sida med samma phishing-nyckel.");
+
+            return Page();
+        }
         catch
         {
             return Redirect("/help/notpermitted");
