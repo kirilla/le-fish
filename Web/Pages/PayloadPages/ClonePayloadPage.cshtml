@@ -24,10 +24,15 @@
 
         <input type="hidden" asp-for="CommandModel.PayloadPageId" />
 
-        <label asp-for="CommandModel.CloneName">
+        <label asp-for="CommandModel.PageKey">
+            Phishing-nyckel
+        </label>
+        <input asp-for="CommandModel.PageKey" />
+
+        <label asp-for="CommandModel.Name">
             Namn
         </label>
-        <input asp-for="CommandModel.CloneName" />
+        <input asp-for="CommandModel.Name" />
 
         <div asp-validation-summary="All"></div>
 

@@ -17,10 +17,14 @@ public class ClonePayloadPageCommand(IDatabaseService database) : IClonePayloadP
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
+        if (await database.PayloadPages
+            .AnyAsync(x => x.PageKey == model.PageKey))
+            throw new BlockedByKeyException();
+
         var newPage = new PayloadPage()
         {
-            Name = model.CloneName,
-            PageKey = page.PageKey,
+            PageKey = model.PageKey,
+            Name = model.Name,
             Html = page.Html,
         };
 
