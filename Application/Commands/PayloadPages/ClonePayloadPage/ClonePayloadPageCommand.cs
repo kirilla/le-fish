@@ -24,7 +24,7 @@ public class ClonePayloadPageCommand(IDatabaseService database) : IClonePayloadP
         var newPage = new PayloadPage()
         {
             PageKey = model.PageKey,
-            Name = model.Name,
+            Comment = model.Comment,
             Html = page.Html,
         };
 

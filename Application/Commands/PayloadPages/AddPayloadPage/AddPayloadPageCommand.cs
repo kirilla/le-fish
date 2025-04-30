@@ -18,9 +18,9 @@ public class AddPayloadPageCommand(IDatabaseService database) : IAddPayloadPageC
 
         var page = new PayloadPage()
         {
-            Name = model.Name,
-            Html = model.Html,
             PageKey = model.PageKey,
+            Comment = model.Comment,
+            Html = model.Html,
         };
 
         database.PayloadPages.Add(page);

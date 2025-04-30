@@ -28,7 +28,7 @@ public class ClonePayloadPageModel(
             {
                 PayloadPageId = PayloadPage.Id,
                 PageKey = PayloadPage.PageKey,
-                Name = PayloadPage.Name,
+                Comment = PayloadPage.Comment,
             };
 
             return Page();

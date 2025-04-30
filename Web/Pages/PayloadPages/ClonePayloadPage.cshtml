@@ -17,7 +17,7 @@
 <main>
     <h4>
         Klona fångstsidan:
-        @(Model.PayloadPage.Name)
+        @(Model.PayloadPage.Comment)
     </h4>
 
     <form method="post">
@@ -29,10 +29,10 @@
         </label>
         <input asp-for="CommandModel.PageKey" />
 
-        <label asp-for="CommandModel.Name">
-            Namn
+        <label asp-for="CommandModel.Comment">
+            Anteckning
         </label>
-        <input asp-for="CommandModel.Name" />
+        <input asp-for="CommandModel.Comment" />
 
         <div asp-validation-summary="All"></div>
 

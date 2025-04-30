@@ -23,8 +23,8 @@ public class EditPayloadPageCommand(IDatabaseService database) : IEditPayloadPag
                 x.Id != model.PayloadPageId))
             throw new BlockedByKeyException();
 
-        page.Name = model.Name;
         page.PageKey = model.PageKey;
+        page.Comment = model.Comment;
         page.Html = model.Html;
 
         await database.SaveAsync(userToken);

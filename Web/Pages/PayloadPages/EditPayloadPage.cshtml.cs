@@ -27,7 +27,7 @@ public class EditPayloadPageModel(
             CommandModel = new EditPayloadPageCommandModel()
             {
                 PayloadPageId = PayloadPage.Id,
-                Name = PayloadPage.Name,
+                Comment = PayloadPage.Comment,
 				PageKey = PayloadPage.PageKey,
 				Html = PayloadPage.Html,
             };

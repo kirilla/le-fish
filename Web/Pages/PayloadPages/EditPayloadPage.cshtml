@@ -17,22 +17,22 @@
 <main>
     <h4>
         Redigera fångstsidan:
-        @(Model.PayloadPage.Name)
+        @(Model.PayloadPage.Comment)
     </h4>
 
     <form method="post">
 
         <input type="hidden" asp-for="CommandModel.PayloadPageId" />
 
-        <label asp-for="CommandModel.Name">
-            Namn
-        </label>
-        <input asp-for="CommandModel.Name" />
-
         <label asp-for="CommandModel.PageKey">
             Phishing-nyckel
         </label>
         <input asp-for="CommandModel.PageKey" />
+
+        <label asp-for="CommandModel.Comment">
+            Anteckning
+        </label>
+        <input asp-for="CommandModel.Comment" />
 
         <label asp-for="CommandModel.Html">
             HTML

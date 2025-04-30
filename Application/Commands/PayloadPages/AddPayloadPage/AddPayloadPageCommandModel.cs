@@ -6,18 +6,17 @@ namespace Lefish.Application.Commands.PayloadPages.AddPayloadPage;
 public class AddPayloadPageCommandModel
 {
     [RegularExpression(Pattern.Common.SomeContent)]
-    [Required(ErrorMessage = "Ange namn.")]
-    [StringLength(
-        MaxLengths.Domain.PayloadPage.Name,
-        ErrorMessage = "Skriv kortare.")]
-    public string Name { get; set; }
-
-    [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Ange phishing-nyckel.")]
     [StringLength(
         MaxLengths.Domain.PayloadPage.PageKey,
         ErrorMessage = "Skriv kortare.")]
     public string PageKey { get; set; }
+
+    [RegularExpression(Pattern.Common.SomeContent)]
+    [StringLength(
+        MaxLengths.Domain.PayloadPage.Comment,
+        ErrorMessage = "Skriv kortare.")]
+    public string? Comment { get; set; }
 
     [RegularExpression(Pattern.Common.AnythingMultiLine)]
     [Required(ErrorMessage = "Skriv HTML.")]
