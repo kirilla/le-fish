@@ -4,6 +4,14 @@ An email sending web thing.
 
 ## Getting started
 
+### 0. Prepare a domain
+
+- Register a suitable domain name
+- Find web hosting with asp.net core support, and email.
+- Set up DNS records, MX 
+- Prepare the website (SSL, etc)
+- Prepare an email account for sending email.
+
 ### 1. Prepare the app settings
 
 The is a file named 'appsettings.json' in the Web project, 
