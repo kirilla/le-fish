@@ -13,7 +13,7 @@ public class PayloadPageModel(
 
     public List<PayloadPage> PayloadPages { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int pageKey, int personKey)
+    public async Task<IActionResult> OnGetAsync(string pageKey, string personKey)
     {
         try
         {

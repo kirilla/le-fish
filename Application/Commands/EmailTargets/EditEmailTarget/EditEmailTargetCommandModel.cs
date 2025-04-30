@@ -21,6 +21,10 @@ public class EditEmailTargetCommandModel
         ErrorMessage = "Skriv kortare.")]
     public string Address { get; set; }
 
+    [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Ange phishing-nyckel.")]
-    public int? PersonKey { get; set; }
+    [StringLength(
+        MaxLengths.Domain.EmailTarget.PersonKey,
+        ErrorMessage = "Skriv kortare.")]
+    public string PersonKey { get; set; }
 }

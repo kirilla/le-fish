@@ -22,13 +22,7 @@ public class AddPayloadPageCommand(IDatabaseService database) : IAddPayloadPageC
             .Select(x => x.PageKey)
             .ToListAsync();
 
-        while (page.PageKey == null)
-        {
-            page.PageKey = Random.Shared.Next();
-
-            if (keys.Any(x => x == page.PageKey))
-                page.PageKey = null;
-        }
+        page.GeneratePhishingKey(keys);
 
         database.PayloadPages.Add(page);
 

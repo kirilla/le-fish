@@ -26,13 +26,7 @@ public class AddEmailTargetCommand(IDatabaseService database) : IAddEmailTargetC
             .Select(x => x.PersonKey)
             .ToListAsync();
 
-        while (target.PersonKey == null)
-        {
-            target.PersonKey = Random.Shared.Next();
-
-            if (keys.Any(x => x == target.PersonKey))
-                target.PersonKey = null;
-        }
+        target.GeneratePhishingKey(keys);
 
         database.EmailTargets.Add(target);
 

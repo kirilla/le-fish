@@ -14,6 +14,10 @@ class PayloadPageConfiguration : IEntityTypeConfiguration<PayloadPage>
             .IsRequired()
             .HasMaxLength(MaxLengths.Domain.PayloadPage.Html);
 
+        builder.Property(p => p.PageKey)
+            .IsRequired()
+            .HasMaxLength(MaxLengths.Domain.PayloadPage.PageKey);
+
         builder.HasMany(x => x.PageVisits)
             .WithOne(x => x.PayloadPage)
             .HasForeignKey(x => x.PayloadPageId);

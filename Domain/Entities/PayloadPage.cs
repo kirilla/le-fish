@@ -7,7 +7,7 @@ public class PayloadPage
     public string Name { get; set; }
     public string Html { get; set; }
 
-    public int? PageKey { get; set; }
+    public string PageKey { get; set; }
 
     public List<PageVisit> PageVisits { get; set; }
 }

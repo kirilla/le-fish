@@ -1,4 +1,5 @@
 ﻿global using Lefish.Application.Auth;
+global using Lefish.Application.Extensions;
 global using Lefish.Application.Interfaces;
 global using Lefish.Common.Dates;
 global using Lefish.Common.Exceptions;
