@@ -63,11 +63,19 @@ public class EditEmailTargetModel(
 
             return Redirect($"/show-email-target/{id}");
         }
-        catch (BlockedByExistingException)
+        catch (BlockedByAddressException)
         {
             ModelState.AddModelError(
                 nameof(CommandModel.Address),
                 "Det finns ett annat målkonto med samma adress.");
+
+            return Page();
+        }
+        catch (BlockedByKeyException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.PersonKey),
+                "Det finns ett annat målkonto med samma phishing-nyckel.");
 
             return Page();
         }

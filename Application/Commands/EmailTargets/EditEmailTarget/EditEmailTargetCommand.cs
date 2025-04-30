@@ -20,7 +20,13 @@ public class EditEmailTargetCommand(IDatabaseService database) : IEditEmailTarge
             .AnyAsync(x =>
                 x.Address == model.Address &&
                 x.Id != model.EmailTargetId))
-            throw new BlockedByExistingException();
+            throw new BlockedByAddressException();
+
+        if (await database.EmailTargets
+            .AnyAsync(x =>
+                x.PersonKey == model.PersonKey &&
+                x.Id != model.EmailTargetId))
+            throw new BlockedByKeyException();
 
         target.Name = model.Name;
         target.Address = model.Address;

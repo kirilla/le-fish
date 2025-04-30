@@ -13,20 +13,18 @@ public class AddEmailTargetCommand(IDatabaseService database) : IAddEmailTargetC
 
         if (await database.EmailTargets
             .AnyAsync(x => x.Address == model.Address))
-            throw new BlockedByExistingException();
+            throw new BlockedByAddressException();
+
+        if (await database.EmailTargets
+            .AnyAsync(x => x.PersonKey == model.PersonKey))
+            throw new BlockedByKeyException();
 
         var target = new EmailTarget()
         {
             Name = model.Name,
             Address = model.Address,
-            PersonKey = null,
+            PersonKey = model.PersonKey,
         };
-
-        var keys = await database.EmailTargets
-            .Select(x => x.PersonKey)
-            .ToListAsync();
-
-        target.GeneratePhishingKey(keys);
 
         database.EmailTargets.Add(target);
 
