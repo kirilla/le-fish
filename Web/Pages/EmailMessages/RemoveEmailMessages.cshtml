@@ -27,12 +27,15 @@
 
         <select asp-for="CommandModel.EmailStatus">
             <option value="">–</option>
-            @foreach (var status in Enum.GetValues(typeof(EmailStatus)))
-            {
-                <option value="@(status)">
-                    @(status)
-                </option>
-            }
+            <option value="@(EmailStatus.Sent)">
+                Skickade
+            </option>
+            <option value="@(EmailStatus.NotSent)">
+                Ej skickade
+            </option>
+            <option value="@(EmailStatus.SendFailed)">
+                Sändning misslyckades
+            </option>
         </select>
 
         <div asp-validation-summary="All"></div>
