@@ -13,6 +13,8 @@ public class ShowPayloadPageModel(
 {
     public PayloadPage PayloadPage { get; set; }
 
+    public List<EmailTarget> EmailTargets { get; set; }
+
     public bool CanClonePayloadPage { get; set; }
         = clonePayloadPageCommand.IsPermitted(userToken);
 
@@ -33,6 +35,10 @@ public class ShowPayloadPageModel(
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
+
+            EmailTargets = await database.EmailTargets
+                .OrderBy(x => x.Address)
+                .ToListAsync();
 
             return Page();
         }

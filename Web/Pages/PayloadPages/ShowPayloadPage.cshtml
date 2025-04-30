@@ -22,7 +22,7 @@
         URL
     </h5>
     <p class="notice">
-        /page/@(Model.PayloadPage.PageKey)/<a href="/show-payload-page-targets/@(Model.PayloadPage.Id)">[[target_key]]</a>
+        /page/@(Model.PayloadPage.PageKey)/[[target_key]]
     </p>
 
     <h5>
@@ -31,11 +31,6 @@
     <p class="notice">
         @(Model.PayloadPage.Comment ?? "-")
     </p>
-
-    <h5>
-        HTML
-    </h5>
-    <pre class="notice">@(Model.PayloadPage.Html)</pre>
 
     <p>
         @if (Model.CanEditPayloadPage)
@@ -59,5 +54,37 @@
             </a>
         }
     </p>
+
+    <h5>
+        HTML
+    </h5>
+    <pre class="notice">@(Model.PayloadPage.Html)</pre>
+
+    <h5>
+        Besök sidan som...
+    </h5>
+
+    <ul class="notice">
+        @foreach (var target in Model.EmailTargets)
+        {
+            var url = $"/page/{Model.PayloadPage.PageKey}/{target.PersonKey}";
+            <li>
+                🎯
+                &thinsp;
+                <a href="@(url)">@(url)</a>
+                &ensp;
+                @(target.Address)
+            </li>
+        }
+
+        @if (!Model.EmailTargets.Any())
+        {
+            <li>
+                🎯
+                &thinsp;
+                &ndash;
+            </li>
+        }
+    </ul>
 
 </main>
