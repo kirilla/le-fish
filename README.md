@@ -82,8 +82,16 @@ In Visual Studio:
 
 - Download web deploy publishing settings, e.g. a yourdomain.publishsettings file, from your web host.
 - Import a publishing profile in Visual Studio, or set up a publishing profile manually.
+- Publish
+- Does it run?
 - Make sure you have a dedicated app pool.
-- Log in the account you registered before while running locally.
+- Log in as the account you registered before while running locally.
+
+
+### 6. Problems
+- Run the project locally again whenever you need to, for debugging etc.
+- Use SQL Server Management Studio manually for admin tasks.
+- Ask your trusty web host customer support how you can optimize your phishing!
 
 ## FAQ
 
