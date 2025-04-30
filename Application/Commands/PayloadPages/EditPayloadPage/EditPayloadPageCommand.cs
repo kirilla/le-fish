@@ -10,6 +10,7 @@ public class EditPayloadPageCommand(IDatabaseService database) : IEditPayloadPag
 
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
+        model.TruncateByStringLength();
 
         var page = await database.PayloadPages
             .Where(x => x.Id == model.PayloadPageId)

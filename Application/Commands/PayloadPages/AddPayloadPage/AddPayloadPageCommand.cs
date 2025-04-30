@@ -10,6 +10,7 @@ public class AddPayloadPageCommand(IDatabaseService database) : IAddPayloadPageC
 
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
+        model.TruncateByStringLength();
 
         var page = new PayloadPage()
         {
