@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 
 namespace Lefish.Web.Pages;
 
+[IgnoreAntiforgeryToken]
 [AllowAnonymous]
 public class PayloadPageModel(
     IUserToken userToken,
