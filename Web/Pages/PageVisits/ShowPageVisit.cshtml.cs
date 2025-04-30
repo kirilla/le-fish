@@ -21,7 +21,7 @@ public class ShowPageVisitModel(
 
             PageVisit = await database.PageVisits
                 .Include(x => x.EmailTarget)
-                .Include(x => x.PayloadPage)
+                //.Include(x => x.PayloadPage)
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

@@ -16,6 +16,7 @@ public class ShowEmailTargetModel(
     public EmailTarget EmailTarget { get; set; }
 
     public List<EmailHeader> EmailHeaders { get; set; }
+    public List<PageVisitPlus> PageVisits { get; set; }
 
     public bool CanEditTarget { get; set; }
         = editTargetCommand.IsPermitted(userToken);
@@ -44,6 +45,7 @@ public class ShowEmailTargetModel(
             EmailHeaders = await database.EmailMessages
                 .Include(x => x.EmailAccount)
                 .Include(x => x.EmailTarget)
+                .OrderByDescending(x => x.Created)
                 .Where(x => x.EmailTargetId == id)
                 .Select(x => new EmailHeader()
                 {
@@ -58,6 +60,25 @@ public class ShowEmailTargetModel(
                     EmailStatus = x.EmailStatus,
                     Created = x.Created,
                     Sent = x.Sent,
+                })
+                .ToListAsync();
+
+            PageVisits = await database.PageVisits
+                .Where(x => x.EmailTargetId == id)
+                .OrderByDescending(x => x.Created)
+                .Select(x => new PageVisitPlus() { 
+                    Id = x.Id,
+                    Created = x.Created,
+                    Url = x.Url,
+                    Method = x.Method,
+                    IpAddress = x.IpAddress,
+                    UserAgent = x.UserAgent,
+                    PageKey = x.PayloadPage.PageKey,
+                    PayloadPageId = x.PayloadPageId,
+                    TargetName = x.EmailTarget.Name,
+                    TargetAddress = x.EmailTarget.Address,
+                    TargetKey = x.EmailTarget.PersonKey,
+                    EmailTargetId = x.EmailTargetId,
                 })
                 .ToListAsync();
 
