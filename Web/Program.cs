@@ -106,6 +106,8 @@ public class Program
                 Secure = CookieSecurePolicy.Always,
             });
 
+        app.UseMiddleware<IpFilterMiddleware>();
+
         app.UseRouting();
         
         app.UseAuthentication();

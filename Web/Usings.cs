@@ -7,6 +7,7 @@ global using Lefish.Domain.Entities;
 global using Lefish.Domain.Enums;
 global using Lefish.Web.Common;
 global using Lefish.Web.Models;
+global using Lefish.Web.Middleware;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Mvc.RazorPages;
 global using Microsoft.EntityFrameworkCore;
