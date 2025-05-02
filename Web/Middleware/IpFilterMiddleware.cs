@@ -16,8 +16,11 @@ public class IpFilterMiddleware(
 
         if (requestIp != null && await IsIpBlocked(requestIp))
         {
-            context.Response.StatusCode = StatusCodes.Status403Forbidden;
-            await context.Response.WriteAsync("Access Denied");
+            //context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            //await context.Response.WriteAsync("Access Denied");
+
+            context.Response.StatusCode = StatusCodes.Status404NotFound;
+
             return;
         }
 
