@@ -16,6 +16,7 @@ public class DatabaseService(
     public DbSet<EmailMessage> EmailMessages { get; set; }
     public DbSet<EmailTarget> EmailTargets { get; set; }
     public DbSet<EmailTemplate> EmailTemplates { get; set; }
+    public DbSet<IpRange> IpRanges { get; set; }
     public DbSet<PageVisit> PageVisits { get; set; }
     public DbSet<PayloadPage> PayloadPages { get; set; }
     public DbSet<Session> Sessions { get; set; }
@@ -33,6 +34,7 @@ public class DatabaseService(
         new EmailMessageConfiguration().Configure(builder.Entity<EmailMessage>());
         new EmailTargetConfiguration().Configure(builder.Entity<EmailTarget>());
         new EmailTemplateConfiguration().Configure(builder.Entity<EmailTemplate>());
+        new IpRangeConfiguration().Configure(builder.Entity<IpRange>());
         new PageVisitConfiguration().Configure(builder.Entity<PageVisit>());
         new PayloadPageConfiguration().Configure(builder.Entity<PayloadPage>());
         new SessionConfiguration().Configure(builder.Entity<Session>());
