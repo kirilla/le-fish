@@ -8,8 +8,6 @@ public class IpRangeCacheService(
     IDatabaseService database,
     IMemoryCache cache) : IIpRangeCacheService
 {
-    private readonly TimeSpan _cacheExpiration = TimeSpan.FromHours(1);
-
     private const string cacheKey = "allowedIpRanges";
 
     public async Task<List<IpRange>> GetIpRanges()
@@ -30,7 +28,7 @@ public class IpRangeCacheService(
 
         var options = new MemoryCacheEntryOptions
         {
-            AbsoluteExpirationRelativeToNow = _cacheExpiration
+            AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1),
         };
 
         cache.Set(cacheKey, list, options);
