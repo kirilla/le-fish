@@ -1,0 +1,91 @@
+﻿@page "/show-ip-ranges"
+@model ShowIpRangesModel
+@{
+}
+
+@section Meta {
+    <title>
+        IP-addressintervall -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <p class="breadcrumbs">
+        <a href="/desktop">Skrivbord</a>
+        &raquo;
+        IP-addressintervall
+    </p>
+
+    <h4>
+        IP-addressintervall
+    </h4>
+
+    <figure>
+        <table>
+            <tr>
+                <th>Adress</th>
+                <th>IPNetwork</th>
+                <th>Basadress</th>
+                <th>Prefix</th>
+                <th>Blockerat</th>
+            </tr>
+            @foreach (var range in Model.IpRanges)
+            {
+                <tr>
+                    <td>
+                        <a href="/show-ip-range/@(range.Id)">
+                            @(range.Range)
+                        </a>
+                    </td>
+                    <td>
+                        @(range.IPNetwork)
+                    </td>
+                    <td>
+                        @(range.BaseAddress)
+                    </td>
+                    <td>
+                        @(range.Prefix)
+                    </td>
+                    <td>
+                        @if (range.Blocked)
+                        {
+                            <span>🛑 Blockerat</span>
+                        }
+                        else
+                        {
+                            <span>🛣️ Öppet</span>
+                        }
+                    </td>
+                </tr>
+            }
+            @if (!Model.IpRanges.Any())
+            {
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            }
+        </table>
+    </figure>
+
+    <p>
+        <a class="button" href="/add-ip-range">
+            Lägg till adress
+        </a>
+    </p>
+
+</main>

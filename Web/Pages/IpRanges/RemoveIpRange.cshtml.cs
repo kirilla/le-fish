@@ -1,16 +1,17 @@
-﻿using Lefish.Application.Commands.Users.DeleteUser;
+using Lefish.Application.Commands.IpRanges.RemoveIpRange;
 
-namespace Lefish.Web.Pages.Users;
+namespace Lefish.Web.Pages.IpRanges;
 
-public class DeleteUserModel(
+public class RemoveIpRangeModel(
+    IIpRangeCacheService cacheService,
+    IUserToken userToken,
     IDatabaseService database,
-    IDeleteUserCommand command,
-    IUserToken userToken) : UserTokenPageModel(userToken)
+    IRemoveIpRangeCommand command) : UserTokenPageModel(userToken)
 {
-    public new User User { get; set; }
+    public IpRange IpRange { get; set; }
 
     [BindProperty]
-    public DeleteUserCommandModel CommandModel { get; set; }
+    public RemoveIpRangeCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -19,14 +20,14 @@ public class DeleteUserModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            User = await database.Users
+            IpRange = await database.IpRanges
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new DeleteUserCommandModel()
+            CommandModel = new RemoveIpRangeCommandModel()
             {
-                Id = User.Id,
+                Id = IpRange.Id,
             };
 
             return Page();
@@ -48,7 +49,7 @@ public class DeleteUserModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            User = await database.Users
+            IpRange = await database.IpRanges
                 .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -58,13 +59,15 @@ public class DeleteUserModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect("/show-users");
+            cacheService.InvalidateCache();
+
+            return Redirect("/show-ip-ranges");
         }
         catch (ConfirmationRequiredException)
         {
             ModelState.AddModelError(
                 nameof(CommandModel.Confirmed),
-                "Bekräfta att du verkligen vill ta bort användaren.");
+                "Bekr�fta att du verkligen vill ta bort adressen.");
 
             return Page();
         }

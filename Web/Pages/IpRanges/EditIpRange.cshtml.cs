@@ -1,16 +1,17 @@
-﻿using Lefish.Application.Commands.Users.DeleteUser;
+using Lefish.Application.Commands.IpRanges.EditIpRange;
 
-namespace Lefish.Web.Pages.Users;
+namespace Lefish.Web.Pages.IpRanges;
 
-public class DeleteUserModel(
+public class EditIpRangeModel(
+    IIpRangeCacheService cacheService,
+    IUserToken userToken,
     IDatabaseService database,
-    IDeleteUserCommand command,
-    IUserToken userToken) : UserTokenPageModel(userToken)
+    IEditIpRangeCommand command) : UserTokenPageModel(userToken)
 {
-    public new User User { get; set; }
+    public IpRange IpRange { get; set; }
 
     [BindProperty]
-    public DeleteUserCommandModel CommandModel { get; set; }
+    public EditIpRangeCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -19,14 +20,16 @@ public class DeleteUserModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            User = await database.Users
+            IpRange = await database.IpRanges
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new DeleteUserCommandModel()
+            CommandModel = new EditIpRangeCommandModel()
             {
-                Id = User.Id,
+                Id = IpRange.Id,
+                Range = IpRange.Range,
+                Blocked = IpRange.Blocked,
             };
 
             return Page();
@@ -48,7 +51,7 @@ public class DeleteUserModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            User = await database.Users
+            IpRange = await database.IpRanges
                 .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -58,13 +61,23 @@ public class DeleteUserModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect("/show-users");
+            cacheService.InvalidateCache();
+
+            return Redirect("/show-ip-ranges");
         }
-        catch (ConfirmationRequiredException)
+        catch (BlockedByExistingException)
         {
             ModelState.AddModelError(
-                nameof(CommandModel.Confirmed),
-                "Bekräfta att du verkligen vill ta bort användaren.");
+                nameof(CommandModel.Range),
+                "Intervallet finns redan.");
+
+            return Page();
+        }
+        catch (FormatException ex)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.Range),
+                "Ogiltig CIDR-adressblock.");
 
             return Page();
         }

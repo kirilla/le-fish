@@ -1,0 +1,44 @@
+﻿@page "/show-ip-range/{id:int}"
+@model ShowIpRangeModel
+@{
+}
+
+@section Meta {
+    <title>IP-adressintervall - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <p class="breadcrumbs">
+        <a href="/desktop">Desktop</a>
+        &raquo;
+        <a href="/show-ip-ranges">IP-addressintervall</a>
+        &raquo;
+        @(Model.IpRange.Range)
+    </p>
+
+    <h4>
+        IP-adressintervall
+    </h4>
+
+    <div class="notice">
+        <b>Adress</b>
+        <br />
+        @(Model.IpRange.Range)
+    </div>
+
+    <p>
+        <a class="button" href="/edit-ip-range/@(Model.IpRange.Id)">
+            Redigera adressen
+        </a>
+
+        <a class="button" href="/remove-ip-range/@(Model.IpRange.Id)">
+            Ta bort adressen
+        </a>
+    </p>
+
+</main>
