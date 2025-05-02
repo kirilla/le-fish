@@ -14,11 +14,11 @@ public class DatabaseService(
     public DbSet<EmailAttachment> EmailAttachments { get; set; }
     public DbSet<EmailImage> EmailImages { get; set; }
     public DbSet<EmailMessage> EmailMessages { get; set; }
-    public DbSet<Session> Sessions { get; set; }
     public DbSet<EmailTarget> EmailTargets { get; set; }
     public DbSet<EmailTemplate> EmailTemplates { get; set; }
     public DbSet<PageVisit> PageVisits { get; set; }
     public DbSet<PayloadPage> PayloadPages { get; set; }
+    public DbSet<Session> Sessions { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserEmail> UserEmails { get; set; }
 
@@ -31,11 +31,11 @@ public class DatabaseService(
         new EmailAttachmentConfiguration().Configure(builder.Entity<EmailAttachment>());
         new EmailImageConfiguration().Configure(builder.Entity<EmailImage>());
         new EmailMessageConfiguration().Configure(builder.Entity<EmailMessage>());
-        new SessionConfiguration().Configure(builder.Entity<Session>());
         new EmailTargetConfiguration().Configure(builder.Entity<EmailTarget>());
         new EmailTemplateConfiguration().Configure(builder.Entity<EmailTemplate>());
         new PageVisitConfiguration().Configure(builder.Entity<PageVisit>());
         new PayloadPageConfiguration().Configure(builder.Entity<PayloadPage>());
+        new SessionConfiguration().Configure(builder.Entity<Session>());
         new UserConfiguration().Configure(builder.Entity<User>());
         new UserEmailConfiguration().Configure(builder.Entity<UserEmail>());
     }
