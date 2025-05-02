@@ -29,10 +29,10 @@
     <figure>
         <table>
             <tr>
-                <th>Adress</th>
-                <th>IPNetwork</th>
+                <th>Nätverk</th>
+                @* <th>IPNetwork</th>
                 <th>Basadress</th>
-                <th>Prefix</th>
+                <th>Prefix</th> *@
                 <th>Blockerat</th>
             </tr>
             @foreach (var range in Model.IpRanges)
@@ -43,7 +43,7 @@
                             @(range.Range)
                         </a>
                     </td>
-                    <td>
+                    @* <td>
                         @(range.IPNetwork)
                     </td>
                     <td>
@@ -51,7 +51,7 @@
                     </td>
                     <td>
                         @(range.Prefix)
-                    </td>
+                    </td> *@
                     <td>
                         @if (range.Blocked)
                         {
@@ -69,12 +69,12 @@
                 <tr>
                     <td>
                     </td>
-                    <td>
+                    @* <td>
                     </td>
                     <td>
                     </td>
                     <td>
-                    </td>
+                    </td> *@
                     <td>
                     </td>
                 </tr>
