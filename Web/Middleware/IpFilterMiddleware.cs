@@ -1,9 +1,15 @@
-﻿using System.Net;
+﻿using Lefish.Common.Settings;
+using System.Net;
 
 namespace Lefish.Web.Middleware;
 
-public class IpFilterMiddleware(RequestDelegate next, IIpRangeCacheService cacheService)
+public class IpFilterMiddleware(
+    RequestDelegate next, 
+    IIpRangeCacheService cacheService,
+    IOptions<IpFilterConfiguration> ipFilterOptions)
 {
+    private readonly IpFilterConfiguration _config = ipFilterOptions.Value;
+
     public async Task InvokeAsync(HttpContext context)
     {
         var requestIp = context.Connection.RemoteIpAddress;
@@ -30,6 +36,8 @@ public class IpFilterMiddleware(RequestDelegate next, IIpRangeCacheService cache
             }
         }
 
-        return false;
+        return _config.BlockByDefault;
+
+        // Or simply: return false/true;
     }
 }

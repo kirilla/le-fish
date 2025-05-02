@@ -27,6 +27,9 @@ public class Program
         builder.Services.Configure<UserAccountConfiguration>(
             builder.Configuration.GetSection("User:Account"));
 
+        builder.Services.Configure<IpFilterConfiguration>(
+            builder.Configuration.GetSection("Network:IpFilter"));
+
         // Dynamic dependency injection
         var files = Directory.GetFiles(
             AppDomain.CurrentDomain.BaseDirectory,

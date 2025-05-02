@@ -3,6 +3,7 @@ global using Lefish.Common.Constants;
 global using Lefish.Common.Exceptions;
 global using Lefish.Common.Extensions;
 global using Lefish.Common.Interfaces;
+global using Lefish.Common.Settings;
 global using Lefish.Domain.Entities;
 global using Lefish.Domain.Enums;
 global using Lefish.Web.Common;
