@@ -2,7 +2,7 @@
 
 namespace Lefish.Domain.Entities;
 
-public class DataDump
+public class DataDump : ICreatedDateTime
 {
     public int Id { get; set; }
 
@@ -17,6 +17,8 @@ public class DataDump
     [Required]
     [StringLength(MaxLengths.Domain.DataDump.ContentType)]
     public string ContentType { get; set; }
+
+    public DateTime? Created { get; set; }
 
     public int EmailTargetId { get; set; }
     public EmailTarget EmailTarget { get; set; }
