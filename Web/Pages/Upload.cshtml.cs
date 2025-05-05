@@ -1,10 +1,10 @@
 ﻿using Lefish.Application.Commands.DataDumps.UploadDataDump;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Lefish.Web.Pages.DataDumps;
+namespace Lefish.Web.Pages;
 
 [AllowAnonymous]
-public class UploadDataDumpModel(
+public class UploadPageModel(
     IUserToken userToken,
     IDatabaseService database,
     IUploadDataDumpCommand command) : UserTokenPageModel(userToken)
