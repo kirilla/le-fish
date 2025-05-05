@@ -4,6 +4,7 @@ namespace Lefish.Application.Interfaces;
 
 public interface IDatabaseService
 {
+    DbSet<BlockedRequest> BlockedRequests { get; set; }
     DbSet<DataDump> DataDumps { get; set; }
     DbSet<EmailAccount> EmailAccounts { get; set; }
     DbSet<EmailAttachment> EmailAttachments { get; set; }

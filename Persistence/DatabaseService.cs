@@ -9,6 +9,7 @@ public class DatabaseService(
     ICreatedDateTimeSetter createdDateTimeSetter,
     IUpdatedDateTimeSetter updatedDateTimeSetter) : DbContext(options), IDatabaseService
 {
+    public DbSet<BlockedRequest> BlockedRequests { get; set; }
     public DbSet<DataDump> DataDumps { get; set; }
     public DbSet<EmailAccount> EmailAccounts { get; set; }
     public DbSet<EmailAttachment> EmailAttachments { get; set; }
@@ -27,6 +28,7 @@ public class DatabaseService(
     {
         base.OnModelCreating(builder);
 
+        new BlockedRequestConfiguration().Configure(builder.Entity<BlockedRequest>());
         new DataDumpConfiguration().Configure(builder.Entity<DataDump>());
         new EmailAccountConfiguration().Configure(builder.Entity<EmailAccount>());
         new EmailAttachmentConfiguration().Configure(builder.Entity<EmailAttachment>());
