@@ -1,4 +1,4 @@
-﻿@page "/upload/{id:int}"
+﻿@page "/upload/{personKey:minlength(1):maxlength(50)}"
 @model UploadPageModel
 @{
 }
@@ -24,7 +24,7 @@
 
         <form method="post" enctype="multipart/form-data">
 
-            <input type="file" asp-for="UploadedFile" />
+            <input type="file" asp-for="File" />
 
             <div asp-validation-summary="All"></div>
 

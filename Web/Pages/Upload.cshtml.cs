@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Lefish.Web.Pages;
 
+[IgnoreAntiforgeryToken]
 [AllowAnonymous]
 public class UploadPageModel(
     IUserToken userToken,
@@ -12,11 +13,11 @@ public class UploadPageModel(
     public EmailTarget EmailTarget { get; set; }
 
     [BindProperty]
-    public IFormFile UploadedFile { get; set; }
+    public IFormFile File { get; set; }
 
     public UploadDataDumpCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int id)
+    public async Task<IActionResult> OnGetAsync(string personKey)
     {
         try
         {
@@ -24,7 +25,7 @@ public class UploadPageModel(
             //    throw new NotPermittedException();
 
             EmailTarget = await database.EmailTargets
-                .Where(x => x.Id == id)
+                .Where(x => x.PersonKey == personKey)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -45,7 +46,7 @@ public class UploadPageModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync(int id)
+    public async Task<IActionResult> OnPostAsync(string personKey)
     {
         try
         {
@@ -53,36 +54,36 @@ public class UploadPageModel(
             //    throw new NotPermittedException();
 
             EmailTarget = await database.EmailTargets
-                .Where(x => x.Id == id)
+                .Where(x => x.PersonKey == personKey)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             if (!ModelState.IsValid)
                 return Page();
 
-            if (UploadedFile == null || UploadedFile.Length == 0)
+            if (File == null || File.Length == 0)
             {
                 ModelState.AddModelError("", "Please upload a valid file.");
 
                 return Page();
             }
 
-            var data = await GetFileBytesAsync(UploadedFile);
+            var data = await GetFileBytesAsync(File);
 
             CommandModel = new UploadDataDumpCommandModel()
             {
-                EmailTargetId = id,
+                EmailTargetId = EmailTarget.Id,
                 Data = data,
                 //ContentLength = data.Length,
-                ContentType = UploadedFile.ContentType,
-                Name = UploadedFile.FileName,
+                ContentType = File.ContentType,
+                Name = File.FileName,
             };
 
-            CommandModel.Data = await GetFileBytesAsync(UploadedFile);
+            CommandModel.Data = await GetFileBytesAsync(File);
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-data-dump/{id}");
+            return Redirect($"/upload/{personKey}");
         }
         catch
         {

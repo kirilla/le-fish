@@ -105,7 +105,7 @@
     <p>
         @if (Model.CanUploadDataDump)
         {
-            <a class="button" href="/upload-data-dump/@(Model.EmailTarget.Id)">
+            <a class="button" href="/upload/@(Model.EmailTarget.PersonKey)">
                 Ladda upp data
             </a>
         }
