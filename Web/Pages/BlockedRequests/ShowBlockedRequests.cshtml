@@ -1,0 +1,59 @@
+﻿@page "/show-blocked-requests"
+@model ShowBlockedRequestsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Blockerade sidbesök -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Blockerade sidbesök
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var visit in Model.BlockedRequests)
+            {
+                <li>
+                    🛑
+                    &thinsp;
+                    <a href="/show-blocked-request/@(visit.Id)">
+                        @(visit.Method)
+                        &thinsp;
+                        @(visit.Url)
+                        &thinsp;
+                        @(visit.Created.ToFixedFormatDateShortTime())
+                    </a>
+                </li>
+            }
+
+            @if (!Model.BlockedRequests.Any())
+            {
+                <li>
+                    🛑
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    <p>
+        <a class="button" href="/remove-blocked-requests">
+            Ta bort
+        </a>
+    </p>
+
+</main>

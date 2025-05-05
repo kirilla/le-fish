@@ -2,7 +2,9 @@
 
 namespace Lefish.Application.Commands.IpRanges.AddIpRange;
 
-public class AddIpRangeCommand(IDatabaseService database) : IAddIpRangeCommand
+public class AddIpRangeCommand(
+    IDatabaseService database,
+    IIpRangeCacheService cacheService) : IAddIpRangeCommand
 {
     public async Task Execute(
         IUserToken userToken, AddIpRangeCommandModel model)
@@ -34,6 +36,8 @@ public class AddIpRangeCommand(IDatabaseService database) : IAddIpRangeCommand
         database.IpRanges.Add(range);
 
         await database.SaveAsync(userToken);
+
+        cacheService.InvalidateCache();
     }
 
     public bool IsPermitted(IUserToken userToken)

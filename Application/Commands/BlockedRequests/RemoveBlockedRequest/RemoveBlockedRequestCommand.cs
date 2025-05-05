@@ -1,11 +1,9 @@
-﻿namespace Lefish.Application.Commands.IpRanges.RemoveIpRange;
+﻿namespace Lefish.Application.Commands.BlockedRequests.RemoveBlockedRequest;
 
-public class RemoveIpRangeCommand(
-    IDatabaseService database,
-    IIpRangeCacheService cacheService) : IRemoveIpRangeCommand
+public class RemoveBlockedRequestCommand(IDatabaseService database) : IRemoveBlockedRequestCommand
 {
     public async Task Execute(
-        IUserToken userToken, RemoveIpRangeCommandModel model)
+        IUserToken userToken, RemoveBlockedRequestCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
@@ -13,16 +11,14 @@ public class RemoveIpRangeCommand(
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var range = await database.IpRanges
-            .Where(x => x.Id == model.Id)
+        var visit = await database.BlockedRequests
+            .Where(x => x.Id == model.BlockedRequestId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.IpRanges.Remove(range);
+        database.BlockedRequests.Remove(visit);
 
         await database.SaveAsync(userToken);
-
-        cacheService.InvalidateCache();
     }
 
     public bool IsPermitted(IUserToken userToken)

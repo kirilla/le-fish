@@ -2,7 +2,9 @@
 
 namespace Lefish.Application.Commands.IpRanges.EditIpRange;
 
-public class EditIpRangeCommand(IDatabaseService database) : IEditIpRangeCommand
+public class EditIpRangeCommand(
+    IDatabaseService database,
+    IIpRangeCacheService cacheService) : IEditIpRangeCommand
 {
     public async Task Execute(
         IUserToken userToken, EditIpRangeCommandModel model)
@@ -36,6 +38,8 @@ public class EditIpRangeCommand(IDatabaseService database) : IEditIpRangeCommand
         range.Blocked = model.Blocked;
 
         await database.SaveAsync(userToken);
+
+        cacheService.InvalidateCache();
     }
 
     public bool IsPermitted(IUserToken userToken)
