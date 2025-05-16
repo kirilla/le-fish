@@ -1,14 +1,14 @@
-using static Lefish.Common.Validation.Pattern.Common;
-
 namespace Lefish.Web.Pages.EmailMessages;
 
 public class ShowEmailQueueModel(
     IUserToken userToken,
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
-    public List<EmailHeader> NotSentEmails { get; set; }
-    public List<EmailHeader> FailedEmails { get; set; }
-    public List<EmailHeader> SentEmails { get; set; }
+    public List<EmailHeader> EmailHeaders { get; set; }
+
+    public int NotSent { get; set; }
+    public int Failed { get; set; }
+    public int Sent { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -17,7 +17,7 @@ public class ShowEmailQueueModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            var emails = await database.EmailMessages
+            EmailHeaders = await database.EmailMessages
                 .Include(x => x.EmailAccount)
                 .Include(x => x.EmailTarget)
                 .OrderBy(x => x.Created)
@@ -37,17 +37,9 @@ public class ShowEmailQueueModel(
                 })
                 .ToListAsync();
 
-            NotSentEmails = emails
-                .Where(x => x.EmailStatus == EmailStatus.NotSent)
-                .ToList();
-
-            FailedEmails = emails
-                .Where(x => x.EmailStatus == EmailStatus.SendFailed)
-                .ToList();
-
-            SentEmails = emails
-                .Where(x => x.EmailStatus == EmailStatus.Sent)
-                .ToList();
+            NotSent = EmailHeaders.Count(x => x.EmailStatus == EmailStatus.NotSent);
+            Failed = EmailHeaders.Count(x => x.EmailStatus == EmailStatus.SendFailed);
+            Sent = EmailHeaders.Count(x => x.EmailStatus == EmailStatus.Sent);
 
             return Page();
         }

@@ -20,9 +20,19 @@
         Utkorg
     </h4>
 
-    <h5>
-        Väntande
-    </h5>
+    @if (Model.NotSent > 0)
+    {
+        <p class="notice">
+            Väntar på att sändas: @(Model.NotSent)
+        </p>
+    }
+
+    @if (Model.Failed > 0)
+    {
+        <p class="notice">
+            Misslyckad sändning @(Model.Failed)
+        </p>
+    }
 
     <figure>
         <table>
@@ -31,8 +41,9 @@
                 <th>Namn</th>
                 <th>Adress</th>
                 <th>Ämne</th>
+                <th>Status</th>
             </tr>
-            @foreach (var email in Model.NotSentEmails)
+            @foreach (var email in Model.EmailHeaders)
             {
                 <tr>
                     <td>
@@ -49,103 +60,25 @@
                     <td>
                         @(email.Subject)
                     </td>
+                    <td>
+                        @(email.EmailStatus)
+                    </td>
                 </tr>
             }
-        </table>
-    </figure>
-
-    @if (!Model.NotSentEmails.Any())
-    {
-        <p>
-            inga
-        </p>
-    }
-
-    <h5>
-        Misslyckat
-    </h5>
-
-    <figure>
-        <table>
-            <tr>
-                <th>När</th>
-                <th>Namn</th>
-                <th>Adress</th>
-                <th>Ämne</th>
-            </tr>
-            @foreach (var email in Model.FailedEmails)
+            @if (!Model.EmailHeaders.Any())
             {
                 <tr>
-                    <td>
-                        <a href="/show-email/@(email.Id)">
-                            @(email.Created.ToFixedFormatDateShortTime())
-                        </a>
-                    </td>
-                    <td>
-                        @(email.ToName)
-                    </td>
-                    <td>
-                        @(email.ToAddress)
-                    </td>
-                    <td>
-                        @(email.Subject)
+                    <td colspan="5">
+                        Inga
                     </td>
                 </tr>
             }
         </table>
     </figure>
-
-    @if (!Model.FailedEmails.Any())
-    {
-        <p>
-            inga
-        </p>
-    }
-
-    <h5>
-        Skickat
-    </h5>
-
-    <figure>
-        <table>
-            <tr>
-                <th>När</th>
-                <th>Namn</th>
-                <th>Adress</th>
-                <th>Ämne</th>
-            </tr>
-            @foreach (var email in Model.SentEmails)
-            {
-                <tr>
-                    <td>
-                        <a href="/show-email/@(email.Id)">
-                            @(email.Created.ToFixedFormatDateShortTime())
-                        </a>
-                    </td>
-                    <td>
-                        @(email.ToName)
-                    </td>
-                    <td>
-                        @(email.ToAddress)
-                    </td>
-                    <td>
-                        @(email.Subject)
-                    </td>
-                </tr>
-            }
-        </table>
-    </figure>
-
-    @if (!Model.SentEmails.Any())
-    {
-        <p>
-            inga
-        </p>
-    }
 
     <p>
         <a class="button" href="/remove-email-messages">
-            Ta bort epostmeddelanden
+            Ta bort meddelanden
         </a>
     </p>
 
