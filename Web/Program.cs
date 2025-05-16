@@ -87,8 +87,6 @@ public class Program
         var app = builder.Build();
 
         // Middleware
-        app.UseMiddleware<IpFilterMiddleware>();
-
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/error");
@@ -101,6 +99,9 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+
+        app.UseMiddleware<IpFilterMiddleware>();
+
         app.UseStaticFiles();
 
         app.UseCookiePolicy(
