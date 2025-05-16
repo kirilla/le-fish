@@ -15,15 +15,10 @@ public class AddEmailTargetCommand(IDatabaseService database) : IAddEmailTargetC
             .AnyAsync(x => x.Address == model.Address))
             throw new BlockedByAddressException();
 
-        if (await database.EmailTargets
-            .AnyAsync(x => x.PersonKey == model.PersonKey))
-            throw new BlockedByKeyException();
-
         var target = new EmailTarget()
         {
             Name = model.Name,
             Address = model.Address,
-            PersonKey = model.PersonKey,
         };
 
         database.EmailTargets.Add(target);

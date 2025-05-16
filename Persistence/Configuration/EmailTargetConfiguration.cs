@@ -14,10 +14,6 @@ class EmailTargetConfiguration : IEntityTypeConfiguration<EmailTarget>
             .IsRequired()
             .HasMaxLength(MaxLengths.Domain.EmailTarget.Address);
 
-        builder.Property(p => p.PersonKey)
-            .IsRequired()
-            .HasMaxLength(MaxLengths.Domain.EmailTarget.PersonKey);
-
         builder.HasMany(x => x.EmailMessages)
             .WithOne(x => x.EmailTarget)
             .HasForeignKey(x => x.EmailTargetId)

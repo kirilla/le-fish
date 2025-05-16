@@ -22,15 +22,8 @@ public class EditEmailTargetCommand(IDatabaseService database) : IEditEmailTarge
                 x.Id != model.EmailTargetId))
             throw new BlockedByAddressException();
 
-        if (await database.EmailTargets
-            .AnyAsync(x =>
-                x.PersonKey == model.PersonKey &&
-                x.Id != model.EmailTargetId))
-            throw new BlockedByKeyException();
-
         target.Name = model.Name;
         target.Address = model.Address;
-        target.PersonKey = model.PersonKey;
 
         await database.SaveAsync(userToken);
     }

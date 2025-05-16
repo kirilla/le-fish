@@ -29,7 +29,6 @@ public class EditEmailTargetModel(
                 EmailTargetId = EmailTarget.Id,
                 Name = EmailTarget.Name,
                 Address = EmailTarget.Address,
-                PersonKey = EmailTarget.PersonKey,
             };
 
             return Page();
@@ -68,14 +67,6 @@ public class EditEmailTargetModel(
             ModelState.AddModelError(
                 nameof(CommandModel.Address),
                 "Det finns ett annat målkonto med samma adress.");
-
-            return Page();
-        }
-        catch (BlockedByKeyException)
-        {
-            ModelState.AddModelError(
-                nameof(CommandModel.PersonKey),
-                "Det finns ett annat målkonto med samma phishing-nyckel.");
 
             return Page();
         }

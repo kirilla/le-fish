@@ -17,6 +17,7 @@ public class ShowEmailTargetModel(
 
     public List<EmailHeader> EmailHeaders { get; set; }
     public List<PageVisitPlus> PageVisits { get; set; }
+    public List<PhishingToken> PhishingTokens { get; set; }
 
     public bool CanEditTarget { get; set; }
         = editTargetCommand.IsPermitted(userToken);
@@ -77,9 +78,12 @@ public class ShowEmailTargetModel(
                     PayloadPageId = x.PayloadPageId,
                     TargetName = x.EmailTarget.Name,
                     TargetAddress = x.EmailTarget.Address,
-                    TargetKey = x.EmailTarget.PersonKey,
                     EmailTargetId = x.EmailTargetId,
                 })
+                .ToListAsync();
+
+            PhishingTokens = await database.PhishingTokens
+                .Where(x => x.EmailTargetId == id)
                 .ToListAsync();
 
             return Page();

@@ -7,17 +7,14 @@ public static class EmailMessageExtensions
     {
         message.Subject = message.Subject.Replace("[[target_name]]", target.Name);
         message.Subject = message.Subject.Replace("[[target_address]]", target.Address);
-        message.Subject = message.Subject.Replace("[[target_key]]", target.PersonKey);
         message.Subject = message.Subject.Replace("[[token]]", token.Token.ToString());
 
         message.HtmlBody = message.HtmlBody.Replace("[[target_name]]", target.Name);
         message.HtmlBody = message.HtmlBody.Replace("[[target_address]]", target.Address);
-        message.HtmlBody = message.HtmlBody.Replace("[[target_key]]", target.PersonKey);
         message.HtmlBody = message.HtmlBody.Replace("[[token]]", token.Token.ToString());
 
         message.TextBody = message.TextBody.Replace("[[target_name]]", target.Name);
         message.TextBody = message.TextBody.Replace("[[target_address]]", target.Address);
-        message.TextBody = message.TextBody.Replace("[[target_key]]", target.PersonKey);
         message.TextBody = message.TextBody.Replace("[[token]]", token.Token.ToString());
     }
 }

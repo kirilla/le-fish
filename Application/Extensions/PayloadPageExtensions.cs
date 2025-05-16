@@ -7,7 +7,6 @@ public static class PayloadPageExtensions
     {
         page.Html = page.Html.Replace("[[target_name]]", target.Name);
         page.Html = page.Html.Replace("[[target_address]]", target.Address);
-        page.Html = page.Html.Replace("[[target_key]]", target.PersonKey);
         page.Html = page.Html.Replace("[[token]]", token.Token.ToString());
     }
 }

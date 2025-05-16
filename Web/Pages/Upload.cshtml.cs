@@ -17,17 +17,20 @@ public class UploadPageModel(
 
     public UploadDataDumpCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(string personKey)
+    public async Task<IActionResult> OnGetAsync(int token)
     {
         try
         {
             //if (!command.IsPermitted(UserToken))
             //    throw new NotPermittedException();
 
-            EmailTarget = await database.EmailTargets
-                .Where(x => x.PersonKey == personKey)
+            var phishingToken = await database.PhishingTokens
+                .Include(x => x.EmailTarget)
+                .Where(x => x.Token == token)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
+
+            EmailTarget = phishingToken.EmailTarget;
 
             CommandModel = new UploadDataDumpCommandModel()
             {
@@ -46,17 +49,20 @@ public class UploadPageModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync(string personKey)
+    public async Task<IActionResult> OnPostAsync(int token)
     {
         try
         {
             //if (!command.IsPermitted(UserToken))
             //    throw new NotPermittedException();
 
-            EmailTarget = await database.EmailTargets
-                .Where(x => x.PersonKey == personKey)
+            var phishingToken = await database.PhishingTokens
+                .Include(x => x.EmailTarget)
+                .Where(x => x.Token == token)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
+
+            EmailTarget = phishingToken.EmailTarget;
 
             if (!ModelState.IsValid)
                 return Page();
@@ -83,7 +89,7 @@ public class UploadPageModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/upload/{personKey}");
+            return Redirect($"/upload/{token}");
         }
         catch
         {

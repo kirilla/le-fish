@@ -18,7 +18,6 @@ public class PageVisitPlus
 
     public string TargetName { get; set; }
     public string TargetAddress { get; set; }
-    public string TargetKey { get; set; }
 
     public int EmailTargetId { get; set; }
 }

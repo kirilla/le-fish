@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Lefish.Common.Validation;
 
 namespace Lefish.Application.Commands.EmailTargets.EditEmailTarget;
 
@@ -20,11 +19,4 @@ public class EditEmailTargetCommandModel
         MaxLengths.Domain.EmailTarget.Address,
         ErrorMessage = "Skriv kortare.")]
     public string Address { get; set; }
-
-    [RegularExpression(Pattern.Common.SomeContent)]
-    [Required(ErrorMessage = "Ange phishing-nyckel.")]
-    [StringLength(
-        MaxLengths.Domain.EmailTarget.PersonKey,
-        ErrorMessage = "Skriv kortare.")]
-    public string PersonKey { get; set; }
 }

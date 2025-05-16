@@ -108,7 +108,6 @@ public static class MaxLengths
         {
             public const int Name = 100;
             public const int Address = 100;
-            public const int PersonKey = 50;
         }
 
         public static class EmailTemplate

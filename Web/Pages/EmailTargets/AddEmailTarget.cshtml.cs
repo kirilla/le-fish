@@ -17,10 +17,7 @@ public class AddEmailTargetModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            CommandModel = new AddEmailTargetCommandModel()
-            {
-                PersonKey = Random.Shared.Next().ToString(),
-            };
+            CommandModel = new AddEmailTargetCommandModel();
 
             return Page();
         }
@@ -49,14 +46,6 @@ public class AddEmailTargetModel(
             ModelState.AddModelError(
                 nameof(CommandModel.Address),
                 "Det finns ett annat målkonto med samma adress.");
-
-            return Page();
-        }
-        catch (BlockedByKeyException)
-        {
-            ModelState.AddModelError(
-                nameof(CommandModel.PersonKey),
-                "Det finns ett annat målkonto med samma phishing-nyckel.");
 
             return Page();
         }

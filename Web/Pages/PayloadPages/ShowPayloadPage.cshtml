@@ -67,7 +67,7 @@
     <ul class="notice">
         @foreach (var target in Model.EmailTargets)
         {
-            var url = $"/page/{Model.PayloadPage.PageKey}/{target.PersonKey}";
+            var url = $"/page/[[token]]";
             <li>
                 🎯
                 &thinsp;

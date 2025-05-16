@@ -15,7 +15,7 @@
 
     <h4>
         🎯
-        @(Model.EmailTarget.Name) [@(Model.EmailTarget.PersonKey)]
+        @(Model.EmailTarget.Name)
     </h4>
 
     <div class="notice">
@@ -76,17 +76,51 @@
     </p>
 
     <h4>
+        Tokens
+    </h4>
+
+    <ul class="notice">
+        @foreach (var token in Model.PhishingTokens)
+        {
+            <li>
+                🍪
+                &thinsp;
+                <a href="/show-phishing-token/@(token.Id)">@(token.Token)</a>
+                &ensp;
+                @(token.Created.ToFixedFormatDateShortTime())
+                @if (Model.CanUploadDataDump)
+                {
+                    <span>
+                        &ensp;
+                        <a href="/upload/@(token.Token)">
+                            Ladda upp data
+                        </a>
+                    </span>
+                }
+            </li>
+        }
+
+        @if (!Model.PhishingTokens.Any())
+        {
+            <li>
+                    🍪
+                &thinsp;
+                &ndash;
+            </li>
+        }
+    </ul>
+
+    <h4>
         Sidbesök
     </h4>
 
     <ul class="notice">
         @foreach (var visit in Model.PageVisits)
         {
-            var url = $"/page/{visit.PageKey}/{visit.TargetKey}";
             <li>
                 🙋
                 &thinsp;
-                <a href="/show-page-visit/@(visit.Id)">@(url)</a>
+                <a href="/show-page-visit/@(visit.Id)">@(visit.PageKey ?? "null")</a>
                 &ensp;
                 @(visit.Created.ToFixedFormatDateShortTime())
             </li>
@@ -101,14 +135,5 @@
             </li>
         }
     </ul>
-
-    <p>
-        @if (Model.CanUploadDataDump)
-        {
-            <a class="button" href="/upload/@(Model.EmailTarget.PersonKey)">
-                Ladda upp data
-            </a>
-        }
-    </p>
 
 </main>
