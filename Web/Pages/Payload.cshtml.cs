@@ -30,7 +30,7 @@ public class PayloadPageModel(
             EmailTarget = phishingToken.EmailTarget;
             PayloadPage = phishingToken.PayloadPage;
 
-            PayloadPage.InsertTargetValues(EmailTarget);
+            PayloadPage.InsertTargetValues(EmailTarget, phishingToken);
 
             await LogPageVisit(HttpContext, PayloadPage, EmailTarget);
 
