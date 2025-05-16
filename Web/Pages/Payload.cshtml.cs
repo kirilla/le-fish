@@ -36,13 +36,9 @@ public class PayloadPageModel(
 
             return Page();
         }
-        catch (NotFoundException)
-        {
-            return Redirect("/help/notfound");
-        }
         catch
         {
-            return Redirect("/help/notpermitted");
+            return NotFound();
         }
     }
 
