@@ -27,7 +27,6 @@ public class EditPayloadPageModel(
             CommandModel = new EditPayloadPageCommandModel()
             {
                 PayloadPageId = PayloadPage.Id,
-                Comment = PayloadPage.Comment,
 				PageKey = PayloadPage.PageKey,
 				Html = PayloadPage.Html,
             };
@@ -63,11 +62,11 @@ public class EditPayloadPageModel(
 
             return Redirect($"/show-payload-page/{id}");
         }
-        catch (BlockedByKeyException)
+        catch (BlockedByExistingException)
         {
             ModelState.AddModelError(
                 nameof(CommandModel.PageKey),
-                "Det finns en annan sida med samma phishing-nyckel.");
+                "Det finns en annan sida med samma namn.");
 
             return Page();
         }

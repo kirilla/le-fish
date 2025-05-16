@@ -28,7 +28,6 @@ public class ClonePayloadPageModel(
             {
                 PayloadPageId = PayloadPage.Id,
                 PageKey = PayloadPage.PageKey,
-                Comment = PayloadPage.Comment,
             };
 
             return Page();
@@ -62,11 +61,11 @@ public class ClonePayloadPageModel(
 
             return Redirect($"/show-payload-page/{cloneId}");
         }
-        catch (BlockedByKeyException)
+        catch (BlockedByExistingException)
         {
             ModelState.AddModelError(
                 nameof(CommandModel.PageKey),
-                "Det finns en sida med samma phishing-nyckel.");
+                "Det finns en sida med samma namn.");
 
             return Page();
         }

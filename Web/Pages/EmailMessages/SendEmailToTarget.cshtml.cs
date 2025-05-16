@@ -36,7 +36,7 @@ public class SendEmailToTargetModel(
                 .Select(x => new SimplePayloadPage()
                 {
                     Id = x.Id,
-                    Name = x.Comment,
+                    Name = x.PageKey,
                 })
                 .ToListAsync();
 
@@ -76,7 +76,7 @@ public class SendEmailToTargetModel(
                 .Select(x => new SimplePayloadPage()
                 {
                     Id = x.Id,
-                    Name = x.Comment,
+                    Name = x.PageKey,
                 })
                 .ToListAsync();
 

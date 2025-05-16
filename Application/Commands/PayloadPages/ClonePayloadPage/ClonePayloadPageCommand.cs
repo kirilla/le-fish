@@ -19,12 +19,11 @@ public class ClonePayloadPageCommand(IDatabaseService database) : IClonePayloadP
 
         if (await database.PayloadPages
             .AnyAsync(x => x.PageKey == model.PageKey))
-            throw new BlockedByKeyException();
+            throw new BlockedByExistingException();
 
         var newPage = new PayloadPage()
         {
             PageKey = model.PageKey,
-            Comment = model.Comment,
             Html = page.Html,
         };
 

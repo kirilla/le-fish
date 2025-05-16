@@ -121,7 +121,6 @@ public static class MaxLengths
         public static class PayloadPage
         {
             public const int PageKey = 50;
-            public const int Comment = 100;
 
             public const int Html = Common.DbSuperSize;
         }

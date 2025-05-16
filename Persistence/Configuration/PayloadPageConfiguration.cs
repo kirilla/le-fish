@@ -10,10 +10,6 @@ class PayloadPageConfiguration : IEntityTypeConfiguration<PayloadPage>
             .IsRequired()
             .HasMaxLength(MaxLengths.Domain.PayloadPage.PageKey);
 
-        builder.Property(p => p.Comment)
-            .IsRequired(false)
-            .HasMaxLength(MaxLengths.Domain.PayloadPage.Comment);
-
         builder.Property(p => p.Html)
             .IsRequired()
             .HasMaxLength(MaxLengths.Domain.PayloadPage.Html);

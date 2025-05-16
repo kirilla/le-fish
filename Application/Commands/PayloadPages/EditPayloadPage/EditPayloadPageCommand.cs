@@ -21,10 +21,9 @@ public class EditPayloadPageCommand(IDatabaseService database) : IEditPayloadPag
             .AnyAsync(x =>
                 x.PageKey == model.PageKey &&
                 x.Id != model.PayloadPageId))
-            throw new BlockedByKeyException();
+            throw new BlockedByExistingException();
 
         page.PageKey = model.PageKey;
-        page.Comment = model.Comment;
         page.Html = model.Html;
 
         await database.SaveAsync(userToken);

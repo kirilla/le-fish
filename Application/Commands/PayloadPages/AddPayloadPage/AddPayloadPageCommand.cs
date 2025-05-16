@@ -14,12 +14,11 @@ public class AddPayloadPageCommand(IDatabaseService database) : IAddPayloadPageC
 
         if (await database.PayloadPages
             .AnyAsync(x => x.PageKey == model.PageKey))
-            throw new BlockedByKeyException();
+            throw new BlockedByExistingException();
 
         var page = new PayloadPage()
         {
             PageKey = model.PageKey,
-            Comment = model.Comment,
             Html = model.Html,
         };
 
