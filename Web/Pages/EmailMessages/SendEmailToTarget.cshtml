@@ -39,6 +39,20 @@
             }
         </select>
 
+        <label asp-for="CommandModel.PayloadPageId">
+            Fångstsida
+        </label>
+
+        <select asp-for="CommandModel.PayloadPageId">
+            <option value="">–</option>
+            @foreach (var page in Model.PayloadPages)
+            {
+                <option value="@(page.Id)">
+                    @(page.Name)
+                </option>
+            }
+        </select>
+
         <label asp-for="CommandModel.EmailAccountId">
             Epostkonto
         </label>

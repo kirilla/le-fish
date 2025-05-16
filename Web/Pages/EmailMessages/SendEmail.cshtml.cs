@@ -10,6 +10,8 @@ public class SendEmailModel(
     public List<EmailAccount> EmailAccounts { get; set; }
     public List<EmailTarget> EmailTargets { get; set; }
     public List<EmailTemplate> EmailTemplates { get; set; }
+
+    public List<SimplePayloadPage> PayloadPages { get; set; }
     
     [BindProperty]
     public SendEmailCommandModel CommandModel { get; set; }
@@ -24,6 +26,14 @@ public class SendEmailModel(
             EmailAccounts = await database.EmailAccounts.ToListAsync();
             EmailTargets = await database.EmailTargets.ToListAsync();
             EmailTemplates = await database.EmailTemplates.ToListAsync();
+
+            PayloadPages = await database.PayloadPages
+                .Select(x => new SimplePayloadPage()
+                {
+                    Id = x.Id,
+                    Name = x.Comment,
+                })
+                .ToListAsync();
 
             CommandModel = new SendEmailCommandModel();
 
@@ -49,6 +59,14 @@ public class SendEmailModel(
             EmailAccounts = await database.EmailAccounts.ToListAsync();
             EmailTargets = await database.EmailTargets.ToListAsync();
             EmailTemplates = await database.EmailTemplates.ToListAsync();
+
+            PayloadPages = await database.PayloadPages
+                .Select(x => new SimplePayloadPage()
+                {
+                    Id = x.Id,
+                    Name = x.Comment,
+                })
+                .ToListAsync();
 
             if (!ModelState.IsValid)
                 return Page();

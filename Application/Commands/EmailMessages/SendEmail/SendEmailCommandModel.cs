@@ -12,4 +12,7 @@ public class SendEmailCommandModel
 
     [Required]
     public int? EmailAccountId { get; set; }
+
+    [Required]
+    public int? PayloadPageId { get; set; }
 }

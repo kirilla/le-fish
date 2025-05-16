@@ -1,6 +1,4 @@
-﻿using Lefish.Application.Extensions;
-
-namespace Lefish.Application.Commands.EmailMessages.SendEmailToTarget;
+﻿namespace Lefish.Application.Commands.EmailMessages.SendEmailToTarget;
 
 public class SendEmailToTargetCommand(
     IDateService dateService,
@@ -18,6 +16,11 @@ public class SendEmailToTargetCommand(
 
         var account = await database.EmailAccounts
             .Where(x => x.Id == model.EmailAccountId!.Value)
+            .SingleOrDefaultAsync() ??
+             throw new NotFoundException();
+
+        var page = await database.PayloadPages
+            .Where(x => x.Id == model.PayloadPageId!.Value)
             .SingleOrDefaultAsync() ??
              throw new NotFoundException();
 
@@ -52,6 +55,16 @@ public class SendEmailToTargetCommand(
         message.InsertTargetValues(target);
 
         database.EmailMessages.Add(message);
+
+        var token = new PhishingToken()
+        {
+            EmailTargetId = target.Id,
+            PayloadPageId = page.Id,
+        };
+
+        await token.SetUniqueTokenAsync(database);
+
+        database.PhishingTokens.Add(token);
 
         await database.SaveAsync(userToken);
 
