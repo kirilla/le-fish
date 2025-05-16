@@ -22,7 +22,7 @@
         URL
     </h5>
     <p class="notice">
-        /page/@(Model.PayloadPage.Name)/[[target_key]]
+        /page/[[token]]
     </p>
 
     <p>
@@ -58,19 +58,18 @@
     </h5>
 
     <ul class="notice">
-        @foreach (var target in Model.EmailTargets)
+        @foreach (var token in Model.PhishingTokens)
         {
-            var url = $"/page/[[token]]";
             <li>
                 🎯
                 &thinsp;
-                <a href="@(url)">@(url)</a>
+                <a href="/page/@(token.Token)">@(token.EmailTarget.Name), @(token.EmailTarget.Address)</a>
                 &ensp;
-                @(target.Address)
+                [@(token.Token)]
             </li>
         }
 
-        @if (!Model.EmailTargets.Any())
+        @if (!Model.PhishingTokens.Any())
         {
             <li>
                 🎯

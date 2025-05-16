@@ -13,7 +13,7 @@ public class ShowPayloadPageModel(
 {
     public PayloadPage PayloadPage { get; set; }
 
-    public List<EmailTarget> EmailTargets { get; set; }
+    public List<PhishingToken> PhishingTokens { get; set; }
 
     public bool CanClonePayloadPage { get; set; }
         = clonePayloadPageCommand.IsPermitted(userToken);
@@ -36,8 +36,11 @@ public class ShowPayloadPageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            EmailTargets = await database.EmailTargets
-                .OrderBy(x => x.Address)
+            PhishingTokens = await database.PhishingTokens
+                .Include(x => x.EmailTarget)
+                .Where(x => x.PayloadPageId == id)
+                .OrderBy(x => x.EmailTarget.Name)
+                .ThenBy(x => x.EmailTarget.Address)
                 .ToListAsync();
 
             return Page();
