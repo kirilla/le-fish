@@ -87,6 +87,8 @@ public class Program
         var app = builder.Build();
 
         // Middleware
+        app.UseMiddleware<IpFilterMiddleware>();
+
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/error");
@@ -108,8 +110,6 @@ public class Program
                 MinimumSameSitePolicy = SameSiteMode.Lax,
                 Secure = CookieSecurePolicy.Always,
             });
-
-        app.UseMiddleware<IpFilterMiddleware>();
 
         app.UseRouting();
         
