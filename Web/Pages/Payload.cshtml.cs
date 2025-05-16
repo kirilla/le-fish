@@ -10,31 +10,29 @@ public class PayloadPageModel(
     IUserToken userToken,
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
+    public EmailTarget EmailTarget { get; set; }
     public PayloadPage PayloadPage { get; set; }
 
     public List<PayloadPage> PayloadPages { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(string pageKey, string personKey)
+    public async Task<IActionResult> OnGetAsync(int token)
     {
         try
         {
-            PayloadPage = await database.PayloadPages
+            var phishingToken = await database.PhishingTokens
                 .AsNoTracking()
-                .Where(x => x.PageKey == pageKey)
+                .Include(x => x.EmailTarget)
+                .Include(x => x.PayloadPage)
+                .Where(x => x.Token == token)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            var target = await database.EmailTargets
-                .AsNoTracking()
-                .Where(x => x.PersonKey == personKey)
-                .FirstOrDefaultAsync();
+            EmailTarget = phishingToken.EmailTarget;
+            PayloadPage = phishingToken.PayloadPage;
 
-            if (target == null)
-                return Redirect("/help/notfound");
+            PayloadPage.InsertTargetValues(EmailTarget);
 
-            PayloadPage.InsertTargetValues(target);
-
-            await LogPageVisit(HttpContext, PayloadPage, target);
+            await LogPageVisit(HttpContext, PayloadPage, EmailTarget);
 
             return Page();
         }
