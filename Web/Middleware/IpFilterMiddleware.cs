@@ -17,7 +17,9 @@ public class IpFilterMiddleware(
     {
         var requestIp = context.Connection.RemoteIpAddress;
 
-        if (requestIp != null && await IsIpBlocked(requestIp))
+        if (_config.IsFiltering &&
+            requestIp != null &&
+            await IsIpBlocked(requestIp))
         {
             //context.Response.StatusCode = StatusCodes.Status403Forbidden;
             //await context.Response.WriteAsync("Access Denied");
