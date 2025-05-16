@@ -15,6 +15,7 @@ public interface IDatabaseService
     DbSet<IpRange> IpRanges { get; set; }
     DbSet<PageVisit> PageVisits { get; set; }
     DbSet<PayloadPage> PayloadPages { get; set; }
+    DbSet<PhishingToken> PhishingTokens { get; set; }
     DbSet<Session> Sessions { get; set; }
     DbSet<User> Users { get; set; }
     DbSet<UserEmail> UserEmails { get; set; }

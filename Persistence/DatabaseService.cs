@@ -20,6 +20,7 @@ public class DatabaseService(
     public DbSet<IpRange> IpRanges { get; set; }
     public DbSet<PageVisit> PageVisits { get; set; }
     public DbSet<PayloadPage> PayloadPages { get; set; }
+    public DbSet<PhishingToken> PhishingTokens { get; set; }
     public DbSet<Session> Sessions { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserEmail> UserEmails { get; set; }
@@ -39,6 +40,7 @@ public class DatabaseService(
         new IpRangeConfiguration().Configure(builder.Entity<IpRange>());
         new PageVisitConfiguration().Configure(builder.Entity<PageVisit>());
         new PayloadPageConfiguration().Configure(builder.Entity<PayloadPage>());
+        new PhishingTokenConfiguration().Configure(builder.Entity<PhishingToken>());
         new SessionConfiguration().Configure(builder.Entity<Session>());
         new UserConfiguration().Configure(builder.Entity<User>());
         new UserEmailConfiguration().Configure(builder.Entity<UserEmail>());

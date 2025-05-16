@@ -12,4 +12,5 @@ public class EmailTarget
     public List<DataDump> DataDumps { get; set; }
     public List<EmailMessage> EmailMessages { get; set; }
     public List<PageVisit> PageVisits { get; set; }
+    public List<PhishingToken> PhishingTokens { get; set; }
 }

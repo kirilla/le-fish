@@ -1,0 +1,13 @@
+﻿namespace Lefish.Domain.Entities;
+
+public class PhishingToken : ICreatedDateTime
+{
+    public int Id { get; set; }
+
+    public long Token { get; set; }
+
+    public DateTime? Created { get; set; }
+
+    public int? EmailTargetId { get; set; }
+    public EmailTarget? EmailTarget { get; set; }
+}
