@@ -19,7 +19,7 @@ public class AddPayloadPageModel(
 
             CommandModel = new AddPayloadPageCommandModel()
             {
-                PageKey = Random.Shared.Next().ToString(),
+                Name = Random.Shared.Next().ToString(),
             };
 
             return Page();
@@ -47,7 +47,7 @@ public class AddPayloadPageModel(
         catch (BlockedByExistingException)
         {
             ModelState.AddModelError(
-                nameof(CommandModel.PageKey),
+                nameof(CommandModel.Name),
                 "Det finns en annan sida med samma namn.");
 
             return Page();

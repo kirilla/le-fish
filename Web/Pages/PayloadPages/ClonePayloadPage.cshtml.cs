@@ -27,7 +27,7 @@ public class ClonePayloadPageModel(
             CommandModel = new ClonePayloadPageCommandModel()
             {
                 PayloadPageId = PayloadPage.Id,
-                PageKey = PayloadPage.PageKey,
+                Name = PayloadPage.Name,
             };
 
             return Page();
@@ -64,7 +64,7 @@ public class ClonePayloadPageModel(
         catch (BlockedByExistingException)
         {
             ModelState.AddModelError(
-                nameof(CommandModel.PageKey),
+                nameof(CommandModel.Name),
                 "Det finns en sida med samma namn.");
 
             return Page();

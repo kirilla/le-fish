@@ -27,7 +27,7 @@ public class EditPayloadPageModel(
             CommandModel = new EditPayloadPageCommandModel()
             {
                 PayloadPageId = PayloadPage.Id,
-				PageKey = PayloadPage.PageKey,
+				Name = PayloadPage.Name,
 				Html = PayloadPage.Html,
             };
 
@@ -65,7 +65,7 @@ public class EditPayloadPageModel(
         catch (BlockedByExistingException)
         {
             ModelState.AddModelError(
-                nameof(CommandModel.PageKey),
+                nameof(CommandModel.Name),
                 "Det finns en annan sida med samma namn.");
 
             return Page();

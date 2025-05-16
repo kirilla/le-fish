@@ -19,11 +19,11 @@ public class EditPayloadPageCommand(IDatabaseService database) : IEditPayloadPag
 
         if (await database.PayloadPages
             .AnyAsync(x =>
-                x.PageKey == model.PageKey &&
+                x.Name == model.Name &&
                 x.Id != model.PayloadPageId))
             throw new BlockedByExistingException();
 
-        page.PageKey = model.PageKey;
+        page.Name = model.Name;
         page.Html = model.Html;
 
         await database.SaveAsync(userToken);

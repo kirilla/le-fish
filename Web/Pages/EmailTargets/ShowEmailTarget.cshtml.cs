@@ -74,7 +74,7 @@ public class ShowEmailTargetModel(
                     Method = x.Method,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
-                    PageKey = x.PayloadPage.PageKey,
+                    PageName = x.PayloadPage.Name,
                     PayloadPageId = x.PayloadPageId,
                     TargetName = x.EmailTarget.Name,
                     TargetAddress = x.EmailTarget.Address,

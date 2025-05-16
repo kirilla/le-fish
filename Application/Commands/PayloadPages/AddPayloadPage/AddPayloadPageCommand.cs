@@ -13,12 +13,12 @@ public class AddPayloadPageCommand(IDatabaseService database) : IAddPayloadPageC
         model.TruncateByStringLength();
 
         if (await database.PayloadPages
-            .AnyAsync(x => x.PageKey == model.PageKey))
+            .AnyAsync(x => x.Name == model.Name))
             throw new BlockedByExistingException();
 
         var page = new PayloadPage()
         {
-            PageKey = model.PageKey,
+            Name = model.Name,
             Html = model.Html,
         };
 

@@ -6,9 +6,9 @@ class PayloadPageConfiguration : IEntityTypeConfiguration<PayloadPage>
     {
         builder.HasKey(p => p.Id);
 
-        builder.Property(p => p.PageKey)
+        builder.Property(p => p.Name)
             .IsRequired()
-            .HasMaxLength(MaxLengths.Domain.PayloadPage.PageKey);
+            .HasMaxLength(MaxLengths.Domain.PayloadPage.Name);
 
         builder.Property(p => p.Html)
             .IsRequired()

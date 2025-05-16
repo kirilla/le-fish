@@ -9,9 +9,9 @@ public class EditPayloadPageCommandModel
     [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Ange namn.")]
     [StringLength(
-        MaxLengths.Domain.PayloadPage.PageKey,
+        MaxLengths.Domain.PayloadPage.Name,
         ErrorMessage = "Skriv kortare.")]
-    public string PageKey { get; set; }
+    public string Name { get; set; }
 
     [RegularExpression(Pattern.Common.AnythingMultiLine)]
     [Required(ErrorMessage = "Skriv HTML.")]

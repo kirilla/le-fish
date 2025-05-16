@@ -17,17 +17,17 @@
 <main>
     <h4>
         Klona fångstsidan:
-        @(Model.PayloadPage.PageKey)
+        @(Model.PayloadPage.Name)
     </h4>
 
     <form method="post">
 
         <input type="hidden" asp-for="CommandModel.PayloadPageId" />
 
-        <label asp-for="CommandModel.PageKey">
+        <label asp-for="CommandModel.Name">
             Namn
         </label>
-        <input asp-for="CommandModel.PageKey" />
+        <input asp-for="CommandModel.Name" />
 
         <div asp-validation-summary="All"></div>
 

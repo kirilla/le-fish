@@ -21,7 +21,7 @@ public class ShowPayloadPagesModel(
 
             PayloadPages = await database.PayloadPages
                 .AsNoTracking()
-                .OrderBy(x => x.PageKey)
+                .OrderBy(x => x.Name)
                 .ToListAsync();
 
             return Page();

@@ -5,7 +5,7 @@ public class PayloadPage : ICreatedDateTime
 {
     public int Id { get; set; }
 
-    public string PageKey { get; set; }
+    public string Name { get; set; }
 
     public string Html { get; set; }
 

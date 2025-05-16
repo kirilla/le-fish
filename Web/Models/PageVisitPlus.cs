@@ -12,7 +12,7 @@ public class PageVisitPlus
     public string? IpAddress { get; set; }
     public string? UserAgent { get; set; }
 
-    public string PageKey { get; set; }
+    public string PageName { get; set; }
     
     public int PayloadPageId { get; set; }
 
