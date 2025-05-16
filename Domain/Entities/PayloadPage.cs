@@ -1,6 +1,7 @@
-﻿namespace Lefish.Domain.Entities;
+﻿
+namespace Lefish.Domain.Entities;
 
-public class PayloadPage
+public class PayloadPage : ICreatedDateTime
 {
     public int Id { get; set; }
 
@@ -9,5 +10,8 @@ public class PayloadPage
 
     public string Html { get; set; }
 
+    public DateTime? Created { get; set; }
+
     public List<PageVisit> PageVisits { get; set; }
+    public List<PhishingToken> PhishingTokens { get; set; }
 }
