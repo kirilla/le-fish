@@ -8,9 +8,11 @@ public class PhishingToken : ICreatedDateTime
 
     public DateTime? Created { get; set; }
 
+    public int EmailMessageId { get; set; }
     public int EmailTargetId { get; set; }
     public int PayloadPageId { get; set; }
 
+    public EmailMessage EmailMessage { get; set; }
     public EmailTarget EmailTarget { get; set; }
     public PayloadPage PayloadPage { get; set; }
 }
