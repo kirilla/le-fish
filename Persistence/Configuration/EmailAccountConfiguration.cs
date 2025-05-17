@@ -30,7 +30,6 @@ class EmailAccountConfiguration : IEntityTypeConfiguration<EmailAccount>
 
         builder.HasMany(x => x.EmailMessages)
             .WithOne(x => x.EmailAccount)
-            .HasForeignKey(x => x.EmailAccountId)
-            .IsRequired(false);
+            .HasForeignKey(x => x.EmailAccountId);
     }
 }

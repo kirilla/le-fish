@@ -7,7 +7,6 @@ class IpRangeConfiguration : IEntityTypeConfiguration<IpRange>
         builder.HasKey(p => p.Id);
 
         builder.Property(p => p.Range)
-            .IsRequired(false)
             .HasMaxLength(MaxLengths.Common.IpAddress.IPv6);
     }
 }
