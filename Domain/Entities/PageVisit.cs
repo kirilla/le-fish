@@ -11,10 +11,7 @@ public class PageVisit : ICreatedDateTime
 
     public string? IpAddress { get; set; }
     public string? UserAgent { get; set; }
-    
-    public PayloadPage PayloadPage { get; set; }
-    public int PayloadPageId { get; set; }
 
-    public EmailTarget EmailTarget { get; set; }
-    public int EmailTargetId { get; set; }
+    public PageToken PageToken { get; set; }
+    public int PageTokenId { get; set; }
 }

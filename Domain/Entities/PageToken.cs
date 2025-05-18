@@ -13,4 +13,6 @@ public class PageToken : ICreatedDateTime
 
     public EmailMessage EmailMessage { get; set; }
     public PayloadPage PayloadPage { get; set; }
+
+    public List<PageVisit> PageVisits { get; set; }
 }

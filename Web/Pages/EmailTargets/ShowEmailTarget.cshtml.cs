@@ -65,7 +65,7 @@ public class ShowEmailTargetModel(
                 .ToListAsync();
 
             PageVisits = await database.PageVisits
-                .Where(x => x.EmailTargetId == id)
+                .Where(x => x.PageToken.EmailMessage.EmailTargetId == id)
                 .OrderByDescending(x => x.Created)
                 .Select(x => new PageVisitPlus() { 
                     Id = x.Id,
@@ -74,11 +74,11 @@ public class ShowEmailTargetModel(
                     Method = x.Method,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
-                    PageName = x.PayloadPage.Name,
-                    PayloadPageId = x.PayloadPageId,
-                    TargetName = x.EmailTarget.Name,
-                    TargetAddress = x.EmailTarget.Address,
-                    EmailTargetId = x.EmailTargetId,
+                    PageName = x.PageToken.PayloadPage.Name,
+                    PayloadPageId = x.PageToken.PayloadPageId,
+                    TargetName = x.PageToken.EmailMessage.EmailTarget.Name,
+                    TargetAddress = x.PageToken.EmailMessage.EmailTarget.Address,
+                    EmailTargetId = x.PageToken.EmailMessage.EmailTargetId,
                 })
                 .ToListAsync();
 

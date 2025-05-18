@@ -9,5 +9,9 @@ class PageTokenConfiguration : IEntityTypeConfiguration<PageToken>
         builder.Property(p => p.Token).IsRequired();
 
         builder.HasIndex(p => p.Token).IsUnique();
+
+        builder.HasMany(x => x.PageVisits)
+            .WithOne(x => x.PageToken)
+            .HasForeignKey(x => x.PageTokenId);
     }
 }

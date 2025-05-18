@@ -4,7 +4,7 @@ public class ShowPageVisitsModel(
     IUserToken userToken,
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
-    public List<PageVisit> PageVisits { get; set; }
+    public List<PageVisitPlus> PageVisits { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -14,10 +14,19 @@ public class ShowPageVisitsModel(
                 throw new NotPermittedException();
 
             PageVisits = await database.PageVisits
-                .AsNoTracking()
-                .Include(x => x.EmailTarget)
-                .Include(x => x.PayloadPage)
                 .OrderByDescending(x => x.Created)
+                .Select(x => new PageVisitPlus()
+                {
+                    Url = x.Url,
+                    Method = x.Method,
+                    IpAddress = x.IpAddress,
+                    UserAgent = x.UserAgent,
+                    PageName = x.PageToken.PayloadPage.Name,
+                    PayloadPageId = x.PageToken.PayloadPageId,
+                    TargetName = x.PageToken.EmailMessage.EmailTarget.Name,
+                    TargetAddress = x.PageToken.EmailMessage.EmailTarget.Address,
+                    EmailTargetId = x.PageToken.EmailMessageId,
+                })
                 .ToListAsync();
 
             return Page();

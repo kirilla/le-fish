@@ -7,7 +7,7 @@ public class RemovePageVisitModel(
     IDatabaseService database,
     IRemovePageVisitCommand command) : UserTokenPageModel(userToken)
 {
-    public PageVisit PageVisit { get; set; }
+    public PageVisitPlus PageVisit { get; set; }
 
     [BindProperty]
     public RemovePageVisitCommandModel CommandModel { get; set; }
@@ -20,9 +20,19 @@ public class RemovePageVisitModel(
                 throw new NotPermittedException();
 
             PageVisit = await database.PageVisits
-                .Include(x => x.EmailTarget)
-                .Include(x => x.PayloadPage)
                 .Where(x => x.Id == id)
+                .Select(x => new PageVisitPlus()
+                {
+                    Url = x.Url,
+                    Method = x.Method,
+                    IpAddress = x.IpAddress,
+                    UserAgent = x.UserAgent,
+                    PageName = x.PageToken.PayloadPage.Name,
+                    PayloadPageId = x.PageToken.PayloadPageId,
+                    TargetName = x.PageToken.EmailMessage.EmailTarget.Name,
+                    TargetAddress = x.PageToken.EmailMessage.EmailTarget.Address,
+                    EmailTargetId = x.PageToken.EmailMessageId,
+                })
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -51,9 +61,19 @@ public class RemovePageVisitModel(
                 throw new NotPermittedException();
 
             PageVisit = await database.PageVisits
-                .Include(x => x.EmailTarget)
-                .Include(x => x.PayloadPage)
                 .Where(x => x.Id == CommandModel.PageVisitId)
+                .Select(x => new PageVisitPlus()
+                {
+                    Url = x.Url,
+                    Method = x.Method,
+                    IpAddress = x.IpAddress,
+                    UserAgent = x.UserAgent,
+                    PageName = x.PageToken.PayloadPage.Name,
+                    PayloadPageId = x.PageToken.PayloadPageId,
+                    TargetName = x.PageToken.EmailMessage.EmailTarget.Name,
+                    TargetAddress = x.PageToken.EmailMessage.EmailTarget.Address,
+                    EmailTargetId = x.PageToken.EmailMessageId,
+                })
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

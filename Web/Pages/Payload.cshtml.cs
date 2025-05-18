@@ -11,6 +11,7 @@ public class PayloadPageModel(
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
     public EmailTarget EmailTarget { get; set; }
+    public PageToken PageToken { get; set; }
     public PayloadPage PayloadPage { get; set; }
 
     public List<PayloadPage> PayloadPages { get; set; }
@@ -19,20 +20,35 @@ public class PayloadPageModel(
     {
         try
         {
-            var pageToken = await database.PageTokens
+            PageToken = await database.PageTokens
                 .AsNoTracking()
-                .Include(x => x.EmailMessage.EmailTarget)
-                .Include(x => x.PayloadPage)
                 .Where(x => x.Token == token)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            EmailTarget = pageToken.EmailMessage.EmailTarget;
-            PayloadPage = pageToken.PayloadPage;
+            PayloadPage = await database.PayloadPages
+                .AsNoTracking()
+                .Where(x => x.Id == PageToken.PayloadPageId)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
 
-            PayloadPage.InsertTargetValues(EmailTarget, pageToken);
+            var emailTargetId = await database.PageTokens
+                .AsNoTracking()
+                .Where(x => x.Token == token)
+                .Select(x => x.EmailMessage.EmailTargetId)
+                .Cast<int?>()
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
 
-            await LogPageVisit(HttpContext, PayloadPage, EmailTarget);
+            EmailTarget = await database.EmailTargets
+                .AsNoTracking()
+                .Where(x => x.Id == emailTargetId)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            PayloadPage.InsertTargetValues(EmailTarget, PageToken);
+
+            await LogPageVisit(HttpContext, PageToken);
 
             return Page();
         }
@@ -43,7 +59,7 @@ public class PayloadPageModel(
     }
 
     public async Task LogPageVisit(
-        HttpContext context, PayloadPage page, EmailTarget target)
+        HttpContext context, PageToken pageToken)
     {
         var visit = new PageVisit()
         {
@@ -51,8 +67,7 @@ public class PayloadPageModel(
             Method = context.Request.Method,
             IpAddress = context.Connection.RemoteIpAddress?.ToString(),
             UserAgent = context.Request.Headers?.UserAgent,
-            PayloadPageId = page.Id,
-            EmailTargetId = target.Id,
+            PageTokenId = pageToken.Id,
         };
 
         database.PageVisits.Add(visit);

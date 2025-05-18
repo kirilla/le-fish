@@ -11,6 +11,5 @@ public class PayloadPage : ICreatedDateTime
 
     public DateTime? Created { get; set; }
 
-    public List<PageVisit> PageVisits { get; set; }
     public List<PageToken> PageTokens { get; set; }
 }
