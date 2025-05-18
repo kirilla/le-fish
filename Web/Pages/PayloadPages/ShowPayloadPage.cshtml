@@ -54,25 +54,27 @@
     <pre class="notice">@(Model.PayloadPage.Html)</pre>
 
     <h5>
-        Besök sidan som...
+        Tokens
     </h5>
 
     <ul class="notice">
         @foreach (var token in Model.PageTokens)
         {
             <li>
-                🎯
+                🍪
                 &thinsp;
-                <a href="/page/@(token.Token)">@(token.EmailMessage.EmailTarget.Name), @(token.EmailMessage.EmailTarget.Address)</a>
+                <a href="/show-page-token/@(token.Token)">Visa @(token.Token)</a>
                 &ensp;
-                [@(token.Token)]
+                <a href="/page/@(token.Token)">Besök som @(token.TargetName), @(token.TargetAddress)</a>
+                &ensp;
+                [@(token.PageVisitCount)]
             </li>
         }
 
         @if (!Model.PageTokens.Any())
         {
             <li>
-                🎯
+                🍪
                 &thinsp;
                 &ndash;
             </li>
