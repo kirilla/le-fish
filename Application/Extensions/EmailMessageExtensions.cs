@@ -3,7 +3,7 @@
 public static class EmailMessageExtensions
 {
     public static void InsertTargetValues(
-        this EmailMessage message, EmailTarget target, PhishingToken token)
+        this EmailMessage message, EmailTarget target, PageToken token)
     {
         message.Subject = message.Subject.Replace("[[target_name]]", target.Name);
         message.Subject = message.Subject.Replace("[[target_address]]", target.Address);

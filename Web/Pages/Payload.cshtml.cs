@@ -19,7 +19,7 @@ public class PayloadPageModel(
     {
         try
         {
-            var phishingToken = await database.PhishingTokens
+            var pageToken = await database.PageTokens
                 .AsNoTracking()
                 .Include(x => x.EmailMessage.EmailTarget)
                 .Include(x => x.PayloadPage)
@@ -27,10 +27,10 @@ public class PayloadPageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            EmailTarget = phishingToken.EmailMessage.EmailTarget;
-            PayloadPage = phishingToken.PayloadPage;
+            EmailTarget = pageToken.EmailMessage.EmailTarget;
+            PayloadPage = pageToken.PayloadPage;
 
-            PayloadPage.InsertTargetValues(EmailTarget, phishingToken);
+            PayloadPage.InsertTargetValues(EmailTarget, pageToken);
 
             await LogPageVisit(HttpContext, PayloadPage, EmailTarget);
 

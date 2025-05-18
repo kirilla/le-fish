@@ -18,7 +18,7 @@ class PayloadPageConfiguration : IEntityTypeConfiguration<PayloadPage>
             .WithOne(x => x.PayloadPage)
             .HasForeignKey(x => x.PayloadPageId);
 
-        builder.HasMany(x => x.PhishingTokens)
+        builder.HasMany(x => x.PageTokens)
             .WithOne(x => x.PayloadPage)
             .HasForeignKey(x => x.PayloadPageId);
     }

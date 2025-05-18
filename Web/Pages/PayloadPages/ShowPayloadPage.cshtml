@@ -58,7 +58,7 @@
     </h5>
 
     <ul class="notice">
-        @foreach (var token in Model.PhishingTokens)
+        @foreach (var token in Model.PageTokens)
         {
             <li>
                 🎯
@@ -69,7 +69,7 @@
             </li>
         }
 
-        @if (!Model.PhishingTokens.Any())
+        @if (!Model.PageTokens.Any())
         {
             <li>
                 🎯

@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Domain.Entities;
 
-public class PhishingToken : ICreatedDateTime
+public class PageToken : ICreatedDateTime
 {
     public int Id { get; set; }
 

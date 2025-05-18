@@ -1,8 +1,8 @@
 ﻿namespace Lefish.Persistence.Configuration;
 
-class PhishingTokenConfiguration : IEntityTypeConfiguration<PhishingToken>
+class PageTokenConfiguration : IEntityTypeConfiguration<PageToken>
 {
-    public void Configure(EntityTypeBuilder<PhishingToken> builder)
+    public void Configure(EntityTypeBuilder<PageToken> builder)
     {
         builder.HasKey(p => p.Id);
 

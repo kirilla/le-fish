@@ -1,10 +1,10 @@
 ﻿namespace Lefish.Application.Extensions;
 
-public static class PhishingTokenExtensions
+public static class PageTokenExtensions
 {
-    public static async Task SetUniqueTokenAsync(this PhishingToken token, IDatabaseService database)
+    public static async Task SetUniqueTokenAsync(this PageToken token, IDatabaseService database)
     {
-        var tokens = database.PhishingTokens
+        var tokens = database.PageTokens
             .Select(x => x.Token)
             .ToList();
 

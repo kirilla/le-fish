@@ -52,14 +52,14 @@ public class SendEmailToTargetCommand(
             EmailTargetId = target.Id,
         };
 
-        var token = new PhishingToken()
+        var token = new PageToken()
         {
             EmailMessage = message,
             PayloadPageId = page.Id,
         };
 
         database.EmailMessages.Add(message);
-        database.PhishingTokens.Add(token);
+        database.PageTokens.Add(token);
 
         await token.SetUniqueTokenAsync(database);
 

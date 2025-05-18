@@ -80,14 +80,14 @@
     </h4>
 
     <ul class="notice">
-        @foreach (var token in Model.PhishingTokens)
+        @foreach (var token in Model.PageTokens)
         {
             <li>
                 🍪
                 &thinsp;
                 <a href="/show-phishing-token/@(token.Id)">@(token.Token)</a>
                 &ensp;
-                @(token.Created.ToFixedFormatDateShortTime())
+                @(token.Token)
                 @if (Model.CanUploadDataDump)
                 {
                     <span>
@@ -100,7 +100,7 @@
             </li>
         }
 
-        @if (!Model.PhishingTokens.Any())
+        @if (!Model.PageTokens.Any())
         {
             <li>
                     🍪

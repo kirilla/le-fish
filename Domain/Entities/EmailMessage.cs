@@ -22,5 +22,5 @@ public class EmailMessage : ICreatedDateTime
     public EmailAccount? EmailAccount { get; set; }
     public EmailTarget? EmailTarget { get; set; }
 
-    public List<PhishingToken> PhishingTokens { get; set; }
+    public List<PageToken> PageTokens { get; set; }
 }

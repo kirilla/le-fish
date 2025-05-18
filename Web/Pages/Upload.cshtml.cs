@@ -24,13 +24,13 @@ public class UploadPageModel(
             //if (!command.IsPermitted(UserToken))
             //    throw new NotPermittedException();
 
-            var phishingToken = await database.PhishingTokens
+            var pageToken = await database.PageTokens
                 .Include(x => x.EmailMessage.EmailTarget)
                 .Where(x => x.Token == token)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            EmailTarget = phishingToken.EmailMessage.EmailTarget;
+            EmailTarget = pageToken.EmailMessage.EmailTarget;
 
             CommandModel = new UploadDataDumpCommandModel()
             {
@@ -56,13 +56,13 @@ public class UploadPageModel(
             //if (!command.IsPermitted(UserToken))
             //    throw new NotPermittedException();
 
-            var phishingToken = await database.PhishingTokens
+            var pageToken = await database.PageTokens
                 .Include(x => x.EmailMessage.EmailTarget)
                 .Where(x => x.Token == token)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            EmailTarget = phishingToken.EmailMessage.EmailTarget;
+            EmailTarget = pageToken.EmailMessage.EmailTarget;
 
             if (!ModelState.IsValid)
                 return Page();

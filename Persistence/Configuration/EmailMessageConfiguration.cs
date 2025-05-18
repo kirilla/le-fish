@@ -18,7 +18,7 @@ class EmailMessageConfiguration : IEntityTypeConfiguration<EmailMessage>
             .IsRequired()
             .HasMaxLength(MaxLengths.Domain.EmailMessage.TextBody);
 
-        builder.HasMany(x => x.PhishingTokens)
+        builder.HasMany(x => x.PageTokens)
             .WithOne(x => x.EmailMessage)
             .HasForeignKey(x => x.EmailMessageId);
     }
