@@ -37,10 +37,10 @@ public class ShowPayloadPageModel(
                 throw new NotFoundException();
 
             PhishingTokens = await database.PhishingTokens
-                .Include(x => x.EmailTarget)
+                .Include(x => x.EmailMessage.EmailTarget)
                 .Where(x => x.PayloadPageId == id)
-                .OrderBy(x => x.EmailTarget.Name)
-                .ThenBy(x => x.EmailTarget.Address)
+                .OrderBy(x => x.EmailMessage.EmailTarget.Name)
+                .ThenBy(x => x.EmailMessage.EmailTarget.Address)
                 .ToListAsync();
 
             return Page();

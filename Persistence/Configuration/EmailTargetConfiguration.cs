@@ -21,10 +21,5 @@ class EmailTargetConfiguration : IEntityTypeConfiguration<EmailTarget>
         builder.HasMany(x => x.PageVisits)
             .WithOne(x => x.EmailTarget)
             .HasForeignKey(x => x.EmailTargetId);
-
-        builder.HasMany(x => x.PhishingTokens)
-            .WithOne(x => x.EmailTarget)
-            .HasForeignKey(x => x.EmailTargetId)
-            .OnDelete(DeleteBehavior.NoAction);
     }
 }

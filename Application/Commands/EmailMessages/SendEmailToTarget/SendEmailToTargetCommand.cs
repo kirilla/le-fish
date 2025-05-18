@@ -42,16 +42,6 @@ public class SendEmailToTargetCommand(
             .Where(x => x.EmailTemplateId == model.EmailTemplateId!.Value)
             .ToListAsync();
 
-        var token = new PhishingToken()
-        {
-            EmailTargetId = target.Id,
-            PayloadPageId = page.Id,
-        };
-
-        await token.SetUniqueTokenAsync(database);
-
-        database.PhishingTokens.Add(token);
-
         var message = new EmailMessage()
         {
             Subject = template.Subject,
@@ -62,9 +52,18 @@ public class SendEmailToTargetCommand(
             EmailTargetId = target.Id,
         };
 
-        message.InsertTargetValues(target, token);
+        var token = new PhishingToken()
+        {
+            EmailMessage = message,
+            PayloadPageId = page.Id,
+        };
 
         database.EmailMessages.Add(message);
+        database.PhishingTokens.Add(token);
+
+        await token.SetUniqueTokenAsync(database);
+
+        message.InsertTargetValues(target, token);
 
         await database.SaveAsync(userToken);
 

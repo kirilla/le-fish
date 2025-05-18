@@ -21,13 +21,13 @@ public class PayloadPageModel(
         {
             var phishingToken = await database.PhishingTokens
                 .AsNoTracking()
-                .Include(x => x.EmailTarget)
+                .Include(x => x.EmailMessage.EmailTarget)
                 .Include(x => x.PayloadPage)
                 .Where(x => x.Token == token)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            EmailTarget = phishingToken.EmailTarget;
+            EmailTarget = phishingToken.EmailMessage.EmailTarget;
             PayloadPage = phishingToken.PayloadPage;
 
             PayloadPage.InsertTargetValues(EmailTarget, phishingToken);

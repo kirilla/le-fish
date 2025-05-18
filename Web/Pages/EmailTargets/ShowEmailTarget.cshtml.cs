@@ -83,7 +83,7 @@ public class ShowEmailTargetModel(
                 .ToListAsync();
 
             PhishingTokens = await database.PhishingTokens
-                .Where(x => x.EmailTargetId == id)
+                .Where(x => x.EmailMessage.EmailTargetId == id)
                 .ToListAsync();
 
             return Page();
