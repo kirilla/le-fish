@@ -8,8 +8,11 @@ namespace Lefish.Web.Pages;
 [AllowAnonymous]
 public class PayloadPageModel(
     IUserToken userToken,
-    IDatabaseService database) : UserTokenPageModel(userToken)
+    IDatabaseService database,
+    IOptions<TemplateConfiguration> templateConfiguration) : UserTokenPageModel(userToken)
 {
+    private readonly TemplateConfiguration _config = templateConfiguration.Value;
+
     public EmailTarget EmailTarget { get; set; }
     public PageToken PageToken { get; set; }
     public PayloadPage PayloadPage { get; set; }
@@ -46,7 +49,7 @@ public class PayloadPageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            PayloadPage.InsertTargetValues(EmailTarget, PageToken);
+            PayloadPage.InsertTargetValues(_config, EmailTarget, PageToken);
 
             await LogPageVisit(HttpContext, PageToken);
 

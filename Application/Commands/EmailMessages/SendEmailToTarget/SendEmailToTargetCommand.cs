@@ -1,10 +1,16 @@
-﻿namespace Lefish.Application.Commands.EmailMessages.SendEmailToTarget;
+﻿using Lefish.Common.Settings;
+using Microsoft.Extensions.Options;
+
+namespace Lefish.Application.Commands.EmailMessages.SendEmailToTarget;
 
 public class SendEmailToTargetCommand(
     IDateService dateService,
     ISmtpService smtpService,
-    IDatabaseService database) : ISendEmailToTargetCommand
+    IDatabaseService database,
+    IOptions<TemplateConfiguration> templateConfiguration) : ISendEmailToTargetCommand
 {
+    private readonly TemplateConfiguration _config = templateConfiguration.Value;
+
     public async Task Execute(
         IUserToken userToken, SendEmailToTargetCommandModel model)
     {
@@ -63,7 +69,7 @@ public class SendEmailToTargetCommand(
 
         await token.SetUniqueTokenAsync(database);
 
-        message.InsertTargetValues(target, token);
+        message.InsertTargetValues(_config, target, token);
 
         await database.SaveAsync(userToken);
 

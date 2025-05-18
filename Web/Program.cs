@@ -1,4 +1,3 @@
-using Lefish.Common.Settings;
 using Lefish.Persistence;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.CookiePolicy;
@@ -29,6 +28,9 @@ public class Program
 
         builder.Services.Configure<IpFilterConfiguration>(
             builder.Configuration.GetSection("Network:IpFilter"));
+
+        builder.Services.Configure<TemplateConfiguration>(
+            builder.Configuration.GetSection("Template"));
 
         // Dynamic dependency injection
         var files = Directory.GetFiles(
