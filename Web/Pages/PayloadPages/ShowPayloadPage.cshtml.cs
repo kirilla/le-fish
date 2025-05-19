@@ -40,7 +40,6 @@ public class ShowPayloadPageModel(
                 throw new NotFoundException();
 
             PageTokens = await database.PageTokens
-                .Include(x => x.EmailMessage.EmailTarget)
                 .Where(x => x.PayloadPageId == id)
                 .OrderBy(x => x.EmailMessage.EmailTarget.Name)
                 .ThenBy(x => x.EmailMessage.EmailTarget.Address)
