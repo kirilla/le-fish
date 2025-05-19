@@ -17,6 +17,7 @@ public class ShowPageVisitsModel(
                 .OrderByDescending(x => x.Created)
                 .Select(x => new PageVisitPlus()
                 {
+                    Id = x.Id,
                     Url = x.Url,
                     Method = x.Method,
                     IpAddress = x.IpAddress,
