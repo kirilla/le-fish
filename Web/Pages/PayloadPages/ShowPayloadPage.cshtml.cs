@@ -9,8 +9,11 @@ public class ShowPayloadPageModel(
     IDatabaseService database,
     IClonePayloadPageCommand clonePayloadPageCommand,
     IEditPayloadPageCommand editPayloadPageCommand,
-    IRemovePayloadPageCommand removePayloadPageCommand) : UserTokenPageModel(userToken)
+    IRemovePayloadPageCommand removePayloadPageCommand,
+    IOptions<TemplateConfiguration> templateConfiguration) : UserTokenPageModel(userToken)
 {
+    public readonly TemplateConfiguration Config = templateConfiguration.Value;
+
     public PayloadPage PayloadPage { get; set; }
 
     public List<PageTokenPlus> PageTokens { get; set; }
