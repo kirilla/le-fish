@@ -1,0 +1,94 @@
+﻿@page "/show-page-token/{id:int}"
+@model ShowPageTokenModel
+@{
+}
+
+@section Meta {
+    <title>Token - @(Model.PageToken.Token) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        🍪
+        @(Model.PageToken.Token)
+    </h4>
+
+    <h5>
+        Målkonto
+    </h5>
+
+    <p class="notice"">
+        🎯
+        &thinsp;
+        <a href="/show-email-target/@(Model.PageToken.EmailTargetId)">
+            "@(Model.PageToken.TargetName)"
+            &lt;@(Model.PageToken.TargetAddress)&gt;
+        </a>
+    </p>
+
+    <h5>
+        Meddelande
+    </h5>
+
+    <p class="notice"">
+        📧
+        &thinsp;
+        <a href="/show-email/@(Model.PageToken.EmailMessageId)">
+            @(Model.PageToken.EmailMessageSubject)
+        </a>
+    </p>
+
+    <h5>
+        Sida
+    </h5>
+
+    <p class="notice"">
+        🕸️
+        &thinsp;
+        <a href="/show-payload-page/@(Model.PageToken.PayloadPageId)">
+            @(Model.PageToken.PageName)
+        </a>
+    </p>
+
+    <h5>
+        Sidbesök
+    </h5>
+
+    <figure>
+        <table>
+            <tr>
+                <th>&emsp;🙋</th>
+                <th>IP-nummer</th>
+                <th>UserAgent</th>
+            </tr>
+            @foreach (var visit in Model.PageVisits)
+            {
+                <tr>
+                    <td>
+                        @(visit.Created.ToFixedFormatDateShortTime())
+                    </td>
+                    <td>
+                        @(visit.IpAddress)
+                    </td>
+                    <td>
+                        @(visit.UserAgent)
+                    </td>
+                </tr>
+            }
+            @if (!Model.PageVisits.Any())
+            {
+                <tr>
+                    <td colspan="3">
+                        Inga
+                    </td>
+                </tr>
+            }
+        </table>
+    </figure>
+
+</main>

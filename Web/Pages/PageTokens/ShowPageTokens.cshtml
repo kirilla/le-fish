@@ -20,53 +20,13 @@
         Tokens
     </h4>
 
-    <div class="notice">
-
-        <ul>
-            @foreach (var token in Model.PageTokens)
-            {
-                <li>
-                    @(token.Created.ToFixedFormatDateShortTime())
-                    &ensp;
-                    🍪
-                    &thinsp;
-                    <a href="/show-page-token/@(token.Id)">
-                        @(token.Token)
-                    </a>
-                    &ensp;
-                    🎯
-                    &thinsp;
-                    <a href="/show-email-target/@(token.EmailTargetId)">
-                        @(token.TargetName)
-                    </a>
-                    &ensp;
-                    🕸️
-                    &thinsp;
-                    <a href="/show-payload-page/@(token.PayloadPageId)">
-                        @(token.PageName)
-                    </a>
-                </li>
-            }
-
-            @if (!Model.PageTokens.Any())
-            {
-                <li>
-                    🍪
-                    &thinsp;
-                    &ndash;
-                </li>
-            }
-        </ul>
-
-    </div>
-
     <figure>
         <table>
             <tr>
-                <th></th>
-                <th>Målkonto</th>
-                <th>Fångstsida</th>
+                <th>&emsp;🍪</th>
                 <th>Token</th>
+                <th>Målkonto</th>
+                <th>Sida</th>
                 <th>Sidbesök</th>
             </tr>
             @foreach (var token in Model.PageTokens)
@@ -76,25 +36,21 @@
                         @(token.Created.ToFixedFormatDateShortTime())
                     </td>
                     <td>
-                        🎯
-                        <a href="/show-email-target/@(token.EmailTargetId)">
-                        @(token.TargetName)
-                        </a>
-                    </td>
-                    <td>
-                        🕸️
-                        <a href="/show-payload-page/@(token.PayloadPageId)">
-                        @(token.PageName)
-                        </a>
-                    </td>
-                    <td>
-                        🍪
                         <a href="/show-page-token/@(token.Id)">
                         @(token.Token)
                         </a>
                     </td>
                     <td>
-                        🙋
+                        <a href="/show-email-target/@(token.EmailTargetId)">
+                        @(token.TargetName)
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/show-payload-page/@(token.PayloadPageId)">
+                        @(token.PageName)
+                        </a>
+                    </td>
+                    <td>
                         @(token.PageVisitCount.ToSwedishSpacing())
                     </td>
                 </tr>

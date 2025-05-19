@@ -14,7 +14,7 @@ public class ShowPageTokensModel(
                 throw new NotPermittedException();
 
             PageTokens = await database.PageTokens
-                .OrderByDescending(x => x.Created)
+                .OrderBy(x => x.Created)
                 .ThenBy(x => x.Token)
                 .Select(x => new PageTokenPlus()
                 {

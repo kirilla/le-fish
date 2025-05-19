@@ -17,7 +17,7 @@ public class ShowEmailTargetModel(
 
     public List<EmailHeader> EmailHeaders { get; set; }
     public List<PageVisitPlus> PageVisits { get; set; }
-    public List<PageToken> PageTokens { get; set; }
+    public List<PageTokenPlus> PageTokens { get; set; }
 
     public bool CanEditTarget { get; set; }
         = editTargetCommand.IsPermitted(userToken);
@@ -66,24 +66,38 @@ public class ShowEmailTargetModel(
 
             PageVisits = await database.PageVisits
                 .Where(x => x.PageToken.EmailMessage.EmailTargetId == id)
-                .OrderByDescending(x => x.Created)
+                .OrderBy(x => x.Created)
                 .Select(x => new PageVisitPlus() { 
                     Id = x.Id,
                     Created = x.Created,
-                    Url = x.Url,
-                    Method = x.Method,
+                    //Url = x.Url,
+                    //Method = x.Method,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
                     PageName = x.PageToken.PayloadPage.Name,
                     PayloadPageId = x.PageToken.PayloadPageId,
-                    TargetName = x.PageToken.EmailMessage.EmailTarget.Name,
-                    TargetAddress = x.PageToken.EmailMessage.EmailTarget.Address,
-                    EmailTargetId = x.PageToken.EmailMessage.EmailTargetId,
+                    //TargetName = x.PageToken.EmailMessage.EmailTarget.Name,
+                    //TargetAddress = x.PageToken.EmailMessage.EmailTarget.Address,
+                    //EmailTargetId = x.PageToken.EmailMessage.EmailTargetId,
                 })
                 .ToListAsync();
 
             PageTokens = await database.PageTokens
                 .Where(x => x.EmailMessage.EmailTargetId == id)
+                .Select(x => new PageTokenPlus()
+                {
+                    Id = x.Id,
+                    Token = x.Token,
+                    Created = x.Created,
+                    PageName = x.PayloadPage.Name,
+                    PayloadPageId = x.PayloadPageId,
+                    TargetName = x.EmailMessage.EmailTarget.Name,
+                    TargetAddress = x.EmailMessage.EmailTarget.Address,
+                    EmailMessageId = x.EmailMessageId,
+                    EmailMessageSubject = x.EmailMessage.Subject,
+                    EmailTargetId = x.EmailMessage.EmailTargetId,
+                    //PageVisitCount = x.PageVisits.Count(),
+                })
                 .ToListAsync();
 
             return Page();

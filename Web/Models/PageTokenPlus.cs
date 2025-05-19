@@ -15,6 +15,9 @@ public class PageTokenPlus
     public string TargetName { get; set; }
     public string TargetAddress { get; set; }
 
+    public string EmailMessageSubject { get; set; }
+
+    public int EmailMessageId { get; set; }
     public int EmailTargetId { get; set; }
 
     public int PageVisitCount { get; set; }
