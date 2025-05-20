@@ -10,9 +10,10 @@ public static class PayloadScriptExtensions
         EmailTarget target, 
         PageToken token)
     {
-        script.Script = script.Script.Replace(Variables.PAGE_URL, templateConfiguration.PageUrl);
-        script.Script = script.Script.Replace(Variables.TARGET_NAME, target.Name);
-        script.Script = script.Script.Replace(Variables.TARGET_ADDRESS, target.Address);
         script.Script = script.Script.Replace(Variables.PAGE_TOKEN, token.Token.ToString());
+        script.Script = script.Script.Replace(Variables.PAGE_URL, templateConfiguration.PageUrl);
+        script.Script = script.Script.Replace(Variables.SCRIPT_URL, templateConfiguration.ScriptUrl);
+        script.Script = script.Script.Replace(Variables.TARGET_ADDRESS, target.Address);
+        script.Script = script.Script.Replace(Variables.TARGET_NAME, target.Name);
     }
 }
