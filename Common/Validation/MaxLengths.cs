@@ -124,5 +124,12 @@ public static class MaxLengths
 
             public const int Html = Common.DbSuperSize;
         }
+
+        public static class PayloadScript
+        {
+            public const int Name = 50;
+
+            public const int Script = Common.DbSuperSize;
+        }
     }
 }

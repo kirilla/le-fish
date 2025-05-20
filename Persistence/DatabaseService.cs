@@ -20,6 +20,7 @@ public class DatabaseService(
     public DbSet<IpRange> IpRanges { get; set; }
     public DbSet<PageVisit> PageVisits { get; set; }
     public DbSet<PayloadPage> PayloadPages { get; set; }
+    public DbSet<PayloadScript> PayloadScripts { get; set; }
     public DbSet<PageToken> PageTokens { get; set; }
     public DbSet<Session> Sessions { get; set; }
     public DbSet<User> Users { get; set; }
@@ -40,6 +41,7 @@ public class DatabaseService(
         new IpRangeConfiguration().Configure(builder.Entity<IpRange>());
         new PageVisitConfiguration().Configure(builder.Entity<PageVisit>());
         new PayloadPageConfiguration().Configure(builder.Entity<PayloadPage>());
+        new PayloadScriptConfiguration().Configure(builder.Entity<PayloadScript>());
         new PageTokenConfiguration().Configure(builder.Entity<PageToken>());
         new SessionConfiguration().Configure(builder.Entity<Session>());
         new UserConfiguration().Configure(builder.Entity<User>());

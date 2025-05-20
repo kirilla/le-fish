@@ -16,6 +16,7 @@ public interface IDatabaseService
     DbSet<PageVisit> PageVisits { get; set; }
     DbSet<PageToken> PageTokens { get; set; }
     DbSet<PayloadPage> PayloadPages { get; set; }
+    DbSet<PayloadScript> PayloadScripts { get; set; }
     DbSet<Session> Sessions { get; set; }
     DbSet<User> Users { get; set; }
     DbSet<UserEmail> UserEmails { get; set; }
