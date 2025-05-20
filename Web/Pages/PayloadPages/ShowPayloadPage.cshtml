@@ -42,13 +42,11 @@
                 &thinsp;
                 @(token.Token)
                     &thinsp;
-                <a href="/show-page-token/@(token.Token)">Visa token</a>
+                <a href="/show-page-token/@(token.Id)">Visa token</a>
                 &ensp;
                 <a href="/page/@(token.Token)">Besök som</a>
                 &thinsp;
                 @(token.TargetName), @(token.TargetAddress)
-                &ensp;
-                [@(token.PageVisitCount)]
             </li>
         }
 
