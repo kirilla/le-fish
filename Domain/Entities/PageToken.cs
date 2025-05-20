@@ -10,9 +10,11 @@ public class PageToken : ICreatedDateTime
 
     public int EmailMessageId { get; set; }
     public int PayloadPageId { get; set; }
+    public int PayloadScriptId { get; set; }
 
     public EmailMessage EmailMessage { get; set; }
     public PayloadPage PayloadPage { get; set; }
+    public PayloadScript PayloadScript { get; set; }
 
     public List<PageVisit> PageVisits { get; set; }
 }

@@ -11,5 +11,5 @@ public class PayloadScript : ICreatedDateTime
 
     public DateTime? Created { get; set; }
 
-    //public List<PageToken> PageTokens { get; set; }
+    public List<PageToken> PageTokens { get; set; }
 }
