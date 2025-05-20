@@ -1,0 +1,6 @@
+﻿@page "/script/{token:int}"
+@model ScriptPageModel
+@{
+    Layout = null;
+}
+@Html.Raw(Model.PayloadScript.Script)
