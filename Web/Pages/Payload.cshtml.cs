@@ -17,8 +17,6 @@ public class PayloadPageModel(
     public PageToken PageToken { get; set; }
     public PayloadPage PayloadPage { get; set; }
 
-    public List<PayloadPage> PayloadPages { get; set; }
-
     public async Task<IActionResult> OnGetAsync(int token)
     {
         try
