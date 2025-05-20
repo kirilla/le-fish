@@ -1,0 +1,56 @@
+﻿@page "/show-payload-scripts"
+@model ShowPayloadScriptsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Skript -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Skript
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var page in Model.PayloadScripts)
+            {
+                <li>
+                    📜
+                    &thinsp;
+                    <a href="/show-payload-script/@(page.Id)">@(page.Name)</a>
+                </li>
+            }
+
+            @if (!Model.PayloadScripts.Any())
+            {
+                <li>
+                    📜
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    @if (Model.CanAddPayloadScript)
+    {
+        <p>
+            <a class="button" href="/add-payload-script">
+                Lägg till ett skript
+            </a>
+        </p>
+    }
+
+</main>

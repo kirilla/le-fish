@@ -1,0 +1,45 @@
+﻿@page "/add-payload-script"
+@model AddPayloadScriptModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till skript -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Lägg till ett skript
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <label asp-for="CommandModel.Script">
+            Skript
+        </label>
+        <textarea asp-for="CommandModel.Script" rows="15"></textarea>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/show-payload-scripts">
+            Avbryt
+        </a>
+    </form>
+
+</main>

@@ -1,0 +1,86 @@
+﻿@page "/show-payload-script/{id:int}"
+@model ShowPayloadScriptModel
+@{
+}
+
+@section Meta {
+    <title>Skript - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        📜
+        @(Model.PayloadScript.Name)
+    </h4>
+
+    <h5>
+        URL
+    </h5>
+    <p class="notice">
+        @(Model.Config.PageUrl ?? "/page/[[token]]")
+    </p>
+
+    <h5>
+        Skript
+    </h5>
+    <pre class="notice">@(Model.PayloadScript.Script)</pre>
+
+    <h5>
+        Tokens
+    </h5>
+
+    <ul class="notice">
+        @foreach (var token in Model.PageTokens)
+        {
+            <li>
+                🍪
+                &thinsp;
+                @(token.Token)
+                    &thinsp;
+                <a href="/show-page-token/@(token.Id)">Visa token</a>
+                &ensp;
+                <a href="/page/@(token.Token)">Besök som</a>
+                &thinsp;
+                @(token.TargetName), @(token.TargetAddress)
+            </li>
+        }
+
+        @if (!Model.PageTokens.Any())
+        {
+            <li>
+                🍪
+                &thinsp;
+                &ndash;
+            </li>
+        }
+    </ul>
+
+    <p>
+        @if (Model.CanClonePayloadScript)
+        {
+            <a class="button" href="/clone-payload-script/@(Model.PayloadScript.Id)">
+                Klona
+            </a>
+        }
+
+        @if (Model.CanEditPayloadScript)
+        {
+            <a class="button" href="/edit-payload-script/@(Model.PayloadScript.Id)">
+                Redigera
+            </a>
+        }
+
+        @if (Model.CanRemovePayloadScript)
+        {
+            <a class="button" href="/remove-payload-script/@(Model.PayloadScript.Id)">
+                Ta bort
+            </a>
+        }
+    </p>
+
+</main>

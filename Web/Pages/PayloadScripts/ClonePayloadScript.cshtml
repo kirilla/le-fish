@@ -1,0 +1,43 @@
+﻿@page "/clone-payload-script/{id:int}"
+@model ClonePayloadScriptModel
+@{
+}
+
+@section Meta {
+    <title>
+        Klona skript -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Klona skriptet:
+        @(Model.PayloadScript.Name)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.PayloadScriptId" />
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Klona
+        </button>
+
+        <a class="button" href="/show-payload-script/@(Model.PayloadScript.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>
