@@ -10,19 +10,19 @@ public static class EmailMessageExtensions
         EmailTarget target, 
         PageToken token)
     {
-        message.Subject = message.Subject.Replace("[[page_url]]", templateConfiguration.PageUrl);
-        message.Subject = message.Subject.Replace("[[target_name]]", target.Name);
-        message.Subject = message.Subject.Replace("[[target_address]]", target.Address);
-        message.Subject = message.Subject.Replace("[[page_token]]", token.Token.ToString());
+        message.Subject = message.Subject.Replace(Variables.PAGE_URL, templateConfiguration.PageUrl);
+        message.Subject = message.Subject.Replace(Variables.TARGET_NAME, target.Name);
+        message.Subject = message.Subject.Replace(Variables.TARGET_ADDRESS, target.Address);
+        message.Subject = message.Subject.Replace(Variables.PAGE_TOKEN, token.Token.ToString());
 
-        message.HtmlBody = message.HtmlBody.Replace("[[page_url]]", templateConfiguration.PageUrl);
-        message.HtmlBody = message.HtmlBody.Replace("[[target_name]]", target.Name);
-        message.HtmlBody = message.HtmlBody.Replace("[[target_address]]", target.Address);
-        message.HtmlBody = message.HtmlBody.Replace("[[page_token]]", token.Token.ToString());
+        message.HtmlBody = message.HtmlBody.Replace(Variables.PAGE_URL, templateConfiguration.PageUrl);
+        message.HtmlBody = message.HtmlBody.Replace(Variables.TARGET_NAME, target.Name);
+        message.HtmlBody = message.HtmlBody.Replace(Variables.TARGET_ADDRESS, target.Address);
+        message.HtmlBody = message.HtmlBody.Replace(Variables.PAGE_TOKEN, token.Token.ToString());
 
-        message.TextBody = message.TextBody.Replace("[[page_url]]", templateConfiguration.PageUrl);
-        message.TextBody = message.TextBody.Replace("[[target_name]]", target.Name);
-        message.TextBody = message.TextBody.Replace("[[target_address]]", target.Address);
-        message.TextBody = message.TextBody.Replace("[[page_token]]", token.Token.ToString());
+        message.TextBody = message.TextBody.Replace(Variables.PAGE_URL, templateConfiguration.PageUrl);
+        message.TextBody = message.TextBody.Replace(Variables.TARGET_NAME, target.Name);
+        message.TextBody = message.TextBody.Replace(Variables.TARGET_ADDRESS, target.Address);
+        message.TextBody = message.TextBody.Replace(Variables.PAGE_TOKEN, token.Token.ToString());
     }
 }

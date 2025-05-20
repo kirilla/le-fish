@@ -10,9 +10,9 @@ public static class PayloadPageExtensions
         EmailTarget target, 
         PageToken token)
     {
-        page.Html = page.Html.Replace("[[page_url]]", templateConfiguration.PageUrl);
-        page.Html = page.Html.Replace("[[target_name]]", target.Name);
-        page.Html = page.Html.Replace("[[target_address]]", target.Address);
-        page.Html = page.Html.Replace("[[page_token]]", token.Token.ToString());
+        page.Html = page.Html.Replace(Variables.PAGE_URL, templateConfiguration.PageUrl);
+        page.Html = page.Html.Replace(Variables.TARGET_NAME, target.Name);
+        page.Html = page.Html.Replace(Variables.TARGET_ADDRESS, target.Address);
+        page.Html = page.Html.Replace(Variables.PAGE_TOKEN, token.Token.ToString());
     }
 }
