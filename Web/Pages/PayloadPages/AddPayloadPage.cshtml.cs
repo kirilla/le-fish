@@ -19,7 +19,8 @@ public class AddPayloadPageModel(
 
             CommandModel = new AddPayloadPageCommandModel()
             {
-                Name = Random.Shared.Next().ToString(),
+                Name = "Förslag",
+                Html = GetDefaultTemplate(),
             };
 
             return Page();
@@ -56,5 +57,24 @@ public class AddPayloadPageModel(
         {
             return Redirect("/help/notpermitted");
         }
+    }
+
+    private string GetDefaultTemplate()
+    {
+        return """
+            <!DOCTYPE html>
+            <html lang="en-US">
+            <head>
+                <meta charset="utf-8" />
+                <title>Sida</title>
+            </head>
+            <body>
+                <h1>Rubrik</h1>
+                <script>
+                    alert('Hej [[page_token]]!');
+                </script>
+            </body>
+            </html>
+            """;
     }
 }
