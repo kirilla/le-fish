@@ -1,6 +1,6 @@
 using Lefish.Application.Extensions;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.Extensions;
+using System.Text;
 
 namespace Lefish.Web.Pages;
 
@@ -51,7 +51,7 @@ public class ScriptPageModel(
 
             //await LogPageVisit(HttpContext, PageToken);
 
-            return Page();
+            return Content(PayloadScript.Script, "application/javascript", Encoding.UTF8);
         }
         catch
         {
