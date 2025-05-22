@@ -1,0 +1,51 @@
+﻿@page "/show-script-visit/{id:int}"
+@model ShowScriptVisitModel
+@{
+}
+
+@section Meta {
+    <title>Webbsida - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        🙋
+        @(Model.ScriptVisit.TargetName)
+        @(Model.ScriptVisit.TargetAddress)
+    </h4>
+
+    <dl class="notice">
+        <dt>När</dt>
+        <dd>@(Model.ScriptVisit.Created.ToFixedFormatDateShortTime())</dd>
+
+        @* <dt>Sida</dt>
+        <dd>@(Model.ScriptVisit.PayloadPage.Comment)</dd> *@
+
+        <dt>URL</dt>
+        <dd>@(Model.ScriptVisit.Url)</dd>
+
+        @* <dt>Metod</dt>
+        <dd>@(Model.ScriptVisit.Method)</dd> *@
+
+        <dt>UserAgent</dt>
+        <dd>@(Model.ScriptVisit.UserAgent)</dd>
+
+        <dt>Ip-nummer</dt>
+        <dd>@(Model.ScriptVisit.IpAddress)</dd>
+    </dl>
+
+    <p>
+        @if (Model.CanRemoveScriptVisit)
+        {
+            <a class="button" href="/remove-script-visit/@(Model.ScriptVisit.Id)">
+                Ta bort
+            </a>
+        }
+    </p>
+
+</main>

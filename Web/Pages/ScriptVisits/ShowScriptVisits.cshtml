@@ -1,0 +1,59 @@
+﻿@page "/show-script-visits"
+@model ShowScriptVisitsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Skriptbesök -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Skriptbesök
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var visit in Model.ScriptVisits)
+            {
+                <li>
+                    🙋
+                    &thinsp;
+                    <a href="/show-script-visit/@(visit.Id)">
+                        @(visit.TargetAddress)
+                        &thinsp;
+                        @(visit.PageName)
+                        &thinsp;
+                        @(visit.Created.ToFixedFormatDateShortTime())
+                    </a>
+                </li>
+            }
+
+            @if (!Model.ScriptVisits.Any())
+            {
+                <li>
+                    🙋
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    <p>
+        <a class="button" href="/remove-script-visits">
+            Ta bort skriptbesök
+        </a>
+    </p>
+
+</main>
