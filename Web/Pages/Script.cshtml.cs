@@ -49,7 +49,7 @@ public class ScriptPageModel(
 
             PayloadScript.InsertTargetValues(_config, EmailTarget, PageToken);
 
-            await LogPageVisit(HttpContext, PageToken);
+            //await LogPageVisit(HttpContext, PageToken);
 
             return Page();
         }
@@ -59,20 +59,20 @@ public class ScriptPageModel(
         }
     }
 
-    public async Task LogPageVisit(
-        HttpContext context, PageToken pageToken)
-    {
-        var visit = new PageVisit()
-        {
-            Url = context.Request.GetDisplayUrl(),
-            Method = context.Request.Method,
-            IpAddress = context.Connection.RemoteIpAddress?.ToString(),
-            UserAgent = context.Request.Headers?.UserAgent,
-            PageTokenId = pageToken.Id,
-        };
+    //public async Task LogPageVisit(
+    //    HttpContext context, PageToken pageToken)
+    //{
+    //    var visit = new PageVisit()
+    //    {
+    //        Url = context.Request.GetDisplayUrl(),
+    //        Method = context.Request.Method,
+    //        IpAddress = context.Connection.RemoteIpAddress?.ToString(),
+    //        UserAgent = context.Request.Headers?.UserAgent,
+    //        PageTokenId = pageToken.Id,
+    //    };
 
-        database.PageVisits.Add(visit);
+    //    database.PageVisits.Add(visit);
 
-        await database.SaveAsync(UserToken);
-    }
+    //    await database.SaveAsync(UserToken);
+    //}
 }
