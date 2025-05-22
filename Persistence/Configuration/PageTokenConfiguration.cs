@@ -13,5 +13,9 @@ class PageTokenConfiguration : IEntityTypeConfiguration<PageToken>
         builder.HasMany(x => x.PageVisits)
             .WithOne(x => x.PageToken)
             .HasForeignKey(x => x.PageTokenId);
+
+        builder.HasMany(x => x.ScriptVisits)
+            .WithOne(x => x.PageToken)
+            .HasForeignKey(x => x.PageTokenId);
     }
 }

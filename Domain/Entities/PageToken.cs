@@ -17,4 +17,5 @@ public class PageToken : ICreatedDateTime
     public PayloadScript PayloadScript { get; set; }
 
     public List<PageVisit> PageVisits { get; set; }
+    public List<ScriptVisit> ScriptVisits { get; set; }
 }
