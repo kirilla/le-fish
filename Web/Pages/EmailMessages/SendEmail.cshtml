@@ -63,6 +63,20 @@
             }
         </select>
 
+        <label asp-for="CommandModel.PayloadScriptId">
+            Skript
+        </label>
+
+        <select asp-for="CommandModel.PayloadScriptId">
+            <option value="">–</option>
+            @foreach (var script in Model.PayloadScripts)
+            {
+                <option value="@(script.Id)">
+                    @(script.Name)
+                </option>
+            }
+        </select>
+
         <label asp-for="CommandModel.EmailAccountId">
             Epostkonto
         </label>

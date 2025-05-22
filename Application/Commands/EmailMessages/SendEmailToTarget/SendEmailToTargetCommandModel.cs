@@ -15,4 +15,7 @@ public class SendEmailToTargetCommandModel
 
     [Required]
     public int? PayloadPageId { get; set; }
+
+    [Required]
+    public int? PayloadScriptId { get; set; }
 }

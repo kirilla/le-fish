@@ -30,6 +30,11 @@ public class SendEmailCommand(
             .SingleOrDefaultAsync() ??
              throw new NotFoundException();
 
+        var script = await database.PayloadScripts
+            .Where(x => x.Id == model.PayloadScriptId!.Value)
+            .SingleOrDefaultAsync() ??
+             throw new NotFoundException();
+
         var target = await database.EmailTargets
             .Where(x => x.Id == model.EmailTargetId!.Value)
             .SingleOrDefaultAsync() ??
@@ -62,6 +67,7 @@ public class SendEmailCommand(
         {
             EmailMessage = message,
             PayloadPageId = page.Id,
+            PayloadScriptId = script.Id,
         };
 
         database.EmailMessages.Add(message);
