@@ -1,0 +1,109 @@
+﻿@page "/outline"
+@model OutlineModel
+@{
+}
+
+@section Meta {
+    <title>Översikt - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Översikt
+    </h4>
+
+    <div class="notice">
+        @foreach (var target in Model.EmailTargets)
+        {
+            <div>
+                🎯
+                &thinsp;
+                <a href="/show-email-target/@(target.Id)">@(target.Name)</a>
+                &thinsp;
+                <span class="muted">
+                    @(target.Address)
+                </span>
+            </div>
+
+            @foreach (var message in Model.EmailMessages
+                .Where(x => x.EmailTargetId == target.Id))
+            {
+                <div style="padding-left:1.5em;">
+                    <span>
+                        📩
+                        &thinsp;
+                        <a href="/show-email/@(message.Id)">@(message.Subject)</a>
+                        &thinsp;
+                        <span class="muted">
+                            skickat @(message.Sent.ToFixedFormatDateShortTime())
+                        </span>
+                    </span>
+                    
+                    @foreach (var token in Model.PageTokens
+                        .Where(x => x.EmailMessageId == message.Id))
+                    {
+                        <div style="padding-left:1.5em;">
+                            <div>
+                                🍪
+                                &thinsp;
+                                <a href="/show-page-token/@(token.Id)">@(token.Token)</a>
+                            </div>
+
+                            @foreach (var visit in Model.PageVisits
+                                .Where(x => x.PageTokenId == token.Id)) 
+                                //x.PayloadPageId == token.PayloadPageId))
+                            {
+                                <div style="padding-left:1.5em;">
+                                    📄
+                                    &thinsp;
+                                    <a href="/show-payload-page/@(visit.PayloadPageId)">@(visit.PageName)</a>
+                                    &thinsp;
+                                    <span class="muted">
+                                        besökt @(visit.Created.ToFixedFormatDateShortTime())
+                                    </span>
+                                </div>
+                            }
+
+                            @if (!Model.PageVisits
+                                .Any(x => x.PageTokenId == token.Id))
+                            {
+                                <div style="padding-left:1.5em;">
+                                    📄
+                                    &thinsp;
+                                    &ndash;
+                                </div>
+                            }
+                        </div>
+                    }
+
+                    @if (!Model.PageTokens
+                        .Any(x => x.EmailMessageId == message.Id))
+                    {
+                        <div style="padding-left:1.5em;">
+                            🍪
+                            &thinsp;
+                            &ndash;
+                        </div>
+                    }
+                </div>
+                <br />
+            }
+
+            @if (!Model.EmailMessages.Any(x => x.EmailTargetId == target.Id))
+            {
+                <div style="padding-left:1.5em;">
+                    📩
+                    &thinsp;
+                    &ndash;
+                </div>
+            }
+            <br />
+        }
+    </div>
+
+</main>

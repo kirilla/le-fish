@@ -4,6 +4,10 @@ public class PageVisitPlus
 {
     public int Id { get; set; }
 
+    public int EmailTargetId { get; set; }
+    public int PageTokenId { get; set; }
+    public int PayloadPageId { get; set; }
+
     public DateTime? Created { get; set; }
 
     public string? Url { get; set; }
@@ -14,10 +18,6 @@ public class PageVisitPlus
 
     public string PageName { get; set; }
     
-    public int PayloadPageId { get; set; }
-
     public string TargetName { get; set; }
     public string TargetAddress { get; set; }
-
-    public int EmailTargetId { get; set; }
 }

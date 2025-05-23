@@ -3,6 +3,7 @@
 public class EmailHeader
 {
     public int Id { get; set; }
+    public int EmailTargetId { get; set; }
 
     public string ToName { get; set; }
     public string ToAddress { get; set; }
