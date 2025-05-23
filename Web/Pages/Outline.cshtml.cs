@@ -1,4 +1,7 @@
-﻿namespace Lefish.Web.Pages;
+﻿using System.ComponentModel;
+using System.Linq;
+
+namespace Lefish.Web.Pages;
 
 public class OutlineModel(
     IUserToken userToken,
@@ -6,9 +9,8 @@ public class OutlineModel(
 {
     public List<EmailTarget> EmailTargets { get; set; }
     public List<EmailHeader> EmailMessages { get; set; }
-    public List<PageVisitPlus> PageVisits { get; set; }
-    public List<ScriptVisitPlus> ScriptVisits { get; set; }
     public List<PageTokenPlus> PageTokens { get; set; }
+    public List<Visit> Visits { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -43,41 +45,37 @@ public class OutlineModel(
                 })
                 .ToListAsync();
 
-            PageVisits = await database.PageVisits
+            var pageVisits = await database.PageVisits
                 .OrderBy(x => x.Created)
-                .Select(x => new PageVisitPlus() { 
+                .Select(x => new Visit() { 
+                    VisitKind = VisitKind.Page,
                     Id = x.Id,
                     PageTokenId = x.PageTokenId,
                     Created = x.Created,
-                    //Url = x.Url,
-                    //Method = x.Method,
                     IpAddress = x.IpAddress,
-                    //UserAgent = x.UserAgent,
                     PageName = x.PageToken.PayloadPage.Name,
                     PayloadPageId = x.PageToken.PayloadPageId,
-                    //TargetName = x.PageToken.EmailMessage.EmailTarget.Name,
-                    //TargetAddress = x.PageToken.EmailMessage.EmailTarget.Address,
-                    //EmailTargetId = x.PageToken.EmailMessage.EmailTargetId,
                 })
                 .ToListAsync();
 
-            ScriptVisits = await database.ScriptVisits
+            var scriptVisits = await database.ScriptVisits
                 .OrderBy(x => x.Created)
-                .Select(x => new ScriptVisitPlus()
+                .Select(x => new Visit()
                 {
+                    VisitKind = VisitKind.Script,
                     Id = x.Id,
+                    PageTokenId = x.PageTokenId,
                     Created = x.Created,
-                    //Url = x.Url,
-                    //Method = x.Method,
-                    //IpAddress = x.IpAddress,
-                    //UserAgent = x.UserAgent,
+                    IpAddress = x.IpAddress,
                     ScriptName = x.PageToken.PayloadScript.Name,
                     PayloadScriptId = x.PageToken.PayloadScriptId,
-                    //TargetName = x.PageToken.EmailMessage.EmailTarget.Name,
-                    //TargetAddress = x.PageToken.EmailMessage.EmailTarget.Address,
-                    //EmailTargetId = x.PageToken.EmailMessage.EmailTargetId,
                 })
                 .ToListAsync();
+
+            Visits = pageVisits
+                .Union(scriptVisits)
+                .OrderBy(x => x.Created)
+                .ToList();
 
             PageTokens = await database.PageTokens
                 .OrderBy(x => x.Created)

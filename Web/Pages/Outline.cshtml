@@ -31,7 +31,7 @@
             </div>
 
             @foreach (var message in Model.EmailMessages
-                .Where(x => x.EmailTargetId == target.Id))
+               .Where(x => x.EmailTargetId == target.Id))
             {
                 <div style="padding-left:1.5em;">
                     <span>
@@ -43,9 +43,9 @@
                             skickat @(message.Sent.ToFixedFormatDateShortTime())
                         </span>
                     </span>
-                    
+
                     @foreach (var token in Model.PageTokens
-                        .Where(x => x.EmailMessageId == message.Id))
+                       .Where(x => x.EmailMessageId == message.Id))
                     {
                         <div style="padding-left:1.5em;">
                             <div>
@@ -54,22 +54,37 @@
                                 <a href="/show-page-token/@(token.Id)">@(token.Token)</a>
                             </div>
 
-                            @foreach (var visit in Model.PageVisits
-                                .Where(x => x.PageTokenId == token.Id)) 
-                                //x.PayloadPageId == token.PayloadPageId))
+                            @foreach (var visit in Model.Visits
+                                .Where(x => x.PageTokenId == token.Id))
                             {
-                                <div style="padding-left:1.5em;">
-                                    📄
-                                    &thinsp;
-                                    <a href="/show-payload-page/@(visit.PayloadPageId)">@(visit.PageName)</a>
-                                    &thinsp;
-                                    <span class="muted">
-                                        besökt @(visit.Created.ToFixedFormatDateShortTime())
-                                    </span>
-                                </div>
+                                if (visit.VisitKind == VisitKind.Page)
+                                {
+                                    <div style="padding-left:1.5em;">
+                                        📄
+                                        &thinsp;
+                                        <a href="/show-payload-page/@(visit.PayloadPageId)">@(visit.PageName)</a>
+                                        &thinsp;
+                                        <span class="muted">
+                                            besökt @(visit.Created.ToFixedFormatDateShortTime())
+                                        </span>
+                                    </div>
+                                }
+
+                                if (visit.VisitKind == VisitKind.Script)
+                                {
+                                    <div style="padding-left:1.5em;">
+                                        📜
+                                        &thinsp;
+                                        <a href="/show-payload-script/@(visit.PayloadScriptId)">@(visit.ScriptName)</a>
+                                        &thinsp;
+                                        <span class="muted">
+                                            besökt @(visit.Created.ToFixedFormatDateShortTime())
+                                        </span>
+                                    </div>
+                                }
                             }
 
-                            @if (!Model.PageVisits
+                            @if (!Model.Visits
                                 .Any(x => x.PageTokenId == token.Id))
                             {
                                 <div style="padding-left:1.5em;">
