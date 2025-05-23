@@ -27,6 +27,157 @@
     </div>
 
     <p>
+        @if (Model.CanSendEmailToTargetCommand)
+        {
+            <a class="button" href="/send-email-to-target/@(Model.EmailTarget.Id)">
+                Skicka meddelande
+            </a>
+        }
+    </p>
+
+    <h5>
+        Attack
+    </h5>
+
+    <div class="notice">
+        <div>
+            🎯
+            &thinsp;
+            <a href="/show-email-target/@(Model.EmailTarget.Id)">@(Model.EmailTarget.Name)</a>
+            &thinsp;
+            <span class="muted">
+                @(Model.EmailTarget.Address)
+            </span>
+        </div>
+
+        @foreach (var message in Model.EmailMessages.Where(x => x.EmailTargetId == Model.EmailTarget.Id))
+        {
+            <div style="padding-left:1.5em;">
+                <span>
+                    📩
+                    &thinsp;
+                    <a href="/show-email/@(message.Id)">@(message.Subject)</a>
+                    &thinsp;
+                    <span class="muted">
+                        skickat @(message.Sent.ToFixedFormatDateShortTime())
+                    </span>
+                </span>
+
+                @foreach (var token in Model.PageTokens.Where(x => x.EmailMessageId == message.Id))
+                {
+                    <div style="padding-left:1.5em;">
+                        <div>
+                            🍪
+                            &thinsp;
+                            <a href="/show-page-token/@(token.Id)">@(token.Token)</a>
+                        </div>
+
+                        @foreach (var visit in Model.Visits.Where(x => x.PageTokenId == token.Id))
+                        {
+                            if (visit.VisitKind == VisitKind.Page)
+                            {
+                                <div style="padding-left:1.5em;">
+                                    📄
+                                    &thinsp;
+                                    <a href="/show-payload-page/@(visit.PayloadPageId)">@(visit.PageName)</a>
+                                    &thinsp;
+                                    <span class="muted">
+                                        besökt @(visit.Created.ToFixedFormatDateShortTime())
+                                    </span>
+                                </div>
+                            }
+
+                            if (visit.VisitKind == VisitKind.Script)
+                            {
+                                <div style="padding-left:1.5em;">
+                                    📜
+                                    &thinsp;
+                                    <a href="/show-payload-script/@(visit.PayloadScriptId)">@(visit.ScriptName)</a>
+                                    &thinsp;
+                                    <span class="muted">
+                                        besökt @(visit.Created.ToFixedFormatDateShortTime())
+                                    </span>
+                                </div>
+                            }
+                        }
+
+                        @if (!Model.Visits.Any(x => x.PageTokenId == token.Id))
+                        {
+                            <div style="padding-left:1.5em;">
+                                📄
+                                &thinsp;
+                                &ndash;
+                            </div>
+                        }
+
+                        @if (Model.CanUploadDataDump)
+                        {
+                            <div style="padding-left:1.5em;">
+                                💉
+                                &thinsp;
+                                <a href="/upload/@(token.Token)">
+                                    Ladda upp data
+                                </a>
+                            </div>
+                        }
+                    </div>
+                }
+
+                @if (!Model.PageTokens.Any(x => x.EmailMessageId == message.Id))
+                {
+                    <div style="padding-left:1.5em;">
+                        🍪
+                        &thinsp;
+                        &ndash;
+                    </div>
+                }
+            </div>
+            <br />
+        }
+
+        @if (!Model.EmailMessages.Any(x => x.EmailTargetId == Model.EmailTarget.Id))
+        {
+            <div style="padding-left:1.5em;">
+                📩
+                &thinsp;
+                &ndash;
+            </div>
+        }
+    </div>
+
+    @if (Model.UserAgents.Any())
+    {
+        <h5>
+            Agent
+        </h5>
+
+        <ul class="notice">
+            @foreach (var agent in Model.UserAgents)
+            {
+                <li>
+                @(agent)
+                </li>
+            }
+        </ul>
+    }
+
+    @if (Model.IpAddresses.Any())
+    {
+        <h5>
+            IP-nummer
+        </h5>
+
+        <ul class="notice">
+            @foreach (var address in Model.IpAddresses)
+            {
+                <li>
+                @(address)
+                </li>
+            }
+        </ul>
+    }
+
+    <p>
         @if (Model.CanEditTarget)
         {
             <a class="button" href="/edit-email-target/@(Model.EmailTarget.Id)">
@@ -41,121 +192,5 @@
             </a>
         }
     </p>
-
-    <h5>Skickade meddelanden</h5>
-
-    <ul class="notice">
-        @foreach (var header in Model.EmailHeaders)
-        {
-            <li>
-                📩
-                &thinsp;
-                <a href="/show-email/@(header.Id)">@(header.Subject)</a>
-                &ensp;
-                @(header.Created.ToFixedFormatDateShortTime())
-            </li>
-        }
-
-        @if (!Model.EmailHeaders.Any())
-        {
-            <li>
-                📩
-                &thinsp;
-                &ndash;
-            </li>
-        }
-    </ul>
-
-    <p>
-        @if (Model.CanSendEmailToTargetCommand)
-        {
-            <a class="button" href="/send-email-to-target/@(Model.EmailTarget.Id)">
-                Skicka meddelande
-            </a>
-        }
-    </p>
-
-    <h4>
-        Tokens
-    </h4>
-
-    <ul class="notice">
-        @foreach (var token in Model.PageTokens)
-        {
-            <li>
-                🍪
-                &thinsp;
-                <a href="/show-page-token/@(token.Id)">@(token.Token)</a>
-                &thinsp;
-                avsedd för
-                &thinsp;
-                📄
-                <a href="/show-payload-page/@(token.PayloadPageId)">@(token.PageName)</a>
-                &ensp;
-                @if (Model.CanUploadDataDump)
-                {
-                    <span>
-                        &ensp;
-                        <a href="/upload/@(token.Token)">
-                            Ladda upp data
-                        </a>
-                    </span>
-                }
-            </li>
-        }
-
-        @if (!Model.PageTokens.Any())
-        {
-            <li>
-                    🍪
-                &thinsp;
-                &ndash;
-            </li>
-        }
-    </ul>
-
-    <h4>
-        Sidbesök
-    </h4>
-
-    <figure>
-        <table>
-            <tr>
-                <th>&emsp;🙋</th>
-                <th>Sida</th>
-                <th>IP-nummer</th>
-                <th>UserAgent</th>
-            </tr>
-            @foreach (var visit in Model.PageVisits)
-            {
-                <tr>
-                    <td>
-                        <a href="/show-page-visit/@(visit.Id)">
-                            @(visit.Created.ToFixedFormatDateShortTime())
-                        </a>
-                    </td>
-                    <td>
-                        <a href="/show-payload-page/@(visit.PayloadPageId)">
-                            @(visit.PageName ?? "null")
-                        </a>
-                    </td>
-                    <td>
-                        @(visit.IpAddress)
-                    </td>
-                    <td>
-                        @(visit.UserAgent)
-                    </td>
-                </tr>
-            }
-            @if (!Model.PageVisits.Any())
-            {
-                <tr>
-                    <td colspan="4">
-                        Inga
-                    </td>
-                </tr>
-            }
-        </table>
-    </figure>
 
 </main>

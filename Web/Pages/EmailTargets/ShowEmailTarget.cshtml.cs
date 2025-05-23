@@ -15,10 +15,13 @@ public class ShowEmailTargetModel(
 {
     public EmailTarget EmailTarget { get; set; }
 
-    public List<EmailHeader> EmailHeaders { get; set; }
-    public List<PageVisitPlus> PageVisits { get; set; }
+    public List<EmailHeader> EmailMessages { get; set; }
     public List<PageTokenPlus> PageTokens { get; set; }
+    public List<Visit> Visits { get; set; }
 
+    public List<string> IpAddresses { get; set; }
+    public List<string> UserAgents { get; set; }
+    
     public bool CanEditTarget { get; set; }
         = editTargetCommand.IsPermitted(userToken);
 
@@ -43,53 +46,74 @@ public class ShowEmailTargetModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            EmailHeaders = await database.EmailMessages
+            EmailMessages = await database.EmailMessages
                 .Include(x => x.EmailAccount)
                 .Include(x => x.EmailTarget)
-                .OrderByDescending(x => x.Created)
                 .Where(x => x.EmailTargetId == id)
+                .OrderByDescending(x => x.Created)
                 .Select(x => new EmailHeader()
                 {
                     Id = x.Id,
-                    ToName = x.EmailTarget.Name,
-                    ToAddress = x.EmailTarget.Address,
-                    FromName = x.EmailAccount.FromName,
-                    FromAddress = x.EmailAccount.FromAddress,
-                    ReplyToName = x.EmailAccount.ReplyToName,
-                    ReplyToAddress = x.EmailAccount.ReplyToAddress,
+                    EmailTargetId = x.EmailTargetId,
+                    //ToName = x.EmailTarget.Name,
+                    //ToAddress = x.EmailTarget.Address,
+                    //FromName = x.EmailAccount.FromName,
+                    //FromAddress = x.EmailAccount.FromAddress,
+                    //ReplyToName = x.EmailAccount.ReplyToName,
+                    //ReplyToAddress = x.EmailAccount.ReplyToAddress,
                     Subject = x.Subject,
                     EmailStatus = x.EmailStatus,
-                    Created = x.Created,
+                    //Created = x.Created,
                     Sent = x.Sent,
                 })
                 .ToListAsync();
 
-            PageVisits = await database.PageVisits
-                .Where(x => x.PageToken.EmailMessage.EmailTargetId == id)
+            var pageVisits = await database.PageVisits
                 .OrderBy(x => x.Created)
-                .Select(x => new PageVisitPlus() { 
+                .Where(x => x.PageToken.EmailMessage.EmailTargetId == id)
+                .Select(x => new Visit()
+                {
+                    VisitKind = VisitKind.Page,
                     Id = x.Id,
+                    PageTokenId = x.PageTokenId,
                     Created = x.Created,
-                    //Url = x.Url,
-                    //Method = x.Method,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
                     PageName = x.PageToken.PayloadPage.Name,
                     PayloadPageId = x.PageToken.PayloadPageId,
-                    //TargetName = x.PageToken.EmailMessage.EmailTarget.Name,
-                    //TargetAddress = x.PageToken.EmailMessage.EmailTarget.Address,
-                    //EmailTargetId = x.PageToken.EmailMessage.EmailTargetId,
                 })
                 .ToListAsync();
 
+            var scriptVisits = await database.ScriptVisits
+                .OrderBy(x => x.Created)
+                .Where(x => x.PageToken.EmailMessage.EmailTargetId == id)
+                .Select(x => new Visit()
+                {
+                    VisitKind = VisitKind.Script,
+                    Id = x.Id,
+                    PageTokenId = x.PageTokenId,
+                    Created = x.Created,
+                    IpAddress = x.IpAddress,
+                    UserAgent = x.UserAgent,
+                    ScriptName = x.PageToken.PayloadScript.Name,
+                    PayloadScriptId = x.PageToken.PayloadScriptId,
+                })
+                .ToListAsync();
+
+            Visits = pageVisits
+                .Union(scriptVisits)
+                .OrderBy(x => x.Created)
+                .ToList();
+
             PageTokens = await database.PageTokens
                 .Where(x => x.EmailMessage.EmailTargetId == id)
+                .OrderBy(x => x.Created)
                 .Select(x => new PageTokenPlus()
                 {
                     Id = x.Id,
                     Token = x.Token,
-                    Created = x.Created,
-                    PageName = x.PayloadPage.Name,
+                    //Created = x.Created,
+                    //PageName = x.PayloadPage.Name,
                     PayloadPageId = x.PayloadPageId,
                     TargetName = x.EmailMessage.EmailTarget.Name,
                     TargetAddress = x.EmailMessage.EmailTarget.Address,
@@ -99,6 +123,20 @@ public class ShowEmailTargetModel(
                     //PageVisitCount = x.PageVisits.Count(),
                 })
                 .ToListAsync();
+
+            IpAddresses = Visits
+                .Select(x => x.IpAddress)
+                .Where(x => x != null)
+                .Cast<string>()
+                .Distinct()
+                .ToList();
+
+            UserAgents = Visits
+                .Select(x => x.UserAgent)
+                .Where(x => x != null)
+                .Cast<string>()
+                .Distinct()
+                .ToList();
 
             return Page();
         }
