@@ -1,9 +1,6 @@
-﻿using System.ComponentModel;
-using System.Linq;
+﻿namespace Lefish.Web.Pages;
 
-namespace Lefish.Web.Pages;
-
-public class OutlineModel(
+public class AttackModel(
     IUserToken userToken,
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
