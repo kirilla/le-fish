@@ -1,5 +1,6 @@
 using Lefish.Application.Extensions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Extensions;
 using System.Text;
 
 namespace Lefish.Web.Pages;
@@ -49,7 +50,7 @@ public class ScriptPageModel(
 
             PayloadScript.InsertTargetValues(_config, EmailTarget, PageToken);
 
-            //await LogPageVisit(HttpContext, PageToken);
+            await LogScriptVisit(HttpContext, PageToken);
 
             return Content(PayloadScript.Script, "application/javascript", Encoding.UTF8);
         }
@@ -59,20 +60,20 @@ public class ScriptPageModel(
         }
     }
 
-    //public async Task LogPageVisit(
-    //    HttpContext context, PageToken pageToken)
-    //{
-    //    var visit = new PageVisit()
-    //    {
-    //        Url = context.Request.GetDisplayUrl(),
-    //        Method = context.Request.Method,
-    //        IpAddress = context.Connection.RemoteIpAddress?.ToString(),
-    //        UserAgent = context.Request.Headers?.UserAgent,
-    //        PageTokenId = pageToken.Id,
-    //    };
+    public async Task LogScriptVisit(
+        HttpContext context, PageToken pageToken)
+    {
+        var visit = new ScriptVisit()
+        {
+            Url = context.Request.GetDisplayUrl(),
+            Method = context.Request.Method,
+            IpAddress = context.Connection.RemoteIpAddress?.ToString(),
+            UserAgent = context.Request.Headers?.UserAgent,
+            PageTokenId = pageToken.Id,
+        };
 
-    //    database.PageVisits.Add(visit);
+        database.ScriptVisits.Add(visit);
 
-    //    await database.SaveAsync(UserToken);
-    //}
+        await database.SaveAsync(UserToken);
+    }
 }
