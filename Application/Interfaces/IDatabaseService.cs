@@ -14,7 +14,7 @@ public interface IDatabaseService
     DbSet<EmailTemplate> EmailTemplates { get; set; }
     DbSet<IpRange> IpRanges { get; set; }
     DbSet<PageVisit> PageVisits { get; set; }
-    DbSet<PageToken> PageKeys { get; set; }
+    DbSet<PageKey> PageKeys { get; set; }
     DbSet<PayloadPage> PayloadPages { get; set; }
     DbSet<PayloadScript> PayloadScripts { get; set; }
     DbSet<ScriptVisit> ScriptVisits { get; set; }

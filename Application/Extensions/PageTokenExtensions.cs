@@ -2,7 +2,7 @@
 
 public static class PageTokenExtensions
 {
-    public static async Task SetUniqueTokenAsync(this PageToken token, IDatabaseService database)
+    public static async Task SetUniqueTokenAsync(this PageKey token, IDatabaseService database)
     {
         var tokens = database.PageKeys
             .Select(x => x.Token)

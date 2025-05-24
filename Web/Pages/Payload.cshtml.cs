@@ -14,7 +14,7 @@ public class PayloadPageModel(
     private readonly TemplateConfiguration _config = templateConfiguration.Value;
 
     public EmailTarget EmailTarget { get; set; }
-    public PageToken PageToken { get; set; }
+    public PageKey PageToken { get; set; }
     public PayloadPage PayloadPage { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int token)
@@ -60,7 +60,7 @@ public class PayloadPageModel(
     }
 
     public async Task LogPageVisit(
-        HttpContext context, PageToken pageToken)
+        HttpContext context, PageKey pageToken)
     {
         var visit = new PageVisit()
         {

@@ -15,7 +15,7 @@ public class ScriptPageModel(
     private readonly TemplateConfiguration _config = templateConfiguration.Value;
 
     public EmailTarget EmailTarget { get; set; }
-    public PageToken PageToken { get; set; }
+    public PageKey PageToken { get; set; }
     public PayloadScript PayloadScript { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int token)
@@ -61,7 +61,7 @@ public class ScriptPageModel(
     }
 
     public async Task LogScriptVisit(
-        HttpContext context, PageToken pageToken)
+        HttpContext context, PageKey pageToken)
     {
         var visit = new ScriptVisit()
         {

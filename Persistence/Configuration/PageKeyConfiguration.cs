@@ -1,8 +1,8 @@
 ﻿namespace Lefish.Persistence.Configuration;
 
-class PageTokenConfiguration : IEntityTypeConfiguration<PageToken>
+class PageKeyConfiguration : IEntityTypeConfiguration<PageKey>
 {
-    public void Configure(EntityTypeBuilder<PageToken> builder)
+    public void Configure(EntityTypeBuilder<PageKey> builder)
     {
         builder.HasKey(p => p.Id);
 

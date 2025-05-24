@@ -63,7 +63,7 @@ public class SendEmailToTargetCommand(
             EmailTargetId = target.Id,
         };
 
-        var token = new PageToken()
+        var token = new PageKey()
         {
             EmailMessage = message,
             PayloadPageId = page.Id,

@@ -12,6 +12,6 @@ public class PageVisit : ICreatedDateTime
     public string? IpAddress { get; set; }
     public string? UserAgent { get; set; }
 
-    public PageToken PageToken { get; set; }
+    public PageKey PageToken { get; set; }
     public int PageTokenId { get; set; }
 }
