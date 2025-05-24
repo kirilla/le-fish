@@ -4,7 +4,7 @@ public class ShowPageKeysModel(
     IUserToken userToken,
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
-    public List<PageKeyPlus> PageTokens { get; set; }
+    public List<PageKeyPlus> PageKeys { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -13,7 +13,7 @@ public class ShowPageKeysModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PageTokens = await database.PageKeys
+            PageKeys = await database.PageKeys
                 .OrderBy(x => x.Created)
                 .ThenBy(x => x.Token)
                 .Select(x => new PageKeyPlus()

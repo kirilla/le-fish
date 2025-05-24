@@ -16,7 +16,7 @@ public class ShowPayloadScriptModel(
 
     public PayloadScript PayloadScript { get; set; }
 
-    public List<PageKeyPlus> PageTokens { get; set; }
+    public List<PageKeyPlus> PageKeys { get; set; }
 
     public bool CanClonePayloadScript { get; set; }
         = clonePayloadScriptCommand.IsPermitted(userToken);
@@ -39,7 +39,7 @@ public class ShowPayloadScriptModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            PageTokens = await database.PageKeys
+            PageKeys = await database.PageKeys
                 .Where(x => x.PayloadScriptId == id)
                 .OrderBy(x => x.EmailMessage.EmailTarget.Name)
                 .ThenBy(x => x.EmailMessage.EmailTarget.Address)

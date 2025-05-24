@@ -63,7 +63,7 @@
                     </span>
                 </span>
 
-                @foreach (var token in Model.PageTokens.Where(x => x.EmailMessageId == message.Id))
+                @foreach (var token in Model.PageKeys.Where(x => x.EmailMessageId == message.Id))
                 {
                     <div style="padding-left:1.5em;">
                         <div>
@@ -123,7 +123,7 @@
                     </div>
                 }
 
-                @if (!Model.PageTokens.Any(x => x.EmailMessageId == message.Id))
+                @if (!Model.PageKeys.Any(x => x.EmailMessageId == message.Id))
                 {
                     <div style="padding-left:1.5em;">
                         🍪

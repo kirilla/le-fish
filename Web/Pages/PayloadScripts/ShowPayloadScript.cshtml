@@ -35,7 +35,7 @@
     </h5>
 
     <ul class="notice">
-        @foreach (var token in Model.PageTokens)
+        @foreach (var token in Model.PageKeys)
         {
             <li>
                 🍪
@@ -50,7 +50,7 @@
             </li>
         }
 
-        @if (!Model.PageTokens.Any())
+        @if (!Model.PageKeys.Any())
         {
             <li>
                 🍪

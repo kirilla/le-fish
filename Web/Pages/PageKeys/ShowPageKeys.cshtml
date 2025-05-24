@@ -29,7 +29,7 @@
                 <th>Sida</th>
                 <th>Sidbesök</th>
             </tr>
-            @foreach (var token in Model.PageTokens)
+            @foreach (var token in Model.PageKeys)
             {
                 <tr>
                     <td>
@@ -55,7 +55,7 @@
                     </td>
                 </tr>
             }
-            @if (!Model.PageTokens.Any())
+            @if (!Model.PageKeys.Any())
             {
                 <tr>
                     <td colspan="4">
