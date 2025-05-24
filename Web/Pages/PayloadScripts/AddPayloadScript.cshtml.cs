@@ -62,7 +62,9 @@ public class AddPayloadScriptModel(
     private string GetDefaultTemplate()
     {
         return """
-            (function(){ alert('sample'); })()
+            (function() { 
+                alert('hej [[page_token]]'); 
+            })()
             """;
     }
 }

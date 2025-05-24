@@ -67,11 +67,12 @@ public class AddPayloadPageModel(
             <head>
                 <meta charset="utf-8" />
                 <title>Sida</title>
+                <script src="[[script_url]]" defer=""></script>
             </head>
             <body>
                 <h1>Rubrik</h1>
                 <script>
-                    alert('Hej [[page_token]]!');
+                    console.log('hej [[page_token]]');
                 </script>
             </body>
             </html>
