@@ -1,0 +1,75 @@
+﻿@page "/preparations"
+@model PreparationsModel
+@{
+}
+
+@section Meta {
+    <title>Förberedelser - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    
+    <h4>
+        Förberedelser
+    </h4>
+
+    <div class="notice">
+        <ul>
+            <li>
+                🎯
+                &thinsp;
+                <a href="/show-email-targets">Mål</a>
+            </li>
+            <li>
+                📝
+                &thinsp;
+                <a href="/show-email-templates">Epostmallar</a>
+            </li>
+            <li>
+                📄
+                &thinsp;
+                <a href="/show-payload-pages">Sidor</a>
+            </li>
+            <li>
+                📜
+                &thinsp;
+                <a href="/show-payload-scripts">Skript</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="notice">
+
+        <h5>
+            Slask
+        </h5>
+
+        <ul>
+            <li>
+                🍪
+                &thinsp;
+                <a href="/show-page-tokens">Tokens</a>
+            </li>
+            <li>
+                🙋
+                &thinsp;
+                <a href="/show-page-visits">Sidbesök</a>
+            </li>
+            <li>
+                🙋
+                &thinsp;
+                <a href="/show-script-visits">Skriptbesök</a>
+            </li>
+            <li>
+                📦
+                &thinsp;
+                <a href="/show-data-dumps">Avlämnade data</a>
+            </li>
+        </ul>
+    </div>
+
+</main>

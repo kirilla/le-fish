@@ -1,0 +1,87 @@
+﻿@page "/settings"
+@model SettingsModel
+@{
+}
+
+@section Meta {
+    <title>Inställningar - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    
+    <h4>
+        Inställningar
+    </h4>
+
+    <div class="notice">
+
+        <h5>
+            Användare
+        </h5>
+
+        <ul>
+            <li>
+                👤
+                &thinsp;
+                <a href="/show-users">Konton</a>
+            </li>
+            <li>
+                👋
+                &thinsp;
+                <a href="/show-all-sessions">Inloggade</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="notice">
+
+        <h5>
+            Epost
+        </h5>
+
+        <ul>
+            <li>
+                📮
+                &thinsp;
+                <a href="/show-email-accounts">Konton</a>
+            </li>
+            <li>
+                📤
+                &thinsp;
+                <a href="/show-email-queue">Utkorg</a>
+            </li>
+            <li>
+                🧹
+                &thinsp;
+                <a href="/remove-email-messages">
+                    Städa
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="notice">
+
+        <h5>
+            Nätverk
+        </h5>
+
+        <ul>
+            <li>
+                ⚙️
+                &thinsp;
+                <a href="/show-ip-ranges">Filter</a>
+            </li>
+            <li>
+                🛑
+                &thinsp;
+                <a href="/show-blocked-requests">Blockerade anrop</a>
+            </li>
+        </ul>
+    </div>
+
+</main>
