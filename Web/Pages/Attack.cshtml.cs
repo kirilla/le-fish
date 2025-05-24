@@ -1,13 +1,20 @@
-﻿namespace Lefish.Web.Pages;
+﻿using Lefish.Application.Commands.EmailMessages.SendEmail;
+using Lefish.Application.Commands.EmailMessages.SendEmailToTarget;
+
+namespace Lefish.Web.Pages;
 
 public class AttackModel(
     IUserToken userToken,
-    IDatabaseService database) : UserTokenPageModel(userToken)
+    IDatabaseService database,
+    ISendEmailCommand sendEmailCommand) : UserTokenPageModel(userToken)
 {
     public List<EmailTarget> EmailTargets { get; set; }
     public List<EmailHeader> EmailMessages { get; set; }
     public List<PageTokenPlus> PageTokens { get; set; }
     public List<Visit> Visits { get; set; }
+
+    public bool CanSendEmail { get; set; }
+        = sendEmailCommand.IsPermitted(userToken);
 
     public async Task<IActionResult> OnGetAsync()
     {
