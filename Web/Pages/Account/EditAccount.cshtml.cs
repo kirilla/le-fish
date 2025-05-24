@@ -47,7 +47,7 @@ public class EditAccountModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect("/account/showaccount");
+            return Redirect("/show-account");
         }
         catch (Exception ex)
         {

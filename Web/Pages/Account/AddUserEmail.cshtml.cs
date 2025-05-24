@@ -39,7 +39,7 @@ public class AddUserEmailModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/account/showaccount");
+            return Redirect($"/show-account");
         }
         catch (BlockedByExistingException)
         {
