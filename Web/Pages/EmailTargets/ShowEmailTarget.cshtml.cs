@@ -105,7 +105,7 @@ public class ShowEmailTargetModel(
                 .OrderBy(x => x.Created)
                 .ToList();
 
-            PageTokens = await database.PageTokens
+            PageTokens = await database.PageKeys
                 .Where(x => x.EmailMessage.EmailTargetId == id)
                 .OrderBy(x => x.Created)
                 .Select(x => new PageTokenPlus()

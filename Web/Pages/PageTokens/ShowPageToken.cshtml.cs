@@ -15,7 +15,7 @@ public class ShowPageTokenModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PageToken = await database.PageTokens
+            PageToken = await database.PageKeys
                 .Where(x => x.Id == id)
                 .Select(x => new PageTokenPlus()
                 {

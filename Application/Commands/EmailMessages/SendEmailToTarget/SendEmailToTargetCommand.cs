@@ -71,7 +71,7 @@ public class SendEmailToTargetCommand(
         };
 
         database.EmailMessages.Add(message);
-        database.PageTokens.Add(token);
+        database.PageKeys.Add(token);
 
         await token.SetUniqueTokenAsync(database);
 

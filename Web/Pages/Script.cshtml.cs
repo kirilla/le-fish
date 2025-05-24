@@ -22,7 +22,7 @@ public class ScriptPageModel(
     {
         try
         {
-            PageToken = await database.PageTokens
+            PageToken = await database.PageKeys
                 .AsNoTracking()
                 .Where(x => x.Token == token)
                 .SingleOrDefaultAsync() ??
@@ -34,7 +34,7 @@ public class ScriptPageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            var emailTargetId = await database.PageTokens
+            var emailTargetId = await database.PageKeys
                 .AsNoTracking()
                 .Where(x => x.Token == token)
                 .Select(x => x.EmailMessage.EmailTargetId)

@@ -13,7 +13,7 @@ public class ShowPageTokensModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PageTokens = await database.PageTokens
+            PageTokens = await database.PageKeys
                 .OrderBy(x => x.Created)
                 .ThenBy(x => x.Token)
                 .Select(x => new PageTokenPlus()

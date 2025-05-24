@@ -24,7 +24,7 @@ public class UploadPageModel(
             //if (!command.IsPermitted(UserToken))
             //    throw new NotPermittedException();
 
-            var pageToken = await database.PageTokens
+            var pageToken = await database.PageKeys
                 .Include(x => x.EmailMessage.EmailTarget)
                 .Where(x => x.Token == token)
                 .SingleOrDefaultAsync() ??
@@ -56,7 +56,7 @@ public class UploadPageModel(
             //if (!command.IsPermitted(UserToken))
             //    throw new NotPermittedException();
 
-            var pageToken = await database.PageTokens
+            var pageToken = await database.PageKeys
                 .Include(x => x.EmailMessage.EmailTarget)
                 .Where(x => x.Token == token)
                 .SingleOrDefaultAsync() ??

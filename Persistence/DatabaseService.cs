@@ -21,7 +21,7 @@ public class DatabaseService(
     public DbSet<PageVisit> PageVisits { get; set; }
     public DbSet<PayloadPage> PayloadPages { get; set; }
     public DbSet<PayloadScript> PayloadScripts { get; set; }
-    public DbSet<PageToken> PageTokens { get; set; }
+    public DbSet<PageToken> PageKeys { get; set; }
     public DbSet<ScriptVisit> ScriptVisits { get; set; }
     public DbSet<Session> Sessions { get; set; }
     public DbSet<User> Users { get; set; }
