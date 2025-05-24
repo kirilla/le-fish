@@ -63,7 +63,7 @@ public class SendEmailToTargetCommand(
             EmailTargetId = target.Id,
         };
 
-        var token = new PageKey()
+        var key = new PageKey()
         {
             EmailMessage = message,
             PayloadPageId = page.Id,
@@ -71,11 +71,11 @@ public class SendEmailToTargetCommand(
         };
 
         database.EmailMessages.Add(message);
-        database.PageKeys.Add(token);
+        database.PageKeys.Add(key);
 
-        await token.SetUniqueTokenAsync(database);
+        await key.SetUniqueTokenAsync(database);
 
-        message.InsertTargetValues(_config, target, token);
+        message.InsertTargetValues(_config, target, key);
 
         await database.SaveAsync(userToken);
 

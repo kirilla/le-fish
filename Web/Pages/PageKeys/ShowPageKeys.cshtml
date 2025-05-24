@@ -29,29 +29,29 @@
                 <th>Sida</th>
                 <th>Sidbesök</th>
             </tr>
-            @foreach (var token in Model.PageKeys)
+            @foreach (var key in Model.PageKeys)
             {
                 <tr>
                     <td>
-                        @(token.Created.ToFixedFormatDateShortTime())
+                        @(key.Created.ToFixedFormatDateShortTime())
                     </td>
                     <td>
-                        <a href="/show-page-key/@(token.Id)">
-                        @(token.Token)
+                        <a href="/show-page-key/@(key.Id)">
+                        @(key.Token)
                         </a>
                     </td>
                     <td>
-                        <a href="/show-email-target/@(token.EmailTargetId)">
-                        @(token.TargetName)
+                        <a href="/show-email-target/@(key.EmailTargetId)">
+                        @(key.TargetName)
                         </a>
                     </td>
                     <td>
-                        <a href="/show-payload-page/@(token.PayloadPageId)">
-                        @(token.PageName)
+                        <a href="/show-payload-page/@(key.PayloadPageId)">
+                        @(key.PageName)
                         </a>
                     </td>
                     <td>
-                        @(token.PageVisitCount.ToSwedishSpacing())
+                        @(key.PageVisitCount.ToSwedishSpacing())
                     </td>
                 </tr>
             }

@@ -17,7 +17,7 @@ public class UploadPageModel(
 
     public UploadDataDumpCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int token)
+    public async Task<IActionResult> OnGetAsync(int key)
     {
         try
         {
@@ -26,7 +26,7 @@ public class UploadPageModel(
 
             var pageKey = await database.PageKeys
                 .Include(x => x.EmailMessage.EmailTarget)
-                .Where(x => x.Token == token)
+                .Where(x => x.Token == key)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -49,7 +49,7 @@ public class UploadPageModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync(int token)
+    public async Task<IActionResult> OnPostAsync(int key)
     {
         try
         {
@@ -58,7 +58,7 @@ public class UploadPageModel(
 
             var pageKey = await database.PageKeys
                 .Include(x => x.EmailMessage.EmailTarget)
-                .Where(x => x.Token == token)
+                .Where(x => x.Token == key)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -89,7 +89,7 @@ public class UploadPageModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/upload/{token}");
+            return Redirect($"/upload/{key}");
         }
         catch
         {

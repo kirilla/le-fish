@@ -53,18 +53,18 @@
                         </span>
                     </span>
 
-                    @foreach (var token in Model.PageKeys
+                    @foreach (var key in Model.PageKeys
                        .Where(x => x.EmailMessageId == message.Id))
                     {
                         <div style="padding-left:1.5em;">
                             <div>
                                 🍪
                                 &thinsp;
-                                <a href="/show-page-key/@(token.Id)">@(token.Token)</a>
+                                <a href="/show-page-key/@(key.Id)">@(key.Token)</a>
                             </div>
 
                             @foreach (var visit in Model.Visits
-                                .Where(x => x.PageKeyId == token.Id))
+                                .Where(x => x.PageKeyId == key.Id))
                             {
                                 if (visit.VisitKind == VisitKind.Page)
                                 {
@@ -94,7 +94,7 @@
                             }
 
                             @if (!Model.Visits
-                                .Any(x => x.PageKeyId == token.Id))
+                                .Any(x => x.PageKeyId == key.Id))
                             {
                                 <div style="padding-left:1.5em;">
                                     📄

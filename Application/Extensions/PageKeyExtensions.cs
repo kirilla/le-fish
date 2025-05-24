@@ -2,7 +2,7 @@
 
 public static class PageKeyExtensions
 {
-    public static async Task SetUniqueTokenAsync(this PageKey token, IDatabaseService database)
+    public static async Task SetUniqueTokenAsync(this PageKey key, IDatabaseService database)
     {
         var tokens = database.PageKeys
             .Select(x => x.Token)
@@ -10,8 +10,8 @@ public static class PageKeyExtensions
 
         do
         {
-            token.Token = Random.Shared.Next();
+            key.Token = Random.Shared.Next();
         }
-        while (tokens.Contains(token.Token));
+        while (tokens.Contains(key.Token));
     }
 }

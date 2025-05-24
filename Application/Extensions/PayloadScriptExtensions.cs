@@ -8,14 +8,14 @@ public static class PayloadScriptExtensions
         this PayloadScript script,
         TemplateConfiguration templateConfiguration,
         EmailTarget target, 
-        PageKey token)
+        PageKey key)
     {
         // Step 1
         script.Script = script.Script.Replace(Variables.PAGE_URL, templateConfiguration.PageUrl);
         script.Script = script.Script.Replace(Variables.SCRIPT_URL, templateConfiguration.ScriptUrl);
 
         // Step 2
-        script.Script = script.Script.Replace(Variables.PAGE_TOKEN, token.Token.ToString());
+        script.Script = script.Script.Replace(Variables.PAGE_TOKEN, key.Token.ToString());
         script.Script = script.Script.Replace(Variables.TARGET_ADDRESS, target.Address);
         script.Script = script.Script.Replace(Variables.TARGET_NAME, target.Name);
 

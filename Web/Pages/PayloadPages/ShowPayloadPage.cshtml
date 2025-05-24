@@ -35,18 +35,18 @@
     </h5>
 
     <ul class="notice">
-        @foreach (var token in Model.PageKeys)
+        @foreach (var key in Model.PageKeys)
         {
             <li>
                 🍪
                 &thinsp;
-                @(token.Token)
+                @(key.Token)
                     &thinsp;
-                <a href="/show-page-key/@(token.Id)">Visa token</a>
+                <a href="/show-page-key/@(key.Id)">Visa nyckel</a>
                 &ensp;
-                <a href="/page/@(token.Token)">Besök som</a>
+                <a href="/page/@(key.Token)">Besök som</a>
                 &thinsp;
-                @(token.TargetName), @(token.TargetAddress)
+                @(key.TargetName), @(key.TargetAddress)
             </li>
         }
 
