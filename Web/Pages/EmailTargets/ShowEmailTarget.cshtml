@@ -27,7 +27,7 @@
     </div>
 
     <p>
-        @if (Model.CanSendEmailToTargetCommand)
+        @if (Model.CanSendEmailToTarget)
         {
             <a class="button" href="/send-email-to-target/@(Model.EmailTarget.Id)">
                 Skicka meddelande

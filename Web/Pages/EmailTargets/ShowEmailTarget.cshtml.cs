@@ -28,7 +28,7 @@ public class ShowEmailTargetModel(
     public bool CanRemoveTarget { get; set; }
         = removeTargetCommand.IsPermitted(userToken);
 
-    public bool CanSendEmailToTargetCommand { get; set; }
+    public bool CanSendEmailToTarget { get; set; }
         = sendEmailToTargetCommand.IsPermitted(userToken);
 
     public bool CanUploadDataDump { get; set; }
