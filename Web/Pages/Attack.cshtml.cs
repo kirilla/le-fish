@@ -68,7 +68,7 @@ public class AttackModel(
                 {
                     VisitKind = VisitKind.Script,
                     Id = x.Id,
-                    PageTokenId = x.PageTokenId,
+                    PageTokenId = x.PageKeyId,
                     Created = x.Created,
                     IpAddress = x.IpAddress,
                     ScriptName = x.PageKey.PayloadScript.Name,

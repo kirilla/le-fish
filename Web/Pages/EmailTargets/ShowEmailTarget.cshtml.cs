@@ -91,7 +91,7 @@ public class ShowEmailTargetModel(
                 {
                     VisitKind = VisitKind.Script,
                     Id = x.Id,
-                    PageTokenId = x.PageTokenId,
+                    PageTokenId = x.PageKeyId,
                     Created = x.Created,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,

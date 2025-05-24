@@ -13,5 +13,5 @@ public class ScriptVisit : ICreatedDateTime
     public string? UserAgent { get; set; }
 
     public PageKey PageKey { get; set; }
-    public int PageTokenId { get; set; }
+    public int PageKeyId { get; set; }
 }
