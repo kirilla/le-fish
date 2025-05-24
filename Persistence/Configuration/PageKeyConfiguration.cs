@@ -12,7 +12,7 @@ class PageKeyConfiguration : IEntityTypeConfiguration<PageKey>
 
         builder.HasMany(x => x.PageVisits)
             .WithOne(x => x.PageKey)
-            .HasForeignKey(x => x.PageTokenId);
+            .HasForeignKey(x => x.PageKeyId);
 
         builder.HasMany(x => x.ScriptVisits)
             .WithOne(x => x.PageKey)

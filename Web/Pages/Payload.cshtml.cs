@@ -68,7 +68,7 @@ public class PayloadPageModel(
             Method = context.Request.Method,
             IpAddress = context.Connection.RemoteIpAddress?.ToString(),
             UserAgent = context.Request.Headers?.UserAgent,
-            PageTokenId = pageKey.Id,
+            PageKeyId = pageKey.Id,
         };
 
         database.PageVisits.Add(visit);

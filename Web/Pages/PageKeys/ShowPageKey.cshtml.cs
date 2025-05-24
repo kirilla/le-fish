@@ -35,7 +35,7 @@ public class ShowPageKeyModel(
                 throw new NotFoundException();
 
             PageVisits = await database.PageVisits
-                .Where(x => x.PageTokenId == id)
+                .Where(x => x.PageKeyId == id)
                 .OrderBy(x => x.Created)
                 .Select(x => new PageVisitPlus()
                 {
