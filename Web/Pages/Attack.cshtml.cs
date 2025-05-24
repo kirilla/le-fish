@@ -86,7 +86,7 @@ public class AttackModel(
                 .Select(x => new PageKeyPlus()
                 {
                     Id = x.Id,
-                    Token = x.Token,
+                    Token = x.Value,
                     //Created = x.Created,
                     //PageName = x.PayloadPage.Name,
                     PayloadPageId = x.PayloadPageId,

@@ -4,7 +4,7 @@ public class PageKey : ICreatedDateTime
 {
     public int Id { get; set; }
 
-    public int Token { get; set; }
+    public int Value { get; set; }
 
     public DateTime? Created { get; set; }
 

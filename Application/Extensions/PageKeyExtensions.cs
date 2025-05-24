@@ -5,13 +5,13 @@ public static class PageKeyExtensions
     public static async Task SetUniqueTokenAsync(this PageKey key, IDatabaseService database)
     {
         var tokens = database.PageKeys
-            .Select(x => x.Token)
+            .Select(x => x.Value)
             .ToList();
 
         do
         {
-            key.Token = Random.Shared.Next();
+            key.Value = Random.Shared.Next();
         }
-        while (tokens.Contains(key.Token));
+        while (tokens.Contains(key.Value));
     }
 }

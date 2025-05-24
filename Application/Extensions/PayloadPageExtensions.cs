@@ -15,7 +15,7 @@ public static class PayloadPageExtensions
         page.Html = page.Html.Replace(Variables.SCRIPT_URL, templateConfiguration.ScriptUrl);
 
         // Step 2
-        page.Html = page.Html.Replace(Variables.PAGE_TOKEN, key.Token.ToString());
+        page.Html = page.Html.Replace(Variables.PAGE_TOKEN, key.Value.ToString());
         page.Html = page.Html.Replace(Variables.TARGET_ADDRESS, target.Address);
         page.Html = page.Html.Replace(Variables.TARGET_NAME, target.Name);
 

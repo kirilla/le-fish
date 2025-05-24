@@ -15,11 +15,11 @@ public class ShowPageKeysModel(
 
             PageKeys = await database.PageKeys
                 .OrderBy(x => x.Created)
-                .ThenBy(x => x.Token)
+                .ThenBy(x => x.Value)
                 .Select(x => new PageKeyPlus()
                 {
                     Id = x.Id,
-                    Token = x.Token,
+                    Token = x.Value,
                     Created = x.Created,
                     PageName = x.PayloadPage.Name,
                     PayloadPageId = x.PayloadPageId,

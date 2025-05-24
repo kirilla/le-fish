@@ -24,7 +24,7 @@ public class ScriptPageModel(
         {
             PageKey = await database.PageKeys
                 .AsNoTracking()
-                .Where(x => x.Token == key)
+                .Where(x => x.Value == key)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -36,7 +36,7 @@ public class ScriptPageModel(
 
             var emailTargetId = await database.PageKeys
                 .AsNoTracking()
-                .Where(x => x.Token == key)
+                .Where(x => x.Value == key)
                 .Select(x => x.EmailMessage.EmailTargetId)
                 .Cast<int?>()
                 .SingleOrDefaultAsync() ??

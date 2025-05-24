@@ -6,9 +6,9 @@ class PageKeyConfiguration : IEntityTypeConfiguration<PageKey>
     {
         builder.HasKey(p => p.Id);
 
-        builder.Property(p => p.Token).IsRequired();
+        builder.Property(p => p.Value).IsRequired();
 
-        builder.HasIndex(p => p.Token).IsUnique();
+        builder.HasIndex(p => p.Value).IsUnique();
 
         builder.HasMany(x => x.PageVisits)
             .WithOne(x => x.PageKey)

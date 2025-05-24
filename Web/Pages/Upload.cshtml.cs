@@ -26,7 +26,7 @@ public class UploadPageModel(
 
             var pageKey = await database.PageKeys
                 .Include(x => x.EmailMessage.EmailTarget)
-                .Where(x => x.Token == key)
+                .Where(x => x.Value == key)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -58,7 +58,7 @@ public class UploadPageModel(
 
             var pageKey = await database.PageKeys
                 .Include(x => x.EmailMessage.EmailTarget)
-                .Where(x => x.Token == key)
+                .Where(x => x.Value == key)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
