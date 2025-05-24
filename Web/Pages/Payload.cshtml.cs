@@ -14,14 +14,14 @@ public class PayloadPageModel(
     private readonly TemplateConfiguration _config = templateConfiguration.Value;
 
     public EmailTarget EmailTarget { get; set; }
-    public PageKey PageToken { get; set; }
+    public PageKey PageKey { get; set; }
     public PayloadPage PayloadPage { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int token)
     {
         try
         {
-            PageToken = await database.PageKeys
+            PageKey = await database.PageKeys
                 .AsNoTracking()
                 .Where(x => x.Token == token)
                 .SingleOrDefaultAsync() ??
@@ -29,7 +29,7 @@ public class PayloadPageModel(
 
             PayloadPage = await database.PayloadPages
                 .AsNoTracking()
-                .Where(x => x.Id == PageToken.PayloadPageId)
+                .Where(x => x.Id == PageKey.PayloadPageId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -47,9 +47,9 @@ public class PayloadPageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            PayloadPage.InsertTargetValues(_config, EmailTarget, PageToken);
+            PayloadPage.InsertTargetValues(_config, EmailTarget, PageKey);
 
-            await LogPageVisit(HttpContext, PageToken);
+            await LogPageVisit(HttpContext, PageKey);
 
             return Page();
         }
@@ -60,7 +60,7 @@ public class PayloadPageModel(
     }
 
     public async Task LogPageVisit(
-        HttpContext context, PageKey pageToken)
+        HttpContext context, PageKey pageKey)
     {
         var visit = new PageVisit()
         {
@@ -68,7 +68,7 @@ public class PayloadPageModel(
             Method = context.Request.Method,
             IpAddress = context.Connection.RemoteIpAddress?.ToString(),
             UserAgent = context.Request.Headers?.UserAgent,
-            PageTokenId = pageToken.Id,
+            PageTokenId = pageKey.Id,
         };
 
         database.PageVisits.Add(visit);

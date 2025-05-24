@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Web.Models;
 
-public class PageTokenPlus
+public class PageKeyPlus
 {
     public int Id { get; set; }
 

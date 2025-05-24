@@ -1,10 +1,10 @@
-﻿namespace Lefish.Web.Pages.PageTokens;
+﻿namespace Lefish.Web.Pages.PageKeys;
 
-public class ShowPageTokenModel(
+public class ShowPageKeyModel(
     IUserToken userToken,
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
-    public PageTokenPlus PageToken { get; set; }
+    public PageKeyPlus PageKey { get; set; }
 
     public List<PageVisitPlus> PageVisits { get; set; }
 
@@ -15,9 +15,9 @@ public class ShowPageTokenModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PageToken = await database.PageKeys
+            PageKey = await database.PageKeys
                 .Where(x => x.Id == id)
-                .Select(x => new PageTokenPlus()
+                .Select(x => new PageKeyPlus()
                 {
                     Id = x.Id,
                     Token = x.Token,
@@ -47,9 +47,9 @@ public class ShowPageTokenModel(
                     UserAgent = x.UserAgent,
                     PageName = x.PageKey.PayloadPage.Name,
                     PayloadPageId = x.PageKey.PayloadPageId,
-                    //TargetName = x.PageToken.EmailMessage.EmailTarget.Name,
-                    //TargetAddress = x.PageToken.EmailMessage.EmailTarget.Address,
-                    //EmailTargetId = x.PageToken.EmailMessage.EmailTargetId,
+                    //TargetName = x.PageKey.EmailMessage.EmailTarget.Name,
+                    //TargetAddress = x.PageKey.EmailMessage.EmailTarget.Address,
+                    //EmailTargetId = x.PageKey.EmailMessage.EmailTargetId,
                 })
                 .ToListAsync();
 

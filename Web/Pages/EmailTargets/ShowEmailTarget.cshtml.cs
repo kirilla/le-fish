@@ -16,7 +16,7 @@ public class ShowEmailTargetModel(
     public EmailTarget EmailTarget { get; set; }
 
     public List<EmailHeader> EmailMessages { get; set; }
-    public List<PageTokenPlus> PageTokens { get; set; }
+    public List<PageKeyPlus> PageTokens { get; set; }
     public List<Visit> Visits { get; set; }
 
     public List<string> IpAddresses { get; set; }
@@ -108,7 +108,7 @@ public class ShowEmailTargetModel(
             PageTokens = await database.PageKeys
                 .Where(x => x.EmailMessage.EmailTargetId == id)
                 .OrderBy(x => x.Created)
-                .Select(x => new PageTokenPlus()
+                .Select(x => new PageKeyPlus()
                 {
                     Id = x.Id,
                     Token = x.Token,

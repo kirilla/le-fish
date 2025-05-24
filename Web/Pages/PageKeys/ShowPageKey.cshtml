@@ -1,10 +1,10 @@
-﻿@page "/show-page-token/{id:int}"
-@model ShowPageTokenModel
+﻿@page "/show-page-key/{id:int}"
+@model ShowPageKeyModel
 @{
 }
 
 @section Meta {
-    <title>Token - @(Model.PageToken.Token) - @(Branding.WebsiteTitle)</title>
+    <title>Token - @(Model.PageKey.Token) - @(Branding.WebsiteTitle)</title>
 }
 
 @section Header {
@@ -15,7 +15,7 @@
 
     <h4>
         🍪
-        @(Model.PageToken.Token)
+        @(Model.PageKey.Token)
     </h4>
 
     <h5>
@@ -25,9 +25,9 @@
     <p class="notice"">
         🎯
         &thinsp;
-        <a href="/show-email-target/@(Model.PageToken.EmailTargetId)">
-            "@(Model.PageToken.TargetName)"
-            &lt;@(Model.PageToken.TargetAddress)&gt;
+        <a href="/show-email-target/@(Model.PageKey.EmailTargetId)">
+            "@(Model.PageKey.TargetName)"
+            &lt;@(Model.PageKey.TargetAddress)&gt;
         </a>
     </p>
 
@@ -38,8 +38,8 @@
     <p class="notice"">
         📧
         &thinsp;
-        <a href="/show-email/@(Model.PageToken.EmailMessageId)">
-            @(Model.PageToken.EmailMessageSubject)
+        <a href="/show-email/@(Model.PageKey.EmailMessageId)">
+            @(Model.PageKey.EmailMessageSubject)
         </a>
     </p>
 
@@ -50,8 +50,8 @@
     <p class="notice"">
         📄
         &thinsp;
-        <a href="/show-payload-page/@(Model.PageToken.PayloadPageId)">
-            @(Model.PageToken.PageName)
+        <a href="/show-payload-page/@(Model.PageKey.PayloadPageId)">
+            @(Model.PageKey.PageName)
         </a>
     </p>
 

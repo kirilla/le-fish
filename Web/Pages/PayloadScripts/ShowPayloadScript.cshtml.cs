@@ -16,7 +16,7 @@ public class ShowPayloadScriptModel(
 
     public PayloadScript PayloadScript { get; set; }
 
-    public List<PageTokenPlus> PageTokens { get; set; }
+    public List<PageKeyPlus> PageTokens { get; set; }
 
     public bool CanClonePayloadScript { get; set; }
         = clonePayloadScriptCommand.IsPermitted(userToken);
@@ -43,7 +43,7 @@ public class ShowPayloadScriptModel(
                 .Where(x => x.PayloadScriptId == id)
                 .OrderBy(x => x.EmailMessage.EmailTarget.Name)
                 .ThenBy(x => x.EmailMessage.EmailTarget.Address)
-                .Select(x => new PageTokenPlus()
+                .Select(x => new PageKeyPlus()
                 {
                     Id = x.Id,
                     Token = x.Token,

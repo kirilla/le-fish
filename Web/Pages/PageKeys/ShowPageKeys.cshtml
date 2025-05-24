@@ -1,5 +1,5 @@
-﻿@page "/show-page-tokens"
-@model ShowPageTokensModel
+﻿@page "/show-page-keys"
+@model ShowPageKeysModel
 @{
 }
 
@@ -36,7 +36,7 @@
                         @(token.Created.ToFixedFormatDateShortTime())
                     </td>
                     <td>
-                        <a href="/show-page-token/@(token.Id)">
+                        <a href="/show-page-key/@(token.Id)">
                         @(token.Token)
                         </a>
                     </td>

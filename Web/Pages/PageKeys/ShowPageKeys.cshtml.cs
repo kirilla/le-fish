@@ -1,10 +1,10 @@
-namespace Lefish.Web.Pages.PageTokens;
+namespace Lefish.Web.Pages.PageKeys;
 
-public class ShowPageTokensModel(
+public class ShowPageKeysModel(
     IUserToken userToken,
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
-    public List<PageTokenPlus> PageTokens { get; set; }
+    public List<PageKeyPlus> PageTokens { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -16,7 +16,7 @@ public class ShowPageTokensModel(
             PageTokens = await database.PageKeys
                 .OrderBy(x => x.Created)
                 .ThenBy(x => x.Token)
-                .Select(x => new PageTokenPlus()
+                .Select(x => new PageKeyPlus()
                 {
                     Id = x.Id,
                     Token = x.Token,

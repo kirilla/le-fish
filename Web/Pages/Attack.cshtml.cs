@@ -9,7 +9,7 @@ public class AttackModel(
 {
     public List<EmailTarget> EmailTargets { get; set; }
     public List<EmailHeader> EmailMessages { get; set; }
-    public List<PageTokenPlus> PageTokens { get; set; }
+    public List<PageKeyPlus> PageTokens { get; set; }
     public List<Visit> Visits { get; set; }
 
     public bool CanSendEmail { get; set; }
@@ -83,7 +83,7 @@ public class AttackModel(
 
             PageTokens = await database.PageKeys
                 .OrderBy(x => x.Created)
-                .Select(x => new PageTokenPlus()
+                .Select(x => new PageKeyPlus()
                 {
                     Id = x.Id,
                     Token = x.Token,

@@ -16,7 +16,7 @@ public class ShowPayloadPageModel(
 
     public PayloadPage PayloadPage { get; set; }
 
-    public List<PageTokenPlus> PageTokens { get; set; }
+    public List<PageKeyPlus> PageTokens { get; set; }
 
     public bool CanClonePayloadPage { get; set; }
         = clonePayloadPageCommand.IsPermitted(userToken);
@@ -43,7 +43,7 @@ public class ShowPayloadPageModel(
                 .Where(x => x.PayloadPageId == id)
                 .OrderBy(x => x.EmailMessage.EmailTarget.Name)
                 .ThenBy(x => x.EmailMessage.EmailTarget.Address)
-                .Select(x => new PageTokenPlus()
+                .Select(x => new PageKeyPlus()
                 {
                     Id = x.Id,
                     Token = x.Token,

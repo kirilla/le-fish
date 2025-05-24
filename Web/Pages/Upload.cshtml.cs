@@ -24,13 +24,13 @@ public class UploadPageModel(
             //if (!command.IsPermitted(UserToken))
             //    throw new NotPermittedException();
 
-            var pageToken = await database.PageKeys
+            var pageKey = await database.PageKeys
                 .Include(x => x.EmailMessage.EmailTarget)
                 .Where(x => x.Token == token)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            EmailTarget = pageToken.EmailMessage.EmailTarget;
+            EmailTarget = pageKey.EmailMessage.EmailTarget;
 
             CommandModel = new UploadDataDumpCommandModel()
             {
@@ -56,13 +56,13 @@ public class UploadPageModel(
             //if (!command.IsPermitted(UserToken))
             //    throw new NotPermittedException();
 
-            var pageToken = await database.PageKeys
+            var pageKey = await database.PageKeys
                 .Include(x => x.EmailMessage.EmailTarget)
                 .Where(x => x.Token == token)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            EmailTarget = pageToken.EmailMessage.EmailTarget;
+            EmailTarget = pageKey.EmailMessage.EmailTarget;
 
             if (!ModelState.IsValid)
                 return Page();

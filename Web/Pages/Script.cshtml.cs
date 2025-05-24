@@ -15,14 +15,14 @@ public class ScriptPageModel(
     private readonly TemplateConfiguration _config = templateConfiguration.Value;
 
     public EmailTarget EmailTarget { get; set; }
-    public PageKey PageToken { get; set; }
+    public PageKey PageKey { get; set; }
     public PayloadScript PayloadScript { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int token)
     {
         try
         {
-            PageToken = await database.PageKeys
+            PageKey = await database.PageKeys
                 .AsNoTracking()
                 .Where(x => x.Token == token)
                 .SingleOrDefaultAsync() ??
@@ -30,7 +30,7 @@ public class ScriptPageModel(
 
             PayloadScript = await database.PayloadScripts
                 .AsNoTracking()
-                .Where(x => x.Id == PageToken.PayloadScriptId)
+                .Where(x => x.Id == PageKey.PayloadScriptId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -48,9 +48,9 @@ public class ScriptPageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            PayloadScript.InsertTargetValues(_config, EmailTarget, PageToken);
+            PayloadScript.InsertTargetValues(_config, EmailTarget, PageKey);
 
-            await LogScriptVisit(HttpContext, PageToken);
+            await LogScriptVisit(HttpContext, PageKey);
 
             return Content(PayloadScript.Script, "application/javascript", Encoding.UTF8);
         }
@@ -61,7 +61,7 @@ public class ScriptPageModel(
     }
 
     public async Task LogScriptVisit(
-        HttpContext context, PageKey pageToken)
+        HttpContext context, PageKey pageKey)
     {
         var visit = new ScriptVisit()
         {
@@ -69,7 +69,7 @@ public class ScriptPageModel(
             Method = context.Request.Method,
             IpAddress = context.Connection.RemoteIpAddress?.ToString(),
             UserAgent = context.Request.Headers?.UserAgent,
-            PageTokenId = pageToken.Id,
+            PageTokenId = pageKey.Id,
         };
 
         database.ScriptVisits.Add(visit);

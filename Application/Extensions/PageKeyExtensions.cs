@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Application.Extensions;
 
-public static class PageTokenExtensions
+public static class PageKeyExtensions
 {
     public static async Task SetUniqueTokenAsync(this PageKey token, IDatabaseService database)
     {

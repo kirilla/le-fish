@@ -69,7 +69,7 @@
                         <div>
                             🍪
                             &thinsp;
-                            <a href="/show-page-token/@(token.Id)">@(token.Token)</a>
+                            <a href="/show-page-key/@(token.Id)">@(token.Token)</a>
                         </div>
 
                         @foreach (var visit in Model.Visits.Where(x => x.PageTokenId == token.Id))
