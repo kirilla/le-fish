@@ -69,7 +69,7 @@
                         <div>
                             🍪
                             &thinsp;
-                            <a href="/show-page-key/@(key.Id)">@(key.Token)</a>
+                            <a href="/show-page-key/@(key.Id)">@(key.Value)</a>
                         </div>
 
                         @foreach (var visit in Model.Visits.Where(x => x.PageKeyId == key.Id))
@@ -115,7 +115,7 @@
                             <div style="padding-left:1.5em;">
                                 💉
                                 &thinsp;
-                                <a href="/upload/@(key.Token)">
+                                <a href="/upload/@(key.Value)">
                                     Ladda upp data
                                 </a>
                             </div>

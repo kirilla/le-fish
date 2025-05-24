@@ -19,7 +19,7 @@ public class ShowPageKeysModel(
                 .Select(x => new PageKeyPlus()
                 {
                     Id = x.Id,
-                    Token = x.Value,
+                    Value = x.Value,
                     Created = x.Created,
                     PageName = x.PayloadPage.Name,
                     PayloadPageId = x.PayloadPageId,
