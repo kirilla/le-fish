@@ -1,5 +1,4 @@
 ﻿using Lefish.Application.Commands.EmailMessages.SendEmail;
-using Lefish.Application.Commands.EmailMessages.SendEmailToTarget;
 
 namespace Lefish.Web.Pages;
 
@@ -24,6 +23,7 @@ public class AttackModel(
                 throw new NotPermittedException();
 
             EmailTargets = await database.EmailTargets
+                //.Where(x => x.EmailMessages.Any())
                 .OrderBy(x => x.Name)
                 .ThenBy(x => x.Address)
                 .ToListAsync();

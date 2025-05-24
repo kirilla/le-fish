@@ -18,6 +18,15 @@
     </h4>
 
     <div class="notice">
+        @if (!Model.EmailTargets.Any())
+        {
+            <div>
+                🎯
+                &thinsp;
+                &ndash;
+            </div>
+        }
+
         @foreach (var target in Model.EmailTargets)
         {
             <div>
