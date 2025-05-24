@@ -54,7 +54,7 @@ public class AttackModel(
                 .Select(x => new Visit() { 
                     VisitKind = VisitKind.Page,
                     Id = x.Id,
-                    PageTokenId = x.PageKeyId,
+                    PageKeyId = x.PageKeyId,
                     Created = x.Created,
                     IpAddress = x.IpAddress,
                     PageName = x.PageKey.PayloadPage.Name,
@@ -68,7 +68,7 @@ public class AttackModel(
                 {
                     VisitKind = VisitKind.Script,
                     Id = x.Id,
-                    PageTokenId = x.PageKeyId,
+                    PageKeyId = x.PageKeyId,
                     Created = x.Created,
                     IpAddress = x.IpAddress,
                     ScriptName = x.PageKey.PayloadScript.Name,

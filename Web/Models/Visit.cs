@@ -5,7 +5,7 @@ public class Visit
     public int Id { get; set; }
 
     public int EmailTargetId { get; set; }
-    public int PageTokenId { get; set; }
+    public int PageKeyId { get; set; }
 
     public int? PayloadPageId { get; set; }
     public int? PayloadScriptId { get; set; }

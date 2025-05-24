@@ -75,7 +75,7 @@ public class ShowEmailTargetModel(
                 {
                     VisitKind = VisitKind.Page,
                     Id = x.Id,
-                    PageTokenId = x.PageKeyId,
+                    PageKeyId = x.PageKeyId,
                     Created = x.Created,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
@@ -91,7 +91,7 @@ public class ShowEmailTargetModel(
                 {
                     VisitKind = VisitKind.Script,
                     Id = x.Id,
-                    PageTokenId = x.PageKeyId,
+                    PageKeyId = x.PageKeyId,
                     Created = x.Created,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,

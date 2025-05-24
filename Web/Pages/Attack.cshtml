@@ -64,7 +64,7 @@
                             </div>
 
                             @foreach (var visit in Model.Visits
-                                .Where(x => x.PageTokenId == token.Id))
+                                .Where(x => x.PageKeyId == token.Id))
                             {
                                 if (visit.VisitKind == VisitKind.Page)
                                 {
@@ -94,7 +94,7 @@
                             }
 
                             @if (!Model.Visits
-                                .Any(x => x.PageTokenId == token.Id))
+                                .Any(x => x.PageKeyId == token.Id))
                             {
                                 <div style="padding-left:1.5em;">
                                     📄

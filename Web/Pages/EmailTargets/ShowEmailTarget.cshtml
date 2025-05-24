@@ -72,7 +72,7 @@
                             <a href="/show-page-key/@(token.Id)">@(token.Token)</a>
                         </div>
 
-                        @foreach (var visit in Model.Visits.Where(x => x.PageTokenId == token.Id))
+                        @foreach (var visit in Model.Visits.Where(x => x.PageKeyId == token.Id))
                         {
                             if (visit.VisitKind == VisitKind.Page)
                             {
@@ -101,7 +101,7 @@
                             }
                         }
 
-                        @if (!Model.Visits.Any(x => x.PageTokenId == token.Id))
+                        @if (!Model.Visits.Any(x => x.PageKeyId == token.Id))
                         {
                             <div style="padding-left:1.5em;">
                                 📄
