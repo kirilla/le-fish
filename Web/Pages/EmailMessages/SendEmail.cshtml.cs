@@ -90,7 +90,7 @@ public class SendEmailModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect("/desktop");
+            return Redirect("/attack");
         }
         catch
         {

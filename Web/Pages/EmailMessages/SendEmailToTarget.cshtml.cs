@@ -102,7 +102,7 @@ public class SendEmailToTargetModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect("/desktop");
+            return Redirect($"/show-email-target/{id}");
         }
         catch (NotFoundException)
         {
