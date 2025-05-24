@@ -14,7 +14,7 @@ public class RemovePageVisitsCommand(IDatabaseService database) : IRemovePageVis
         if (model.EmailTargetId.HasValue)
         {
             await database.PageVisits
-                .Where(x => x.PageToken.EmailMessage.EmailTargetId == model.EmailTargetId!.Value)
+                .Where(x => x.PageKey.EmailMessage.EmailTargetId == model.EmailTargetId!.Value)
                 .ExecuteDeleteAsync();
         }
         else

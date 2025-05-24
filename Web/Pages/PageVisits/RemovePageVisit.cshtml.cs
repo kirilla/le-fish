@@ -27,11 +27,11 @@ public class RemovePageVisitModel(
                     Method = x.Method,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
-                    PageName = x.PageToken.PayloadPage.Name,
-                    PayloadPageId = x.PageToken.PayloadPageId,
-                    TargetName = x.PageToken.EmailMessage.EmailTarget.Name,
-                    TargetAddress = x.PageToken.EmailMessage.EmailTarget.Address,
-                    EmailTargetId = x.PageToken.EmailMessageId,
+                    PageName = x.PageKey.PayloadPage.Name,
+                    PayloadPageId = x.PageKey.PayloadPageId,
+                    TargetName = x.PageKey.EmailMessage.EmailTarget.Name,
+                    TargetAddress = x.PageKey.EmailMessage.EmailTarget.Address,
+                    EmailTargetId = x.PageKey.EmailMessageId,
                 })
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -68,11 +68,11 @@ public class RemovePageVisitModel(
                     Method = x.Method,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
-                    PageName = x.PageToken.PayloadPage.Name,
-                    PayloadPageId = x.PageToken.PayloadPageId,
-                    TargetName = x.PageToken.EmailMessage.EmailTarget.Name,
-                    TargetAddress = x.PageToken.EmailMessage.EmailTarget.Address,
-                    EmailTargetId = x.PageToken.EmailMessageId,
+                    PageName = x.PageKey.PayloadPage.Name,
+                    PayloadPageId = x.PageKey.PayloadPageId,
+                    TargetName = x.PageKey.EmailMessage.EmailTarget.Name,
+                    TargetAddress = x.PageKey.EmailMessage.EmailTarget.Address,
+                    EmailTargetId = x.PageKey.EmailMessageId,
                 })
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

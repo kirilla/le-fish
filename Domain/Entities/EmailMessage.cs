@@ -22,5 +22,5 @@ public class EmailMessage : ICreatedDateTime
     public EmailAccount? EmailAccount { get; set; }
     public EmailTarget? EmailTarget { get; set; }
 
-    public List<PageKey> PageTokens { get; set; }
+    public List<PageKey> PageKeys { get; set; }
 }

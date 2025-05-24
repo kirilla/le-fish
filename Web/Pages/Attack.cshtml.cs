@@ -57,8 +57,8 @@ public class AttackModel(
                     PageTokenId = x.PageTokenId,
                     Created = x.Created,
                     IpAddress = x.IpAddress,
-                    PageName = x.PageToken.PayloadPage.Name,
-                    PayloadPageId = x.PageToken.PayloadPageId,
+                    PageName = x.PageKey.PayloadPage.Name,
+                    PayloadPageId = x.PageKey.PayloadPageId,
                 })
                 .ToListAsync();
 
@@ -71,8 +71,8 @@ public class AttackModel(
                     PageTokenId = x.PageTokenId,
                     Created = x.Created,
                     IpAddress = x.IpAddress,
-                    ScriptName = x.PageToken.PayloadScript.Name,
-                    PayloadScriptId = x.PageToken.PayloadScriptId,
+                    ScriptName = x.PageKey.PayloadScript.Name,
+                    PayloadScriptId = x.PageKey.PayloadScriptId,
                 })
                 .ToListAsync();
 

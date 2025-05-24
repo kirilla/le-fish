@@ -70,7 +70,7 @@ public class ShowEmailTargetModel(
 
             var pageVisits = await database.PageVisits
                 .OrderBy(x => x.Created)
-                .Where(x => x.PageToken.EmailMessage.EmailTargetId == id)
+                .Where(x => x.PageKey.EmailMessage.EmailTargetId == id)
                 .Select(x => new Visit()
                 {
                     VisitKind = VisitKind.Page,
@@ -79,14 +79,14 @@ public class ShowEmailTargetModel(
                     Created = x.Created,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
-                    PageName = x.PageToken.PayloadPage.Name,
-                    PayloadPageId = x.PageToken.PayloadPageId,
+                    PageName = x.PageKey.PayloadPage.Name,
+                    PayloadPageId = x.PageKey.PayloadPageId,
                 })
                 .ToListAsync();
 
             var scriptVisits = await database.ScriptVisits
                 .OrderBy(x => x.Created)
-                .Where(x => x.PageToken.EmailMessage.EmailTargetId == id)
+                .Where(x => x.PageKey.EmailMessage.EmailTargetId == id)
                 .Select(x => new Visit()
                 {
                     VisitKind = VisitKind.Script,
@@ -95,8 +95,8 @@ public class ShowEmailTargetModel(
                     Created = x.Created,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
-                    ScriptName = x.PageToken.PayloadScript.Name,
-                    PayloadScriptId = x.PageToken.PayloadScriptId,
+                    ScriptName = x.PageKey.PayloadScript.Name,
+                    PayloadScriptId = x.PageKey.PayloadScriptId,
                 })
                 .ToListAsync();
 

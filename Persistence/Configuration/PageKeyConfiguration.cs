@@ -11,11 +11,11 @@ class PageKeyConfiguration : IEntityTypeConfiguration<PageKey>
         builder.HasIndex(p => p.Token).IsUnique();
 
         builder.HasMany(x => x.PageVisits)
-            .WithOne(x => x.PageToken)
+            .WithOne(x => x.PageKey)
             .HasForeignKey(x => x.PageTokenId);
 
         builder.HasMany(x => x.ScriptVisits)
-            .WithOne(x => x.PageToken)
+            .WithOne(x => x.PageKey)
             .HasForeignKey(x => x.PageTokenId);
     }
 }
