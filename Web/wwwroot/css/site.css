@@ -164,3 +164,7 @@ summary {
     font-weight: normal;
     font-size: smaller;
 }
+
+.spaced-list li {
+    margin-bottom: 8px;
+}
