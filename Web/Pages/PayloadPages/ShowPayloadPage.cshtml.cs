@@ -16,8 +16,6 @@ public class ShowPayloadPageModel(
 
     public PayloadPage PayloadPage { get; set; }
 
-    public List<PageKeyPlus> PageKeys { get; set; }
-
     public bool CanClonePayloadPage { get; set; }
         = clonePayloadPageCommand.IsPermitted(userToken);
 
@@ -38,24 +36,6 @@ public class ShowPayloadPageModel(
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
-
-            PageKeys = await database.PageKeys
-                .Where(x => x.PayloadPageId == id)
-                .OrderBy(x => x.EmailMessage.EmailTarget.Name)
-                .ThenBy(x => x.EmailMessage.EmailTarget.Address)
-                .Select(x => new PageKeyPlus()
-                {
-                    Id = x.Id,
-                    Value = x.Value,
-                    Created = x.Created,
-                    PageName = x.PayloadPage.Name,
-                    PayloadPageId = x.PayloadPageId,
-                    TargetName = x.EmailMessage.EmailTarget.Name,
-                    TargetAddress = x.EmailMessage.EmailTarget.Address,
-                    EmailTargetId = x.EmailMessage.EmailTargetId,
-                    PageVisitCount = x.PageVisits.Count(),
-                })
-                .ToListAsync();
 
             return Page();
         }
