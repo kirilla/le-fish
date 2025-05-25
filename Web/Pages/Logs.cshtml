@@ -1,0 +1,78 @@
+﻿@page "/logs"
+@model LogsModel
+@{
+}
+
+@section Meta {
+    <title>Loggar - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Loggar och städning
+    </h4>
+
+    <div class="notice">
+
+        <h5>
+            Loggar
+        </h5>
+
+        <ul>
+            
+            <li>
+                🛑
+                &thinsp;
+                <a href="/show-blocked-requests">Blockerade anrop</a>
+            </li>
+            <li>
+                📤
+                &thinsp;
+                <a href="/show-email-queue">Epost</a>
+            </li>
+            <li>
+                🔑
+                &thinsp;
+                <a href="/show-page-keys">Nycklar</a>
+            </li>
+            <li>
+                🙋
+                &thinsp;
+                <a href="/show-page-visits">Sidbesök</a>
+            </li>
+            <li>
+                🙋
+                &thinsp;
+                <a href="/show-script-visits">Skriptnedladdningar</a>
+            </li>
+            <li>
+                📦
+                &thinsp;
+                <a href="/show-data-dumps">Avlämnade data</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="notice">
+
+        <h5>
+            Städning
+        </h5>
+
+        <ul>
+            <li>
+                🧹
+                &thinsp;
+                <a href="/remove-email-messages">
+                    Ta bort epostmeddelanden
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</main>
