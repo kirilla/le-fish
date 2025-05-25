@@ -72,7 +72,7 @@ public class AddPayloadPageModel(
             <body>
                 <h1>Rubrik</h1>
                 <script>
-                    console.log('hej [[page_token]]');
+                    console.log('hej [[page_key]]');
                 </script>
             </body>
             </html>
