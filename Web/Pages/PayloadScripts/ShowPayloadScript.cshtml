@@ -30,36 +30,6 @@
     </h5>
     <pre class="notice">@(Model.PayloadScript.Script)</pre>
 
-    <h5>
-        Nycklar
-    </h5>
-
-    <ul class="notice">
-        @foreach (var key in Model.PageKeys)
-        {
-            <li>
-                🔑
-                &thinsp;
-                @(key.Value)
-                    &thinsp;
-                <a href="/show-page-key/@(key.Id)">Visa nyckel</a>
-                &ensp;
-                <a href="/page/@(key.Value)">Besök som</a>
-                &thinsp;
-                @(key.TargetName), @(key.TargetAddress)
-            </li>
-        }
-
-        @if (!Model.PageKeys.Any())
-        {
-            <li>
-                🔑
-                &thinsp;
-                &ndash;
-            </li>
-        }
-    </ul>
-
     <p>
         @if (Model.CanClonePayloadScript)
         {
