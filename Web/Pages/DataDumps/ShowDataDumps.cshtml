@@ -5,7 +5,7 @@
 
 @section Meta {
     <title>
-        Data -
+        Avlämnade data -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -17,7 +17,7 @@
 <main>
 
     <h4>
-        Data
+        Avlämnade data
     </h4>
 
     <div class="notice">
@@ -26,7 +26,7 @@
             @foreach (var dump in Model.DataDumps)
             {
                 <li>
-                    🎯
+                    📦
                     &thinsp;
                     <a href="/show-data-dump/@(dump.Id)">
                         @(dump.Name)
@@ -39,7 +39,7 @@
             @if (!Model.DataDumps.Any())
             {
                 <li>
-                    🎯
+                    📦
                     &thinsp;
                     &ndash;
                 </li>
@@ -47,5 +47,11 @@
         </ul>
 
     </div>
+
+    <p>
+        <a class="button" href="/remove-data-dumps">
+            Ta bort
+        </a>
+    </p>
 
 </main>
