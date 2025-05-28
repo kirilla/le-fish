@@ -8,6 +8,7 @@ public class RemoveEmailMessageModel(
     IRemoveEmailMessageCommand command) : UserTokenPageModel(userToken)
 {
     public EmailMessage EmailMessage { get; set; }
+    public EmailTarget EmailTarget { get; set; }
 
     [BindProperty]
     public RemoveEmailMessageCommandModel CommandModel { get; set; }
@@ -21,6 +22,11 @@ public class RemoveEmailMessageModel(
 
             EmailMessage = await database.EmailMessages
                 .Where(x => x.Id == id)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            EmailTarget = await database.EmailTargets
+                .Where(x => x.Id == EmailMessage.EmailTargetId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -53,12 +59,17 @@ public class RemoveEmailMessageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
+            EmailTarget = await database.EmailTargets
+                .Where(x => x.Id == EmailMessage.EmailTargetId)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
             if (!ModelState.IsValid)
                 return Page();
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect("/show-email-queue");
+            return Redirect($"/show-email-target/{EmailTarget.Id}");
         }
         catch (ConfirmationRequiredException)
         {
