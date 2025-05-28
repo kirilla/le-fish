@@ -21,8 +21,22 @@
 
     <form method="post">
 
+        <label asp-for="CommandModel.EmailAccountId">
+            Avsändare
+        </label>
+
+        <select asp-for="CommandModel.EmailAccountId">
+            <option value="">–</option>
+            @foreach (var target in Model.EmailAccounts)
+            {
+                <option value="@(target.Id)">
+                    @(target.FromName), @(target.FromAddress)
+                </option>
+            }
+        </select>
+
         <label asp-for="CommandModel.EmailTargetId">
-            Målkonto
+            Mottagare
         </label>
 
         <select asp-for="CommandModel.EmailTargetId">
@@ -73,20 +87,6 @@
             {
                 <option value="@(script.Id)">
                     @(script.Name)
-                </option>
-            }
-        </select>
-
-        <label asp-for="CommandModel.EmailAccountId">
-            Epostkonto
-        </label>
-
-        <select asp-for="CommandModel.EmailAccountId">
-            <option value="">–</option>
-            @foreach (var target in Model.EmailAccounts)
-            {
-                <option value="@(target.Id)">
-                    @(target.FromName), @(target.FromAddress)
                 </option>
             }
         </select>

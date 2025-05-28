@@ -46,6 +46,11 @@ public class SendEmailModel(
 
             CommandModel = new SendEmailCommandModel();
 
+            if (EmailAccounts.Count == 1)
+            {
+                CommandModel.EmailAccountId = EmailAccounts[0].Id;
+            }
+
             return Page();
         }
         catch (NotFoundException)

@@ -54,6 +54,11 @@ public class SendEmailToTargetModel(
                 EmailTargetId = id,
             };
 
+            if (EmailAccounts.Count == 1)
+            {
+                CommandModel.EmailAccountId = EmailAccounts[0].Id;
+            }
+
             return Page();
         }
         catch (NotFoundException)

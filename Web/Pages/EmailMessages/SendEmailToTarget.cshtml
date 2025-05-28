@@ -25,6 +25,20 @@
 
         <input type="hidden" asp-for="CommandModel.EmailTargetId" />
 
+        <label asp-for="CommandModel.EmailAccountId">
+            Avsändare
+        </label>
+
+        <select asp-for="CommandModel.EmailAccountId">
+            <option value="">–</option>
+            @foreach (var target in Model.EmailAccounts)
+            {
+                <option value="@(target.Id)">
+                    @(target.FromName), @(target.FromAddress)
+                </option>
+            }
+        </select>
+
         <label asp-for="CommandModel.EmailTemplateId">
             Epostmall
         </label>
@@ -63,20 +77,6 @@
             {
                 <option value="@(script.Id)">
                     @(script.Name)
-                </option>
-            }
-        </select>
-
-        <label asp-for="CommandModel.EmailAccountId">
-            Epostkonto
-        </label>
-
-        <select asp-for="CommandModel.EmailAccountId">
-            <option value="">–</option>
-            @foreach (var target in Model.EmailAccounts)
-            {
-                <option value="@(target.Id)">
-                    @(target.FromName), @(target.FromAddress)
                 </option>
             }
         </select>
