@@ -2,8 +2,11 @@ namespace Lefish.Web.Pages.IpRanges;
 
 public class ShowIpRangesModel(
     IUserToken userToken,
-    IDatabaseService database) : UserTokenPageModel(userToken)
+    IDatabaseService database,
+    IOptions<IpFilterConfiguration> ipFilterOptions) : UserTokenPageModel(userToken)
 {
+    public readonly IpFilterConfiguration IpFilterConfiguration = ipFilterOptions.Value;
+
     public List<IpRange> IpRanges { get; set; }
 
     public async Task<IActionResult> OnGetAsync()

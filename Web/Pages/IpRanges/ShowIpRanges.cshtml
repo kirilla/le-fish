@@ -20,6 +20,37 @@
         Brandvägg
     </h4>
 
+    <div class="notice">
+        <ul>
+            @if (Model.IpFilterConfiguration.IsFiltering)
+            {
+                <li>✅ Aktiv</li>
+            }
+            else
+            {
+                <li>⚠️ Deaktiverad</li>
+            }
+
+            @if (Model.IpFilterConfiguration.LogBlockedRequest)
+            {
+                <li>🐵 Loggar</li>
+            }
+            else
+            {
+                <li>🙈 Loggar inte</li>
+            }
+
+            @if (Model.IpFilterConfiguration.BlockByDefault)
+            {
+                <li>🛑 Grundregel: blockerat</li>
+            }
+            else
+            {
+                <li>🛣️ Grundregel: öppet</li>
+            }
+        </ul>
+    </div>
+
     <figure>
         <table>
             <tr>
@@ -63,12 +94,6 @@
                 <tr>
                     <td>
                     </td>
-                    @* <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td> *@
                     <td>
                     </td>
                 </tr>
