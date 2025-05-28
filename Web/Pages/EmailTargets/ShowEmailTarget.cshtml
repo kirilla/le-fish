@@ -27,10 +27,17 @@
     </div>
 
     <p>
-        @if (Model.CanSendEmailToTarget)
+        @if (Model.CanEditTarget)
         {
-            <a class="button" href="/send-email-to-target/@(Model.EmailTarget.Id)">
-                Skicka meddelande
+            <a class="button" href="/edit-email-target/@(Model.EmailTarget.Id)">
+                Redigera
+            </a>
+        }
+
+        @if (Model.CanRemoveTarget)
+        {
+            <a class="button" href="/remove-email-target/@(Model.EmailTarget.Id)">
+                Ta bort
             </a>
         }
     </p>
@@ -178,17 +185,10 @@
     }
 
     <p>
-        @if (Model.CanEditTarget)
+        @if (Model.CanSendEmailToTarget)
         {
-            <a class="button" href="/edit-email-target/@(Model.EmailTarget.Id)">
-                Redigera
-            </a>
-        }
-
-        @if (Model.CanRemoveTarget)
-        {
-            <a class="button" href="/remove-email-target/@(Model.EmailTarget.Id)">
-                Ta bort
+            <a class="button" href="/send-email-to-target/@(Model.EmailTarget.Id)">
+                Skicka meddelande
             </a>
         }
     </p>
