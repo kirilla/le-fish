@@ -20,29 +20,41 @@
     </h4>
 
     <div class="notice">
-        <b>Till</b>
+        <span>
+            Från:
+            @(Model.EmailMessage.EmailAccount?.FromName)
+            @(Model.EmailMessage.EmailAccount?.FromAddress)
+        </span>
         <br />
-        @(Model.EmailMessage.EmailTarget?.Name) @(Model.EmailMessage.EmailTarget?.Address)
+        <span>
+            Till:
+            @(Model.EmailMessage.EmailTarget?.Name)
+            @(Model.EmailMessage.EmailTarget?.Address)
+        </span>
         <br />
+        @if (Model.EmailMessage.EmailAccount?.ReplyToAddress.HasValue() ?? false)
+        {
+            <span>
+                Svara till:
+                @(Model.EmailMessage.EmailAccount?.ReplyToName)
+                @(Model.EmailMessage.EmailAccount?.ReplyToAddress)
+            </span>
+            <br />
+        }
+        <span>
+            Ämne:
+            @(Model.EmailMessage.Subject)
+        </span>
         <br />
-        <b>Från</b>
+        <span>
+            När:
+            @(Model.EmailMessage.Created.ToFixedFormatDateShortTime())
+        </span>
         <br />
-        @(Model.EmailMessage.EmailAccount?.FromName) @(Model.EmailMessage.EmailAccount?.FromAddress)
-        <br />
-        <br />
-        <b>Svara till</b>
-        <br />
-        @(Model.EmailMessage.EmailAccount?.ReplyToName) @(Model.EmailMessage.EmailAccount?.ReplyToAddress)
-        <br />
-        <br />
-        <b>När</b>
-        <br />
-        @(Model.EmailMessage.Created.ToFixedFormatDateShortTime())
-        <br />
-        <br />
-        <b>Status</b>
-        <br />
-        @(Model.EmailMessage.EmailStatus.ToString())
+        <span>
+            Status:
+            @(Model.EmailMessage.EmailStatus.ToString())
+        </span>
     </div>
 
     <form method="post">
