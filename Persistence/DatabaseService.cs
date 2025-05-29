@@ -26,6 +26,7 @@ public class DatabaseService(
     public DbSet<Session> Sessions { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserEmail> UserEmails { get; set; }
+    public DbSet<Instruction> Instructions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -39,6 +40,7 @@ public class DatabaseService(
         new EmailMessageConfiguration().Configure(builder.Entity<EmailMessage>());
         new EmailTargetConfiguration().Configure(builder.Entity<EmailTarget>());
         new EmailTemplateConfiguration().Configure(builder.Entity<EmailTemplate>());
+        new InstructionConfiguration().Configure(builder.Entity<Instruction>());
         new IpRangeConfiguration().Configure(builder.Entity<IpRange>());
         new PageVisitConfiguration().Configure(builder.Entity<PageVisit>());
         new PayloadPageConfiguration().Configure(builder.Entity<PayloadPage>());

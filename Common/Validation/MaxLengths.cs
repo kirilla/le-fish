@@ -118,6 +118,13 @@ public static class MaxLengths
             public const int TextBody = Common.DbSuperSize;
         }
 
+        public static class Instruction
+        {
+            public const int Name = 50;
+
+            public const int Script = Common.DbSuperSize;
+        }
+
         public static class PayloadPage
         {
             public const int Name = 50;
