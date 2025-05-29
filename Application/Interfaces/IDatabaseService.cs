@@ -18,6 +18,7 @@ public interface IDatabaseService
     DbSet<PageKey> PageKeys { get; set; }
     DbSet<PayloadPage> PayloadPages { get; set; }
     DbSet<PayloadScript> PayloadScripts { get; set; }
+    DbSet<QueuedInstruction> QueuedInstructions { get; set; }
     DbSet<ScriptVisit> ScriptVisits { get; set; }
     DbSet<Session> Sessions { get; set; }
     DbSet<User> Users { get; set; }

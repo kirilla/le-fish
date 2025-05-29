@@ -22,6 +22,7 @@ public class DatabaseService(
     public DbSet<PayloadPage> PayloadPages { get; set; }
     public DbSet<PayloadScript> PayloadScripts { get; set; }
     public DbSet<PageKey> PageKeys { get; set; }
+    public DbSet<QueuedInstruction> QueuedInstructions { get; set; }
     public DbSet<ScriptVisit> ScriptVisits { get; set; }
     public DbSet<Session> Sessions { get; set; }
     public DbSet<User> Users { get; set; }
@@ -46,6 +47,7 @@ public class DatabaseService(
         new PayloadPageConfiguration().Configure(builder.Entity<PayloadPage>());
         new PayloadScriptConfiguration().Configure(builder.Entity<PayloadScript>());
         new PageKeyConfiguration().Configure(builder.Entity<PageKey>());
+        new QueuedInstructionConfiguration().Configure(builder.Entity<QueuedInstruction>());
         new ScriptVisitConfiguration().Configure(builder.Entity<ScriptVisit>());
         new SessionConfiguration().Configure(builder.Entity<Session>());
         new UserConfiguration().Configure(builder.Entity<User>());
