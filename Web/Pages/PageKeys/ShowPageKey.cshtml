@@ -50,6 +50,13 @@
         </li>
     </ul>
 
+    <p class="notice">
+        🥸
+        &thinsp;
+        <a href="/page/@(Model.PageKey.Value)">
+            Besök sidan som @(Model.PageKey.TargetName)</a>
+    </p>
+
     <h5>
         Sidbesök
     </h5>
@@ -86,11 +93,31 @@
         </table>
     </figure>
 
-    <p class="notice">
-        🥸
-        &thinsp;
-        <a href="/page/@(Model.PageKey.Value)">
-            Besök sidan som @(Model.PageKey.TargetName)</a>
-    </p>
+    <h5>
+        Köade instruktioner
+    </h5>
+
+    <ul class="notice">
+        @foreach (var instruction in Model.QueuedInstructions)
+        {
+            <li>
+                ❇️
+                &thinsp;
+                <a href="/show-instruction/@(instruction.InstructionId)">
+                    @(instruction.Name)
+                </a>
+                &ensp;
+                @(instruction.Created.ToFixedFormatDateShortTime())
+            </li>
+        }
+        @if (!Model.QueuedInstructions.Any())
+        {
+            <li>
+                ❇️
+                &thinsp;
+                &ndash;
+            </li>
+        }
+    </ul>
 
 </main>

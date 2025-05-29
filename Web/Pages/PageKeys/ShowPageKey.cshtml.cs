@@ -7,6 +7,7 @@ public class ShowPageKeyModel(
     public PageKeyPlus PageKey { get; set; }
 
     public List<PageVisitPlus> PageVisits { get; set; }
+    public List<QueuedInstructionPlus> QueuedInstructions { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -52,6 +53,18 @@ public class ShowPageKeyModel(
                     //TargetName = x.PageKey.EmailMessage.EmailTarget.Name,
                     //TargetAddress = x.PageKey.EmailMessage.EmailTarget.Address,
                     //EmailTargetId = x.PageKey.EmailMessage.EmailTargetId,
+                })
+                .ToListAsync();
+
+            QueuedInstructions = await database.QueuedInstructions
+                .Where(x => x.PageKeyId == id)
+                .OrderBy(x => x.Created)
+                .Select(x => new QueuedInstructionPlus()
+                {
+                    Id = x.Id,
+                    Created = x.Created,
+                    Name = x.Instruction.Name,
+                    InstructionId = x.InstructionId,
                 })
                 .ToListAsync();
 
