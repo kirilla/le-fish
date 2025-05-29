@@ -18,4 +18,5 @@ public class PageKey : ICreatedDateTime
 
     public List<PageVisit> PageVisits { get; set; }
     public List<ScriptVisit> ScriptVisits { get; set; }
+    public List<QueuedInstruction> QueuedInstructions { get; set; }
 }
