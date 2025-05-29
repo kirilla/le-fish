@@ -1,0 +1,56 @@
+﻿@page "/show-instructions"
+@model ShowInstructionsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Instruktioner -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Instruktioner
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var page in Model.Instructions)
+            {
+                <li>
+                    ❇️
+                    &thinsp;
+                    <a href="/show-instruction/@(page.Id)">@(page.Name)</a>
+                </li>
+            }
+
+            @if (!Model.Instructions.Any())
+            {
+                <li>
+                    ❇️
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    @if (Model.CanAddInstruction)
+    {
+        <p>
+            <a class="button" href="/add-instruction">
+                Lägg till
+            </a>
+        </p>
+    }
+
+</main>

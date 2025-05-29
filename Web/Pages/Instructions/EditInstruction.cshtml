@@ -1,0 +1,48 @@
+﻿@page "/edit-instruction/{id:int}"
+@model EditInstructionModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera instruktion -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Redigera instruktionen:
+        @(Model.Instruction.Name)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.InstructionId" />
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <label asp-for="CommandModel.Script">
+            Skript
+        </label>
+        <textarea asp-for="CommandModel.Script" rows="10"></textarea>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-instruction/@(Model.Instruction.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

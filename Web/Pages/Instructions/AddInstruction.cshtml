@@ -1,0 +1,45 @@
+﻿@page "/add-instruction"
+@model AddInstructionModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till instruktion -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Lägg till en instruktion
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <label asp-for="CommandModel.Script">
+            Skript
+        </label>
+        <textarea asp-for="CommandModel.Script" rows="15"></textarea>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/show-instructions">
+            Avbryt
+        </a>
+    </form>
+
+</main>
