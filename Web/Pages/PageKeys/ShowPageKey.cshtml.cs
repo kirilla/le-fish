@@ -30,6 +30,8 @@ public class ShowPageKeyModel(
                     EmailMessageSubject = x.EmailMessage.Subject,
                     EmailTargetId = x.EmailMessage.EmailTargetId,
                     //PageVisitCount = x.PageVisits.Count(),
+                    ScriptName = x.PayloadScript.Name,
+                    PayloadScriptId = x.PayloadScriptId,
                 })
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

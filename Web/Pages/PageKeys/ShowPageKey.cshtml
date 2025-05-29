@@ -18,42 +18,37 @@
         @(Model.PageKey.Value)
     </h4>
 
-    <h5>
-        Målkonto
-    </h5>
-
-    <p class="notice">
-        🎯
-        &thinsp;
-        <a href="/show-email-target/@(Model.PageKey.EmailTargetId)">
-            "@(Model.PageKey.TargetName)"
-            &lt;@(Model.PageKey.TargetAddress)&gt;
-        </a>
-    </p>
-
-    <h5>
-        Meddelande
-    </h5>
-
-    <p class="notice">
-        📧
-        &thinsp;
-        <a href="/show-email/@(Model.PageKey.EmailMessageId)">
-            @(Model.PageKey.EmailMessageSubject)
-        </a>
-    </p>
-
-    <h5>
-        Sida
-    </h5>
-
-    <p class="notice">
-        📄
-        &thinsp;
-        <a href="/show-payload-page/@(Model.PageKey.PayloadPageId)">
-            @(Model.PageKey.PageName)
-        </a>
-    </p>
+    <ul class="notice">
+        <li>
+            🎯
+            &thinsp;
+            <a href="/show-email-target/@(Model.PageKey.EmailTargetId)">
+                "@(Model.PageKey.TargetName)"
+                &lt;@(Model.PageKey.TargetAddress)&gt;
+            </a>
+        </li>
+        <li>
+            📧
+            &thinsp;
+            <a href="/show-email/@(Model.PageKey.EmailMessageId)">
+                @(Model.PageKey.EmailMessageSubject)
+            </a>
+        </li>
+        <li>
+            📄
+            &thinsp;
+            <a href="/show-payload-page/@(Model.PageKey.PayloadPageId)">
+                @(Model.PageKey.PageName)
+            </a>
+        </li>
+        <li>
+            📜
+            &thinsp;
+            <a href="/show-payload-script/@(Model.PageKey.PayloadScriptId)">
+                @(Model.PageKey.ScriptName)
+            </a>
+        </li>
+    </ul>
 
     <h5>
         Sidbesök
