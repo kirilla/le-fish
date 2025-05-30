@@ -4,7 +4,7 @@
 }
 
 @section Meta {
-    <title>Målkonto - @(Model.EmailTarget.Name) - @(Branding.WebsiteTitle)</title>
+    <title>Mål - @(Model.EmailTarget.Name) - @(Branding.WebsiteTitle)</title>
 }
 
 @section Header {
@@ -47,19 +47,9 @@
     </h5>
 
     <div class="notice">
-        <div>
-            🎯
-            &thinsp;
-            <a href="/show-email-target/@(Model.EmailTarget.Id)">@(Model.EmailTarget.Name)</a>
-            &thinsp;
-            <span class="muted">
-                @(Model.EmailTarget.Address)
-            </span>
-        </div>
-
         @foreach (var message in Model.EmailMessages.Where(x => x.EmailTargetId == Model.EmailTarget.Id))
         {
-            <div style="padding-left:1.5em;">
+            <div>
                 <span>
                     📩
                     &thinsp;
@@ -70,7 +60,8 @@
                     </span>
                 </span>
 
-                @foreach (var key in Model.PageKeys.Where(x => x.EmailMessageId == message.Id))
+                @foreach (var key in Model.PageKeys
+                    .Where(x => x.EmailMessageId == message.Id))
                 {
                     <div style="padding-left:1.5em;">
                         <div>
@@ -78,59 +69,11 @@
                             &thinsp;
                             <a href="/show-page-key/@(key.Id)">@(key.Value)</a>
                         </div>
-
-                        @foreach (var visit in Model.Visits.Where(x => x.PageKeyId == key.Id))
-                        {
-                            if (visit.VisitKind == VisitKind.Page)
-                            {
-                                <div style="padding-left:1.5em;">
-                                    📄
-                                    &thinsp;
-                                    <a href="/show-payload-page/@(visit.PayloadPageId)">@(visit.PageName)</a>
-                                    &thinsp;
-                                    <span class="muted">
-                                        besökt @(visit.Created.ToFixedFormatDateShortTime())
-                                    </span>
-                                </div>
-                            }
-
-                            if (visit.VisitKind == VisitKind.Script)
-                            {
-                                <div style="padding-left:1.5em;">
-                                    📜
-                                    &thinsp;
-                                    <a href="/show-payload-script/@(visit.PayloadScriptId)">@(visit.ScriptName)</a>
-                                    &thinsp;
-                                    <span class="muted">
-                                        besökt @(visit.Created.ToFixedFormatDateShortTime())
-                                    </span>
-                                </div>
-                            }
-                        }
-
-                        @if (!Model.Visits.Any(x => x.PageKeyId == key.Id))
-                        {
-                            <div style="padding-left:1.5em;">
-                                📄
-                                &thinsp;
-                                &ndash;
-                            </div>
-                        }
-
-                        @if (Model.CanUploadDataDump)
-                        {
-                            <div style="padding-left:1.5em;">
-                                💉
-                                &thinsp;
-                                <a href="/upload/@(key.Value)">
-                                    Ladda upp data
-                                </a>
-                            </div>
-                        }
                     </div>
                 }
 
-                @if (!Model.PageKeys.Any(x => x.EmailMessageId == message.Id))
+                @if (!Model.PageKeys
+                    .Any(x => x.EmailMessageId == message.Id))
                 {
                     <div style="padding-left:1.5em;">
                         🔑
@@ -139,7 +82,6 @@
                     </div>
                 }
             </div>
-            <br />
         }
 
         @if (!Model.EmailMessages.Any(x => x.EmailTargetId == Model.EmailTarget.Id))
@@ -151,38 +93,6 @@
             </div>
         }
     </div>
-
-    @if (Model.UserAgents.Any())
-    {
-        <h5>
-            Agent
-        </h5>
-
-        <ul class="notice">
-            @foreach (var agent in Model.UserAgents)
-            {
-                <li>
-                @(agent)
-                </li>
-            }
-        </ul>
-    }
-
-    @if (Model.IpAddresses.Any())
-    {
-        <h5>
-            IP-nummer
-        </h5>
-
-        <ul class="notice">
-            @foreach (var address in Model.IpAddresses)
-            {
-                <li>
-                @(address)
-                </li>
-            }
-        </ul>
-    }
 
     <p>
         @if (Model.CanSendEmailToTarget)

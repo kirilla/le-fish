@@ -47,75 +47,18 @@
                         📩
                         &thinsp;
                         <a href="/show-email/@(message.Id)">@(message.Subject)</a>
-                        &thinsp;
-                        <span class="muted">
-                            skickat @(message.Sent.ToFixedFormatDateShortTime())
-                        </span>
                     </span>
 
                     @foreach (var key in Model.PageKeys
                        .Where(x => x.EmailMessageId == message.Id))
                     {
                         <div style="padding-left:1.5em;">
-                            <div>
-                                🔑
-                                &thinsp;
-                                <a href="/show-page-key/@(key.Id)">@(key.Value)</a>
-                            </div>
-
-                            @foreach (var visit in Model.Visits
-                                .Where(x => x.PageKeyId == key.Id))
-                            {
-                                if (visit.VisitKind == VisitKind.Page)
-                                {
-                                    <div style="padding-left:1.5em;">
-                                        📄
-                                        &thinsp;
-                                        <a href="/show-payload-page/@(visit.PayloadPageId)">@(visit.PageName)</a>
-                                        &thinsp;
-                                        <span class="muted">
-                                            besökt @(visit.Created.ToFixedFormatDateShortTime())
-                                        </span>
-                                    </div>
-                                }
-
-                                if (visit.VisitKind == VisitKind.Script)
-                                {
-                                    <div style="padding-left:1.5em;">
-                                        📜
-                                        &thinsp;
-                                        <a href="/show-payload-script/@(visit.PayloadScriptId)">@(visit.ScriptName)</a>
-                                        &thinsp;
-                                        <span class="muted">
-                                            besökt @(visit.Created.ToFixedFormatDateShortTime())
-                                        </span>
-                                    </div>
-                                }
-                            }
-
-                            @if (!Model.Visits
-                                .Any(x => x.PageKeyId == key.Id))
-                            {
-                                <div style="padding-left:1.5em;">
-                                    📄
-                                    &thinsp;
-                                    &ndash;
-                                </div>
-                            }
-                        </div>
-                    }
-
-                    @if (!Model.PageKeys
-                        .Any(x => x.EmailMessageId == message.Id))
-                    {
-                        <div style="padding-left:1.5em;">
                             🔑
                             &thinsp;
-                            &ndash;
+                            <a href="/show-page-key/@(key.Id)">@(key.Value)</a>
                         </div>
                     }
                 </div>
-                <br />
             }
 
             @if (!Model.EmailMessages.Any(x => x.EmailTargetId == target.Id))
@@ -126,7 +69,6 @@
                     &ndash;
                 </div>
             }
-            <br />
         }
     </div>
 

@@ -9,6 +9,8 @@ public class RemoveScriptVisitModel(
 {
     public ScriptVisitPlus ScriptVisit { get; set; }
 
+    public PageKey PageKey { get; set; }
+
     [BindProperty]
     public RemoveScriptVisitCommandModel CommandModel { get; set; }
 
@@ -23,6 +25,7 @@ public class RemoveScriptVisitModel(
                 .Where(x => x.Id == id)
                 .Select(x => new ScriptVisitPlus()
                 {
+                    Id = x.Id,
                     Url = x.Url,
                     Method = x.Method,
                     IpAddress = x.IpAddress,
@@ -32,7 +35,13 @@ public class RemoveScriptVisitModel(
                     TargetName = x.PageKey.EmailMessage.EmailTarget.Name,
                     TargetAddress = x.PageKey.EmailMessage.EmailTarget.Address,
                     EmailTargetId = x.PageKey.EmailMessageId,
+                    PageKeyId = x.PageKeyId,
                 })
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            PageKey = await database.PageKeys
+                .Where(x => x.Id == ScriptVisit.PageKeyId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -64,6 +73,7 @@ public class RemoveScriptVisitModel(
                 .Where(x => x.Id == CommandModel.ScriptVisitId)
                 .Select(x => new ScriptVisitPlus()
                 {
+                    Id = x.Id,
                     Url = x.Url,
                     Method = x.Method,
                     IpAddress = x.IpAddress,
@@ -73,7 +83,13 @@ public class RemoveScriptVisitModel(
                     TargetName = x.PageKey.EmailMessage.EmailTarget.Name,
                     TargetAddress = x.PageKey.EmailMessage.EmailTarget.Address,
                     EmailTargetId = x.PageKey.EmailMessageId,
+                    PageKeyId = x.PageKeyId,
                 })
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            PageKey = await database.PageKeys
+                .Where(x => x.Id == ScriptVisit.PageKeyId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -82,7 +98,7 @@ public class RemoveScriptVisitModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-script-visits");
+            return Redirect($"/show-page-key/{PageKey.Id}");
         }
         catch (ConfirmationRequiredException)
         {

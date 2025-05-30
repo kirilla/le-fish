@@ -14,25 +14,22 @@
 <main>
 
     <h4>
+        🎯
+        @(Model.PageKey.TargetName)<br />
         🔑
         @(Model.PageKey.Value)
     </h4>
 
     <ul class="notice">
         <li>
-            🎯
-            &thinsp;
-            <a href="/show-email-target/@(Model.PageKey.EmailTargetId)">
-                "@(Model.PageKey.TargetName)"
-                &lt;@(Model.PageKey.TargetAddress)&gt;
-            </a>
-        </li>
-        <li>
             📧
             &thinsp;
             <a href="/show-email/@(Model.PageKey.EmailMessageId)">
-                @(Model.PageKey.EmailMessageSubject)
-            </a>
+                @(Model.PageKey.EmailMessageSubject)</a>
+            &ensp;
+            <span class="muted">
+                @(Model.PageKey.TargetAddress)
+            </span>
         </li>
         <li>
             📄
@@ -50,12 +47,30 @@
         </li>
     </ul>
 
-    <p class="notice">
-        🥸
-        &thinsp;
-        <a href="/page/@(Model.PageKey.Value)">
-            Besök sidan som @(Model.PageKey.TargetName)</a>
-    </p>
+    <h5>
+        Instruktioner
+    </h5>
+
+    <ul class="notice">
+        @foreach (var instruction in Model.QueuedInstructions)
+        {
+            <li>
+                ❇️
+                &thinsp;
+                <a href="/show-instruction/@(instruction.InstructionId)">
+                    @(instruction.Name)
+                </a>
+            </li>
+        }
+        @if (!Model.QueuedInstructions.Any())
+        {
+            <li>
+                ❇️
+                &thinsp;
+                &ndash;
+            </li>
+        }
+    </ul>
 
     <h5>
         Sidbesök
@@ -72,7 +87,9 @@
             {
                 <tr>
                     <td>
-                        @(visit.Created.ToFixedFormatDateShortTime())
+                        <a href="/show-page-visit/@(visit.Id)">
+                            @(visit.Created.ToFixedFormatDateShortTime())
+                        </a>
                     </td>
                     <td>
                         @(visit.IpAddress)
@@ -93,31 +110,88 @@
         </table>
     </figure>
 
+    <br />
+
     <h5>
-        Köade instruktioner
+        Skriptnedladdningar
     </h5>
 
-    <ul class="notice">
-        @foreach (var instruction in Model.QueuedInstructions)
-        {
-            <li>
-                ❇️
-                &thinsp;
-                <a href="/show-instruction/@(instruction.InstructionId)">
-                    @(instruction.Name)
-                </a>
-                &ensp;
-                @(instruction.Created.ToFixedFormatDateShortTime())
-            </li>
-        }
-        @if (!Model.QueuedInstructions.Any())
-        {
-            <li>
-                ❇️
-                &thinsp;
-                &ndash;
-            </li>
-        }
-    </ul>
+    <figure>
+        <table>
+            <tr>
+                <th>&emsp;🙋</th>
+                <th>IP-nummer</th>
+                <th>UserAgent</th>
+            </tr>
+            @foreach (var visit in Model.ScriptVisits)
+            {
+                <tr>
+                    <td>
+                        <a href="/show-script-visit/@(visit.Id)">
+                            @(visit.Created.ToFixedFormatDateShortTime())
+                        </a>
+                    </td>
+                    <td>
+                        @(visit.IpAddress)
+                    </td>
+                    <td>
+                        @(visit.UserAgent)
+                    </td>
+                </tr>
+            }
+            @if (!Model.ScriptVisits.Any())
+            {
+                <tr>
+                    <td colspan="3">
+                        Inga
+                    </td>
+                </tr>
+            }
+        </table>
+    </figure>
+
+    <br />
+
+    @if (Model.UserAgents.Any())
+    {
+        <h5>
+            Agent
+        </h5>
+
+        <ul class="notice">
+            @foreach (var agent in Model.UserAgents)
+            {
+                <li>
+                    @(agent)
+                </li>
+            }
+        </ul>
+    }
+
+    @if (Model.IpAddresses.Any())
+    {
+        <h5>
+            IP-nummer
+        </h5>
+
+        <ul class="notice">
+            @foreach (var address in Model.IpAddresses)
+            {
+                <li>
+                    @(address)
+                </li>
+            }
+        </ul>
+    }
+
+    <h5>Ladda upp data</h5>
+
+    <div class="notice">
+        💉
+        &thinsp;
+        <a href="/upload/@(Model.PageKey.Value)">
+            Ladda upp data
+        </a>
+    </div>
 
 </main>

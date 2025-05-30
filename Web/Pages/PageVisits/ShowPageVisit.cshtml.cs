@@ -23,6 +23,7 @@ public class ShowPageVisitModel(
                 .Where(x => x.Id == id)
                 .Select(x => new PageVisitPlus()
                 {
+                    Id = x.Id,
                     Url = x.Url,
                     Method = x.Method,
                     IpAddress = x.IpAddress,

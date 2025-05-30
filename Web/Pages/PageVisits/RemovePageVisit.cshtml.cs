@@ -9,6 +9,8 @@ public class RemovePageVisitModel(
 {
     public PageVisitPlus PageVisit { get; set; }
 
+    public PageKey PageKey { get; set; }
+
     [BindProperty]
     public RemovePageVisitCommandModel CommandModel { get; set; }
 
@@ -23,6 +25,7 @@ public class RemovePageVisitModel(
                 .Where(x => x.Id == id)
                 .Select(x => new PageVisitPlus()
                 {
+                    Id = x.Id,
                     Url = x.Url,
                     Method = x.Method,
                     IpAddress = x.IpAddress,
@@ -32,7 +35,13 @@ public class RemovePageVisitModel(
                     TargetName = x.PageKey.EmailMessage.EmailTarget.Name,
                     TargetAddress = x.PageKey.EmailMessage.EmailTarget.Address,
                     EmailTargetId = x.PageKey.EmailMessageId,
+                    PageKeyId = x.PageKeyId,
                 })
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            PageKey = await database.PageKeys
+                .Where(x => x.Id == PageVisit.PageKeyId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -73,7 +82,13 @@ public class RemovePageVisitModel(
                     TargetName = x.PageKey.EmailMessage.EmailTarget.Name,
                     TargetAddress = x.PageKey.EmailMessage.EmailTarget.Address,
                     EmailTargetId = x.PageKey.EmailMessageId,
+                    PageKeyId = x.PageKeyId,
                 })
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            PageKey = await database.PageKeys
+                .Where(x => x.Id == PageVisit.PageKeyId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -82,7 +97,7 @@ public class RemovePageVisitModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-page-visits");
+            return Redirect($"/show-page-key/{PageKey.Id}");
         }
         catch (ConfirmationRequiredException)
         {

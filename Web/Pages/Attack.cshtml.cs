@@ -23,7 +23,7 @@ public class AttackModel(
                 throw new NotPermittedException();
 
             EmailTargets = await database.EmailTargets
-                //.Where(x => x.EmailMessages.Any())
+                .Where(x => x.EmailMessages.Any())
                 .OrderBy(x => x.Name)
                 .ThenBy(x => x.Address)
                 .ToListAsync();
@@ -88,7 +88,7 @@ public class AttackModel(
                     Id = x.Id,
                     Value = x.Value,
                     //Created = x.Created,
-                    //PageName = x.PayloadPage.Name,
+                    PageName = x.PayloadPage.Name,
                     PayloadPageId = x.PayloadPageId,
                     TargetName = x.EmailMessage.EmailTarget.Name,
                     TargetAddress = x.EmailMessage.EmailTarget.Address,
@@ -96,6 +96,8 @@ public class AttackModel(
                     EmailMessageSubject = x.EmailMessage.Subject,
                     EmailTargetId = x.EmailMessage.EmailTargetId,
                     //PageVisitCount = x.PageVisits.Count(),
+                    ScriptName = x.PayloadScript.Name,
+                    PayloadScriptId = x.PayloadScriptId,
                 })
                 .ToListAsync();
 
