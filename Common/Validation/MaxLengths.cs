@@ -106,8 +106,8 @@ public static class MaxLengths
 
         public static class EmailTarget
         {
-            public const int Name = 100;
-            public const int Address = 100;
+            public const int Name = Common.Person.Name;
+            public const int Address = Common.Email.Address;
         }
 
         public static class EmailTemplate
