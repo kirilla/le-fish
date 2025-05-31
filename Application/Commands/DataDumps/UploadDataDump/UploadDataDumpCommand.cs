@@ -3,7 +3,9 @@
 public class UploadDataDumpCommand(IDatabaseService database) : IUploadDataDumpCommand
 {
     public async Task Execute(
-        IUserToken userToken, UploadDataDumpCommandModel model)
+        IUserToken userToken,
+        UploadDataDumpCommandModel model,
+        int pageKeyValue)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
@@ -12,14 +14,14 @@ public class UploadDataDumpCommand(IDatabaseService database) : IUploadDataDumpC
         model.SetEmptyStringsToNull();
         model.TruncateByStringLength();
 
-        var target = await database.EmailTargets
-            .Where(x => x.Id == model.EmailTargetId)
+        var pageKey = await database.PageKeys
+            .Where(x => x.Value == pageKeyValue)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
         var dump = new DataDump()
         {
-            EmailTargetId = model.EmailTargetId,
+            PageKeyId = pageKey.Id,
             Data = model.Data,
             ContentLength = model.Data.Length,
             ContentType = model.ContentType,

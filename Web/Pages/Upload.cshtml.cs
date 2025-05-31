@@ -10,8 +10,6 @@ public class UploadPageModel(
     IDatabaseService database,
     IUploadDataDumpCommand command) : UserTokenPageModel(userToken)
 {
-    public EmailTarget EmailTarget { get; set; }
-
     [BindProperty]
     public IFormFile File { get; set; }
 
@@ -24,18 +22,7 @@ public class UploadPageModel(
             //if (!command.IsPermitted(UserToken))
             //    throw new NotPermittedException();
 
-            var pageKey = await database.PageKeys
-                .Include(x => x.EmailMessage.EmailTarget)
-                .Where(x => x.Value == key)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
-            EmailTarget = pageKey.EmailMessage.EmailTarget;
-
-            CommandModel = new UploadDataDumpCommandModel()
-            {
-                EmailTargetId = EmailTarget.Id,
-            };
+            CommandModel = new UploadDataDumpCommandModel();
 
             return Page();
         }
@@ -56,14 +43,6 @@ public class UploadPageModel(
             //if (!command.IsPermitted(UserToken))
             //    throw new NotPermittedException();
 
-            var pageKey = await database.PageKeys
-                .Include(x => x.EmailMessage.EmailTarget)
-                .Where(x => x.Value == key)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
-            EmailTarget = pageKey.EmailMessage.EmailTarget;
-
             if (!ModelState.IsValid)
                 return Page();
 
@@ -78,7 +57,6 @@ public class UploadPageModel(
 
             CommandModel = new UploadDataDumpCommandModel()
             {
-                EmailTargetId = EmailTarget.Id,
                 Data = data,
                 //ContentLength = data.Length,
                 ContentType = File.ContentType,
@@ -87,7 +65,7 @@ public class UploadPageModel(
 
             CommandModel.Data = await GetFileBytesAsync(File);
 
-            await command.Execute(UserToken, CommandModel);
+            await command.Execute(UserToken, CommandModel, key);
 
             return Redirect($"/upload/{key}");
         }

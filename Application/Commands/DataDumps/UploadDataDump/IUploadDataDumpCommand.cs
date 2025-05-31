@@ -2,7 +2,10 @@
 
 public interface IUploadDataDumpCommand
 {
-    Task Execute(IUserToken userToken, UploadDataDumpCommandModel model);
+    Task Execute(
+        IUserToken userToken, 
+        UploadDataDumpCommandModel model, 
+        int pageKeyValue);
 
     bool IsPermitted(IUserToken userToken);
 }

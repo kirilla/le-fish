@@ -10,6 +10,10 @@ class PageKeyConfiguration : IEntityTypeConfiguration<PageKey>
 
         builder.HasIndex(p => p.Value).IsUnique();
 
+        builder.HasMany(x => x.DataDumps)
+            .WithOne(x => x.PageKey)
+            .HasForeignKey(x => x.PageKeyId);
+
         builder.HasMany(x => x.PageVisits)
             .WithOne(x => x.PageKey)
             .HasForeignKey(x => x.PageKeyId);

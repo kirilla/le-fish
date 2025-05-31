@@ -20,6 +20,6 @@ public class DataDump : ICreatedDateTime
 
     public DateTime? Created { get; set; }
 
-    public int EmailTargetId { get; set; }
-    public EmailTarget EmailTarget { get; set; }
+    public int PageKeyId { get; set; }
+    public PageKey PageKey { get; set; }
 }
