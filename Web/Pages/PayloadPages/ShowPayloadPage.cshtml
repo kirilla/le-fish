@@ -22,7 +22,9 @@
         URL
     </h5>
     <p class="notice">
-        @(Model.Config.PageUrl ?? "Missing config, see appsettings.json")
+        <a href="/visit-payload-page-as/@(Model.PayloadPage.Id)">
+            @(Model.Config.PageUrl ?? "Missing config, see appsettings.json")
+        </a>
     </p>
 
     <h5>

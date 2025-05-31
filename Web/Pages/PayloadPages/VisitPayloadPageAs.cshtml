@@ -1,0 +1,47 @@
+﻿@page "/visit-payload-page-as/{id:int}"
+@model VisitPayloadPageAsModel
+@{
+}
+
+@section Meta {
+    <title>Besök - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        📄 @(Model.PayloadPage.Name)
+    </h4>
+
+    <h5>
+        Besök sidan som
+    </h5>
+    <div class="notice">
+        @foreach (var key in Model.PageKeys)
+        {
+            <div>
+                <a href="/page/@(key.Value)" target="_blank">
+                    @(key.Value)</a>
+                &ensp;
+                @(key.TargetName)
+                &ensp;
+                @(key.TargetAddress)
+            </div>
+        }
+
+        @if (!Model.PageKeys.Any())
+        {
+            <p>
+                Det finns inga mål med nycklar till den här sidan.
+            </p>
+            <p>
+                Nycklar skapas när en attack påbörjas genom att skicka ett meddelande.
+            </p>
+        }
+    </div>
+
+</main>
