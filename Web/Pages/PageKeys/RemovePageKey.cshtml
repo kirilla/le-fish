@@ -1,0 +1,45 @@
+﻿@page "/remove-page-key/{id:int}"
+@model RemovePageKeyModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ta bort nyckel -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Ta bort nyckeln:
+        @(Model.PageKey.Value)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.PageKeyId" />
+
+        <p>
+            <label asp-for="CommandModel.Confirmed">
+                <input asp-for="CommandModel.Confirmed" type="checkbox" />
+                Ja, jag är säker
+            </label>
+        </p>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Ta bort
+        </button>
+
+        <a class="button" href="/show-page-key/@(Model.CommandModel.PageKeyId)">
+            Avbryt
+        </a>
+    </form>
+
+</main>
