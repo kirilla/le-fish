@@ -9,7 +9,6 @@ namespace Lefish.Infrastructure;
 public class SmtpService() : ISmtpService
 {
     public void SendMessage(
-        EmailTarget target, 
         EmailMessage email, 
         EmailAccount account,
         List<EmailAttachment> attachments,
@@ -24,7 +23,7 @@ public class SmtpService() : ISmtpService
             mail.ReplyToList.Add(new MailAddress(account.ReplyToAddress, account.ReplyToName));
         }
 
-        mail.To.Add(new MailAddress(target.Address, target.Name));
+        mail.To.Add(new MailAddress(email.ToAddress, email.ToName));
 
         mail.Subject = email.Subject;
         //mail.Body = email.HtmlBody;

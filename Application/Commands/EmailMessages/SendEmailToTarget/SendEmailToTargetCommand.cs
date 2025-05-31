@@ -55,6 +55,8 @@ public class SendEmailToTargetCommand(
 
         var message = new EmailMessage()
         {
+            ToName = target.Name,
+            ToAddress = target.Address,
             Subject = template.Subject,
             HtmlBody = template.HtmlBody,
             TextBody = template.TextBody,
@@ -81,7 +83,7 @@ public class SendEmailToTargetCommand(
 
         try
         {
-            smtpService.SendMessage(target, message, account, attachments, images);
+            smtpService.SendMessage(message, account, attachments, images);
 
             message.EmailStatus = EmailStatus.Sent;
             message.Sent = dateService.GetDateTimeNow();
