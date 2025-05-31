@@ -58,6 +58,7 @@ public class SendEmailToTargetCommand(
             EmailTargetId = target.Id,
             PayloadPageId = page.Id,
             PayloadScriptId = script.Id,
+            Value = Random.Shared.Next(),
         };
 
         database.PageKeys.Add(key);
@@ -76,8 +77,6 @@ public class SendEmailToTargetCommand(
 
         database.EmailMessages.Add(message);
         
-        await key.SetUniqueTokenAsync(database);
-
         message.InsertTargetValues(_config, target, key);
 
         await database.SaveAsync(userToken);
