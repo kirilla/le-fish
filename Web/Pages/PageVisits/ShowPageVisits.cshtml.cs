@@ -24,9 +24,9 @@ public class ShowPageVisitsModel(
                     UserAgent = x.UserAgent,
                     PageName = x.PageKey.PayloadPage.Name,
                     PayloadPageId = x.PageKey.PayloadPageId,
-                    TargetName = x.PageKey.EmailMessage.EmailTarget.Name,
-                    TargetAddress = x.PageKey.EmailMessage.EmailTarget.Address,
-                    EmailTargetId = x.PageKey.EmailMessageId,
+                    TargetName = x.PageKey.EmailTarget.Name,
+                    TargetAddress = x.PageKey.EmailTarget.Address,
+                    EmailTargetId = x.PageKey.EmailTargetId,
                 })
                 .ToListAsync();
 

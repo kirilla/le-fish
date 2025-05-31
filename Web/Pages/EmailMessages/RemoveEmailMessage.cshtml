@@ -28,8 +28,8 @@
         <br />
         <span>
             Till:
-            @(Model.EmailMessage.EmailTarget?.Name)
-            @(Model.EmailMessage.EmailTarget?.Address)
+            @(Model.EmailMessage.ToName)
+            @(Model.EmailMessage.ToAddress)
         </span>
         <br />
         @if (Model.EmailMessage.EmailAccount?.ReplyToAddress.HasValue() ?? false)

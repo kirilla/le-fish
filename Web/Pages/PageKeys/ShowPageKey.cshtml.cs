@@ -6,6 +6,8 @@ public class ShowPageKeyModel(
 {
     public PageKeyPlus PageKey { get; set; }
 
+    public List<EmailHeader> EmailHeaders { get; set; }
+
     public List<PageVisitPlus> PageVisits { get; set; }
     public List<ScriptVisitPlus> ScriptVisits { get; set; }
 
@@ -32,17 +34,34 @@ public class ShowPageKeyModel(
                     Created = x.Created,
                     PageName = x.PayloadPage.Name,
                     PayloadPageId = x.PayloadPageId,
-                    TargetName = x.EmailMessage.EmailTarget.Name,
-                    TargetAddress = x.EmailMessage.EmailTarget.Address,
-                    EmailMessageId = x.EmailMessageId,
-                    EmailMessageSubject = x.EmailMessage.Subject,
-                    EmailTargetId = x.EmailMessage.EmailTargetId,
-                    //PageVisitCount = x.PageVisits.Count(),
+                    TargetName = x.EmailTarget.Name,
+                    TargetAddress = x.EmailTarget.Address,
+                    EmailTargetId = x.EmailTargetId,
                     ScriptName = x.PayloadScript.Name,
                     PayloadScriptId = x.PayloadScriptId,
                 })
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
+
+            EmailHeaders = await database.EmailMessages
+                .Where(x => x.PageKeyId == id)
+                .OrderBy(x => x.Created)
+                .Select(x => new EmailHeader()
+                {
+                    Id = x.Id,
+                    PageKeyId = x.PageKeyId,
+                    ToName = x.ToName,
+                    ToAddress = x.ToAddress,
+                    FromName = x.EmailAccount!.FromName,
+                    FromAddress = x.EmailAccount!.FromAddress,
+                    ReplyToName = x.EmailAccount.ReplyToName,
+                    ReplyToAddress = x.EmailAccount.ReplyToAddress,
+                    Subject = x.Subject,
+                    EmailStatus = x.EmailStatus,
+                    Created = x.Created,
+                    Sent = x.Sent,
+                })
+                .ToListAsync();
 
             PageVisits = await database.PageVisits
                 .Where(x => x.PageKeyId == id)

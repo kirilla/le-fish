@@ -15,7 +15,6 @@ public class ShowEmailMessageModel(
 
             EmailMessage = await database.EmailMessages
                 .Include(x => x.EmailAccount)
-                .Include(x => x.EmailTarget)
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

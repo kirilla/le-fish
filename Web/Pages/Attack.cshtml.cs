@@ -23,28 +23,20 @@ public class AttackModel(
                 throw new NotPermittedException();
 
             EmailTargets = await database.EmailTargets
-                .Where(x => x.EmailMessages.Any())
+                .Where(x => x.PageKeys.Any())
                 .OrderBy(x => x.Name)
                 .ThenBy(x => x.Address)
                 .ToListAsync();
 
             EmailMessages = await database.EmailMessages
                 .Include(x => x.EmailAccount)
-                .Include(x => x.EmailTarget)
                 .OrderByDescending(x => x.Created)
                 .Select(x => new EmailHeader()
                 {
                     Id = x.Id,
-                    EmailTargetId = x.EmailTargetId,
-                    //ToName = x.EmailTarget.Name,
-                    //ToAddress = x.EmailTarget.Address,
-                    //FromName = x.EmailAccount.FromName,
-                    //FromAddress = x.EmailAccount.FromAddress,
-                    //ReplyToName = x.EmailAccount.ReplyToName,
-                    //ReplyToAddress = x.EmailAccount.ReplyToAddress,
+                    PageKeyId = x.PageKeyId,
                     Subject = x.Subject,
                     EmailStatus = x.EmailStatus,
-                    //Created = x.Created,
                     Sent = x.Sent,
                 })
                 .ToListAsync();
@@ -87,15 +79,11 @@ public class AttackModel(
                 {
                     Id = x.Id,
                     Value = x.Value,
-                    //Created = x.Created,
                     PageName = x.PayloadPage.Name,
                     PayloadPageId = x.PayloadPageId,
-                    TargetName = x.EmailMessage.EmailTarget.Name,
-                    TargetAddress = x.EmailMessage.EmailTarget.Address,
-                    EmailMessageId = x.EmailMessageId,
-                    EmailMessageSubject = x.EmailMessage.Subject,
-                    EmailTargetId = x.EmailMessage.EmailTargetId,
-                    //PageVisitCount = x.PageVisits.Count(),
+                    TargetName = x.EmailTarget.Name,
+                    TargetAddress = x.EmailTarget.Address,
+                    EmailTargetId = x.EmailTargetId,
                     ScriptName = x.PayloadScript.Name,
                     PayloadScriptId = x.PayloadScriptId,
                 })

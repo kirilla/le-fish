@@ -23,10 +23,9 @@ public class ShowPageKeysModel(
                     Created = x.Created,
                     PageName = x.PayloadPage.Name,
                     PayloadPageId = x.PayloadPageId,
-                    TargetName = x.EmailMessage.EmailTarget.Name,
-                    TargetAddress = x.EmailMessage.EmailTarget.Address,
-                    EmailTargetId = x.EmailMessage.EmailTargetId,
-                    PageVisitCount = x.PageVisits.Count(),
+                    TargetName = x.EmailTarget.Name,
+                    TargetAddress = x.EmailTarget.Address,
+                    EmailTargetId = x.EmailTargetId,
                 })
                 .ToListAsync();
 

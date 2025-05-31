@@ -30,9 +30,9 @@ public class ShowScriptVisitModel(
                     UserAgent = x.UserAgent,
                     ScriptName = x.PageKey.PayloadScript.Name,
                     PayloadScriptId = x.PageKey.PayloadScriptId,
-                    TargetName = x.PageKey.EmailMessage.EmailTarget.Name,
-                    TargetAddress = x.PageKey.EmailMessage.EmailTarget.Address,
-                    EmailTargetId = x.PageKey.EmailMessageId,
+                    TargetName = x.PageKey.EmailTarget.Name,
+                    TargetAddress = x.PageKey.EmailTarget.Address,
+                    EmailTargetId = x.PageKey.EmailTargetId,
                 })
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

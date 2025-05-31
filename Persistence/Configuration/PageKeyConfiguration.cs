@@ -14,6 +14,10 @@ class PageKeyConfiguration : IEntityTypeConfiguration<PageKey>
             .WithOne(x => x.PageKey)
             .HasForeignKey(x => x.PageKeyId);
 
+        builder.HasMany(x => x.EmailMessages)
+            .WithOne(x => x.PageKey)
+            .HasForeignKey(x => x.PageKeyId);
+
         builder.HasMany(x => x.PageVisits)
             .WithOne(x => x.PageKey)
             .HasForeignKey(x => x.PageKeyId);

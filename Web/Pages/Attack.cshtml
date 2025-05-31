@@ -39,34 +39,34 @@
                 </span>
             </div>
 
-            @foreach (var message in Model.EmailMessages
+            @foreach (var key in Model.PageKeys
                .Where(x => x.EmailTargetId == target.Id))
             {
                 <div style="padding-left:1.5em;">
-                    <span>
-                        📩
+                    <div>
+                        🔑
                         &thinsp;
-                        <a href="/show-email/@(message.Id)">@(message.Subject)</a>
-                    </span>
+                        <a href="/show-page-key/@(key.Id)">@(key.Value)</a>
+                    </div>
 
-                    @foreach (var key in Model.PageKeys
-                       .Where(x => x.EmailMessageId == message.Id))
+                    @foreach (var message in Model.EmailMessages
+                        .Where(x => x.PageKeyId == key.Id))
                     {
                         <div style="padding-left:1.5em;">
-                            🔑
+                            📩
                             &thinsp;
-                            <a href="/show-page-key/@(key.Id)">@(key.Value)</a>
+                            <a href="/show-email/@(message.Id)">@(message.Subject)</a>
                         </div>
                     }
-                </div>
-            }
 
-            @if (!Model.EmailMessages.Any(x => x.EmailTargetId == target.Id))
-            {
-                <div style="padding-left:1.5em;">
-                    📩
-                    &thinsp;
-                    &ndash;
+                    @if (!Model.EmailMessages.Any(x => x.PageKeyId == key.Id))
+                    {
+                        <div style="padding-left:1.5em;">
+                            📩
+                            &thinsp;
+                            &ndash;
+                        </div>
+                    }
                 </div>
             }
         }

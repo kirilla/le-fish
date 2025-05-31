@@ -53,6 +53,15 @@ public class SendEmailToTargetCommand(
             .Where(x => x.EmailTemplateId == model.EmailTemplateId!.Value)
             .ToListAsync();
 
+        var key = new PageKey()
+        {
+            EmailTargetId = target.Id,
+            PayloadPageId = page.Id,
+            PayloadScriptId = script.Id,
+        };
+
+        database.PageKeys.Add(key);
+
         var message = new EmailMessage()
         {
             ToName = target.Name,
@@ -62,19 +71,11 @@ public class SendEmailToTargetCommand(
             TextBody = template.TextBody,
             EmailStatus = EmailStatus.NotSent,
             EmailAccountId = account.Id,
-            EmailTargetId = target.Id,
-        };
-
-        var key = new PageKey()
-        {
-            EmailMessage = message,
-            PayloadPageId = page.Id,
-            PayloadScriptId = script.Id,
+            PageKey = key,
         };
 
         database.EmailMessages.Add(message);
-        database.PageKeys.Add(key);
-
+        
         await key.SetUniqueTokenAsync(database);
 
         message.InsertTargetValues(_config, target, key);

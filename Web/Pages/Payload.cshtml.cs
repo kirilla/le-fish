@@ -33,17 +33,9 @@ public class PayloadPageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            var emailTargetId = await database.PageKeys
-                .AsNoTracking()
-                .Where(x => x.Value == key)
-                .Select(x => x.EmailMessage.EmailTargetId)
-                .Cast<int?>()
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
             EmailTarget = await database.EmailTargets
                 .AsNoTracking()
-                .Where(x => x.Id == emailTargetId)
+                .Where(x => x.Id == PageKey.EmailTargetId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

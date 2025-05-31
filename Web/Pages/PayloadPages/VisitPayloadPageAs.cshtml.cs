@@ -22,13 +22,13 @@ public class VisitPayloadPageAsModel(
 
             PageKeys = await database.PageKeys
                 .Where(x => x.PayloadPageId == id)
-                .OrderBy(x => x.EmailMessage.EmailTarget.Name)
+                .OrderBy(x => x.EmailTarget.Name)
                 .ThenBy(x => x.Value)
                 .Select(x => new PageKeyPlus()
                 {
                     Id = x.Id,
-                    TargetName = x.EmailMessage.EmailTarget.Name,
-                    TargetAddress = x.EmailMessage.EmailTarget.Address,
+                    TargetName = x.EmailTarget.Name,
+                    TargetAddress = x.EmailTarget.Address,
                     Value = x.Value,
                 })
                 .ToListAsync();

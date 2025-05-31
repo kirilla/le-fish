@@ -25,9 +25,5 @@ class EmailMessageConfiguration : IEntityTypeConfiguration<EmailMessage>
         builder.Property(p => p.TextBody)
             .IsRequired()
             .HasMaxLength(MaxLengths.Domain.EmailMessage.TextBody);
-
-        builder.HasMany(x => x.PageKeys)
-            .WithOne(x => x.EmailMessage)
-            .HasForeignKey(x => x.EmailMessageId);
     }
 }

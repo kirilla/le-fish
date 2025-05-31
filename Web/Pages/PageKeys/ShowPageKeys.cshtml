@@ -27,7 +27,6 @@
                 <th>Nyckel</th>
                 <th>Mål</th>
                 <th>Sida</th>
-                <th>Sidbesök</th>
             </tr>
             @foreach (var key in Model.PageKeys)
             {
@@ -50,15 +49,12 @@
                         @(key.PageName)
                         </a>
                     </td>
-                    <td>
-                        @(key.PageVisitCount.ToSwedishSpacing())
-                    </td>
                 </tr>
             }
             @if (!Model.PageKeys.Any())
             {
                 <tr>
-                    <td colspan="4">
+                    <td colspan="3">
                         Inga
                     </td>
                 </tr>

@@ -21,16 +21,19 @@
     </h4>
 
     <ul class="notice">
-        <li>
-            📧
-            &thinsp;
-            <a href="/show-email/@(Model.PageKey.EmailMessageId)">
-                @(Model.PageKey.EmailMessageSubject)</a>
-            &ensp;
-            <span class="muted">
-                @(Model.PageKey.TargetAddress)
-            </span>
-        </li>
+        @foreach (var message in Model.EmailHeaders)
+        {
+            <li>
+                📧
+                &thinsp;
+                <a href="/show-email/@(message.Id)">
+                    @(message.Subject)</a>
+                &ensp;
+                <span class="muted">
+                    @(message.ToAddress)
+                </span>
+            </li>
+        }
         <li>
             📄
             &thinsp;

@@ -19,13 +19,12 @@ public class ShowEmailQueueModel(
 
             EmailHeaders = await database.EmailMessages
                 .Include(x => x.EmailAccount)
-                .Include(x => x.EmailTarget)
                 .OrderBy(x => x.Created)
                 .Select(x => new EmailHeader()
                 {
                     Id = x.Id,
-                    ToName = x.EmailTarget.Name,
-                    ToAddress = x.EmailTarget.Address,
+                    ToName = x.ToName,
+                    ToAddress = x.ToAddress,
                     FromName = x.EmailAccount.FromName,
                     FromAddress = x.EmailAccount.FromAddress,
                     ReplyToName = x.EmailAccount.ReplyToName,

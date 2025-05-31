@@ -47,36 +47,34 @@
     </h5>
 
     <div class="notice">
-        @foreach (var message in Model.EmailMessages.Where(x => x.EmailTargetId == Model.EmailTarget.Id))
+        @foreach (var key in Model.PageKeys)
         {
             <div>
                 <span>
-                    📩
+                    🔑
                     &thinsp;
-                    <a href="/show-email/@(message.Id)">@(message.Subject)</a>
-                    &thinsp;
-                    <span class="muted">
-                        skickat @(message.Sent.ToFixedFormatDateShortTime())
-                    </span>
+                    <a href="/show-page-key/@(key.Id)">@(key.Value)</a>
                 </span>
 
-                @foreach (var key in Model.PageKeys
-                    .Where(x => x.EmailMessageId == message.Id))
+                @foreach (var message in Model.EmailMessages
+                    .Where(x => x.PageKeyId == key.Id))
                 {
                     <div style="padding-left:1.5em;">
-                        <div>
-                            🔑
-                            &thinsp;
-                            <a href="/show-page-key/@(key.Id)">@(key.Value)</a>
-                        </div>
+                        📩
+                        &thinsp;
+                        <a href="/show-email/@(message.Id)">@(message.Subject)</a>
+                        &thinsp;
+                        <span class="muted">
+                            skickat @(message.Sent.ToFixedFormatDateShortTime())
+                        </span>
                     </div>
                 }
 
-                @if (!Model.PageKeys
-                    .Any(x => x.EmailMessageId == message.Id))
+                @if (!Model.EmailMessages
+                    .Any(x => x.PageKeyId == key.Id))
                 {
                     <div style="padding-left:1.5em;">
-                        🔑
+                        📩
                         &thinsp;
                         &ndash;
                     </div>
@@ -84,10 +82,10 @@
             </div>
         }
 
-        @if (!Model.EmailMessages.Any(x => x.EmailTargetId == Model.EmailTarget.Id))
+        @if (!Model.PageKeys.Any())
         {
-            <div style="padding-left:1.5em;">
-                📩
+            <div>
+                🔑
                 &thinsp;
                 &ndash;
             </div>
