@@ -16,6 +16,11 @@ class EmailTargetConfiguration : IEntityTypeConfiguration<EmailTarget>
 
         builder.HasMany(x => x.EmailMessages)
             .WithOne(x => x.EmailTarget)
+            .HasForeignKey(x => x.EmailTargetId)
+            .OnDelete(DeleteBehavior.NoAction); // NOTE: Temporary; TODO: Drop relation
+
+        builder.HasMany(x => x.PageKeys)
+            .WithOne(x => x.EmailTarget)
             .HasForeignKey(x => x.EmailTargetId);
     }
 }
