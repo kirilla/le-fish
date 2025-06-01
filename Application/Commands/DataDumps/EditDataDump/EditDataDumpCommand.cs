@@ -12,18 +12,11 @@ public class EditDataDumpCommand(IDatabaseService database) : IEditDataDumpComma
         model.SetEmptyStringsToNull();
 
         var dump = await database.DataDumps
-            .Where(x => x.Id == model.DataDumpId)
+            .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        if (await database.DataDumps
-            .AnyAsync(x =>
-                x.Name == model.Name &&
-                x.Id != model.DataDumpId))
-            throw new BlockedByNameException();
-
-        dump.Name = model.Name;
-        dump.ContentType = model.ContentType;
+        dump.JsonData = model.JsonData;
 
         await database.SaveAsync(userToken);
     }

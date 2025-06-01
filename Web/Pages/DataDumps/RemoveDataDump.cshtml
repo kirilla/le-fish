@@ -16,13 +16,12 @@
 
 <main>
     <h4>
-        Ta bort datadumpen:
-        @(Model.DataDump.Name)
+        Ta bort datadump
     </h4>
 
     <form method="post">
 
-        <input type="hidden" asp-for="CommandModel.DataDumpId" />
+        <input type="hidden" asp-for="CommandModel.Id" />
 
         <p>
             <label asp-for="CommandModel.Confirmed">
@@ -37,7 +36,7 @@
             Ta bort
         </button>
 
-        <a class="button" href="/show-data-dump/@(Model.CommandModel.DataDumpId)">
+        <a class="button" href="/show-data-dump/@(Model.CommandModel.Id)">
             Avbryt
         </a>
     </form>

@@ -26,9 +26,8 @@ public class EditDataDumpModel(
 
             CommandModel = new EditDataDumpCommandModel()
             {
-                DataDumpId = DataDump.Id,
-                Name = DataDump.Name,
-                ContentType = DataDump.ContentType,
+                Id = DataDump.Id,
+                JsonData = DataDump.JsonData,
             };
 
             return Page();
@@ -51,7 +50,7 @@ public class EditDataDumpModel(
                 throw new NotPermittedException();
 
             DataDump = await database.DataDumps
-                .Where(x => x.Id == CommandModel.DataDumpId)
+                .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -61,14 +60,6 @@ public class EditDataDumpModel(
             await command.Execute(UserToken, CommandModel);
 
             return Redirect($"/show-data-dump/{id}");
-        }
-        catch (BlockedByNameException)
-        {
-            ModelState.AddModelError(
-                nameof(CommandModel.Name),
-                "Det finns en annat datadump med samma namn.");
-
-            return Page();
         }
         catch
         {

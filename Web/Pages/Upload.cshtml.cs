@@ -10,32 +10,6 @@ public class UploadPageModel(
     IDatabaseService database,
     IUploadDataDumpCommand command) : UserTokenPageModel(userToken)
 {
-    [BindProperty]
-    public IFormFile File { get; set; }
-
-    public UploadDataDumpCommandModel CommandModel { get; set; }
-
-    public async Task<IActionResult> OnGetAsync(int key)
-    {
-        try
-        {
-            //if (!command.IsPermitted(UserToken))
-            //    throw new NotPermittedException();
-
-            CommandModel = new UploadDataDumpCommandModel();
-
-            return Page();
-        }
-        catch (NotFoundException)
-        {
-            return Redirect("/help/notfound");
-        }
-        catch
-        {
-            return Redirect("/help/notpermitted");
-        }
-    }
-
     public async Task<IActionResult> OnPostAsync(int key)
     {
         try
@@ -43,44 +17,28 @@ public class UploadPageModel(
             //if (!command.IsPermitted(UserToken))
             //    throw new NotPermittedException();
 
-            if (!ModelState.IsValid)
-                return Page();
+            //if (!ModelState.IsValid)
+            //    return Page();
 
-            if (File == null || File.Length == 0)
+            string requestBody;
+
+            using (var reader = new StreamReader(Request.Body))
             {
-                ModelState.AddModelError("", "Please upload a valid file.");
-
-                return Page();
+                requestBody = await reader.ReadToEndAsync();
             }
 
-            var data = await GetFileBytesAsync(File);
-
-            CommandModel = new UploadDataDumpCommandModel()
+            var commandModel = new UploadDataDumpCommandModel()
             {
-                Data = data,
-                //ContentLength = data.Length,
-                ContentType = File.ContentType,
-                Name = File.FileName,
+                JsonData = requestBody,
             };
 
-            CommandModel.Data = await GetFileBytesAsync(File);
+            await command.Execute(UserToken, commandModel, key);
 
-            await command.Execute(UserToken, CommandModel, key);
-
-            return Redirect($"/upload/{key}");
+            return new AcceptedResult();
         }
         catch
         {
-            return Redirect("/help/notpermitted");
+            return BadRequest();
         }
-    }
-
-    private async Task<byte[]> GetFileBytesAsync(IFormFile file)
-    {
-        using var memoryStream = new MemoryStream();
-        
-        await file.CopyToAsync(memoryStream);
-
-        return memoryStream.ToArray();
     }
 }

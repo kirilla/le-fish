@@ -26,7 +26,7 @@ public class RemoveDataDumpModel(
 
             CommandModel = new RemoveDataDumpCommandModel()
             {
-                DataDumpId = DataDump.Id,
+                Id = DataDump.Id,
             };
 
             return Page();
@@ -49,7 +49,7 @@ public class RemoveDataDumpModel(
                 throw new NotPermittedException();
 
             DataDump = await database.DataDumps
-                .Where(x => x.Id == CommandModel.DataDumpId)
+                .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

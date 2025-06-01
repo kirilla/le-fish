@@ -22,10 +22,7 @@ public class UploadDataDumpCommand(IDatabaseService database) : IUploadDataDumpC
         var dump = new DataDump()
         {
             PageKeyId = pageKey.Id,
-            Data = model.Data,
-            ContentLength = model.Data.Length,
-            ContentType = model.ContentType,
-            Name = model.Name,
+            JsonData = model.JsonData,
         };
 
         database.DataDumps.Add(dump);

@@ -6,12 +6,8 @@ class DataDumpConfiguration : IEntityTypeConfiguration<DataDump>
     {
         builder.HasKey(p => p.Id);
 
-        builder.Property(p => p.Name)
+        builder.Property(p => p.JsonData)
             .IsRequired()
-            .HasMaxLength(MaxLengths.Domain.DataDump.Name);
-
-        builder.Property(p => p.ContentType)
-            .IsRequired()
-            .HasMaxLength(MaxLengths.Domain.DataDump.ContentType);
+            .HasMaxLength(MaxLengths.Domain.DataDump.JsonData);
     }
 }

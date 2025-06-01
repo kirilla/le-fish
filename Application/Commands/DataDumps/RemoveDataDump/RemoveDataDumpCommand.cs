@@ -12,7 +12,7 @@ public class RemoveDataDumpCommand(IDatabaseService database) : IRemoveDataDumpC
             throw new ConfirmationRequiredException();
 
         var dump = await database.DataDumps
-            .Where(x => x.Id == model.DataDumpId)
+            .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 

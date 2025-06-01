@@ -2,38 +2,3 @@
 @model UploadPageModel
 @{
 }
-
-@section Meta {
-    <title>
-        Ladda upp datadump -
-        @(Branding.WebsiteTitle)
-    </title>
-}
-
-@section Header {
-    <partial name="_Navbar" model="Model.UserToken" />
-}
-
-<main>
-    <h4>
-        Ladda upp datadump
-    </h4>
-
-    <div class="notice">
-
-        <form method="post" enctype="multipart/form-data">
-
-            <input type="file" asp-for="File" />
-
-            <div asp-validation-summary="All"></div>
-
-            <button type="submit">Ladda upp</button>
-        </form>
-
-        <a class="button" href="/">
-            Avbryt
-        </a>
-
-    </div>
-
-</main>

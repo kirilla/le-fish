@@ -4,15 +4,8 @@ namespace Lefish.Application.Commands.DataDumps.UploadDataDump;
 
 public class UploadDataDumpCommandModel
 {
-    public byte[] Data { get; set; }
-
-    //public int ContentLength { get; set; }
-
-    [Required]
-    [StringLength(MaxLengths.Domain.DataDump.Name)]
-    public string Name { get; set; }
-
-    [Required]
-    [StringLength(MaxLengths.Domain.DataDump.ContentType)]
-    public string ContentType { get; set; }
+    [RegularExpression(Pattern.Common.AnythingMultiLine)]
+    [Required(ErrorMessage = "Något innehåll krävs.")]
+    [StringLength(MaxLengths.Domain.DataDump.JsonData)]
+    public string JsonData { get; set; }
 }

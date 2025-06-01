@@ -67,8 +67,7 @@ public static class MaxLengths
     {
         public static class DataDump
         {
-            public const int Name = 100;
-            public const int ContentType = Common.Mime.ContentType;
+            public const int JsonData = Common.DbSuperSize;
         }
 
         public static class EmailAccount

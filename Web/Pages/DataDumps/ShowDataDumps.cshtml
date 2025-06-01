@@ -29,10 +29,8 @@
                     📦
                     &thinsp;
                     <a href="/show-data-dump/@(dump.Id)">
-                        @(dump.Name)
+                        @(dump.Created.ToFixedFormatDateShortTime())
                     </a>
-                    &ensp;
-                    @(dump.Created.ToFixedFormatDateShortTime())
                 </li>
             }
 

@@ -202,13 +202,13 @@
     </h5>
 
     <ul class="notice">
-        @foreach (var data in Model.DataDumps)
+        @foreach (var dump in Model.DataDumps)
         {
             <li>
                 🧺
                 &thinsp;
-                <a href="/show-data-dump/@(data.Id)">
-                    @(data.Name)
+                <a href="/show-data-dump/@(dump.Id)">
+                    @(dump.Created.ToFixedFormatDateShortTime())
                 </a>
             </li>
         }

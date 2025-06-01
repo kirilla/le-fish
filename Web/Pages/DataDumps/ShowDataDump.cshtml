@@ -4,7 +4,7 @@
 }
 
 @section Meta {
-    <title>Datadump - @(Model.DataDump.Name) - @(Branding.WebsiteTitle)</title>
+    <title>Datadump - @(Branding.WebsiteTitle)</title>
 }
 
 @section Header {
@@ -14,23 +14,16 @@
 <main>
 
     <h4>
-        Datadump:
-        @(Model.DataDump.Name)
+        Datadump
     </h4>
 
     <div class="notice">
-        <ul>
-            <li>
-                Filnamn: @(Model.DataDump.Name)
-            </li>
-            <li>
-                Filtyp: @(Model.DataDump.ContentType)
-            </li>
-            <li>
-                Filstorlek: @(Model.DataDump.ContentLength)
-            </li>
-        </ul>
+        <p>
+            Skapad: @(Model.DataDump.Created.ToFixedFormatDateShortTime())
+        </p>
     </div>
+
+    <pre class="notice">@(Model.DataDump.JsonData)</pre>
 
     <p>
         @if (Model.CanEditDataDump)
