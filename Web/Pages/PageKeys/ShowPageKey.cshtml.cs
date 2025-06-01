@@ -6,6 +6,7 @@ public class ShowPageKeyModel(
 {
     public PageKeyPlus PageKey { get; set; }
 
+    public List<DataDump> DataDumps { get; set; }
     public List<EmailHeader> EmailHeaders { get; set; }
 
     public List<PageVisitPlus> PageVisits { get; set; }
@@ -42,6 +43,11 @@ public class ShowPageKeyModel(
                 })
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
+
+            DataDumps = await database.DataDumps
+                .Where(x => x.PageKeyId == id)
+                .OrderBy(x => x.Created)
+                .ToListAsync();
 
             EmailHeaders = await database.EmailMessages
                 .Where(x => x.PageKeyId == id)

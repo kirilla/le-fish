@@ -197,6 +197,31 @@
         </a>
     </div>
 
+    <h5>
+        Exfiltrerad data
+    </h5>
+
+    <ul class="notice">
+        @foreach (var data in Model.DataDumps)
+        {
+            <li>
+                🧺
+                &thinsp;
+                <a href="/show-data-dump/@(data.Id)">
+                    @(data.Name)
+                </a>
+            </li>
+        }
+        @if (!Model.DataDumps.Any())
+        {
+            <li>
+                🧺
+                &thinsp;
+                &ndash;
+            </li>
+        }
+    </ul>
+
     <a class="button" href="/remove-page-key/@(Model.PageKey.Id)">
         Ta bort
     </a>
