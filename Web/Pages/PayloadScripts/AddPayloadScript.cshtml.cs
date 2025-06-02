@@ -63,7 +63,7 @@ public class AddPayloadScriptModel(
     {
         return """
             (function() { 
-                alert('hej [[page_key]]'); 
+                alert('hej [[attack_token]]'); 
             })()
             """;
     }
