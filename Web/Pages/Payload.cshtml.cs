@@ -17,13 +17,13 @@ public class PayloadPageModel(
     public Attack Attack { get; set; }
     public PayloadPage PayloadPage { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int key)
+    public async Task<IActionResult> OnGetAsync(int token)
     {
         try
         {
             Attack = await database.Attacks
                 .AsNoTracking()
-                .Where(x => x.Value == key)
+                .Where(x => x.Value == token)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -52,7 +52,7 @@ public class PayloadPageModel(
     }
 
     public async Task LogPageVisit(
-        HttpContext context, Attack pageKey)
+        HttpContext context, Attack attack)
     {
         var visit = new PageVisit()
         {
@@ -60,7 +60,7 @@ public class PayloadPageModel(
             Method = context.Request.Method,
             IpAddress = context.Connection.RemoteIpAddress?.ToString(),
             UserAgent = context.Request.Headers?.UserAgent,
-            PageKeyId = pageKey.Id,
+            AttackId = attack.Id,
         };
 
         database.PageVisits.Add(visit);

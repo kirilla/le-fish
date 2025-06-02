@@ -21,15 +21,15 @@
         Besök sidan som
     </h5>
     <div class="notice">
-        @foreach (var key in Model.Attacks)
+        @foreach (var attack in Model.Attacks)
         {
             <div>
-                <a href="/page/@(key.Value)" target="_blank">
-                    @(key.Value)</a>
+                <a href="/page/@(attack.Value)" target="_blank">
+                    @(attack.Value)</a>
                 &ensp;
-                @(key.TargetName)
+                @(attack.TargetName)
                 &ensp;
-                @(key.TargetAddress)
+                @(attack.TargetAddress)
             </div>
         }
 

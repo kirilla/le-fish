@@ -11,12 +11,12 @@ public class RemoveAttackCommand(IDatabaseService database) : IRemoveAttackComma
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var key = await database.Attacks
-            .Where(x => x.Id == model.PageKeyId)
+        var attack = await database.Attacks
+            .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.Attacks.Remove(key);
+        database.Attacks.Remove(attack);
 
         await database.SaveAsync(userToken);
     }

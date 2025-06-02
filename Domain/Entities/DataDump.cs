@@ -8,6 +8,6 @@ public class DataDump : ICreatedDateTime
 
     public DateTime? Created { get; set; }
 
-    public int PageKeyId { get; set; }
+    public int AttackId { get; set; }
     public Attack Attack { get; set; }
 }

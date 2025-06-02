@@ -20,7 +20,7 @@ public class EmailMessage : ICreatedDateTime
     public DateTime? Sent { get; set; }
 
     public int EmailAccountId { get; set; }
-    public int PageKeyId { get; set; }
+    public int AttackId { get; set; }
 
     public EmailAccount? EmailAccount { get; set; }
     public Attack Attack { get; set; }

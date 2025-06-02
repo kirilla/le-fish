@@ -35,13 +35,13 @@ public class RemoveScriptVisitModel(
                     TargetName = x.Attack.EmailTarget.Name,
                     TargetAddress = x.Attack.EmailTarget.Address,
                     EmailTargetId = x.Attack.EmailTargetId,
-                    PageKeyId = x.PageKeyId,
+                    AttackId = x.AttackId,
                 })
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             Attack = await database.Attacks
-                .Where(x => x.Id == ScriptVisit.PageKeyId)
+                .Where(x => x.Id == ScriptVisit.AttackId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -83,13 +83,13 @@ public class RemoveScriptVisitModel(
                     TargetName = x.Attack.EmailTarget.Name,
                     TargetAddress = x.Attack.EmailTarget.Address,
                     EmailTargetId = x.Attack.EmailTargetId,
-                    PageKeyId = x.PageKeyId,
+                    AttackId = x.AttackId,
                 })
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             Attack = await database.Attacks
-                .Where(x => x.Id == ScriptVisit.PageKeyId)
+                .Where(x => x.Id == ScriptVisit.AttackId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

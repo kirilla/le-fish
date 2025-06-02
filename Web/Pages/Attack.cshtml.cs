@@ -34,7 +34,7 @@ public class AttackModel(
                 .Select(x => new EmailHeader()
                 {
                     Id = x.Id,
-                    PageKeyId = x.PageKeyId,
+                    AttackId = x.AttackId,
                     Subject = x.Subject,
                     EmailStatus = x.EmailStatus,
                     Sent = x.Sent,
@@ -46,7 +46,7 @@ public class AttackModel(
                 .Select(x => new Visit() { 
                     VisitKind = VisitKind.Page,
                     Id = x.Id,
-                    PageKeyId = x.PageKeyId,
+                    AttackId = x.AttackId,
                     Created = x.Created,
                     IpAddress = x.IpAddress,
                     PageName = x.Attack.PayloadPage.Name,
@@ -60,7 +60,7 @@ public class AttackModel(
                 {
                     VisitKind = VisitKind.Script,
                     Id = x.Id,
-                    PageKeyId = x.PageKeyId,
+                    AttackId = x.AttackId,
                     Created = x.Created,
                     IpAddress = x.IpAddress,
                     ScriptName = x.Attack.PayloadScript.Name,

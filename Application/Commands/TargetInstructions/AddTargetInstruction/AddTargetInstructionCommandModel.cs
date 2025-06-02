@@ -4,7 +4,7 @@ namespace Lefish.Application.Commands.TargetInstructions.AddTargetInstruction;
 
 public class AddTargetInstructionCommandModel
 {
-    public int PageKeyId { get; set; }
+    public int AttackId { get; set; }
 
     [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Ange namn.")]

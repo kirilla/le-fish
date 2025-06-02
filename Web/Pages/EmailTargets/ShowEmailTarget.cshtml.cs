@@ -44,7 +44,7 @@ public class ShowEmailTargetModel(
                 .Select(x => new EmailHeader()
                 {
                     Id = x.Id,
-                    PageKeyId = x.PageKeyId,
+                    AttackId = x.AttackId,
                     Subject = x.Subject,
                     EmailStatus = x.EmailStatus,
                     Sent = x.Sent,

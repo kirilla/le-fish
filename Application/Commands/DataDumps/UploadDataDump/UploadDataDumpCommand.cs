@@ -5,7 +5,7 @@ public class UploadDataDumpCommand(IDatabaseService database) : IUploadDataDumpC
     public async Task Execute(
         IUserToken userToken,
         UploadDataDumpCommandModel model,
-        int pageKeyValue)
+        int attackToken)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
@@ -14,14 +14,14 @@ public class UploadDataDumpCommand(IDatabaseService database) : IUploadDataDumpC
         model.SetEmptyStringsToNull();
         model.TruncateByStringLength();
 
-        var pageKey = await database.Attacks
-            .Where(x => x.Value == pageKeyValue)
+        var attack = await database.Attacks
+            .Where(x => x.Value == attackToken)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
         var dump = new DataDump()
         {
-            PageKeyId = pageKey.Id,
+            AttackId = attack.Id,
             JsonData = model.JsonData,
         };
 

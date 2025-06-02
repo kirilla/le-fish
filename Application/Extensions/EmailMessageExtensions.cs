@@ -8,7 +8,7 @@ public static class EmailMessageExtensions
         this EmailMessage message,
         TemplateConfiguration templateConfiguration,
         EmailTarget target, 
-        Attack key)
+        Attack attack)
     {
         // Step 1
         message.Subject = message.Subject.Replace(Variables.PAGE_URL, templateConfiguration.PageUrl);
@@ -20,15 +20,15 @@ public static class EmailMessageExtensions
         message.TextBody = message.TextBody.Replace(Variables.SCRIPT_URL, templateConfiguration.ScriptUrl);
 
         // Step 2
-        message.Subject = message.Subject.Replace(Variables.PAGE_KEY, key.Value.ToString());
+        message.Subject = message.Subject.Replace(Variables.PAGE_KEY, attack.Value.ToString());
         message.Subject = message.Subject.Replace(Variables.TARGET_ADDRESS, target.Address);
         message.Subject = message.Subject.Replace(Variables.TARGET_NAME, target.Name);
         
-        message.HtmlBody = message.HtmlBody.Replace(Variables.PAGE_KEY, key.Value.ToString());
+        message.HtmlBody = message.HtmlBody.Replace(Variables.PAGE_KEY, attack.Value.ToString());
         message.HtmlBody = message.HtmlBody.Replace(Variables.TARGET_ADDRESS, target.Address);
         message.HtmlBody = message.HtmlBody.Replace(Variables.TARGET_NAME, target.Name);
         
-        message.TextBody = message.TextBody.Replace(Variables.PAGE_KEY, key.Value.ToString());
+        message.TextBody = message.TextBody.Replace(Variables.PAGE_KEY, attack.Value.ToString());
         message.TextBody = message.TextBody.Replace(Variables.TARGET_ADDRESS, target.Address);
         message.TextBody = message.TextBody.Replace(Variables.TARGET_NAME, target.Name);
 

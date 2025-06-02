@@ -4,7 +4,7 @@ public class EmailHeader
 {
     public int Id { get; set; }
 
-    public int PageKeyId { get; set; }
+    public int AttackId { get; set; }
 
     public string ToName { get; set; }
     public string ToAddress { get; set; }

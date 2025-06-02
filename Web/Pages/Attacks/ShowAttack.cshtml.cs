@@ -45,17 +45,17 @@ public class ShowAttackModel(
                 throw new NotFoundException();
 
             DataDumps = await database.DataDumps
-                .Where(x => x.PageKeyId == id)
+                .Where(x => x.AttackId == id)
                 .OrderBy(x => x.Created)
                 .ToListAsync();
 
             EmailHeaders = await database.EmailMessages
-                .Where(x => x.PageKeyId == id)
+                .Where(x => x.AttackId == id)
                 .OrderBy(x => x.Created)
                 .Select(x => new EmailHeader()
                 {
                     Id = x.Id,
-                    PageKeyId = x.PageKeyId,
+                    AttackId = x.AttackId,
                     ToName = x.ToName,
                     ToAddress = x.ToAddress,
                     FromName = x.EmailAccount!.FromName,
@@ -70,7 +70,7 @@ public class ShowAttackModel(
                 .ToListAsync();
 
             PageVisits = await database.PageVisits
-                .Where(x => x.PageKeyId == id)
+                .Where(x => x.AttackId == id)
                 .OrderBy(x => x.Created)
                 .Select(x => new PageVisitPlus()
                 {
@@ -86,7 +86,7 @@ public class ShowAttackModel(
                 .ToListAsync();
 
             ScriptVisits = await database.ScriptVisits
-                .Where(x => x.PageKeyId == id)
+                .Where(x => x.AttackId == id)
                 .OrderBy(x => x.Created)
                 .Select(x => new ScriptVisitPlus()
                 {
@@ -103,12 +103,12 @@ public class ShowAttackModel(
 
             var pageVisits = await database.PageVisits
                 .OrderBy(x => x.Created)
-                .Where(x => x.PageKeyId == id)
+                .Where(x => x.AttackId == id)
                 .Select(x => new Visit()
                 {
                     VisitKind = VisitKind.Page,
                     Id = x.Id,
-                    PageKeyId = x.PageKeyId,
+                    AttackId = x.AttackId,
                     Created = x.Created,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
@@ -119,12 +119,12 @@ public class ShowAttackModel(
 
             var scriptVisits = await database.ScriptVisits
                 .OrderBy(x => x.Created)
-                .Where(x => x.PageKeyId == id)
+                .Where(x => x.AttackId == id)
                 .Select(x => new Visit()
                 {
                     VisitKind = VisitKind.Script,
                     Id = x.Id,
-                    PageKeyId = x.PageKeyId,
+                    AttackId = x.AttackId,
                     Created = x.Created,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
@@ -139,7 +139,7 @@ public class ShowAttackModel(
                 .ToList();
 
             TargetInstructions = await database.TargetInstructions
-                .Where(x => x.PageKeyId == id)
+                .Where(x => x.AttackId == id)
                 .OrderBy(x => x.Created)
                 .Select(x => new TargetInstructionPlus()
                 {

@@ -12,14 +12,14 @@ public class AddTargetInstructionCommand(IDatabaseService database) : IAddTarget
         model.SetEmptyStringsToNull();
         model.TruncateByStringLength();
 
-        var pageKey = await database.Attacks
-            .Where(x => x.Id == model.PageKeyId)
+        var attack = await database.Attacks
+            .Where(x => x.Id == model.AttackId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
         var page = new TargetInstruction()
         {
-            PageKeyId = pageKey.Id,
+            AttackId = attack.Id,
             Name = model.Name,
             Script = model.Script,
             Reference = Random.Shared.Next(),

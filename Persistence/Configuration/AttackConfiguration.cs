@@ -12,22 +12,22 @@ class AttackConfiguration : IEntityTypeConfiguration<Attack>
 
         builder.HasMany(x => x.DataDumps)
             .WithOne(x => x.Attack)
-            .HasForeignKey(x => x.PageKeyId);
+            .HasForeignKey(x => x.AttackId);
 
         builder.HasMany(x => x.EmailMessages)
             .WithOne(x => x.Attack)
-            .HasForeignKey(x => x.PageKeyId);
+            .HasForeignKey(x => x.AttackId);
 
         builder.HasMany(x => x.PageVisits)
             .WithOne(x => x.Attack)
-            .HasForeignKey(x => x.PageKeyId);
+            .HasForeignKey(x => x.AttackId);
 
         builder.HasMany(x => x.ScriptVisits)
             .WithOne(x => x.Attack)
-            .HasForeignKey(x => x.PageKeyId);
+            .HasForeignKey(x => x.AttackId);
 
         builder.HasMany(x => x.TargetInstructions)
             .WithOne(x => x.Attack)
-            .HasForeignKey(x => x.PageKeyId);
+            .HasForeignKey(x => x.AttackId);
     }
 }

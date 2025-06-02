@@ -10,7 +10,7 @@ public class UploadPageModel(
     IDatabaseService database,
     IUploadDataDumpCommand command) : UserTokenPageModel(userToken)
 {
-    public async Task<IActionResult> OnPostAsync(int key)
+    public async Task<IActionResult> OnPostAsync(int token)
     {
         try
         {
@@ -32,7 +32,7 @@ public class UploadPageModel(
                 JsonData = requestBody,
             };
 
-            await command.Execute(UserToken, commandModel, key);
+            await command.Execute(UserToken, commandModel, token);
 
             return new AcceptedResult();
         }

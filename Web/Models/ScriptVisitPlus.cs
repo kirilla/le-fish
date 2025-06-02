@@ -5,7 +5,7 @@ public class ScriptVisitPlus
     public int Id { get; set; }
 
     public int EmailTargetId { get; set; }
-    public int PageKeyId { get; set; }
+    public int AttackId { get; set; }
     public int PayloadScriptId { get; set; }
 
     public DateTime? Created { get; set; }

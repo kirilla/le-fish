@@ -26,7 +26,7 @@ public class RemoveAttackModel(
 
             CommandModel = new RemoveAttackCommandModel()
             {
-                PageKeyId = Attack.Id,
+                Id = Attack.Id,
             };
 
             return Page();
@@ -49,7 +49,7 @@ public class RemoveAttackModel(
                 throw new NotPermittedException();
 
             Attack = await database.Attacks
-                .Where(x => x.Id == CommandModel.PageKeyId)
+                .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

@@ -2,7 +2,7 @@
 
 public class RemoveAttackCommandModel
 {
-    public int PageKeyId { get; set; }
+    public int Id { get; set; }
 
     public bool Confirmed { get; set; }
 }

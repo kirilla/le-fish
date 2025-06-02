@@ -13,5 +13,5 @@ public class PageVisit : ICreatedDateTime
     public string? UserAgent { get; set; }
 
     public Attack Attack { get; set; }
-    public int PageKeyId { get; set; }
+    public int AttackId { get; set; }
 }

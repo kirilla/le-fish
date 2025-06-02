@@ -12,8 +12,8 @@ public class SelectTargetInstructionCommand(IDatabaseService database) : ISelect
         model.SetEmptyStringsToNull();
         model.TruncateByStringLength();
 
-        var pageKey = await database.Attacks
-            .Where(x => x.Id == model.PageKeyId)
+        var attack = await database.Attacks
+            .Where(x => x.Id == model.AttackId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
@@ -24,7 +24,7 @@ public class SelectTargetInstructionCommand(IDatabaseService database) : ISelect
 
         var page = new TargetInstruction()
         {
-            PageKeyId = pageKey.Id,
+            AttackId = attack.Id,
             Name = instruction.Name,
             Script = instruction.Script,
             Reference = Random.Shared.Next(),

@@ -39,18 +39,18 @@
                 </span>
             </div>
 
-            @foreach (var key in Model.Attacks
+            @foreach (var attack in Model.Attacks
                .Where(x => x.EmailTargetId == target.Id))
             {
                 <div style="padding-left:1.5em;">
                     <div>
                         🔑
                         &thinsp;
-                        <a href="/show-attack/@(key.Id)">@(key.Value)</a>
+                        <a href="/show-attack/@(attack.Id)">@(attack.Value)</a>
                     </div>
 
                     @foreach (var message in Model.EmailMessages
-                        .Where(x => x.PageKeyId == key.Id))
+                        .Where(x => x.AttackId == attack.Id))
                     {
                         <div style="padding-left:1.5em;">
                             📩
@@ -59,7 +59,7 @@
                         </div>
                     }
 
-                    @if (!Model.EmailMessages.Any(x => x.PageKeyId == key.Id))
+                    @if (!Model.EmailMessages.Any(x => x.AttackId == attack.Id))
                     {
                         <div style="padding-left:1.5em;">
                             📩

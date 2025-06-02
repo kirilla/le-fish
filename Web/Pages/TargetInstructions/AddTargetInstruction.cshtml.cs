@@ -28,7 +28,7 @@ public class AddTargetInstructionModel(
             {
                 Name = "Instruktion A",
                 Script = GetDefaultTemplate(),
-                PageKeyId = id,
+                AttackId = id,
             };
 
             return Page();

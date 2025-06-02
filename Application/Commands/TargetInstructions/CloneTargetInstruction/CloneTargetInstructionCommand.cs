@@ -19,7 +19,7 @@ public class CloneTargetInstructionCommand(IDatabaseService database) : ICloneTa
 
         var clone = new TargetInstruction()
         {
-            PageKeyId = existing.PageKeyId,
+            AttackId = existing.AttackId,
             Name = model.Name,
             Script = existing.Script,
             Reference = Random.Shared.Next(),

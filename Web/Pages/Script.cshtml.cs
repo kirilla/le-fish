@@ -18,13 +18,13 @@ public class ScriptPageModel(
     public Attack Attack { get; set; }
     public PayloadScript PayloadScript { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int key)
+    public async Task<IActionResult> OnGetAsync(int token)
     {
         try
         {
             Attack = await database.Attacks
                 .AsNoTracking()
-                .Where(x => x.Value == key)
+                .Where(x => x.Value == token)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -53,7 +53,7 @@ public class ScriptPageModel(
     }
 
     public async Task LogScriptVisit(
-        HttpContext context, Attack pageKey)
+        HttpContext context, Attack attack)
     {
         var visit = new ScriptVisit()
         {
@@ -61,7 +61,7 @@ public class ScriptPageModel(
             Method = context.Request.Method,
             IpAddress = context.Connection.RemoteIpAddress?.ToString(),
             UserAgent = context.Request.Headers?.UserAgent,
-            PageKeyId = pageKey.Id,
+            AttackId = attack.Id,
         };
 
         database.ScriptVisits.Add(visit);

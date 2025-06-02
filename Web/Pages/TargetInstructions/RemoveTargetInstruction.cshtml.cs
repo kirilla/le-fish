@@ -53,14 +53,14 @@ public class RemoveTargetInstructionModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            var pageKeyId = TargetInstruction.PageKeyId;
+            var attackId = TargetInstruction.AttackId;
 
             if (!ModelState.IsValid)
                 return Page();
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-attack/{pageKeyId}");
+            return Redirect($"/show-attack/{attackId}");
         }
         catch (ConfirmationRequiredException)
         {

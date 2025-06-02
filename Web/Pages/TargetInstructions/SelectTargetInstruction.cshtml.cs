@@ -38,7 +38,7 @@ public class SelectTargetInstructionModel(
 
             CommandModel = new SelectTargetInstructionCommandModel()
             {
-                PageKeyId = id,
+                AttackId = id,
             };
 
             return Page();

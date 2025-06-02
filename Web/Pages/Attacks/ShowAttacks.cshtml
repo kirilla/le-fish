@@ -28,25 +28,25 @@
                 <th>Mål</th>
                 <th>Sida</th>
             </tr>
-            @foreach (var key in Model.Attacks)
+            @foreach (var attack in Model.Attacks)
             {
                 <tr>
                     <td>
-                        @(key.Created.ToFixedFormatDateShortTime())
+                        @(attack.Created.ToFixedFormatDateShortTime())
                     </td>
                     <td>
-                        <a href="/show-attack/@(key.Id)">
-                        @(key.Value)
+                        <a href="/show-attack/@(attack.Id)">
+                        @(attack.Value)
                         </a>
                     </td>
                     <td>
-                        <a href="/show-email-target/@(key.EmailTargetId)">
-                        @(key.TargetName)
+                        <a href="/show-email-target/@(attack.EmailTargetId)">
+                        @(attack.TargetName)
                         </a>
                     </td>
                     <td>
-                        <a href="/show-payload-page/@(key.PayloadPageId)">
-                        @(key.PageName)
+                        <a href="/show-payload-page/@(attack.PayloadPageId)">
+                        @(attack.PageName)
                         </a>
                     </td>
                 </tr>
