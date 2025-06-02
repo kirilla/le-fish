@@ -4,7 +4,7 @@ public class AddOrSelectInstructionModel(
     IUserToken userToken,
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
-    public PageKey PageKey { get; set; }
+    public Attack Attack { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -13,7 +13,7 @@ public class AddOrSelectInstructionModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PageKey = await database.Attacks
+            Attack = await database.Attacks
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

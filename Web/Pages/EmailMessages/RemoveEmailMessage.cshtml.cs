@@ -50,12 +50,12 @@ public class RemoveEmailMessageModel(
                 throw new NotPermittedException();
 
             EmailMessage = await database.EmailMessages
-                .Include(x => x.PageKey)
+                .Include(x => x.Attack)
                 .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            var emailTargetId = EmailMessage.PageKey.EmailTargetId;
+            var emailTargetId = EmailMessage.Attack.EmailTargetId;
 
             if (!ModelState.IsValid)
                 return Page();

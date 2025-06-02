@@ -14,7 +14,7 @@ class PayloadScriptConfiguration : IEntityTypeConfiguration<PayloadScript>
             .IsRequired()
             .HasMaxLength(MaxLengths.Domain.PayloadScript.Script);
 
-        builder.HasMany(x => x.PageKeys)
+        builder.HasMany(x => x.Attacks)
             .WithOne(x => x.PayloadScript)
             .HasForeignKey(x => x.PayloadScriptId);
     }

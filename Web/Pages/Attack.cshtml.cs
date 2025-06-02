@@ -9,7 +9,7 @@ public class AttackModel(
 {
     public List<EmailTarget> EmailTargets { get; set; }
     public List<EmailHeader> EmailMessages { get; set; }
-    public List<PageKeyPlus> PageKeys { get; set; }
+    public List<AttackSummary> Attacks { get; set; }
     public List<Visit> Visits { get; set; }
 
     public bool CanSendEmail { get; set; }
@@ -23,7 +23,7 @@ public class AttackModel(
                 throw new NotPermittedException();
 
             EmailTargets = await database.EmailTargets
-                .Where(x => x.PageKeys.Any())
+                .Where(x => x.Attacks.Any())
                 .OrderBy(x => x.Name)
                 .ThenBy(x => x.Address)
                 .ToListAsync();
@@ -49,8 +49,8 @@ public class AttackModel(
                     PageKeyId = x.PageKeyId,
                     Created = x.Created,
                     IpAddress = x.IpAddress,
-                    PageName = x.PageKey.PayloadPage.Name,
-                    PayloadPageId = x.PageKey.PayloadPageId,
+                    PageName = x.Attack.PayloadPage.Name,
+                    PayloadPageId = x.Attack.PayloadPageId,
                 })
                 .ToListAsync();
 
@@ -63,8 +63,8 @@ public class AttackModel(
                     PageKeyId = x.PageKeyId,
                     Created = x.Created,
                     IpAddress = x.IpAddress,
-                    ScriptName = x.PageKey.PayloadScript.Name,
-                    PayloadScriptId = x.PageKey.PayloadScriptId,
+                    ScriptName = x.Attack.PayloadScript.Name,
+                    PayloadScriptId = x.Attack.PayloadScriptId,
                 })
                 .ToListAsync();
 
@@ -73,9 +73,9 @@ public class AttackModel(
                 .OrderBy(x => x.Created)
                 .ToList();
 
-            PageKeys = await database.Attacks
+            Attacks = await database.Attacks
                 .OrderBy(x => x.Created)
-                .Select(x => new PageKeyPlus()
+                .Select(x => new AttackSummary()
                 {
                     Id = x.Id,
                     Value = x.Value,

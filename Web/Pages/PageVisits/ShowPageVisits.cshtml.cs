@@ -22,11 +22,11 @@ public class ShowPageVisitsModel(
                     Method = x.Method,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
-                    PageName = x.PageKey.PayloadPage.Name,
-                    PayloadPageId = x.PageKey.PayloadPageId,
-                    TargetName = x.PageKey.EmailTarget.Name,
-                    TargetAddress = x.PageKey.EmailTarget.Address,
-                    EmailTargetId = x.PageKey.EmailTargetId,
+                    PageName = x.Attack.PayloadPage.Name,
+                    PayloadPageId = x.Attack.PayloadPageId,
+                    TargetName = x.Attack.EmailTarget.Name,
+                    TargetAddress = x.Attack.EmailTarget.Address,
+                    EmailTargetId = x.Attack.EmailTargetId,
                 })
                 .ToListAsync();
 

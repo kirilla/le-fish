@@ -1,8 +1,8 @@
 ﻿namespace Lefish.Persistence.Configuration;
 
-class PageKeyConfiguration : IEntityTypeConfiguration<PageKey>
+class AttackConfiguration : IEntityTypeConfiguration<Attack>
 {
-    public void Configure(EntityTypeBuilder<PageKey> builder)
+    public void Configure(EntityTypeBuilder<Attack> builder)
     {
         builder.HasKey(p => p.Id);
 
@@ -11,23 +11,23 @@ class PageKeyConfiguration : IEntityTypeConfiguration<PageKey>
         builder.HasIndex(p => p.Value).IsUnique();
 
         builder.HasMany(x => x.DataDumps)
-            .WithOne(x => x.PageKey)
+            .WithOne(x => x.Attack)
             .HasForeignKey(x => x.PageKeyId);
 
         builder.HasMany(x => x.EmailMessages)
-            .WithOne(x => x.PageKey)
+            .WithOne(x => x.Attack)
             .HasForeignKey(x => x.PageKeyId);
 
         builder.HasMany(x => x.PageVisits)
-            .WithOne(x => x.PageKey)
+            .WithOne(x => x.Attack)
             .HasForeignKey(x => x.PageKeyId);
 
         builder.HasMany(x => x.ScriptVisits)
-            .WithOne(x => x.PageKey)
+            .WithOne(x => x.Attack)
             .HasForeignKey(x => x.PageKeyId);
 
         builder.HasMany(x => x.TargetInstructions)
-            .WithOne(x => x.PageKey)
+            .WithOne(x => x.Attack)
             .HasForeignKey(x => x.PageKeyId);
     }
 }

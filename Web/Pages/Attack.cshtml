@@ -39,14 +39,14 @@
                 </span>
             </div>
 
-            @foreach (var key in Model.PageKeys
+            @foreach (var key in Model.Attacks
                .Where(x => x.EmailTargetId == target.Id))
             {
                 <div style="padding-left:1.5em;">
                     <div>
                         🔑
                         &thinsp;
-                        <a href="/show-page-key/@(key.Id)">@(key.Value)</a>
+                        <a href="/show-attack/@(key.Id)">@(key.Value)</a>
                     </div>
 
                     @foreach (var message in Model.EmailMessages

@@ -60,7 +60,7 @@ public class RemoveTargetInstructionModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-page-key/{pageKeyId}");
+            return Redirect($"/show-attack/{pageKeyId}");
         }
         catch (ConfirmationRequiredException)
         {

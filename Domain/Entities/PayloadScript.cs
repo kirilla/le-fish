@@ -11,5 +11,5 @@ public class PayloadScript : ICreatedDateTime
 
     public DateTime? Created { get; set; }
 
-    public List<PageKey> PageKeys { get; set; }
+    public List<Attack> Attacks { get; set; }
 }

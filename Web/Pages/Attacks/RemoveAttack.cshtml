@@ -1,5 +1,5 @@
-﻿@page "/remove-page-key/{id:int}"
-@model RemovePageKeyModel
+﻿@page "/remove-attack/{id:int}"
+@model RemoveAttackModel
 @{
 }
 
@@ -17,7 +17,7 @@
 <main>
     <h4>
         Ta bort nyckeln:
-        @(Model.PageKey.Value)
+        @(Model.Attack.Value)
     </h4>
 
     <form method="post">
@@ -37,7 +37,7 @@
             Ta bort
         </button>
 
-        <a class="button" href="/show-page-key/@(Model.CommandModel.PageKeyId)">
+        <a class="button" href="/show-attack/@(Model.CommandModel.PageKeyId)">
             Avbryt
         </a>
     </form>

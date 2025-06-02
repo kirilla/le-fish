@@ -8,7 +8,7 @@ public static class EmailMessageExtensions
         this EmailMessage message,
         TemplateConfiguration templateConfiguration,
         EmailTarget target, 
-        PageKey key)
+        Attack key)
     {
         // Step 1
         message.Subject = message.Subject.Replace(Variables.PAGE_URL, templateConfiguration.PageUrl);

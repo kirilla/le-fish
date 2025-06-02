@@ -8,7 +8,7 @@ public static class PayloadScriptExtensions
         this PayloadScript script,
         TemplateConfiguration templateConfiguration,
         EmailTarget target, 
-        PageKey key)
+        Attack key)
     {
         // Step 1
         script.Script = script.Script.Replace(Variables.PAGE_URL, templateConfiguration.PageUrl);

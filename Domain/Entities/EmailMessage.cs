@@ -23,5 +23,5 @@ public class EmailMessage : ICreatedDateTime
     public int PageKeyId { get; set; }
 
     public EmailAccount? EmailAccount { get; set; }
-    public PageKey PageKey { get; set; }
+    public Attack Attack { get; set; }
 }

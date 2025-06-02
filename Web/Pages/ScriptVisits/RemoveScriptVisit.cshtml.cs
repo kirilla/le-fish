@@ -9,7 +9,7 @@ public class RemoveScriptVisitModel(
 {
     public ScriptVisitPlus ScriptVisit { get; set; }
 
-    public PageKey PageKey { get; set; }
+    public Attack Attack { get; set; }
 
     [BindProperty]
     public RemoveScriptVisitCommandModel CommandModel { get; set; }
@@ -30,17 +30,17 @@ public class RemoveScriptVisitModel(
                     Method = x.Method,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
-                    ScriptName = x.PageKey.PayloadScript.Name,
-                    PayloadScriptId = x.PageKey.PayloadScriptId,
-                    TargetName = x.PageKey.EmailTarget.Name,
-                    TargetAddress = x.PageKey.EmailTarget.Address,
-                    EmailTargetId = x.PageKey.EmailTargetId,
+                    ScriptName = x.Attack.PayloadScript.Name,
+                    PayloadScriptId = x.Attack.PayloadScriptId,
+                    TargetName = x.Attack.EmailTarget.Name,
+                    TargetAddress = x.Attack.EmailTarget.Address,
+                    EmailTargetId = x.Attack.EmailTargetId,
                     PageKeyId = x.PageKeyId,
                 })
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            PageKey = await database.Attacks
+            Attack = await database.Attacks
                 .Where(x => x.Id == ScriptVisit.PageKeyId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -78,17 +78,17 @@ public class RemoveScriptVisitModel(
                     Method = x.Method,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
-                    ScriptName = x.PageKey.PayloadScript.Name,
-                    PayloadScriptId = x.PageKey.PayloadScriptId,
-                    TargetName = x.PageKey.EmailTarget.Name,
-                    TargetAddress = x.PageKey.EmailTarget.Address,
-                    EmailTargetId = x.PageKey.EmailTargetId,
+                    ScriptName = x.Attack.PayloadScript.Name,
+                    PayloadScriptId = x.Attack.PayloadScriptId,
+                    TargetName = x.Attack.EmailTarget.Name,
+                    TargetAddress = x.Attack.EmailTarget.Address,
+                    EmailTargetId = x.Attack.EmailTargetId,
                     PageKeyId = x.PageKeyId,
                 })
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            PageKey = await database.Attacks
+            Attack = await database.Attacks
                 .Where(x => x.Id == ScriptVisit.PageKeyId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -98,7 +98,7 @@ public class RemoveScriptVisitModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-page-key/{PageKey.Id}");
+            return Redirect($"/show-attack/{Attack.Id}");
         }
         catch (ConfirmationRequiredException)
         {

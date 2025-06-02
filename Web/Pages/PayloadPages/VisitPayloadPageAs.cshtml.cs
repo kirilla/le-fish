@@ -6,7 +6,7 @@ public class VisitPayloadPageAsModel(
 {
     public PayloadPage PayloadPage { get; set; }
 
-    public List<PageKeyPlus> PageKeys { get; set; }
+    public List<AttackSummary> Attacks { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -20,11 +20,11 @@ public class VisitPayloadPageAsModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            PageKeys = await database.Attacks
+            Attacks = await database.Attacks
                 .Where(x => x.PayloadPageId == id)
                 .OrderBy(x => x.EmailTarget.Name)
                 .ThenBy(x => x.Value)
-                .Select(x => new PageKeyPlus()
+                .Select(x => new AttackSummary()
                 {
                     Id = x.Id,
                     TargetName = x.EmailTarget.Name,

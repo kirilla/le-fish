@@ -53,7 +53,7 @@ public class SendEmailToTargetCommand(
             .Where(x => x.EmailTemplateId == model.EmailTemplateId!.Value)
             .ToListAsync();
 
-        var key = new PageKey()
+        var key = new Attack()
         {
             EmailTargetId = target.Id,
             PayloadPageId = page.Id,
@@ -72,7 +72,7 @@ public class SendEmailToTargetCommand(
             TextBody = template.TextBody,
             EmailStatus = EmailStatus.NotSent,
             EmailAccountId = account.Id,
-            PageKey = key,
+            Attack = key,
         };
 
         database.EmailMessages.Add(message);

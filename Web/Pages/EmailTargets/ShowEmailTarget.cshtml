@@ -47,13 +47,13 @@
     </h5>
 
     <div class="notice">
-        @foreach (var key in Model.PageKeys)
+        @foreach (var key in Model.Attacks)
         {
             <div>
                 <span>
                     🔑
                     &thinsp;
-                    <a href="/show-page-key/@(key.Id)">@(key.Value)</a>
+                    <a href="/show-attack/@(key.Id)">@(key.Value)</a>
                 </span>
 
                 @foreach (var message in Model.EmailMessages
@@ -82,7 +82,7 @@
             </div>
         }
 
-        @if (!Model.PageKeys.Any())
+        @if (!Model.Attacks.Any())
         {
             <div>
                 🔑

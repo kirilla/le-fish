@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Web.Models;
 
-public class PageKeyPlus
+public class AttackSummary
 {
     public int Id { get; set; }
 

@@ -9,7 +9,7 @@ public class DatabaseService(
     ICreatedDateTimeSetter createdDateTimeSetter,
     IUpdatedDateTimeSetter updatedDateTimeSetter) : DbContext(options), IDatabaseService
 {
-    public DbSet<PageKey> Attacks { get; set; }
+    public DbSet<Attack> Attacks { get; set; }
     public DbSet<BlockedRequest> BlockedRequests { get; set; }
     public DbSet<DataDump> DataDumps { get; set; }
     public DbSet<EmailAccount> EmailAccounts { get; set; }
@@ -33,7 +33,7 @@ public class DatabaseService(
     {
         base.OnModelCreating(builder);
 
-        new PageKeyConfiguration().Configure(builder.Entity<PageKey>());
+        new AttackConfiguration().Configure(builder.Entity<Attack>());
         new BlockedRequestConfiguration().Configure(builder.Entity<BlockedRequest>());
         new DataDumpConfiguration().Configure(builder.Entity<DataDump>());
         new EmailAccountConfiguration().Configure(builder.Entity<EmailAccount>());

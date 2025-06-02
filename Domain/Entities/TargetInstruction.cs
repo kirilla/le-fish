@@ -11,6 +11,6 @@ public class TargetInstruction : ICreatedDateTime
 
     public DateTime? Created { get; set; }
 
-    public PageKey PageKey { get; set; }
+    public Attack Attack { get; set; }
     public int PageKeyId { get; set; }
 }

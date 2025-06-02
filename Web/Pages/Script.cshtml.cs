@@ -15,14 +15,14 @@ public class ScriptPageModel(
     private readonly TemplateConfiguration _config = templateConfiguration.Value;
 
     public EmailTarget EmailTarget { get; set; }
-    public PageKey PageKey { get; set; }
+    public Attack Attack { get; set; }
     public PayloadScript PayloadScript { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int key)
     {
         try
         {
-            PageKey = await database.Attacks
+            Attack = await database.Attacks
                 .AsNoTracking()
                 .Where(x => x.Value == key)
                 .SingleOrDefaultAsync() ??
@@ -30,19 +30,19 @@ public class ScriptPageModel(
 
             PayloadScript = await database.PayloadScripts
                 .AsNoTracking()
-                .Where(x => x.Id == PageKey.PayloadScriptId)
+                .Where(x => x.Id == Attack.PayloadScriptId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             EmailTarget = await database.EmailTargets
                 .AsNoTracking()
-                .Where(x => x.Id == PageKey.EmailTargetId)
+                .Where(x => x.Id == Attack.EmailTargetId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            PayloadScript.InsertTargetValues(_config, EmailTarget, PageKey);
+            PayloadScript.InsertTargetValues(_config, EmailTarget, Attack);
 
-            await LogScriptVisit(HttpContext, PageKey);
+            await LogScriptVisit(HttpContext, Attack);
 
             return Content(PayloadScript.Script, "application/javascript", Encoding.UTF8);
         }
@@ -53,7 +53,7 @@ public class ScriptPageModel(
     }
 
     public async Task LogScriptVisit(
-        HttpContext context, PageKey pageKey)
+        HttpContext context, Attack pageKey)
     {
         var visit = new ScriptVisit()
         {

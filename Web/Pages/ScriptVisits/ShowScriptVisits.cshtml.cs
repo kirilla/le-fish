@@ -22,11 +22,11 @@ public class ShowScriptVisitsModel(
                     Method = x.Method,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
-                    ScriptName = x.PageKey.PayloadScript.Name,
-                    PayloadScriptId = x.PageKey.PayloadScriptId,
-                    TargetName = x.PageKey.EmailTarget.Name,
-                    TargetAddress = x.PageKey.EmailTarget.Address,
-                    EmailTargetId = x.PageKey.EmailTargetId,
+                    ScriptName = x.Attack.PayloadScript.Name,
+                    PayloadScriptId = x.Attack.PayloadScriptId,
+                    TargetName = x.Attack.EmailTarget.Name,
+                    TargetAddress = x.Attack.EmailTarget.Address,
+                    EmailTargetId = x.Attack.EmailTargetId,
                 })
                 .ToListAsync();
 

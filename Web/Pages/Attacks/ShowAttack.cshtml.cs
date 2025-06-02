@@ -1,10 +1,10 @@
-﻿namespace Lefish.Web.Pages.PageKeys;
+﻿namespace Lefish.Web.Pages.Attacks;
 
-public class ShowPageKeyModel(
+public class ShowAttackModel(
     IUserToken userToken,
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
-    public PageKeyPlus PageKey { get; set; }
+    public AttackSummary Attack { get; set; }
 
     public List<DataDump> DataDumps { get; set; }
     public List<EmailHeader> EmailHeaders { get; set; }
@@ -26,9 +26,9 @@ public class ShowPageKeyModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PageKey = await database.Attacks
+            Attack = await database.Attacks
                 .Where(x => x.Id == id)
-                .Select(x => new PageKeyPlus()
+                .Select(x => new AttackSummary()
                 {
                     Id = x.Id,
                     Value = x.Value,
@@ -80,8 +80,8 @@ public class ShowPageKeyModel(
                     Method = x.Method,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
-                    PageName = x.PageKey.PayloadPage.Name,
-                    PayloadPageId = x.PageKey.PayloadPageId,
+                    PageName = x.Attack.PayloadPage.Name,
+                    PayloadPageId = x.Attack.PayloadPageId,
                 })
                 .ToListAsync();
 
@@ -96,8 +96,8 @@ public class ShowPageKeyModel(
                     Method = x.Method,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
-                    ScriptName = x.PageKey.PayloadScript.Name,
-                    PayloadScriptId = x.PageKey.PayloadScriptId,
+                    ScriptName = x.Attack.PayloadScript.Name,
+                    PayloadScriptId = x.Attack.PayloadScriptId,
                 })
                 .ToListAsync();
 
@@ -112,8 +112,8 @@ public class ShowPageKeyModel(
                     Created = x.Created,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
-                    PageName = x.PageKey.PayloadPage.Name,
-                    PayloadPageId = x.PageKey.PayloadPageId,
+                    PageName = x.Attack.PayloadPage.Name,
+                    PayloadPageId = x.Attack.PayloadPageId,
                 })
                 .ToListAsync();
 
@@ -128,8 +128,8 @@ public class ShowPageKeyModel(
                     Created = x.Created,
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
-                    ScriptName = x.PageKey.PayloadScript.Name,
-                    PayloadScriptId = x.PageKey.PayloadScriptId,
+                    ScriptName = x.Attack.PayloadScript.Name,
+                    PayloadScriptId = x.Attack.PayloadScriptId,
                 })
                 .ToListAsync();
 

@@ -12,6 +12,6 @@ public class ScriptVisit : ICreatedDateTime
     public string? IpAddress { get; set; }
     public string? UserAgent { get; set; }
 
-    public PageKey PageKey { get; set; }
+    public Attack Attack { get; set; }
     public int PageKeyId { get; set; }
 }

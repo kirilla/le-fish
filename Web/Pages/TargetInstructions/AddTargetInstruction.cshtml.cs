@@ -7,7 +7,7 @@ public class AddTargetInstructionModel(
     IDatabaseService database,
     IAddTargetInstructionCommand command) : UserTokenPageModel(userToken)
 {
-    public PageKey PageKey { get; set; }
+    public Attack Attack { get; set; }
 
     [BindProperty]
     public AddTargetInstructionCommandModel CommandModel { get; set; }
@@ -19,7 +19,7 @@ public class AddTargetInstructionModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PageKey = await database.Attacks
+            Attack = await database.Attacks
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -50,7 +50,7 @@ public class AddTargetInstructionModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PageKey = await database.Attacks
+            Attack = await database.Attacks
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -60,7 +60,7 @@ public class AddTargetInstructionModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-page-key/{id}");
+            return Redirect($"/show-attack/{id}");
         }
         catch (NotFoundException)
         {

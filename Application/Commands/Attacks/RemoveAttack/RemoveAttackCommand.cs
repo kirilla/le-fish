@@ -1,9 +1,9 @@
-﻿namespace Lefish.Application.Commands.PageKeys.RemovePageKey;
+﻿namespace Lefish.Application.Commands.Attacks.RemoveAttack;
 
-public class RemovePageKeyCommand(IDatabaseService database) : IRemovePageKeyCommand
+public class RemoveAttackCommand(IDatabaseService database) : IRemoveAttackCommand
 {
     public async Task Execute(
-        IUserToken userToken, RemovePageKeyCommandModel model)
+        IUserToken userToken, RemoveAttackCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();

@@ -1,5 +1,5 @@
-﻿@page "/show-page-keys"
-@model ShowPageKeysModel
+﻿@page "/show-attacks"
+@model ShowAttacksModel
 @{
 }
 
@@ -28,14 +28,14 @@
                 <th>Mål</th>
                 <th>Sida</th>
             </tr>
-            @foreach (var key in Model.PageKeys)
+            @foreach (var key in Model.Attacks)
             {
                 <tr>
                     <td>
                         @(key.Created.ToFixedFormatDateShortTime())
                     </td>
                     <td>
-                        <a href="/show-page-key/@(key.Id)">
+                        <a href="/show-attack/@(key.Id)">
                         @(key.Value)
                         </a>
                     </td>
@@ -51,7 +51,7 @@
                     </td>
                 </tr>
             }
-            @if (!Model.PageKeys.Any())
+            @if (!Model.Attacks.Any())
             {
                 <tr>
                     <td colspan="3">

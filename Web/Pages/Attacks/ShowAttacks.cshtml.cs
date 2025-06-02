@@ -1,10 +1,10 @@
-namespace Lefish.Web.Pages.PageKeys;
+namespace Lefish.Web.Pages.Attacks;
 
-public class ShowPageKeysModel(
+public class ShowAttacksModel(
     IUserToken userToken,
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
-    public List<PageKeyPlus> PageKeys { get; set; }
+    public List<AttackSummary> Attacks { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -13,10 +13,10 @@ public class ShowPageKeysModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PageKeys = await database.Attacks
+            Attacks = await database.Attacks
                 .OrderBy(x => x.Created)
                 .ThenBy(x => x.Value)
-                .Select(x => new PageKeyPlus()
+                .Select(x => new AttackSummary()
                 {
                     Id = x.Id,
                     Value = x.Value,

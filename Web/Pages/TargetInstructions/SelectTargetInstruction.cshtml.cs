@@ -7,7 +7,7 @@ public class SelectTargetInstructionModel(
     IDatabaseService database,
     ISelectTargetInstructionCommand command) : UserTokenPageModel(userToken)
 {
-    public PageKey PageKey { get; set; }
+    public Attack Attack { get; set; }
 
     public List<InstructionSummary> Instructions { get; set; }
 
@@ -21,7 +21,7 @@ public class SelectTargetInstructionModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PageKey = await database.Attacks
+            Attack = await database.Attacks
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -60,7 +60,7 @@ public class SelectTargetInstructionModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PageKey = await database.Attacks
+            Attack = await database.Attacks
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -80,7 +80,7 @@ public class SelectTargetInstructionModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-page-key/{id}");
+            return Redirect($"/show-attack/{id}");
         }
         catch (NotFoundException)
         {

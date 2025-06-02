@@ -14,7 +14,7 @@ public class RemoveScriptVisitsCommand(IDatabaseService database) : IRemoveScrip
         if (model.EmailTargetId.HasValue)
         {
             await database.ScriptVisits
-                .Where(x => x.PageKey.EmailTargetId == model.EmailTargetId!.Value)
+                .Where(x => x.Attack.EmailTargetId == model.EmailTargetId!.Value)
                 .ExecuteDeleteAsync();
         }
         else

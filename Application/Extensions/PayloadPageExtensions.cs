@@ -8,7 +8,7 @@ public static class PayloadPageExtensions
         this PayloadPage page,
         TemplateConfiguration templateConfiguration,
         EmailTarget target, 
-        PageKey key)
+        Attack key)
     {
         // Step 1
         page.Html = page.Html.Replace(Variables.PAGE_URL, templateConfiguration.PageUrl);

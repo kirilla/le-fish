@@ -21,7 +21,7 @@
         Besök sidan som
     </h5>
     <div class="notice">
-        @foreach (var key in Model.PageKeys)
+        @foreach (var key in Model.Attacks)
         {
             <div>
                 <a href="/page/@(key.Value)" target="_blank">
@@ -33,7 +33,7 @@
             </div>
         }
 
-        @if (!Model.PageKeys.Any())
+        @if (!Model.Attacks.Any())
         {
             <p>
                 Det finns inga mål med nycklar till den här sidan.

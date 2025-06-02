@@ -1,16 +1,16 @@
-using Lefish.Application.Commands.PageKeys.RemovePageKey;
+using Lefish.Application.Commands.Attacks.RemoveAttack;
 
-namespace Lefish.Web.Pages.PageKeys;
+namespace Lefish.Web.Pages.Attacks;
 
-public class RemovePageKeyModel(
+public class RemoveAttackModel(
     IUserToken userToken,
     IDatabaseService database,
-    IRemovePageKeyCommand command) : UserTokenPageModel(userToken)
+    IRemoveAttackCommand command) : UserTokenPageModel(userToken)
 {
-    public PageKey PageKey { get; set; }
+    public Attack Attack { get; set; }
 
     [BindProperty]
-    public RemovePageKeyCommandModel CommandModel { get; set; }
+    public RemoveAttackCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -19,14 +19,14 @@ public class RemovePageKeyModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PageKey = await database.Attacks
+            Attack = await database.Attacks
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new RemovePageKeyCommandModel()
+            CommandModel = new RemoveAttackCommandModel()
             {
-                PageKeyId = PageKey.Id,
+                PageKeyId = Attack.Id,
             };
 
             return Page();
@@ -48,12 +48,12 @@ public class RemovePageKeyModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PageKey = await database.Attacks
+            Attack = await database.Attacks
                 .Where(x => x.Id == CommandModel.PageKeyId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            var emailTargetId = PageKey.EmailTargetId;
+            var emailTargetId = Attack.EmailTargetId;
 
             if (!ModelState.IsValid)
                 return Page();

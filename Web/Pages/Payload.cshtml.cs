@@ -14,14 +14,14 @@ public class PayloadPageModel(
     private readonly TemplateConfiguration _config = templateConfiguration.Value;
 
     public EmailTarget EmailTarget { get; set; }
-    public PageKey PageKey { get; set; }
+    public Attack Attack { get; set; }
     public PayloadPage PayloadPage { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int key)
     {
         try
         {
-            PageKey = await database.Attacks
+            Attack = await database.Attacks
                 .AsNoTracking()
                 .Where(x => x.Value == key)
                 .SingleOrDefaultAsync() ??
@@ -29,19 +29,19 @@ public class PayloadPageModel(
 
             PayloadPage = await database.PayloadPages
                 .AsNoTracking()
-                .Where(x => x.Id == PageKey.PayloadPageId)
+                .Where(x => x.Id == Attack.PayloadPageId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             EmailTarget = await database.EmailTargets
                 .AsNoTracking()
-                .Where(x => x.Id == PageKey.EmailTargetId)
+                .Where(x => x.Id == Attack.EmailTargetId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            PayloadPage.InsertTargetValues(_config, EmailTarget, PageKey);
+            PayloadPage.InsertTargetValues(_config, EmailTarget, Attack);
 
-            await LogPageVisit(HttpContext, PageKey);
+            await LogPageVisit(HttpContext, Attack);
 
             return Page();
         }
@@ -52,7 +52,7 @@ public class PayloadPageModel(
     }
 
     public async Task LogPageVisit(
-        HttpContext context, PageKey pageKey)
+        HttpContext context, Attack pageKey)
     {
         var visit = new PageVisit()
         {

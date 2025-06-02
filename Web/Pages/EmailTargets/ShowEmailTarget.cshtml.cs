@@ -14,7 +14,7 @@ public class ShowEmailTargetModel(
     public EmailTarget EmailTarget { get; set; }
 
     public List<EmailHeader> EmailMessages { get; set; }
-    public List<PageKeyPlus> PageKeys { get; set; }
+    public List<AttackSummary> Attacks { get; set; }
 
     public bool CanEditTarget { get; set; }
         = editTargetCommand.IsPermitted(userToken);
@@ -39,7 +39,7 @@ public class ShowEmailTargetModel(
 
             EmailMessages = await database.EmailMessages
                 .Include(x => x.EmailAccount)
-                .Where(x => x.PageKey.EmailTargetId == id)
+                .Where(x => x.Attack.EmailTargetId == id)
                 .OrderByDescending(x => x.Created)
                 .Select(x => new EmailHeader()
                 {
@@ -51,10 +51,10 @@ public class ShowEmailTargetModel(
                 })
                 .ToListAsync();
 
-            PageKeys = await database.Attacks
+            Attacks = await database.Attacks
                 .Where(x => x.EmailTargetId == id)
                 .OrderBy(x => x.Created)
-                .Select(x => new PageKeyPlus()
+                .Select(x => new AttackSummary()
                 {
                     Id = x.Id,
                     Value = x.Value,

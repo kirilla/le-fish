@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Domain.Entities;
 
-public class PageKey : ICreatedDateTime
+public class Attack : ICreatedDateTime
 {
     public int Id { get; set; }
 
