@@ -1,5 +1,5 @@
-﻿@page "/add-target-instruction/{id:int}"
-@model AddTargetInstructionModel
+﻿@page "/select-target-instruction/{id:int}"
+@model SelectTargetInstructionModel
 @{
 }
 
@@ -23,15 +23,19 @@
 
         <input type="hidden" asp-for="CommandModel.PageKeyId" />
 
-        <label asp-for="CommandModel.Name">
-            Namn
+        <label asp-for="CommandModel.InstructionId">
+            Instruktion
         </label>
-        <input asp-for="CommandModel.Name" />
 
-        <label asp-for="CommandModel.Script">
-            Skript
-        </label>
-        <textarea asp-for="CommandModel.Script" rows="15"></textarea>
+        <select asp-for="CommandModel.InstructionId">
+            <option value="">–</option>
+            @foreach (var instruction in Model.Instructions)
+            {
+                <option value="@(instruction.Id)">
+                    @(instruction.Name)
+                </option>
+            }
+        </select>
 
         <div asp-validation-summary="All"></div>
 

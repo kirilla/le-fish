@@ -1,16 +1,18 @@
-﻿using Lefish.Application.Commands.TargetInstructions.AddTargetInstruction;
+﻿using Lefish.Application.Commands.TargetInstructions.SelectTargetInstruction;
 
 namespace Lefish.Web.Pages.TargetInstructions;
 
-public class AddTargetInstructionModel(
+public class SelectTargetInstructionModel(
     IUserToken userToken,
     IDatabaseService database,
-    IAddTargetInstructionCommand command) : UserTokenPageModel(userToken)
+    ISelectTargetInstructionCommand command) : UserTokenPageModel(userToken)
 {
     public PageKey PageKey { get; set; }
 
+    public List<InstructionSummary> Instructions { get; set; }
+
     [BindProperty]
-    public AddTargetInstructionCommandModel CommandModel { get; set; }
+    public SelectTargetInstructionCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -24,10 +26,18 @@ public class AddTargetInstructionModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new AddTargetInstructionCommandModel()
+            Instructions = await database.Instructions
+                .OrderBy(x => x.Name)
+                .Select(x => new InstructionSummary()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Created = x.Created,
+                })
+                .ToListAsync();
+
+            CommandModel = new SelectTargetInstructionCommandModel()
             {
-                Name = "Instruktion A",
-                Script = GetDefaultTemplate(),
                 PageKeyId = id,
             };
 
@@ -55,6 +65,16 @@ public class AddTargetInstructionModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
+            Instructions = await database.Instructions
+                .OrderBy(x => x.Name)
+                .Select(x => new InstructionSummary()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Created = x.Created,
+                })
+                .ToListAsync();
+
             if (!ModelState.IsValid)
                 return Page();
 
@@ -70,14 +90,5 @@ public class AddTargetInstructionModel(
         {
             return Redirect("/help/notpermitted");
         }
-    }
-
-    private string GetDefaultTemplate()
-    {
-        return """
-            (function() { 
-                alert('Instruktion A'); 
-            })();
-            """;
     }
 }

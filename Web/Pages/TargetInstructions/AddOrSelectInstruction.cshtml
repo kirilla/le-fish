@@ -1,0 +1,38 @@
+﻿@page "/add-or-select-instruction/{id:int}"
+@model AddOrSelectInstructionModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till instruktion -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Lägg till en instruktion
+    </h4>
+    
+    <p>
+        <a class="button" href="/select-target-instruction/@(Model.PageKey.Id)">
+            Välj befintlig
+        </a>
+
+        <a class="button" href="/add-target-instruction/@(Model.PageKey.Id)">
+            Skapa ny
+        </a>
+    </p>
+
+    <p>
+        <a class="button" href="/show-page-key/@(Model.PageKey.Id)">
+            Avbryt
+        </a>
+    </p>
+
+</main>
