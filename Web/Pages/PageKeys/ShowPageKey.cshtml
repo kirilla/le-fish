@@ -55,7 +55,7 @@
     </h5>
 
     <ul class="notice">
-        @foreach (var instruction in Model.QueuedInstructions)
+        @foreach (var instruction in Model.TargetInstructions)
         {
             <li>
                 ❇️
@@ -65,7 +65,7 @@
                 </a>
             </li>
         }
-        @if (!Model.QueuedInstructions.Any())
+        @if (!Model.TargetInstructions.Any())
         {
             <li>
                 ❇️
@@ -186,16 +186,6 @@
             }
         </ul>
     }
-
-    <h5>Ladda upp data</h5>
-
-    <div class="notice">
-        💉
-        &thinsp;
-        <a href="/upload/@(Model.PageKey.Value)">
-            Ladda upp data
-        </a>
-    </div>
 
     <h5>
         Exfiltrerad data

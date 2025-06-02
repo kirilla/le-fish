@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Web.Models;
 
-public class QueuedInstructionPlus
+public class TargetInstructionPlus
 {
     public int Id { get; set; }
 

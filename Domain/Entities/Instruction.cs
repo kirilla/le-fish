@@ -11,5 +11,5 @@ public class Instruction : ICreatedDateTime
 
     public DateTime? Created { get; set; }
 
-    public List<QueuedInstruction> QueuedInstructions { get; set; }
+    public List<TargetInstruction> TargetInstructions { get; set; }
 }

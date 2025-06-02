@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Domain.Entities;
 
-public class QueuedInstruction : ICreatedDateTime
+public class TargetInstruction : ICreatedDateTime
 {
     public int Id { get; set; }
 

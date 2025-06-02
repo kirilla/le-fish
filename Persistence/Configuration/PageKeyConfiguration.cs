@@ -26,7 +26,7 @@ class PageKeyConfiguration : IEntityTypeConfiguration<PageKey>
             .WithOne(x => x.PageKey)
             .HasForeignKey(x => x.PageKeyId);
 
-        builder.HasMany(x => x.QueuedInstructions)
+        builder.HasMany(x => x.TargetInstructions)
             .WithOne(x => x.PageKey)
             .HasForeignKey(x => x.PageKeyId);
     }

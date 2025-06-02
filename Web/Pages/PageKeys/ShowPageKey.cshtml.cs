@@ -12,7 +12,7 @@ public class ShowPageKeyModel(
     public List<PageVisitPlus> PageVisits { get; set; }
     public List<ScriptVisitPlus> ScriptVisits { get; set; }
 
-    public List<QueuedInstructionPlus> QueuedInstructions { get; set; }
+    public List<TargetInstructionPlus> TargetInstructions { get; set; }
 
     public List<Visit> Visits { get; set; }
 
@@ -138,10 +138,10 @@ public class ShowPageKeyModel(
                 .OrderBy(x => x.Created)
                 .ToList();
 
-            QueuedInstructions = await database.QueuedInstructions
+            TargetInstructions = await database.TargetInstructions
                 .Where(x => x.PageKeyId == id)
                 .OrderBy(x => x.Created)
-                .Select(x => new QueuedInstructionPlus()
+                .Select(x => new TargetInstructionPlus()
                 {
                     Id = x.Id,
                     Created = x.Created,

@@ -20,5 +20,5 @@ public class PageKey : ICreatedDateTime
     public List<EmailMessage> EmailMessages { get; set; }
     public List<PageVisit> PageVisits { get; set; }
     public List<ScriptVisit> ScriptVisits { get; set; }
-    public List<QueuedInstruction> QueuedInstructions { get; set; }
+    public List<TargetInstruction> TargetInstructions { get; set; }
 }
