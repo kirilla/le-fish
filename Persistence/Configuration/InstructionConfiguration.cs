@@ -13,9 +13,5 @@ class InstructionConfiguration : IEntityTypeConfiguration<Instruction>
         builder.Property(p => p.Script)
             .IsRequired()
             .HasMaxLength(MaxLengths.Domain.Instruction.Script);
-
-        builder.HasMany(x => x.TargetInstructions)
-            .WithOne(x => x.Instruction)
-            .HasForeignKey(x => x.InstructionId);
     }
 }

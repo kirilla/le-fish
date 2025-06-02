@@ -145,8 +145,8 @@ public class ShowPageKeyModel(
                 {
                     Id = x.Id,
                     Created = x.Created,
-                    Name = x.Instruction.Name,
-                    InstructionId = x.InstructionId,
+                    Name = x.Name,
+                    Reference = x.Reference,
                 })
                 .ToListAsync();
 

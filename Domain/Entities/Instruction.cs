@@ -10,6 +10,4 @@ public class Instruction : ICreatedDateTime
     public string Script { get; set; }
 
     public DateTime? Created { get; set; }
-
-    public List<TargetInstruction> TargetInstructions { get; set; }
 }
