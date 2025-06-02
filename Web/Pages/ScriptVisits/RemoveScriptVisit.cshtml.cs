@@ -40,7 +40,7 @@ public class RemoveScriptVisitModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            PageKey = await database.PageKeys
+            PageKey = await database.Attacks
                 .Where(x => x.Id == ScriptVisit.PageKeyId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -88,7 +88,7 @@ public class RemoveScriptVisitModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            PageKey = await database.PageKeys
+            PageKey = await database.Attacks
                 .Where(x => x.Id == ScriptVisit.PageKeyId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

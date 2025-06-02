@@ -22,7 +22,7 @@ public class ScriptPageModel(
     {
         try
         {
-            PageKey = await database.PageKeys
+            PageKey = await database.Attacks
                 .AsNoTracking()
                 .Where(x => x.Value == key)
                 .SingleOrDefaultAsync() ??

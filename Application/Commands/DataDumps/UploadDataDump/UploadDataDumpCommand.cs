@@ -14,7 +14,7 @@ public class UploadDataDumpCommand(IDatabaseService database) : IUploadDataDumpC
         model.SetEmptyStringsToNull();
         model.TruncateByStringLength();
 
-        var pageKey = await database.PageKeys
+        var pageKey = await database.Attacks
             .Where(x => x.Value == pageKeyValue)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();

@@ -21,7 +21,7 @@ public class PayloadPageModel(
     {
         try
         {
-            PageKey = await database.PageKeys
+            PageKey = await database.Attacks
                 .AsNoTracking()
                 .Where(x => x.Value == key)
                 .SingleOrDefaultAsync() ??

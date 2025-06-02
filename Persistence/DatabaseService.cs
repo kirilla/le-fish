@@ -9,6 +9,7 @@ public class DatabaseService(
     ICreatedDateTimeSetter createdDateTimeSetter,
     IUpdatedDateTimeSetter updatedDateTimeSetter) : DbContext(options), IDatabaseService
 {
+    public DbSet<PageKey> Attacks { get; set; }
     public DbSet<BlockedRequest> BlockedRequests { get; set; }
     public DbSet<DataDump> DataDumps { get; set; }
     public DbSet<EmailAccount> EmailAccounts { get; set; }
@@ -22,7 +23,6 @@ public class DatabaseService(
     public DbSet<PageVisit> PageVisits { get; set; }
     public DbSet<PayloadPage> PayloadPages { get; set; }
     public DbSet<PayloadScript> PayloadScripts { get; set; }
-    public DbSet<PageKey> PageKeys { get; set; }
     public DbSet<ScriptVisit> ScriptVisits { get; set; }
     public DbSet<Session> Sessions { get; set; }
     public DbSet<TargetInstruction> TargetInstructions { get; set; }
@@ -33,6 +33,7 @@ public class DatabaseService(
     {
         base.OnModelCreating(builder);
 
+        new PageKeyConfiguration().Configure(builder.Entity<PageKey>());
         new BlockedRequestConfiguration().Configure(builder.Entity<BlockedRequest>());
         new DataDumpConfiguration().Configure(builder.Entity<DataDump>());
         new EmailAccountConfiguration().Configure(builder.Entity<EmailAccount>());
@@ -46,7 +47,6 @@ public class DatabaseService(
         new PageVisitConfiguration().Configure(builder.Entity<PageVisit>());
         new PayloadPageConfiguration().Configure(builder.Entity<PayloadPage>());
         new PayloadScriptConfiguration().Configure(builder.Entity<PayloadScript>());
-        new PageKeyConfiguration().Configure(builder.Entity<PageKey>());
         new ScriptVisitConfiguration().Configure(builder.Entity<ScriptVisit>());
         new SessionConfiguration().Configure(builder.Entity<Session>());
         new TargetInstructionConfiguration().Configure(builder.Entity<TargetInstruction>());

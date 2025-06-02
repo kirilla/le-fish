@@ -73,7 +73,7 @@ public class AttackModel(
                 .OrderBy(x => x.Created)
                 .ToList();
 
-            PageKeys = await database.PageKeys
+            PageKeys = await database.Attacks
                 .OrderBy(x => x.Created)
                 .Select(x => new PageKeyPlus()
                 {

@@ -11,12 +11,12 @@ public class RemovePageKeyCommand(IDatabaseService database) : IRemovePageKeyCom
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var key = await database.PageKeys
+        var key = await database.Attacks
             .Where(x => x.Id == model.PageKeyId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.PageKeys.Remove(key);
+        database.Attacks.Remove(key);
 
         await database.SaveAsync(userToken);
     }

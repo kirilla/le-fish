@@ -51,7 +51,7 @@ public class ShowEmailTargetModel(
                 })
                 .ToListAsync();
 
-            PageKeys = await database.PageKeys
+            PageKeys = await database.Attacks
                 .Where(x => x.EmailTargetId == id)
                 .OrderBy(x => x.Created)
                 .Select(x => new PageKeyPlus()

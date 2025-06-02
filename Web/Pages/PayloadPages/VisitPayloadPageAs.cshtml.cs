@@ -20,7 +20,7 @@ public class VisitPayloadPageAsModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            PageKeys = await database.PageKeys
+            PageKeys = await database.Attacks
                 .Where(x => x.PayloadPageId == id)
                 .OrderBy(x => x.EmailTarget.Name)
                 .ThenBy(x => x.Value)

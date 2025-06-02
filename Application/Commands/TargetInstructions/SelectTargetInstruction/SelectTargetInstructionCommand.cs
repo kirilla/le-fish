@@ -12,7 +12,7 @@ public class SelectTargetInstructionCommand(IDatabaseService database) : ISelect
         model.SetEmptyStringsToNull();
         model.TruncateByStringLength();
 
-        var pageKey = await database.PageKeys
+        var pageKey = await database.Attacks
             .Where(x => x.Id == model.PageKeyId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();

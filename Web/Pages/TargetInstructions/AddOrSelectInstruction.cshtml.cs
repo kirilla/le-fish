@@ -13,7 +13,7 @@ public class AddOrSelectInstructionModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PageKey = await database.PageKeys
+            PageKey = await database.Attacks
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

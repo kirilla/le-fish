@@ -19,7 +19,7 @@ public class RemovePageKeyModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PageKey = await database.PageKeys
+            PageKey = await database.Attacks
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -48,7 +48,7 @@ public class RemovePageKeyModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PageKey = await database.PageKeys
+            PageKey = await database.Attacks
                 .Where(x => x.Id == CommandModel.PageKeyId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

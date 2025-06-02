@@ -61,7 +61,7 @@ public class SendEmailToTargetCommand(
             Value = Random.Shared.Next(),
         };
 
-        database.PageKeys.Add(key);
+        database.Attacks.Add(key);
 
         var message = new EmailMessage()
         {

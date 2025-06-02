@@ -26,7 +26,7 @@ public class ShowPageKeyModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PageKey = await database.PageKeys
+            PageKey = await database.Attacks
                 .Where(x => x.Id == id)
                 .Select(x => new PageKeyPlus()
                 {

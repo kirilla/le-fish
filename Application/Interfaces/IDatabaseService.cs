@@ -4,6 +4,7 @@ namespace Lefish.Application.Interfaces;
 
 public interface IDatabaseService
 {
+    DbSet<PageKey> Attacks { get; set; }
     DbSet<BlockedRequest> BlockedRequests { get; set; }
     DbSet<DataDump> DataDumps { get; set; }
     DbSet<EmailAccount> EmailAccounts { get; set; }
@@ -15,7 +16,6 @@ public interface IDatabaseService
     DbSet<Instruction> Instructions { get; set; }
     DbSet<IpRange> IpRanges { get; set; }
     DbSet<PageVisit> PageVisits { get; set; }
-    DbSet<PageKey> PageKeys { get; set; }
     DbSet<PayloadPage> PayloadPages { get; set; }
     DbSet<PayloadScript> PayloadScripts { get; set; }
     DbSet<ScriptVisit> ScriptVisits { get; set; }
