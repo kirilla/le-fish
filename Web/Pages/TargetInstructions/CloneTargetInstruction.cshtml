@@ -1,0 +1,43 @@
+﻿@page "/clone-target-instruction/{id:int}"
+@model CloneTargetInstructionModel
+@{
+}
+
+@section Meta {
+    <title>
+        Klona instruktion -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Klona instruktionen:
+        @(Model.TargetInstruction.Name)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Klona
+        </button>
+
+        <a class="button" href="/show-target-instruction/@(Model.TargetInstruction.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

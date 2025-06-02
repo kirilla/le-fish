@@ -137,5 +137,12 @@ public static class MaxLengths
 
             public const int Script = Common.DbSuperSize;
         }
+
+        public static class TargetInstruction
+        {
+            public const int Name = 50;
+
+            public const int Script = Common.DbSuperSize;
+        }
     }
 }

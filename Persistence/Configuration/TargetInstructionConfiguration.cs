@@ -8,10 +8,12 @@ class TargetInstructionConfiguration : IEntityTypeConfiguration<TargetInstructio
 
         builder.Property(p => p.Name)
             .IsRequired()
-            .HasMaxLength(MaxLengths.Domain.Instruction.Name);
+            .HasMaxLength(MaxLengths.Domain.TargetInstruction.Name);
 
         builder.Property(p => p.Script)
             .IsRequired()
-            .HasMaxLength(MaxLengths.Domain.Instruction.Script);
+            .HasMaxLength(MaxLengths.Domain.TargetInstruction.Script);
+
+        builder.HasIndex(p => p.Reference).IsUnique();
     }
 }

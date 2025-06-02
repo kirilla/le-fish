@@ -1,0 +1,56 @@
+﻿@page "/show-target-instruction/{id:int}"
+@model ShowTargetInstructionModel
+@{
+}
+
+@section Meta {
+    <title>Instruktion - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        ❇️ Instruktion:
+        @(Model.TargetInstruction.Name)
+    </h4>
+
+    <h5>
+        URL
+    </h5>
+    <p class="notice">
+        @(Model.Config.ScriptUrl ?? "Missing config, see appsettings.json")
+    </p>
+
+    <h5>
+        Skript
+    </h5>
+    <pre class="notice">@(Model.TargetInstruction.Script)</pre>
+
+    <p>
+        @if (Model.CanCloneTargetInstruction)
+        {
+            <a class="button" href="/clone-target-instruction/@(Model.TargetInstruction.Id)">
+                Klona
+            </a>
+        }
+
+        @if (Model.CanEditTargetInstruction)
+        {
+            <a class="button" href="/edit-target-instruction/@(Model.TargetInstruction.Id)">
+                Redigera
+            </a>
+        }
+
+        @if (Model.CanRemoveTargetInstruction)
+        {
+            <a class="button" href="/remove-target-instruction/@(Model.TargetInstruction.Id)">
+                Ta bort
+            </a>
+        }
+    </p>
+
+</main>
