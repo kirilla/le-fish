@@ -1,6 +1,7 @@
 ﻿global using Lefish.Application.Extensions;
 global using Lefish.Application.Interfaces;
 global using Lefish.Common.Dates;
+global using Lefish.Common.Enums;
 global using Lefish.Common.Exceptions;
 global using Lefish.Common.Extensions;
 global using Lefish.Common.Interfaces;

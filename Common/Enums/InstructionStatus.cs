@@ -1,4 +1,4 @@
-﻿namespace Lefish.Domain.Enums;
+﻿namespace Lefish.Common.Enums;
 
 public enum InstructionStatus
 {

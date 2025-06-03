@@ -64,9 +64,18 @@
                     @(instruction.Name)
                 </a>
                 &ensp;
-                <span class="muted">
-                    @(instruction.InstructionStatus)
-                </span>
+                @if (instruction.InstructionStatus == InstructionStatus.Waiting)
+                {
+                    <span class="muted">
+                        Väntar.
+                    </span>   
+                }
+                @if (instruction.InstructionStatus == InstructionStatus.Fetched)
+                {
+                    <span class="muted">
+                        Hämtad @(instruction.Fetched.ToFixedFormatDateShortTime())
+                    </span>   
+                }
             </li>
         }
         @if (!Model.TargetInstructions.Any())

@@ -1,4 +1,5 @@
 using Lefish.Application.Extensions;
+using Lefish.Common.Dates;
 using Microsoft.AspNetCore.Authorization;
 using System.Text;
 
@@ -9,6 +10,7 @@ namespace Lefish.Web.Pages;
 public class FetchInstructionModel(
     IUserToken userToken,
     IDatabaseService database,
+    IDateService dateService,
     IOptions<TemplateConfiguration> templateConfiguration) : UserTokenPageModel(userToken)
 {
     private readonly TemplateConfiguration _config = templateConfiguration.Value;
@@ -41,6 +43,7 @@ public class FetchInstructionModel(
                 return NotFound();
 
             instruction.InstructionStatus = InstructionStatus.Fetched;
+            instruction.Fetched = dateService.GetDateTimeNow();
 
             await database.SaveAsync(UserToken);
 

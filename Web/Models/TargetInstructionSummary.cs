@@ -9,6 +9,7 @@ public class TargetInstructionSummary
     public int Reference { get; set; }
 
     public DateTime? Created { get; set; }
+    public DateTime? Fetched { get; set; }
 
     public InstructionStatus InstructionStatus { get; set; }
 }

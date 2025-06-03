@@ -145,6 +145,7 @@ public class ShowAttackModel(
                 {
                     Id = x.Id,
                     Created = x.Created,
+                    Fetched = x.Fetched,
                     Name = x.Name,
                     Reference = x.Reference,
                     InstructionStatus = x.InstructionStatus,
