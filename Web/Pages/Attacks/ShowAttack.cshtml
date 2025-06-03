@@ -63,6 +63,10 @@
                 <a href="/show-target-instruction/@(instruction.Id)">
                     @(instruction.Name)
                 </a>
+                &ensp;
+                <span class="muted">
+                    @(instruction.InstructionStatus)
+                </span>
             </li>
         }
         @if (!Model.TargetInstructions.Any())
