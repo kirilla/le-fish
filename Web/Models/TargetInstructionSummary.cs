@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Web.Models;
 
-public class TargetInstructionPlus
+public class TargetInstructionSummary
 {
     public int Id { get; set; }
 
@@ -9,4 +9,6 @@ public class TargetInstructionPlus
     public int Reference { get; set; }
 
     public DateTime? Created { get; set; }
+
+    public InstructionStatus InstructionStatus { get; set; }
 }

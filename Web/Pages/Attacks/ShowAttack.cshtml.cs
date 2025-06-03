@@ -12,7 +12,7 @@ public class ShowAttackModel(
     public List<PageVisitPlus> PageVisits { get; set; }
     public List<ScriptVisitPlus> ScriptVisits { get; set; }
 
-    public List<TargetInstructionPlus> TargetInstructions { get; set; }
+    public List<TargetInstructionSummary> TargetInstructions { get; set; }
 
     public List<Visit> Visits { get; set; }
 
@@ -141,12 +141,13 @@ public class ShowAttackModel(
             TargetInstructions = await database.TargetInstructions
                 .Where(x => x.AttackId == id)
                 .OrderBy(x => x.Created)
-                .Select(x => new TargetInstructionPlus()
+                .Select(x => new TargetInstructionSummary()
                 {
                     Id = x.Id,
                     Created = x.Created,
                     Name = x.Name,
                     Reference = x.Reference,
+                    InstructionStatus = x.InstructionStatus,
                 })
                 .ToListAsync();
 

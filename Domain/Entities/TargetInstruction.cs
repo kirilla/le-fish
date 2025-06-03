@@ -11,6 +11,8 @@ public class TargetInstruction : ICreatedDateTime
 
     public DateTime? Created { get; set; }
 
+    public InstructionStatus InstructionStatus { get; set; }
+
     public Attack Attack { get; set; }
     public int AttackId { get; set; }
 }

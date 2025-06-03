@@ -23,6 +23,7 @@ public class AddTargetInstructionCommand(IDatabaseService database) : IAddTarget
             Name = model.Name,
             Script = model.Script,
             Reference = Random.Shared.Next(),
+            InstructionStatus = InstructionStatus.Available,
         };
 
         database.TargetInstructions.Add(page);

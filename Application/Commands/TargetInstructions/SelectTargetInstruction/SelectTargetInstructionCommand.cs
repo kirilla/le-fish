@@ -28,6 +28,7 @@ public class SelectTargetInstructionCommand(IDatabaseService database) : ISelect
             Name = instruction.Name,
             Script = instruction.Script,
             Reference = Random.Shared.Next(),
+            InstructionStatus = InstructionStatus.Available,
         };
 
         database.TargetInstructions.Add(page);
