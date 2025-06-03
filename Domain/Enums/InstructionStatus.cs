@@ -2,6 +2,6 @@
 
 public enum InstructionStatus
 {
-    Available = 0,
+    Waiting = 0,
     Fetched = 1,
 }

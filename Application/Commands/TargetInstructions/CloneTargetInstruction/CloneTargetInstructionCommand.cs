@@ -23,7 +23,7 @@ public class CloneTargetInstructionCommand(IDatabaseService database) : ICloneTa
             Name = model.Name,
             Script = existing.Script,
             Reference = Random.Shared.Next(),
-            InstructionStatus = InstructionStatus.Available,
+            InstructionStatus = InstructionStatus.Waiting,
         };
 
         database.TargetInstructions.Add(clone);

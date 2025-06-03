@@ -32,7 +32,7 @@ public class FetchInstructionModel(
             var instruction = await database.TargetInstructions
                 .Where(x => 
                     x.AttackId == attack.Id && 
-                    x.InstructionStatus == InstructionStatus.Available)
+                    x.InstructionStatus == InstructionStatus.Waiting)
                 .OrderBy(x => x.Created)
                 .FirstOrDefaultAsync() ??
                 throw new NotFoundException();
