@@ -52,8 +52,9 @@ public class PayloadPageModel(
     public async Task LogPageVisit(
         HttpContext context, Attack attack)
     {
-        var visit = new PageVisit()
+        var visit = new Visit()
         {
+            VisitKind = VisitKind.Page,
             Url = context.Request.GetDisplayUrl(),
             Method = context.Request.Method,
             IpAddress = context.Connection.RemoteIpAddress?.ToString(),

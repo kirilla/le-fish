@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Web.Models;
 
-public class PageVisitPlus
+public class VisitPlus
 {
     public int Id { get; set; }
 

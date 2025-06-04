@@ -22,7 +22,7 @@ public interface IDatabaseService
     DbSet<TargetInstruction> TargetInstructions { get; set; }
     DbSet<User> Users { get; set; }
     DbSet<UserEmail> UserEmails { get; set; }
-    DbSet<PageVisit> Visits { get; set; }
+    DbSet<Visit> Visits { get; set; }
 
     Task SaveAsync(IUserToken userToken);
 

@@ -27,7 +27,7 @@ public class DatabaseService(
     public DbSet<TargetInstruction> TargetInstructions { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserEmail> UserEmails { get; set; }
-    public DbSet<PageVisit> Visits { get; set; }
+    public DbSet<Visit> Visits { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -51,7 +51,7 @@ public class DatabaseService(
         new TargetInstructionConfiguration().Configure(builder.Entity<TargetInstruction>());
         new UserConfiguration().Configure(builder.Entity<User>());
         new UserEmailConfiguration().Configure(builder.Entity<UserEmail>());
-        new PageVisitConfiguration().Configure(builder.Entity<PageVisit>());
+        new VisitConfiguration().Configure(builder.Entity<Visit>());
     }
 
     public async Task SaveAsync(IUserToken userToken)

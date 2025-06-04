@@ -1,8 +1,8 @@
 ﻿namespace Lefish.Persistence.Configuration;
 
-class PageVisitConfiguration : IEntityTypeConfiguration<PageVisit>
+class VisitConfiguration : IEntityTypeConfiguration<Visit>
 {
-    public void Configure(EntityTypeBuilder<PageVisit> builder)
+    public void Configure(EntityTypeBuilder<Visit> builder)
     {
         builder.HasKey(p => p.Id);
 

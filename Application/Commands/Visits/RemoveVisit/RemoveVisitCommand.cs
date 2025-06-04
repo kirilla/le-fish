@@ -1,9 +1,9 @@
-﻿namespace Lefish.Application.Commands.PageVisits.RemovePageVisit;
+﻿namespace Lefish.Application.Commands.Visits.RemoveVisit;
 
-public class RemovePageVisitCommand(IDatabaseService database) : IRemovePageVisitCommand
+public class RemoveVisitCommand(IDatabaseService database) : IRemoveVisitCommand
 {
     public async Task Execute(
-        IUserToken userToken, RemovePageVisitCommandModel model)
+        IUserToken userToken, RemoveVisitCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
@@ -12,7 +12,7 @@ public class RemovePageVisitCommand(IDatabaseService database) : IRemovePageVisi
             throw new ConfirmationRequiredException();
 
         var visit = await database.Visits
-            .Where(x => x.Id == model.PageVisitId)
+            .Where(x => x.Id == model.VisitId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 

@@ -1,0 +1,51 @@
+﻿@page "/show-page-visit/{id:int}"
+@model ShowVisitModel
+@{
+}
+
+@section Meta {
+    <title>Webbsida - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        🙋
+        @(Model.Visit.TargetName)
+        @(Model.Visit.TargetAddress)
+    </h4>
+
+    <dl class="notice">
+        <dt>När</dt>
+        <dd>@(Model.Visit.Created.ToFixedFormatDateShortTime())</dd>
+
+        @* <dt>Sida</dt>
+        <dd>@(Model.Visit.PayloadPage.Comment)</dd> *@
+
+        <dt>URL</dt>
+        <dd>@(Model.Visit.Url)</dd>
+
+        @* <dt>Metod</dt>
+        <dd>@(Model.Visit.Method)</dd> *@
+
+        <dt>UserAgent</dt>
+        <dd>@(Model.Visit.UserAgent)</dd>
+
+        <dt>Ip-nummer</dt>
+        <dd>@(Model.Visit.IpAddress)</dd>
+    </dl>
+
+    <p>
+        @if (Model.CanRemoveVisit)
+        {
+            <a class="button" href="/remove-page-visit/@(Model.Visit.Id)">
+                Ta bort
+            </a>
+        }
+    </p>
+
+</main>

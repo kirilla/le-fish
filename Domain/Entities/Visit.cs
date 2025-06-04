@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Domain.Entities;
 
-public class PageVisit : ICreatedDateTime
+public class Visit : ICreatedDateTime
 {
     public int Id { get; set; }
 

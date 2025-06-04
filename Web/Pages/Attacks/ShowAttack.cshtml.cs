@@ -9,7 +9,7 @@ public class ShowAttackModel(
     public List<DataDump> DataDumps { get; set; }
     public List<EmailHeader> EmailHeaders { get; set; }
 
-    public List<PageVisitPlus> PageVisits { get; set; }
+    public List<VisitPlus> PageVisits { get; set; }
     public List<ScriptVisitPlus> ScriptVisits { get; set; }
 
     public List<TargetInstructionSummary> TargetInstructions { get; set; }
@@ -70,7 +70,7 @@ public class ShowAttackModel(
             PageVisits = await database.Visits
                 .Where(x => x.AttackId == id)
                 .OrderBy(x => x.Created)
-                .Select(x => new PageVisitPlus()
+                .Select(x => new VisitPlus()
                 {
                     Id = x.Id,
                     Created = x.Created,

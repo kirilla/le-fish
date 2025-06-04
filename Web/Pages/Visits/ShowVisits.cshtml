@@ -1,5 +1,5 @@
 ﻿@page "/show-page-visits"
-@model ShowPageVisitsModel
+@model ShowVisitsModel
 @{
 }
 
@@ -23,7 +23,7 @@
     <div class="notice">
 
         <ul>
-            @foreach (var visit in Model.PageVisits)
+            @foreach (var visit in Model.Visits)
             {
                 <li>
                     🙋
@@ -38,7 +38,7 @@
                 </li>
             }
 
-            @if (!Model.PageVisits.Any())
+            @if (!Model.Visits.Any())
             {
                 <li>
                     🙋

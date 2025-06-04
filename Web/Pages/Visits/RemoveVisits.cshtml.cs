@@ -1,14 +1,14 @@
-using Lefish.Application.Commands.PageVisits.RemovePageVisits;
+using Lefish.Application.Commands.Visits.RemoveVisits;
 
-namespace Lefish.Web.Pages.PageVisits;
+namespace Lefish.Web.Pages.Visits;
 
-public class RemovePageVisitsModel(
+public class RemoveVisitsModel(
     IUserToken userToken,
     IDatabaseService database,
-    IRemovePageVisitsCommand command) : UserTokenPageModel(userToken)
+    IRemoveVisitsCommand command) : UserTokenPageModel(userToken)
 {
     [BindProperty]
-    public RemovePageVisitsCommandModel CommandModel { get; set; }
+    public RemoveVisitsCommandModel CommandModel { get; set; }
 
     public List<EmailTarget> EmailTargets { get; set; }
 
@@ -23,7 +23,7 @@ public class RemovePageVisitsModel(
                 .OrderBy(x => x.Address)
                 .ToListAsync();
 
-            CommandModel = new RemovePageVisitsCommandModel();
+            CommandModel = new RemoveVisitsCommandModel();
 
             return Page();
         }
