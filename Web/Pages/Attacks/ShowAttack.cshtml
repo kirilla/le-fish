@@ -111,17 +111,21 @@
             {
                 <tr>
                     <td>
-                        @if (visit.VisitKind == VisitKind.Page)
+                        @if (visit.VisitKind == VisitKind.PageVisit)
                         {
                             <span>📄</span>
                         }
-                        @if (visit.VisitKind == VisitKind.Script)
+                        @if (visit.VisitKind == VisitKind.ScriptDownload)
                         {
                             <span>📜</span>
                         }
-                        @if (visit.VisitKind == VisitKind.InstructionFetch)
+                        @if (visit.VisitKind == VisitKind.FetchInstruction)
                         {
                             <span>❇️</span>
+                        }
+                        @if (visit.VisitKind == VisitKind.UploadData)
+                        {
+                            <span>🧺</span>
                         }
                     </td>
                     <td>

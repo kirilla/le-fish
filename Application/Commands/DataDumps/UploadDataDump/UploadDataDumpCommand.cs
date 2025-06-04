@@ -27,6 +27,18 @@ public class UploadDataDumpCommand(IDatabaseService database) : IUploadDataDumpC
 
         database.DataDumps.Add(dump);
 
+        var visit = new Visit()
+        {
+            AttackId = attack.Id,
+            VisitKind = VisitKind.UploadData,
+            Url = model.Url,
+            Method = model.Method,
+            IpAddress = model.IpAddress,
+            UserAgent = model.UserAgent,
+        };
+
+        database.Visits.Add(visit);
+
         await database.SaveAsync(userToken);
     }
 

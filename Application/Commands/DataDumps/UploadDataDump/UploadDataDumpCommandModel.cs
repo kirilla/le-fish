@@ -8,4 +8,9 @@ public class UploadDataDumpCommandModel
     [Required(ErrorMessage = "Något innehåll krävs.")]
     [StringLength(MaxLengths.Domain.DataDump.JsonData)]
     public string JsonData { get; set; }
+
+    public string? Url { get; set; }
+    public string? Method { get; set; }
+    public string? IpAddress { get; set; }
+    public string? UserAgent { get; set; }
 }

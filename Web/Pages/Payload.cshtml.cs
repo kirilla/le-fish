@@ -54,7 +54,7 @@ public class PayloadPageModel(
     {
         var visit = new Visit()
         {
-            VisitKind = VisitKind.Page,
+            VisitKind = VisitKind.PageVisit,
             Url = context.Request.GetDisplayUrl(),
             Method = context.Request.Method,
             IpAddress = context.Connection.RemoteIpAddress?.ToString(),

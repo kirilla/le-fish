@@ -1,6 +1,7 @@
 using Lefish.Application.Extensions;
 using Lefish.Common.Dates;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Extensions;
 using System.Text;
 
 namespace Lefish.Web.Pages;
@@ -45,6 +46,8 @@ public class FetchInstructionModel(
             instruction.InstructionStatus = InstructionStatus.Fetched;
             instruction.Fetched = dateService.GetDateTimeNow();
 
+            await LogEvent(HttpContext, attack);
+
             await database.SaveAsync(UserToken);
 
             var script = instruction.ReplaceVariables(_config, target, attack);
@@ -55,5 +58,23 @@ public class FetchInstructionModel(
         {
             return NotFound();
         }
+    }
+
+    public async Task LogEvent(
+        HttpContext context, Attack attack)
+    {
+        var visit = new Visit()
+        {
+            VisitKind = VisitKind.FetchInstruction,
+            Url = context.Request.GetDisplayUrl(),
+            Method = context.Request.Method,
+            IpAddress = context.Connection.RemoteIpAddress?.ToString(),
+            UserAgent = context.Request.Headers?.UserAgent,
+            AttackId = attack.Id,
+        };
+
+        database.Visits.Add(visit);
+
+        //await database.SaveAsync(UserToken);
     }
 }

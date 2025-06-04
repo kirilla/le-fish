@@ -2,7 +2,8 @@
 
 public enum VisitKind
 {
-    Page = 0,
-    Script = 1,
-    InstructionFetch = 2,
+    PageVisit = 0,
+    ScriptDownload = 1,
+    FetchInstruction = 2,
+    UploadData = 3,
 }

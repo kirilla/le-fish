@@ -1,5 +1,7 @@
 ﻿using Lefish.Application.Commands.DataDumps.UploadDataDump;
+using Lefish.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace Lefish.Web.Pages;
 
@@ -30,6 +32,11 @@ public class UploadPageModel(
             var commandModel = new UploadDataDumpCommandModel()
             {
                 JsonData = requestBody,
+
+                Url = HttpContext.Request.GetDisplayUrl(),
+                Method = HttpContext.Request.Method,
+                IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
+                UserAgent = HttpContext.Request.Headers?.UserAgent,
             };
 
             await command.Execute(UserToken, commandModel, token);
