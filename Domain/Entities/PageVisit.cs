@@ -4,6 +4,8 @@ public class PageVisit : ICreatedDateTime
 {
     public int Id { get; set; }
 
+    public VisitKind VisitKind { get; set; }
+
     public DateTime? Created { get; set; }
 
     public string? Url { get; set; }
