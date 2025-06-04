@@ -43,30 +43,15 @@
                .Where(x => x.EmailTargetId == target.Id))
             {
                 <div style="padding-left:1.5em;">
-                    <div>
-                        🔥
-                        &thinsp;
-                        <a href="/show-attack/@(attack.Id)">@(attack.Value)</a>
-                    </div>
-
-                    @foreach (var message in Model.EmailMessages
-                        .Where(x => x.AttackId == attack.Id))
-                    {
-                        <div style="padding-left:1.5em;">
-                            📩
-                            &thinsp;
-                            <a href="/show-email/@(message.Id)">@(message.Subject)</a>
-                        </div>
-                    }
-
-                    @if (!Model.EmailMessages.Any(x => x.AttackId == attack.Id))
-                    {
-                        <div style="padding-left:1.5em;">
-                            📩
-                            &thinsp;
-                            &ndash;
-                        </div>
-                    }
+                    🔥
+                    &thinsp;
+                    <a href="/show-attack/@(attack.Id)">
+                        @(attack.Created.ToFixedFormatDateShortTime())
+                    </a>
+                    &ensp;
+                    <span class="muted">
+                        @(attack.Value)
+                    </span>
                 </div>
             }
         }

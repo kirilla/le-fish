@@ -8,9 +8,7 @@ public class AttackModel(
     ISendEmailCommand sendEmailCommand) : UserTokenPageModel(userToken)
 {
     public List<EmailTarget> EmailTargets { get; set; }
-    public List<EmailHeader> EmailMessages { get; set; }
-    public List<AttackSummary> Attacks { get; set; }
-    public List<Visit> Visits { get; set; }
+    public List<Attack> Attacks { get; set; }
 
     public bool CanSendEmail { get; set; }
         = sendEmailCommand.IsPermitted(userToken);
@@ -28,65 +26,8 @@ public class AttackModel(
                 .ThenBy(x => x.Address)
                 .ToListAsync();
 
-            EmailMessages = await database.EmailMessages
-                .Include(x => x.EmailAccount)
-                .OrderByDescending(x => x.Created)
-                .Select(x => new EmailHeader()
-                {
-                    Id = x.Id,
-                    AttackId = x.AttackId,
-                    Subject = x.Subject,
-                    EmailStatus = x.EmailStatus,
-                    Sent = x.Sent,
-                })
-                .ToListAsync();
-
-            var pageVisits = await database.PageVisits
-                .OrderBy(x => x.Created)
-                .Select(x => new Visit() { 
-                    VisitKind = VisitKind.Page,
-                    Id = x.Id,
-                    AttackId = x.AttackId,
-                    Created = x.Created,
-                    IpAddress = x.IpAddress,
-                    PageName = x.Attack.PayloadPage.Name,
-                    PayloadPageId = x.Attack.PayloadPageId,
-                })
-                .ToListAsync();
-
-            var scriptVisits = await database.ScriptVisits
-                .OrderBy(x => x.Created)
-                .Select(x => new Visit()
-                {
-                    VisitKind = VisitKind.Script,
-                    Id = x.Id,
-                    AttackId = x.AttackId,
-                    Created = x.Created,
-                    IpAddress = x.IpAddress,
-                    ScriptName = x.Attack.PayloadScript.Name,
-                    PayloadScriptId = x.Attack.PayloadScriptId,
-                })
-                .ToListAsync();
-
-            Visits = pageVisits
-                .Union(scriptVisits)
-                .OrderBy(x => x.Created)
-                .ToList();
-
             Attacks = await database.Attacks
                 .OrderBy(x => x.Created)
-                .Select(x => new AttackSummary()
-                {
-                    Id = x.Id,
-                    Value = x.Value,
-                    PageName = x.PayloadPage.Name,
-                    PayloadPageId = x.PayloadPageId,
-                    TargetName = x.EmailTarget.Name,
-                    TargetAddress = x.EmailTarget.Address,
-                    EmailTargetId = x.EmailTargetId,
-                    ScriptName = x.PayloadScript.Name,
-                    PayloadScriptId = x.PayloadScriptId,
-                })
                 .ToListAsync();
 
             return Page();
