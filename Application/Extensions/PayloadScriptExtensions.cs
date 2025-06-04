@@ -4,22 +4,26 @@ namespace Lefish.Application.Extensions;
 
 public static class PayloadScriptExtensions
 {
-    public static void InsertTargetValues(
+    public static string ReplaceVariables(
         this PayloadScript script,
         TemplateConfiguration templateConfiguration,
         EmailTarget target, 
         Attack attack)
     {
+        string s = script.Script;
+
         // Step 1
-        script.Script = script.Script.Replace(Variables.PAGE_URL, templateConfiguration.PageUrl);
-        script.Script = script.Script.Replace(Variables.SCRIPT_URL, templateConfiguration.ScriptUrl);
+        s = s.Replace(Variables.PAGE_URL, templateConfiguration.PageUrl);
+        s = s.Replace(Variables.SCRIPT_URL, templateConfiguration.ScriptUrl);
 
         // Step 2
-        script.Script = script.Script.Replace(Variables.ATTACK_TOKEN, attack.Value.ToString());
-        script.Script = script.Script.Replace(Variables.TARGET_ADDRESS, target.Address);
-        script.Script = script.Script.Replace(Variables.TARGET_NAME, target.Name);
+        s = s.Replace(Variables.ATTACK_TOKEN, attack.Value.ToString());
+        s = s.Replace(Variables.TARGET_ADDRESS, target.Address);
+        s = s.Replace(Variables.TARGET_NAME, target.Name);
 
         // Q: Why two steps?
         // A: PAGE_URL and SCRIPT_URL may contain PAGE_TOKEN.
+
+        return s;
     }
 }

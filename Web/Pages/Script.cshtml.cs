@@ -40,11 +40,11 @@ public class ScriptPageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            PayloadScript.InsertTargetValues(_config, EmailTarget, Attack);
+            var script = PayloadScript.ReplaceVariables(_config, EmailTarget, Attack);
 
             await LogScriptVisit(HttpContext, Attack);
 
-            return Content(PayloadScript.Script, "application/javascript", Encoding.UTF8);
+            return Content(script, "application/javascript", Encoding.UTF8);
         }
         catch
         {

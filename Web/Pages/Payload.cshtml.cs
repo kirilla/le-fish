@@ -13,35 +13,33 @@ public class PayloadPageModel(
 {
     private readonly TemplateConfiguration _config = templateConfiguration.Value;
 
-    public EmailTarget EmailTarget { get; set; }
-    public Attack Attack { get; set; }
-    public PayloadPage PayloadPage { get; set; }
+    public string HtmlPage {  get; set; }
 
     public async Task<IActionResult> OnGetAsync(int token)
     {
         try
         {
-            Attack = await database.Attacks
+            var attack = await database.Attacks
                 .AsNoTracking()
                 .Where(x => x.Value == token)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            PayloadPage = await database.PayloadPages
+            var payloadPage = await database.PayloadPages
                 .AsNoTracking()
-                .Where(x => x.Id == Attack.PayloadPageId)
+                .Where(x => x.Id == attack.PayloadPageId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            EmailTarget = await database.EmailTargets
+            var emailTarget = await database.EmailTargets
                 .AsNoTracking()
-                .Where(x => x.Id == Attack.EmailTargetId)
+                .Where(x => x.Id == attack.EmailTargetId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            PayloadPage.InsertTargetValues(_config, EmailTarget, Attack);
+            HtmlPage = payloadPage.ReplaceVariables(_config, emailTarget, attack);
 
-            await LogPageVisit(HttpContext, Attack);
+            await LogPageVisit(HttpContext, attack);
 
             return Page();
         }

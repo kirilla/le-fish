@@ -4,7 +4,7 @@ namespace Lefish.Application.Extensions;
 
 public static class EmailMessageExtensions
 {
-    public static void InsertTargetValues(
+    public static void ReplaceVariables(
         this EmailMessage message,
         TemplateConfiguration templateConfiguration,
         EmailTarget target, 

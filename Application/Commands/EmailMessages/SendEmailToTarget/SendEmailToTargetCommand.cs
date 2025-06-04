@@ -77,7 +77,7 @@ public class SendEmailToTargetCommand(
 
         database.EmailMessages.Add(message);
         
-        message.InsertTargetValues(_config, target, attack);
+        message.ReplaceVariables(_config, target, attack);
 
         await database.SaveAsync(userToken);
 
