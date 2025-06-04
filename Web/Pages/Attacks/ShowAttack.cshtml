@@ -96,19 +96,34 @@
     </p>
 
     <h5>
-        Sidbesök
+        Händelser
     </h5>
 
     <figure>
         <table>
             <tr>
-                <th>&emsp;🙋</th>
+                <th></th>
+                <th>Tid</th>
                 <th>IP-nummer</th>
                 <th>UserAgent</th>
             </tr>
-            @foreach (var visit in Model.PageVisits)
+            @foreach (var visit in Model.Visits)
             {
                 <tr>
+                    <td>
+                        @if (visit.VisitKind == VisitKind.Page)
+                        {
+                            <span>📄</span>
+                        }
+                        @if (visit.VisitKind == VisitKind.Script)
+                        {
+                            <span>📜</span>
+                        }
+                        @if (visit.VisitKind == VisitKind.InstructionFetch)
+                        {
+                            <span>❇️</span>
+                        }
+                    </td>
                     <td>
                         <a href="/show-page-visit/@(visit.Id)">
                             @(visit.Created.ToFixedFormatDateShortTime())
@@ -122,7 +137,7 @@
                     </td>
                 </tr>
             }
-            @if (!Model.PageVisits.Any())
+            @if (!Model.Visits.Any())
             {
                 <tr>
                     <td colspan="3">
@@ -134,44 +149,6 @@
     </figure>
 
     <br />
-
-    <h5>
-        Skriptnedladdningar
-    </h5>
-
-    <figure>
-        <table>
-            <tr>
-                <th>&emsp;🙋</th>
-                <th>IP-nummer</th>
-                <th>UserAgent</th>
-            </tr>
-            @foreach (var visit in Model.ScriptVisits)
-            {
-                <tr>
-                    <td>
-                        <a href="/show-script-visit/@(visit.Id)">
-                            @(visit.Created.ToFixedFormatDateShortTime())
-                        </a>
-                    </td>
-                    <td>
-                        @(visit.IpAddress)
-                    </td>
-                    <td>
-                        @(visit.UserAgent)
-                    </td>
-                </tr>
-            }
-            @if (!Model.ScriptVisits.Any())
-            {
-                <tr>
-                    <td colspan="3">
-                        Inga
-                    </td>
-                </tr>
-            }
-        </table>
-    </figure>
 
     <br />
 

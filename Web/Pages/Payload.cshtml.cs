@@ -39,7 +39,7 @@ public class PayloadPageModel(
 
             HtmlPage = payloadPage.ReplaceVariables(_config, emailTarget, attack);
 
-            await LogPageVisit(HttpContext, attack);
+            await LogEvent(HttpContext, attack);
 
             return Page();
         }
@@ -49,7 +49,7 @@ public class PayloadPageModel(
         }
     }
 
-    public async Task LogPageVisit(
+    public async Task LogEvent(
         HttpContext context, Attack attack)
     {
         var visit = new Visit()

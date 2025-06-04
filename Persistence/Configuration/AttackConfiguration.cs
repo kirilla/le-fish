@@ -22,10 +22,6 @@ class AttackConfiguration : IEntityTypeConfiguration<Attack>
             .WithOne(x => x.Attack)
             .HasForeignKey(x => x.AttackId);
 
-        builder.HasMany(x => x.ScriptVisits)
-            .WithOne(x => x.Attack)
-            .HasForeignKey(x => x.AttackId);
-
         builder.HasMany(x => x.TargetInstructions)
             .WithOne(x => x.Attack)
             .HasForeignKey(x => x.AttackId);

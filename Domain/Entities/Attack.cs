@@ -18,7 +18,6 @@ public class Attack : ICreatedDateTime
 
     public List<DataDump> DataDumps { get; set; }
     public List<EmailMessage> EmailMessages { get; set; }
-    public List<ScriptVisit> ScriptVisits { get; set; }
     public List<TargetInstruction> TargetInstructions { get; set; }
     public List<Visit> Visits { get; set; }
 }

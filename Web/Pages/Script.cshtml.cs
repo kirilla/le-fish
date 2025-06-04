@@ -42,7 +42,7 @@ public class ScriptPageModel(
 
             var script = PayloadScript.ReplaceVariables(_config, EmailTarget, Attack);
 
-            await LogScriptVisit(HttpContext, Attack);
+            await LogEvent(HttpContext, Attack);
 
             return Content(script, "application/javascript", Encoding.UTF8);
         }
@@ -52,11 +52,12 @@ public class ScriptPageModel(
         }
     }
 
-    public async Task LogScriptVisit(
+    public async Task LogEvent(
         HttpContext context, Attack attack)
     {
-        var visit = new ScriptVisit()
+        var visit = new Visit()
         {
+            VisitKind = VisitKind.Script,
             Url = context.Request.GetDisplayUrl(),
             Method = context.Request.Method,
             IpAddress = context.Connection.RemoteIpAddress?.ToString(),
@@ -64,7 +65,7 @@ public class ScriptPageModel(
             AttackId = attack.Id,
         };
 
-        database.ScriptVisits.Add(visit);
+        database.Visits.Add(visit);
 
         await database.SaveAsync(UserToken);
     }

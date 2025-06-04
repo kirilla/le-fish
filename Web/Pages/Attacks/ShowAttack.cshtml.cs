@@ -8,11 +8,8 @@ public class ShowAttackModel(
 
     public List<DataDump> DataDumps { get; set; }
     public List<EmailHeader> EmailHeaders { get; set; }
-
-    public List<VisitPlus> PageVisits { get; set; }
-    public List<ScriptVisitPlus> ScriptVisits { get; set; }
-
     public List<TargetInstructionSummary> TargetInstructions { get; set; }
+    public List<Visit> Visits { get; set; }
 
     public List<string> IpAddresses { get; set; }
     public List<string> UserAgents { get; set; }
@@ -67,36 +64,9 @@ public class ShowAttackModel(
                 })
                 .ToListAsync();
 
-            PageVisits = await database.Visits
+            Visits = await database.Visits
                 .Where(x => x.AttackId == id)
                 .OrderBy(x => x.Created)
-                .Select(x => new VisitPlus()
-                {
-                    Id = x.Id,
-                    Created = x.Created,
-                    Url = x.Url,
-                    Method = x.Method,
-                    IpAddress = x.IpAddress,
-                    UserAgent = x.UserAgent,
-                    PageName = x.Attack.PayloadPage.Name,
-                    PayloadPageId = x.Attack.PayloadPageId,
-                })
-                .ToListAsync();
-
-            ScriptVisits = await database.ScriptVisits
-                .Where(x => x.AttackId == id)
-                .OrderBy(x => x.Created)
-                .Select(x => new ScriptVisitPlus()
-                {
-                    Id = x.Id,
-                    Created = x.Created,
-                    Url = x.Url,
-                    Method = x.Method,
-                    IpAddress = x.IpAddress,
-                    UserAgent = x.UserAgent,
-                    ScriptName = x.Attack.PayloadScript.Name,
-                    PayloadScriptId = x.Attack.PayloadScriptId,
-                })
                 .ToListAsync();
 
             TargetInstructions = await database.TargetInstructions
@@ -113,39 +83,14 @@ public class ShowAttackModel(
                 })
                 .ToListAsync();
 
-            var pageVisits = await database.Visits
-                .OrderBy(x => x.Created)
-                .Where(x => x.AttackId == id)
-                .Select(x => new Visit()
-                {
-                    IpAddress = x.IpAddress,
-                    UserAgent = x.UserAgent,
-                })
-                .ToListAsync();
-
-            var scriptVisits = await database.ScriptVisits
-                .OrderBy(x => x.Created)
-                .Where(x => x.AttackId == id)
-                .Select(x => new Visit()
-                {
-                    IpAddress = x.IpAddress,
-                    UserAgent = x.UserAgent,
-                })
-                .ToListAsync();
-
-            var visits = pageVisits
-                .Union(scriptVisits)
-                .OrderBy(x => x.Created)
-                .ToList();
-
-            IpAddresses = visits
+            IpAddresses = Visits
                 .Select(x => x.IpAddress)
                 .Where(x => x != null)
                 .Cast<string>()
                 .Distinct()
                 .ToList();
 
-            UserAgents = visits
+            UserAgents = Visits
                 .Select(x => x.UserAgent)
                 .Where(x => x != null)
                 .Cast<string>()
