@@ -21,7 +21,7 @@ public class RemovePageVisitModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PageVisit = await database.PageVisits
+            PageVisit = await database.Visits
                 .Where(x => x.Id == id)
                 .Select(x => new PageVisitPlus()
                 {
@@ -69,7 +69,7 @@ public class RemovePageVisitModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PageVisit = await database.PageVisits
+            PageVisit = await database.Visits
                 .Where(x => x.Id == CommandModel.PageVisitId)
                 .Select(x => new PageVisitPlus()
                 {

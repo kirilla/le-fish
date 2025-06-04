@@ -20,7 +20,6 @@ public class DatabaseService(
     public DbSet<EmailTemplate> EmailTemplates { get; set; }
     public DbSet<Instruction> Instructions { get; set; }
     public DbSet<IpRange> IpRanges { get; set; }
-    public DbSet<PageVisit> PageVisits { get; set; }
     public DbSet<PayloadPage> PayloadPages { get; set; }
     public DbSet<PayloadScript> PayloadScripts { get; set; }
     public DbSet<ScriptVisit> ScriptVisits { get; set; }
@@ -28,7 +27,8 @@ public class DatabaseService(
     public DbSet<TargetInstruction> TargetInstructions { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserEmail> UserEmails { get; set; }
-    
+    public DbSet<PageVisit> Visits { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -44,7 +44,6 @@ public class DatabaseService(
         new EmailTemplateConfiguration().Configure(builder.Entity<EmailTemplate>());
         new InstructionConfiguration().Configure(builder.Entity<Instruction>());
         new IpRangeConfiguration().Configure(builder.Entity<IpRange>());
-        new PageVisitConfiguration().Configure(builder.Entity<PageVisit>());
         new PayloadPageConfiguration().Configure(builder.Entity<PayloadPage>());
         new PayloadScriptConfiguration().Configure(builder.Entity<PayloadScript>());
         new ScriptVisitConfiguration().Configure(builder.Entity<ScriptVisit>());
@@ -52,6 +51,7 @@ public class DatabaseService(
         new TargetInstructionConfiguration().Configure(builder.Entity<TargetInstruction>());
         new UserConfiguration().Configure(builder.Entity<User>());
         new UserEmailConfiguration().Configure(builder.Entity<UserEmail>());
+        new PageVisitConfiguration().Configure(builder.Entity<PageVisit>());
     }
 
     public async Task SaveAsync(IUserToken userToken)

@@ -15,7 +15,6 @@ public interface IDatabaseService
     DbSet<EmailTemplate> EmailTemplates { get; set; }
     DbSet<Instruction> Instructions { get; set; }
     DbSet<IpRange> IpRanges { get; set; }
-    DbSet<PageVisit> PageVisits { get; set; }
     DbSet<PayloadPage> PayloadPages { get; set; }
     DbSet<PayloadScript> PayloadScripts { get; set; }
     DbSet<ScriptVisit> ScriptVisits { get; set; }
@@ -23,6 +22,7 @@ public interface IDatabaseService
     DbSet<TargetInstruction> TargetInstructions { get; set; }
     DbSet<User> Users { get; set; }
     DbSet<UserEmail> UserEmails { get; set; }
+    DbSet<PageVisit> Visits { get; set; }
 
     Task SaveAsync(IUserToken userToken);
 

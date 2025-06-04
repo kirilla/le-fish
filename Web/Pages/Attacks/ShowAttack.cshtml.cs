@@ -67,7 +67,7 @@ public class ShowAttackModel(
                 })
                 .ToListAsync();
 
-            PageVisits = await database.PageVisits
+            PageVisits = await database.Visits
                 .Where(x => x.AttackId == id)
                 .OrderBy(x => x.Created)
                 .Select(x => new PageVisitPlus()
@@ -113,7 +113,7 @@ public class ShowAttackModel(
                 })
                 .ToListAsync();
 
-            var pageVisits = await database.PageVisits
+            var pageVisits = await database.Visits
                 .OrderBy(x => x.Created)
                 .Where(x => x.AttackId == id)
                 .Select(x => new Visit()

@@ -11,12 +11,12 @@ public class RemovePageVisitCommand(IDatabaseService database) : IRemovePageVisi
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var visit = await database.PageVisits
+        var visit = await database.Visits
             .Where(x => x.Id == model.PageVisitId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.PageVisits.Remove(visit);
+        database.Visits.Remove(visit);
 
         await database.SaveAsync(userToken);
     }

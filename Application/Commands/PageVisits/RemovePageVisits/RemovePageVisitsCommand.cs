@@ -13,13 +13,13 @@ public class RemovePageVisitsCommand(IDatabaseService database) : IRemovePageVis
 
         if (model.EmailTargetId.HasValue)
         {
-            await database.PageVisits
+            await database.Visits
                 .Where(x => x.Attack.EmailTargetId == model.EmailTargetId!.Value)
                 .ExecuteDeleteAsync();
         }
         else
         {
-            await database.PageVisits.ExecuteDeleteAsync();
+            await database.Visits.ExecuteDeleteAsync();
         }
     }
 

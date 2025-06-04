@@ -61,7 +61,7 @@ public class PayloadPageModel(
             AttackId = attack.Id,
         };
 
-        database.PageVisits.Add(visit);
+        database.Visits.Add(visit);
 
         await database.SaveAsync(UserToken);
     }

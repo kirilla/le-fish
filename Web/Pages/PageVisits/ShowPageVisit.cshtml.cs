@@ -19,7 +19,7 @@ public class ShowPageVisitModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PageVisit = await database.PageVisits
+            PageVisit = await database.Visits
                 .Where(x => x.Id == id)
                 .Select(x => new PageVisitPlus()
                 {
