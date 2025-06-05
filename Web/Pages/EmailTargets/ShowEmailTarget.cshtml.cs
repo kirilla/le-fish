@@ -13,8 +13,7 @@ public class ShowEmailTargetModel(
 {
     public EmailTarget EmailTarget { get; set; }
 
-    public List<EmailHeader> EmailMessages { get; set; }
-    public List<AttackSummary> Attacks { get; set; }
+    public List<Attack> Attacks { get; set; }
 
     public bool CanEditTarget { get; set; }
         = editTargetCommand.IsPermitted(userToken);
@@ -37,35 +36,9 @@ public class ShowEmailTargetModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            EmailMessages = await database.EmailMessages
-                .Include(x => x.EmailAccount)
-                .Where(x => x.Attack.EmailTargetId == id)
-                .OrderByDescending(x => x.Created)
-                .Select(x => new EmailHeader()
-                {
-                    Id = x.Id,
-                    AttackId = x.AttackId,
-                    Subject = x.Subject,
-                    EmailStatus = x.EmailStatus,
-                    Sent = x.Sent,
-                })
-                .ToListAsync();
-
             Attacks = await database.Attacks
                 .Where(x => x.EmailTargetId == id)
                 .OrderBy(x => x.Created)
-                .Select(x => new AttackSummary()
-                {
-                    Id = x.Id,
-                    Value = x.Value,
-                    PageName = x.PayloadPage.Name,
-                    PayloadPageId = x.PayloadPageId,
-                    TargetName = x.EmailTarget.Name,
-                    TargetAddress = x.EmailTarget.Address,
-                    EmailTargetId = x.EmailTargetId,
-                    ScriptName = x.PayloadScript.Name,
-                    PayloadScriptId = x.PayloadScriptId,
-                })
                 .ToListAsync();
 
             return Page();

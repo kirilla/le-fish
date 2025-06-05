@@ -45,12 +45,10 @@
                 <div style="padding-left:1.5em;">
                     🔥
                     &thinsp;
-                    <a href="/show-attack/@(attack.Id)">
-                        @(attack.Created.ToFixedFormatDateShortTime())
-                    </a>
+                    <a href="/show-attack/@(attack.Id)">@(attack.Value)</a>
                     &ensp;
                     <span class="muted">
-                        @(attack.Value)
+                        @(attack.Created.ToFixedFormatDateShortTime())
                     </span>
                 </div>
             }
