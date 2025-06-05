@@ -19,7 +19,7 @@ public class RemoveAttackEventsModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            EmailTargets = await database.EmailTargets
+            EmailTargets = await database.Targets
                 .OrderBy(x => x.Address)
                 .ToListAsync();
 
@@ -44,7 +44,7 @@ public class RemoveAttackEventsModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            EmailTargets = await database.EmailTargets
+            EmailTargets = await database.Targets
                 .OrderBy(x => x.Address)
                 .ToListAsync();
 

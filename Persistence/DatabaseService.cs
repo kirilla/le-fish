@@ -17,7 +17,7 @@ public class DatabaseService(
     public DbSet<EmailAttachment> EmailAttachments { get; set; }
     public DbSet<EmailImage> EmailImages { get; set; }
     public DbSet<EmailMessage> EmailMessages { get; set; }
-    public DbSet<EmailTarget> EmailTargets { get; set; }
+    public DbSet<EmailTarget> Targets { get; set; }
     public DbSet<EmailTemplate> EmailTemplates { get; set; }
     public DbSet<Instruction> Instructions { get; set; }
     public DbSet<IpRange> IpRanges { get; set; }

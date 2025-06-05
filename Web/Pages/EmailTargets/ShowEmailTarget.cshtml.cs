@@ -31,7 +31,7 @@ public class ShowEmailTargetModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            EmailTarget = await database.EmailTargets
+            EmailTarget = await database.Targets
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

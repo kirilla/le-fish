@@ -31,7 +31,7 @@ public class PayloadPageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            var emailTarget = await database.EmailTargets
+            var emailTarget = await database.Targets
                 .AsNoTracking()
                 .Where(x => x.Id == attack.EmailTargetId)
                 .SingleOrDefaultAsync() ??

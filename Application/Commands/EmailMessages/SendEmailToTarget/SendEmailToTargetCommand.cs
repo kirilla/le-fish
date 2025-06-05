@@ -35,7 +35,7 @@ public class SendEmailToTargetCommand(
             .SingleOrDefaultAsync() ??
              throw new NotFoundException();
 
-        var target = await database.EmailTargets
+        var target = await database.Targets
             .Where(x => x.Id == model.EmailTargetId!.Value)
             .SingleOrDefaultAsync() ??
              throw new NotFoundException();

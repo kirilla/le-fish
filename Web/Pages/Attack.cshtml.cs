@@ -20,7 +20,7 @@ public class AttackModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            EmailTargets = await database.EmailTargets
+            EmailTargets = await database.Targets
                 .Where(x => x.Attacks.Any())
                 .OrderBy(x => x.Name)
                 .ThenBy(x => x.Address)

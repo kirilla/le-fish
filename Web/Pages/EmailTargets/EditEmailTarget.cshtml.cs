@@ -19,7 +19,7 @@ public class EditEmailTargetModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            EmailTarget = await database.EmailTargets
+            EmailTarget = await database.Targets
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -50,7 +50,7 @@ public class EditEmailTargetModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            EmailTarget = await database.EmailTargets
+            EmailTarget = await database.Targets
                 .Where(x => x.Id == CommandModel.EmailTargetId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

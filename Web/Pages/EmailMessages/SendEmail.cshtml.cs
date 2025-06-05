@@ -25,7 +25,7 @@ public class SendEmailModel(
                 throw new NotPermittedException();
 
             EmailAccounts = await database.EmailAccounts.ToListAsync();
-            EmailTargets = await database.EmailTargets.ToListAsync();
+            EmailTargets = await database.Targets.ToListAsync();
             EmailTemplates = await database.EmailTemplates.ToListAsync();
 
             PayloadPages = await database.PayloadPages
@@ -71,7 +71,7 @@ public class SendEmailModel(
                 throw new NotPermittedException();
 
             EmailAccounts = await database.EmailAccounts.ToListAsync();
-            EmailTargets = await database.EmailTargets.ToListAsync();
+            EmailTargets = await database.Targets.ToListAsync();
             EmailTemplates = await database.EmailTemplates.ToListAsync();
 
             PayloadPages = await database.PayloadPages

@@ -26,7 +26,7 @@ public class FetchInstructionModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            var target = await database.EmailTargets
+            var target = await database.Targets
                 .AsNoTracking()
                 .Where(x => x.Id == attack.EmailTargetId)
                 .SingleOrDefaultAsync() ??

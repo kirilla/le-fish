@@ -11,7 +11,7 @@ public class AddEmailTargetCommand(IDatabaseService database) : IAddEmailTargetC
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        if (await database.EmailTargets
+        if (await database.Targets
             .AnyAsync(x => x.Address == model.Address))
             throw new BlockedByAddressException();
 
@@ -21,7 +21,7 @@ public class AddEmailTargetCommand(IDatabaseService database) : IAddEmailTargetC
             Address = model.Address,
         };
 
-        database.EmailTargets.Add(target);
+        database.Targets.Add(target);
 
         await database.SaveAsync(userToken);
 

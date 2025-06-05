@@ -25,7 +25,7 @@ public class SendEmailToTargetModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            EmailTarget = await database.EmailTargets
+            EmailTarget = await database.Targets
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -78,7 +78,7 @@ public class SendEmailToTargetModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            EmailTarget = await database.EmailTargets
+            EmailTarget = await database.Targets
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

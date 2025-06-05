@@ -11,12 +11,12 @@ public class RemoveEmailTargetCommand(IDatabaseService database) : IRemoveEmailT
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var target = await database.EmailTargets
+        var target = await database.Targets
             .Where(x => x.Id == model.EmailTargetId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.EmailTargets.Remove(target);
+        database.Targets.Remove(target);
 
         await database.SaveAsync(userToken);
     }

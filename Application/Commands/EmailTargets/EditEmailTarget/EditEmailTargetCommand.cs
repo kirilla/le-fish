@@ -11,12 +11,12 @@ public class EditEmailTargetCommand(IDatabaseService database) : IEditEmailTarge
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        var target = await database.EmailTargets
+        var target = await database.Targets
             .Where(x => x.Id == model.EmailTargetId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        if (await database.EmailTargets
+        if (await database.Targets
             .AnyAsync(x =>
                 x.Address == model.Address &&
                 x.Id != model.EmailTargetId))

@@ -19,7 +19,7 @@ public class ShowEmailTargetsModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            EmailTargets = await database.EmailTargets
+            EmailTargets = await database.Targets
                 .AsNoTracking()
                 .OrderBy(x => x.Address)
                 .ThenBy(x => x.Name)
