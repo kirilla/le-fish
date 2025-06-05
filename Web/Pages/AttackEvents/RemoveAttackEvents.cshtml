@@ -27,7 +27,7 @@
 
         <select asp-for="CommandModel.TargetId">
             <option value="">–</option>
-            @foreach (var target in Model.EmailTargets)
+            @foreach (var target in Model.Targets)
             {
                 <option value="@(target.Id)">
                     @(target.Name), @(target.Address)

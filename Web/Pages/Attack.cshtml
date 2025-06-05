@@ -18,7 +18,7 @@
     </h4>
 
     <div class="notice">
-        @if (!Model.EmailTargets.Any())
+        @if (!Model.Targets.Any())
         {
             <div>
                 🎯
@@ -27,7 +27,7 @@
             </div>
         }
 
-        @foreach (var target in Model.EmailTargets)
+        @foreach (var target in Model.Targets)
         {
             <div>
                 🎯

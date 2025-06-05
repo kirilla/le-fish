@@ -7,7 +7,7 @@ public class AttackModel(
     IDatabaseService database,
     ISendEmailCommand sendEmailCommand) : UserTokenPageModel(userToken)
 {
-    public List<Target> EmailTargets { get; set; }
+    public List<Target> Targets { get; set; }
     public List<Attack> Attacks { get; set; }
 
     public bool CanSendEmail { get; set; }
@@ -20,7 +20,7 @@ public class AttackModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            EmailTargets = await database.Targets
+            Targets = await database.Targets
                 .Where(x => x.Attacks.Any())
                 .OrderBy(x => x.Name)
                 .ThenBy(x => x.Address)

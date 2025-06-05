@@ -10,7 +10,7 @@ public class RemoveAttackEventsModel(
     [BindProperty]
     public RemoveAttackEventsCommandModel CommandModel { get; set; }
 
-    public List<Target> EmailTargets { get; set; }
+    public List<Target> Targets { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -19,7 +19,7 @@ public class RemoveAttackEventsModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            EmailTargets = await database.Targets
+            Targets = await database.Targets
                 .OrderBy(x => x.Address)
                 .ToListAsync();
 
@@ -44,7 +44,7 @@ public class RemoveAttackEventsModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            EmailTargets = await database.Targets
+            Targets = await database.Targets
                 .OrderBy(x => x.Address)
                 .ToListAsync();
 
