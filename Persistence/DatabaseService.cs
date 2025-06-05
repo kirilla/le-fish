@@ -12,7 +12,7 @@ public class DatabaseService(
     public DbSet<Attack> Attacks { get; set; }
     public DbSet<AttackEvent> AttackEvents { get; set; }
     public DbSet<BlockedRequest> BlockedRequests { get; set; }
-    public DbSet<DataDump> DataResults { get; set; }
+    public DbSet<DataResult> DataResults { get; set; }
     public DbSet<EmailAccount> EmailAccounts { get; set; }
     public DbSet<EmailAttachment> EmailAttachments { get; set; }
     public DbSet<EmailImage> EmailImages { get; set; }
@@ -35,7 +35,7 @@ public class DatabaseService(
         new AttackConfiguration().Configure(builder.Entity<Attack>());
         new AttackEventConfiguration().Configure(builder.Entity<AttackEvent>());
         new BlockedRequestConfiguration().Configure(builder.Entity<BlockedRequest>());
-        new DataDumpConfiguration().Configure(builder.Entity<DataDump>());
+        new DataResultConfiguration().Configure(builder.Entity<DataResult>());
         new EmailAccountConfiguration().Configure(builder.Entity<EmailAccount>());
         new EmailAttachmentConfiguration().Configure(builder.Entity<EmailAttachment>());
         new EmailImageConfiguration().Configure(builder.Entity<EmailImage>());

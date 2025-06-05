@@ -7,7 +7,7 @@ public class EditDataDumpModel(
     IDatabaseService database,
     IEditDataDumpCommand command) : UserTokenPageModel(userToken)
 {
-    public DataDump DataDump { get; set; }
+    public DataResult DataDump { get; set; }
 
     [BindProperty]
     public EditDataDumpCommandModel CommandModel { get; set; }

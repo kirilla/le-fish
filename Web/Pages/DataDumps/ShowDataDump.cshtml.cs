@@ -9,7 +9,7 @@ public class ShowDataDumpModel(
     IEditDataDumpCommand editDataDumpCommand,
     IRemoveDataDumpCommand removeDataDumpCommand) : UserTokenPageModel(userToken)
 {
-    public DataDump DataDump { get; set; }
+    public DataResult DataDump { get; set; }
 
     public bool CanEditDataDump { get; set; }
         = editDataDumpCommand.IsPermitted(userToken);

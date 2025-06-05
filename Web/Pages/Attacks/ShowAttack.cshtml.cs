@@ -6,7 +6,7 @@ public class ShowAttackModel(
 {
     public AttackSummary Attack { get; set; }
 
-    public List<DataDump> DataDumps { get; set; }
+    public List<DataResult> DataDumps { get; set; }
     public List<EmailHeader> EmailHeaders { get; set; }
     public List<TargetInstructionSummary> TargetInstructions { get; set; }
     public List<AttackEvent> AttackEvents { get; set; }

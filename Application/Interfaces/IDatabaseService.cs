@@ -7,7 +7,7 @@ public interface IDatabaseService
     DbSet<Attack> Attacks { get; set; }
     DbSet<AttackEvent> AttackEvents { get; set; }
     DbSet<BlockedRequest> BlockedRequests { get; set; }
-    DbSet<DataDump> DataResults { get; set; }
+    DbSet<DataResult> DataResults { get; set; }
     DbSet<EmailAccount> EmailAccounts { get; set; }
     DbSet<EmailAttachment> EmailAttachments { get; set; }
     DbSet<EmailImage> EmailImages { get; set; }

@@ -65,7 +65,7 @@ public static class MaxLengths
 
     public static class Domain
     {
-        public static class DataDump
+        public static class DataResult
         {
             public const int JsonData = Common.DbSuperSize;
         }

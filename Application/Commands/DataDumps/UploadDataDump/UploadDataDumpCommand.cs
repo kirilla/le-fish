@@ -19,7 +19,7 @@ public class UploadDataDumpCommand(IDatabaseService database) : IUploadDataDumpC
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        var dump = new DataDump()
+        var dump = new DataResult()
         {
             AttackId = attack.Id,
             JsonData = model.JsonData,

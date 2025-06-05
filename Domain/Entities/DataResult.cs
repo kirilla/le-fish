@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Domain.Entities;
 
-public class DataDump : ICreatedDateTime
+public class DataResult : ICreatedDateTime
 {
     public int Id { get; set; }
 

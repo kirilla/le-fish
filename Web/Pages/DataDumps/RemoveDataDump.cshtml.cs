@@ -7,7 +7,7 @@ public class RemoveDataDumpModel(
     IDatabaseService database,
     IRemoveDataDumpCommand command) : UserTokenPageModel(userToken)
 {
-    public DataDump DataDump { get; set; }
+    public DataResult DataDump { get; set; }
 
     [BindProperty]
     public RemoveDataDumpCommandModel CommandModel { get; set; }

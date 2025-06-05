@@ -8,6 +8,6 @@ public class EditDataDumpCommandModel
 
     [RegularExpression(Pattern.Common.AnythingMultiLine)]
     [Required(ErrorMessage = "Något innehåll krävs.")]
-    [StringLength(MaxLengths.Domain.DataDump.JsonData)]
+    [StringLength(MaxLengths.Domain.DataResult.JsonData)]
     public string JsonData { get; set; }
 }

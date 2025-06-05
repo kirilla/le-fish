@@ -4,7 +4,7 @@ public class ShowDataDumpsModel(
     IUserToken userToken,
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
-    public List<DataDump> DataDumps { get; set; }
+    public List<DataResult> DataDumps { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {

@@ -10,7 +10,7 @@ class AttackConfiguration : IEntityTypeConfiguration<Attack>
 
         builder.HasIndex(p => p.Value).IsUnique();
 
-        builder.HasMany(x => x.DataDumps)
+        builder.HasMany(x => x.DataResults)
             .WithOne(x => x.Attack)
             .HasForeignKey(x => x.AttackId);
 
