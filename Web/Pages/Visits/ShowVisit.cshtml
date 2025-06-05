@@ -1,4 +1,4 @@
-﻿@page "/show-page-visit/{id:int}"
+﻿@page "/show-visit/{id:int}"
 @model ShowVisitModel
 @{
 }
@@ -14,7 +14,7 @@
 <main>
 
     <h4>
-        🙋
+        🛎️
         @(Model.Visit.TargetName)
         @(Model.Visit.TargetAddress)
     </h4>
@@ -42,7 +42,7 @@
     <p>
         @if (Model.CanRemoveVisit)
         {
-            <a class="button" href="/remove-page-visit/@(Model.Visit.Id)">
+            <a class="button" href="/remove-visit/@(Model.Visit.Id)">
                 Ta bort
             </a>
         }

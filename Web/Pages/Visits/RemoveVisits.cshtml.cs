@@ -53,7 +53,7 @@ public class RemoveVisitsModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect("/show-page-visits");
+            return Redirect("/show-visits");
         }
         catch (ConfirmationRequiredException)
         {

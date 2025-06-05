@@ -1,4 +1,4 @@
-﻿@page "/show-page-visits"
+﻿@page "/show-visits"
 @model ShowVisitsModel
 @{
 }
@@ -26,9 +26,9 @@
             @foreach (var visit in Model.Visits)
             {
                 <li>
-                    🙋
+                    🛎️
                     &thinsp;
-                    <a href="/show-page-visit/@(visit.Id)">
+                    <a href="/show-visit/@(visit.Id)">
                         @(visit.TargetAddress)
                         &thinsp;
                         @(visit.PageName)
@@ -41,7 +41,7 @@
             @if (!Model.Visits.Any())
             {
                 <li>
-                    🙋
+                    🛎️
                     &thinsp;
                     &ndash;
                 </li>
@@ -51,7 +51,7 @@
     </div>
 
     <p>
-        <a class="button" href="/remove-page-visits">
+        <a class="button" href="/remove-visits">
             Ta bort sidbesök
         </a>
     </p>
