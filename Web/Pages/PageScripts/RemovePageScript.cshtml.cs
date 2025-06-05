@@ -26,7 +26,7 @@ public class RemovePageScriptModel(
 
             CommandModel = new RemovePageScriptCommandModel()
             {
-                PayloadScriptId = PayloadScript.Id,
+                Id = PayloadScript.Id,
             };
 
             return Page();
@@ -49,7 +49,7 @@ public class RemovePageScriptModel(
                 throw new NotPermittedException();
 
             PayloadScript = await database.PageScripts
-                .Where(x => x.Id == CommandModel.PayloadScriptId)
+                .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

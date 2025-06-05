@@ -26,7 +26,7 @@ public class EditPageScriptModel(
 
             CommandModel = new EditPageScriptCommandModel()
             {
-                PayloadScriptId = PayloadScript.Id,
+                Id = PayloadScript.Id,
 				Name = PayloadScript.Name,
 				Script = PayloadScript.Script,
             };
@@ -51,7 +51,7 @@ public class EditPageScriptModel(
                 throw new NotPermittedException();
 
             PayloadScript = await database.PageScripts
-                .Where(x => x.Id == CommandModel.PayloadScriptId)
+                .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

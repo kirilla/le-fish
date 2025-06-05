@@ -2,7 +2,7 @@
 
 public class RemovePageScriptCommandModel
 {
-    public int PayloadScriptId { get; set; }
+    public int Id { get; set; }
 
     public bool Confirmed { get; set; }
 }

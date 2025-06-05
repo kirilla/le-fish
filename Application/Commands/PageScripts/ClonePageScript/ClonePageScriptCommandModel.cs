@@ -4,7 +4,7 @@ namespace Lefish.Application.Commands.PageScripts.ClonePageScript;
 
 public class ClonePageScriptCommandModel
 {
-    public int PayloadScriptId { get; set; }
+    public int Id { get; set; }
 
     [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Ange namn.")]

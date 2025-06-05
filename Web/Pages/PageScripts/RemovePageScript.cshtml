@@ -22,7 +22,7 @@
 
     <form method="post">
 
-        <input type="hidden" asp-for="CommandModel.PayloadScriptId" />
+        <input type="hidden" asp-for="CommandModel.Id" />
 
         <p>
             <label asp-for="CommandModel.Confirmed">
@@ -37,7 +37,7 @@
             Ta bort
         </button>
 
-        <a class="button" href="/show-payload-script/@(Model.CommandModel.PayloadScriptId)">
+        <a class="button" href="/show-payload-script/@(Model.CommandModel.Id)">
             Avbryt
         </a>
     </form>

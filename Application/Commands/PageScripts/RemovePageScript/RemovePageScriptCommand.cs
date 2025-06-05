@@ -12,7 +12,7 @@ public class RemovePageScriptCommand(IDatabaseService database) : IRemovePageScr
             throw new ConfirmationRequiredException();
 
         var page = await database.PageScripts
-            .Where(x => x.Id == model.PayloadScriptId)
+            .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 

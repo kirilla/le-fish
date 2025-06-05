@@ -26,7 +26,7 @@ public class ClonePageScriptModel(
 
             CommandModel = new ClonePageScriptCommandModel()
             {
-                PayloadScriptId = PayloadScript.Id,
+                Id = PayloadScript.Id,
                 Name = PayloadScript.Name,
             };
 
@@ -50,7 +50,7 @@ public class ClonePageScriptModel(
                 throw new NotPermittedException();
 
             PayloadScript = await database.PageScripts
-                .Where(x => x.Id == CommandModel.PayloadScriptId)
+                .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

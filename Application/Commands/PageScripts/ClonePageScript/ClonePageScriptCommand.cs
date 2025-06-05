@@ -13,7 +13,7 @@ public class ClonePageScriptCommand(IDatabaseService database) : IClonePageScrip
 
         var page = await database.PageScripts
             .AsNoTracking()
-            .Where(x => x.Id == model.PayloadScriptId)
+            .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 

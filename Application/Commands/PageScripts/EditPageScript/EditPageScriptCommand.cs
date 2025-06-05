@@ -13,14 +13,14 @@ public class EditPageScriptCommand(IDatabaseService database) : IEditPageScriptC
         model.TruncateByStringLength();
 
         var page = await database.PageScripts
-            .Where(x => x.Id == model.PayloadScriptId)
+            .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
         if (await database.PageScripts
             .AnyAsync(x =>
                 x.Name == model.Name &&
-                x.Id != model.PayloadScriptId))
+                x.Id != model.Id))
             throw new BlockedByExistingException();
 
         page.Name = model.Name;
