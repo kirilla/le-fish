@@ -2,7 +2,7 @@ using Lefish.Application.Commands.PageScripts.RemovePageScript;
 
 namespace Lefish.Web.Pages.PayloadScripts;
 
-public class RemovePayloadScriptModel(
+public class RemovePageScriptModel(
     IUserToken userToken,
     IDatabaseService database,
     IRemovePageScriptCommand command) : UserTokenPageModel(userToken)

@@ -2,7 +2,7 @@
 
 namespace Lefish.Web.Pages.PayloadScripts;
 
-public class AddPayloadScriptModel(
+public class AddPageScriptModel(
     IUserToken userToken,
     IDatabaseService database,
     IAddPageScriptCommand command) : UserTokenPageModel(userToken)

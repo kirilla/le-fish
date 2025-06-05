@@ -2,7 +2,7 @@
 
 namespace Lefish.Web.Pages.PayloadScripts;
 
-public class ClonePayloadScriptModel(
+public class ClonePageScriptModel(
     IUserToken userToken,
     IDatabaseService database,
     IClonePageScriptCommand command) : UserTokenPageModel(userToken)

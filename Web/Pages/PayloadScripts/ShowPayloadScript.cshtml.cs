@@ -4,7 +4,7 @@ using Lefish.Application.Commands.PageScripts.RemovePageScript;
 
 namespace Lefish.Web.Pages.PayloadScripts;
 
-public class ShowPayloadScriptModel(
+public class ShowPageScriptModel(
     IUserToken userToken,
     IDatabaseService database,
     IClonePageScriptCommand clonePayloadScriptCommand,

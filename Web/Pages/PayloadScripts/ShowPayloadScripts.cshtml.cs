@@ -2,7 +2,7 @@ using Lefish.Application.Commands.PageScripts.AddPageScript;
 
 namespace Lefish.Web.Pages.PayloadScripts;
 
-public class ShowPayloadScriptsModel(
+public class ShowPageScriptsModel(
     IUserToken userToken,
     IDatabaseService database,
     IAddPageScriptCommand addPayloadScriptCommand) : UserTokenPageModel(userToken)
