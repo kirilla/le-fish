@@ -1,14 +1,14 @@
-﻿using Lefish.Application.Commands.PayloadScripts.AddPayloadScript;
+﻿using Lefish.Application.Commands.PageScripts.AddPageScript;
 
 namespace Lefish.Web.Pages.PayloadScripts;
 
 public class AddPayloadScriptModel(
     IUserToken userToken,
     IDatabaseService database,
-    IAddPayloadScriptCommand command) : UserTokenPageModel(userToken)
+    IAddPageScriptCommand command) : UserTokenPageModel(userToken)
 {
     [BindProperty]
-    public AddPayloadScriptCommandModel CommandModel { get; set; }
+    public AddPageScriptCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -17,7 +17,7 @@ public class AddPayloadScriptModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            CommandModel = new AddPayloadScriptCommandModel()
+            CommandModel = new AddPageScriptCommandModel()
             {
                 Name = "Skript X",
                 Script = GetDefaultTemplate(),

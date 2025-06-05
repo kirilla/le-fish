@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Web.Models;
 
-public class SimplePayloadScript
+public class PageScriptSummary
 {
     public int Id { get; set; }
 

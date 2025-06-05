@@ -1,32 +1,37 @@
-﻿namespace Lefish.Application.Commands.PayloadScripts.EditPayloadScript;
+﻿namespace Lefish.Application.Commands.PageScripts.ClonePageScript;
 
-public class EditPayloadScriptCommand(IDatabaseService database) : IEditPayloadScriptCommand
+public class ClonePageScriptCommand(IDatabaseService database) : IClonePageScriptCommand
 {
-    public async Task Execute(
-        IUserToken userToken, EditPayloadScriptCommandModel model)
+    public async Task<int> Execute(
+        IUserToken userToken, ClonePageScriptCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
 
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
-        model.TruncateByStringLength();
 
         var page = await database.PageScripts
+            .AsNoTracking()
             .Where(x => x.Id == model.PayloadScriptId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
         if (await database.PageScripts
-            .AnyAsync(x =>
-                x.Name == model.Name &&
-                x.Id != model.PayloadScriptId))
+            .AnyAsync(x => x.Name == model.Name))
             throw new BlockedByExistingException();
 
-        page.Name = model.Name;
-        page.Script = model.Script;
+        var newPage = new PageScript()
+        {
+            Name = model.Name,
+            Script = page.Script,
+        };
+
+        database.PageScripts.Add(newPage);
 
         await database.SaveAsync(userToken);
+
+        return newPage.Id;
     }
 
     public bool IsPermitted(IUserToken userToken)

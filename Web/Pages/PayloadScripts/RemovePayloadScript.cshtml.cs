@@ -1,16 +1,16 @@
-using Lefish.Application.Commands.PayloadScripts.RemovePayloadScript;
+using Lefish.Application.Commands.PageScripts.RemovePageScript;
 
 namespace Lefish.Web.Pages.PayloadScripts;
 
 public class RemovePayloadScriptModel(
     IUserToken userToken,
     IDatabaseService database,
-    IRemovePayloadScriptCommand command) : UserTokenPageModel(userToken)
+    IRemovePageScriptCommand command) : UserTokenPageModel(userToken)
 {
     public PageScript PayloadScript { get; set; }
 
     [BindProperty]
-    public RemovePayloadScriptCommandModel CommandModel { get; set; }
+    public RemovePageScriptCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -24,7 +24,7 @@ public class RemovePayloadScriptModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new RemovePayloadScriptCommandModel()
+            CommandModel = new RemovePageScriptCommandModel()
             {
                 PayloadScriptId = PayloadScript.Id,
             };

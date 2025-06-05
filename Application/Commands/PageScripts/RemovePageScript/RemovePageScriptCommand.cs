@@ -1,9 +1,9 @@
-﻿namespace Lefish.Application.Commands.PayloadScripts.RemovePayloadScript;
+﻿namespace Lefish.Application.Commands.PageScripts.RemovePageScript;
 
-public class RemovePayloadScriptCommand(IDatabaseService database) : IRemovePayloadScriptCommand
+public class RemovePageScriptCommand(IDatabaseService database) : IRemovePageScriptCommand
 {
     public async Task Execute(
-        IUserToken userToken, RemovePayloadScriptCommandModel model)
+        IUserToken userToken, RemovePageScriptCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();

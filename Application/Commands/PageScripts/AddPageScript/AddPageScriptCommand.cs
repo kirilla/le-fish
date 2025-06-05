@@ -1,9 +1,9 @@
-﻿namespace Lefish.Application.Commands.PayloadScripts.AddPayloadScript;
+﻿namespace Lefish.Application.Commands.PageScripts.AddPageScript;
 
-public class AddPayloadScriptCommand(IDatabaseService database) : IAddPayloadScriptCommand
+public class AddPageScriptCommand(IDatabaseService database) : IAddPageScriptCommand
 {
     public async Task<int> Execute(
-        IUserToken userToken, AddPayloadScriptCommandModel model)
+        IUserToken userToken, AddPageScriptCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();

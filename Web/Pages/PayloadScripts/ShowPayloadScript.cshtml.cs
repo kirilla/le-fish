@@ -1,15 +1,15 @@
-﻿using Lefish.Application.Commands.PayloadScripts.ClonePayloadScript;
-using Lefish.Application.Commands.PayloadScripts.EditPayloadScript;
-using Lefish.Application.Commands.PayloadScripts.RemovePayloadScript;
+﻿using Lefish.Application.Commands.PageScripts.ClonePageScript;
+using Lefish.Application.Commands.PageScripts.EditPageScript;
+using Lefish.Application.Commands.PageScripts.RemovePageScript;
 
 namespace Lefish.Web.Pages.PayloadScripts;
 
 public class ShowPayloadScriptModel(
     IUserToken userToken,
     IDatabaseService database,
-    IClonePayloadScriptCommand clonePayloadScriptCommand,
-    IEditPayloadScriptCommand editPayloadScriptCommand,
-    IRemovePayloadScriptCommand removePayloadScriptCommand,
+    IClonePageScriptCommand clonePayloadScriptCommand,
+    IEditPageScriptCommand editPayloadScriptCommand,
+    IRemovePageScriptCommand removePayloadScriptCommand,
     IOptions<TemplateConfiguration> templateConfiguration) : UserTokenPageModel(userToken)
 {
     public readonly TemplateConfiguration Config = templateConfiguration.Value;

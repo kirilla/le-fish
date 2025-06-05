@@ -1,16 +1,16 @@
-﻿using Lefish.Application.Commands.PayloadScripts.EditPayloadScript;
+﻿using Lefish.Application.Commands.PageScripts.EditPageScript;
 
 namespace Lefish.Web.Pages.PayloadScripts;
 
 public class EditPayloadScriptModel(
     IUserToken userToken,
     IDatabaseService database,
-    IEditPayloadScriptCommand command) : UserTokenPageModel(userToken)
+    IEditPageScriptCommand command) : UserTokenPageModel(userToken)
 {
     public PageScript PayloadScript { get; set; }
 
     [BindProperty]
-    public EditPayloadScriptCommandModel CommandModel { get; set; }
+    public EditPageScriptCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -24,7 +24,7 @@ public class EditPayloadScriptModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new EditPayloadScriptCommandModel()
+            CommandModel = new EditPageScriptCommandModel()
             {
                 PayloadScriptId = PayloadScript.Id,
 				Name = PayloadScript.Name,

@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Lefish.Application.Commands.PayloadScripts.EditPayloadScript;
+namespace Lefish.Application.Commands.PageScripts.AddPageScript;
 
-public class EditPayloadScriptCommandModel
+public class AddPageScriptCommandModel
 {
-    public int PayloadScriptId { get; set; }
-
     [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Ange namn.")]
     [StringLength(

@@ -1,11 +1,11 @@
-using Lefish.Application.Commands.PayloadScripts.AddPayloadScript;
+using Lefish.Application.Commands.PageScripts.AddPageScript;
 
 namespace Lefish.Web.Pages.PayloadScripts;
 
 public class ShowPayloadScriptsModel(
     IUserToken userToken,
     IDatabaseService database,
-    IAddPayloadScriptCommand addPayloadScriptCommand) : UserTokenPageModel(userToken)
+    IAddPageScriptCommand addPayloadScriptCommand) : UserTokenPageModel(userToken)
 {
     public List<PageScript> PayloadScripts { get; set; }
 

@@ -1,16 +1,16 @@
-﻿using Lefish.Application.Commands.PayloadScripts.ClonePayloadScript;
+﻿using Lefish.Application.Commands.PageScripts.ClonePageScript;
 
 namespace Lefish.Web.Pages.PayloadScripts;
 
 public class ClonePayloadScriptModel(
     IUserToken userToken,
     IDatabaseService database,
-    IClonePayloadScriptCommand command) : UserTokenPageModel(userToken)
+    IClonePageScriptCommand command) : UserTokenPageModel(userToken)
 {
     public PageScript PayloadScript { get; set; }
 
     [BindProperty]
-    public ClonePayloadScriptCommandModel CommandModel { get; set; }
+    public ClonePageScriptCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -24,7 +24,7 @@ public class ClonePayloadScriptModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new ClonePayloadScriptCommandModel()
+            CommandModel = new ClonePageScriptCommandModel()
             {
                 PayloadScriptId = PayloadScript.Id,
                 Name = PayloadScript.Name,
