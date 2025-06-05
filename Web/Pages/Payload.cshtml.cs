@@ -52,7 +52,7 @@ public class PayloadPageModel(
     public async Task LogEvent(
         HttpContext context, Attack attack)
     {
-        var visit = new Visit()
+        var visit = new AttackEvent()
         {
             VisitKind = VisitKind.PageVisit,
             Url = context.Request.GetDisplayUrl(),

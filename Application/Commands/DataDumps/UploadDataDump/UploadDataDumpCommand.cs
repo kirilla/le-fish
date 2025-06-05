@@ -27,7 +27,7 @@ public class UploadDataDumpCommand(IDatabaseService database) : IUploadDataDumpC
 
         database.DataDumps.Add(dump);
 
-        var visit = new Visit()
+        var visit = new AttackEvent()
         {
             AttackId = attack.Id,
             VisitKind = VisitKind.UploadData,

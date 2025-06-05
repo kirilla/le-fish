@@ -9,7 +9,7 @@ public class ShowAttackModel(
     public List<DataDump> DataDumps { get; set; }
     public List<EmailHeader> EmailHeaders { get; set; }
     public List<TargetInstructionSummary> TargetInstructions { get; set; }
-    public List<Visit> Visits { get; set; }
+    public List<AttackEvent> Visits { get; set; }
 
     public List<string> IpAddresses { get; set; }
     public List<string> UserAgents { get; set; }

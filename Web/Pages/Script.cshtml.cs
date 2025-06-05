@@ -55,7 +55,7 @@ public class ScriptPageModel(
     public async Task LogEvent(
         HttpContext context, Attack attack)
     {
-        var visit = new Visit()
+        var visit = new AttackEvent()
         {
             VisitKind = VisitKind.ScriptDownload,
             Url = context.Request.GetDisplayUrl(),

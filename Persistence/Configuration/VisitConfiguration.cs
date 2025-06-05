@@ -1,8 +1,8 @@
 ﻿namespace Lefish.Persistence.Configuration;
 
-class VisitConfiguration : IEntityTypeConfiguration<Visit>
+class VisitConfiguration : IEntityTypeConfiguration<AttackEvent>
 {
-    public void Configure(EntityTypeBuilder<Visit> builder)
+    public void Configure(EntityTypeBuilder<AttackEvent> builder)
     {
         builder.HasKey(p => p.Id);
 

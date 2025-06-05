@@ -5,7 +5,7 @@ namespace Lefish.Application.Interfaces;
 public interface IDatabaseService
 {
     DbSet<Attack> Attacks { get; set; }
-    DbSet<Visit> AttackEvents { get; set; }
+    DbSet<AttackEvent> AttackEvents { get; set; }
     DbSet<BlockedRequest> BlockedRequests { get; set; }
     DbSet<DataDump> DataDumps { get; set; }
     DbSet<EmailAccount> EmailAccounts { get; set; }

@@ -16,8 +16,8 @@ public class Attack : ICreatedDateTime
     public PayloadPage PayloadPage { get; set; }
     public PayloadScript PayloadScript { get; set; }
 
+    public List<AttackEvent> AttackEvents { get; set; }
     public List<DataDump> DataDumps { get; set; }
     public List<EmailMessage> EmailMessages { get; set; }
     public List<TargetInstruction> TargetInstructions { get; set; }
-    public List<Visit> Visits { get; set; }
 }
