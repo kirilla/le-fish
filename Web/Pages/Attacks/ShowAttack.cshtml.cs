@@ -9,7 +9,7 @@ public class ShowAttackModel(
     public List<DataDump> DataDumps { get; set; }
     public List<EmailHeader> EmailHeaders { get; set; }
     public List<TargetInstructionSummary> TargetInstructions { get; set; }
-    public List<AttackEvent> Visits { get; set; }
+    public List<AttackEvent> AttackEvents { get; set; }
 
     public List<string> IpAddresses { get; set; }
     public List<string> UserAgents { get; set; }
@@ -64,7 +64,7 @@ public class ShowAttackModel(
                 })
                 .ToListAsync();
 
-            Visits = await database.AttackEvents
+            AttackEvents = await database.AttackEvents
                 .Where(x => x.AttackId == id)
                 .OrderBy(x => x.Created)
                 .ToListAsync();
@@ -83,14 +83,14 @@ public class ShowAttackModel(
                 })
                 .ToListAsync();
 
-            IpAddresses = Visits
+            IpAddresses = AttackEvents
                 .Select(x => x.IpAddress)
                 .Where(x => x != null)
                 .Cast<string>()
                 .Distinct()
                 .ToList();
 
-            UserAgents = Visits
+            UserAgents = AttackEvents
                 .Select(x => x.UserAgent)
                 .Where(x => x != null)
                 .Cast<string>()

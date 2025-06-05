@@ -23,18 +23,18 @@
     <div class="notice">
 
         <ul>
-            @foreach (var visit in Model.BlockedRequests)
+            @foreach (var evt in Model.BlockedRequests)
             {
                 <li>
                     🛑
                     &thinsp;
-                    <a href="/show-blocked-request/@(visit.Id)">
-                        @(visit.Created.ToFixedFormatDateShortTime())
+                    <a href="/show-blocked-request/@(evt.Id)">
+                        @(evt.Created.ToFixedFormatDateShortTime())
                     </a>
                     &thinsp;
-                    @(visit.Method)
+                    @(evt.Method)
                     &thinsp;
-                    @(visit.Url)
+                    @(evt.Url)
                 </li>
             }
 

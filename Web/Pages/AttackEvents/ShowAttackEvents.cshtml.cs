@@ -1,6 +1,6 @@
 namespace Lefish.Web.Pages.AttackEvents;
 
-public class ShowVisitsModel(
+public class ShowAttackEventsModel(
     IUserToken userToken,
     IDatabaseService database) : UserTokenPageModel(userToken)
 {

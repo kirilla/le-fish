@@ -12,7 +12,7 @@ public class RemoveAttackEventCommand(IDatabaseService database) : IRemoveAttack
             throw new ConfirmationRequiredException();
 
         var evt = await database.AttackEvents
-            .Where(x => x.Id == model.VisitId)
+            .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 

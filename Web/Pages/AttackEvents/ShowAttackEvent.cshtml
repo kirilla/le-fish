@@ -1,5 +1,5 @@
 ﻿@page "/show-attack-event/{id:int}"
-@model ShowVisitModel
+@model ShowAttackEventModel
 @{
 }
 
@@ -40,7 +40,7 @@
     </dl>
 
     <p>
-        @if (Model.CanRemoveVisit)
+        @if (Model.CanRemoveAttackEvent)
         {
             <a class="button" href="/remove-attack-event/@(Model.AttackEvent.Id)">
                 Ta bort

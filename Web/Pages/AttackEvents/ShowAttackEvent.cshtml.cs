@@ -2,15 +2,15 @@
 
 namespace Lefish.Web.Pages.AttackEvents;
 
-public class ShowVisitModel(
+public class ShowAttackEventModel(
     IUserToken userToken,
     IDatabaseService database,
-    IRemoveAttackEventCommand removeVisitCommand) : UserTokenPageModel(userToken)
+    IRemoveAttackEventCommand removeAttackEventCommand) : UserTokenPageModel(userToken)
 {
     public AttackEventPlus AttackEvent { get; set; }
 
-    public bool CanRemoveVisit { get; set; }
-        = removeVisitCommand.IsPermitted(userToken);
+    public bool CanRemoveAttackEvent { get; set; }
+        = removeAttackEventCommand.IsPermitted(userToken);
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

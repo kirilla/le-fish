@@ -1,5 +1,5 @@
 ﻿@page "/remove-attack-event/{id:int}"
-@model RemoveVisitModel
+@model RemoveAttackEventModel
 @{
 }
 
@@ -25,7 +25,7 @@
 
     <form method="post">
 
-        <input type="hidden" asp-for="CommandModel.VisitId" />
+        <input type="hidden" asp-for="CommandModel.Id" />
 
         <p>
             <label asp-for="CommandModel.Confirmed">

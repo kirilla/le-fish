@@ -55,9 +55,9 @@ public class ScriptPageModel(
     public async Task LogEvent(
         HttpContext context, Attack attack)
     {
-        var visit = new AttackEvent()
+        var evt = new AttackEvent()
         {
-            VisitKind = AttackEventKind.ScriptDownload,
+            AttackEventKind = AttackEventKind.ScriptDownload,
             Url = context.Request.GetDisplayUrl(),
             Method = context.Request.Method,
             IpAddress = context.Connection.RemoteIpAddress?.ToString(),
@@ -65,7 +65,7 @@ public class ScriptPageModel(
             AttackId = attack.Id,
         };
 
-        database.AttackEvents.Add(visit);
+        database.AttackEvents.Add(evt);
 
         await database.SaveAsync(UserToken);
     }

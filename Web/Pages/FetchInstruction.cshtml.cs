@@ -63,9 +63,9 @@ public class FetchInstructionModel(
     public async Task LogEvent(
         HttpContext context, Attack attack)
     {
-        var visit = new AttackEvent()
+        var evt = new AttackEvent()
         {
-            VisitKind = AttackEventKind.FetchInstruction,
+            AttackEventKind = AttackEventKind.FetchInstruction,
             Url = context.Request.GetDisplayUrl(),
             Method = context.Request.Method,
             IpAddress = context.Connection.RemoteIpAddress?.ToString(),
@@ -73,7 +73,7 @@ public class FetchInstructionModel(
             AttackId = attack.Id,
         };
 
-        database.AttackEvents.Add(visit);
+        database.AttackEvents.Add(evt);
 
         //await database.SaveAsync(UserToken);
     }

@@ -2,7 +2,7 @@ using Lefish.Application.Commands.AttackEvents.RemoveAttackEvents;
 
 namespace Lefish.Web.Pages.AttackEvents;
 
-public class RemoveVisitsModel(
+public class RemoveAttackEventsModel(
     IUserToken userToken,
     IDatabaseService database,
     IRemoveAttackEventsCommand command) : UserTokenPageModel(userToken)

@@ -107,41 +107,41 @@
                 <th>IP-nummer</th>
                 <th>UserAgent</th>
             </tr>
-            @foreach (var visit in Model.Visits)
+            @foreach (var evt in Model.AttackEvents)
             {
                 <tr>
                     <td>
-                        @if (visit.VisitKind == AttackEventKind.PageVisit)
+                        @if (evt.AttackEventKind == AttackEventKind.PageVisit)
                         {
                             <span>📄</span>
                         }
-                        @if (visit.VisitKind == AttackEventKind.ScriptDownload)
+                        @if (evt.AttackEventKind == AttackEventKind.ScriptDownload)
                         {
                             <span>📜</span>
                         }
-                        @if (visit.VisitKind == AttackEventKind.FetchInstruction)
+                        @if (evt.AttackEventKind == AttackEventKind.FetchInstruction)
                         {
                             <span>❇️</span>
                         }
-                        @if (visit.VisitKind == AttackEventKind.UploadData)
+                        @if (evt.AttackEventKind == AttackEventKind.UploadData)
                         {
                             <span>🧺</span>
                         }
                     </td>
                     <td>
-                        <a href="/show-attack-event/@(visit.Id)">
-                            @(visit.Created.ToFixedFormatDateShortTime())
+                        <a href="/show-attack-event/@(evt.Id)">
+                            @(evt.Created.ToFixedFormatDateShortTime())
                         </a>
                     </td>
                     <td>
-                        @(visit.IpAddress)
+                        @(evt.IpAddress)
                     </td>
                     <td>
-                        @(visit.UserAgent)
+                        @(evt.UserAgent)
                     </td>
                 </tr>
             }
-            @if (!Model.Visits.Any())
+            @if (!Model.AttackEvents.Any())
             {
                 <tr>
                     <td colspan="3">

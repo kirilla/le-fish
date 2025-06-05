@@ -52,9 +52,9 @@ public class PayloadPageModel(
     public async Task LogEvent(
         HttpContext context, Attack attack)
     {
-        var visit = new AttackEvent()
+        var evt = new AttackEvent()
         {
-            VisitKind = AttackEventKind.PageVisit,
+            AttackEventKind = AttackEventKind.PageVisit,
             Url = context.Request.GetDisplayUrl(),
             Method = context.Request.Method,
             IpAddress = context.Connection.RemoteIpAddress?.ToString(),
@@ -62,7 +62,7 @@ public class PayloadPageModel(
             AttackId = attack.Id,
         };
 
-        database.AttackEvents.Add(visit);
+        database.AttackEvents.Add(evt);
 
         await database.SaveAsync(UserToken);
     }

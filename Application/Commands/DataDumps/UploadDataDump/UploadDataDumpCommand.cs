@@ -30,7 +30,7 @@ public class UploadDataDumpCommand(IDatabaseService database) : IUploadDataDumpC
         var evt = new AttackEvent()
         {
             AttackId = attack.Id,
-            VisitKind = AttackEventKind.UploadData,
+            AttackEventKind = AttackEventKind.UploadData,
             Url = model.Url,
             Method = model.Method,
             IpAddress = model.IpAddress,

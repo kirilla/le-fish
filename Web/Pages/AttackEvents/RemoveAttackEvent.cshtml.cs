@@ -2,7 +2,7 @@ using Lefish.Application.Commands.AttackEvents.RemoveAttackEvent;
 
 namespace Lefish.Web.Pages.AttackEvents;
 
-public class RemoveVisitModel(
+public class RemoveAttackEventModel(
     IUserToken userToken,
     IDatabaseService database,
     IRemoveAttackEventCommand command) : UserTokenPageModel(userToken)
@@ -47,7 +47,7 @@ public class RemoveVisitModel(
 
             CommandModel = new RemoveAttackEventCommandModel()
             {
-                VisitId = AttackEvent.Id,
+                Id = AttackEvent.Id,
             };
 
             return Page();
@@ -70,7 +70,7 @@ public class RemoveVisitModel(
                 throw new NotPermittedException();
 
             AttackEvent = await database.AttackEvents
-                .Where(x => x.Id == CommandModel.VisitId)
+                .Where(x => x.Id == CommandModel.Id)
                 .Select(x => new AttackEventPlus()
                 {
                     Url = x.Url,
