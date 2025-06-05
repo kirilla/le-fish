@@ -10,6 +10,7 @@ public class DatabaseService(
     IUpdatedDateTimeSetter updatedDateTimeSetter) : DbContext(options), IDatabaseService
 {
     public DbSet<Attack> Attacks { get; set; }
+    public DbSet<Visit> AttackEvents { get; set; }
     public DbSet<BlockedRequest> BlockedRequests { get; set; }
     public DbSet<DataDump> DataDumps { get; set; }
     public DbSet<EmailAccount> EmailAccounts { get; set; }
@@ -26,13 +27,13 @@ public class DatabaseService(
     public DbSet<TargetInstruction> TargetInstructions { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserEmail> UserEmails { get; set; }
-    public DbSet<Visit> Visits { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
         new AttackConfiguration().Configure(builder.Entity<Attack>());
+        new VisitConfiguration().Configure(builder.Entity<Visit>());
         new BlockedRequestConfiguration().Configure(builder.Entity<BlockedRequest>());
         new DataDumpConfiguration().Configure(builder.Entity<DataDump>());
         new EmailAccountConfiguration().Configure(builder.Entity<EmailAccount>());
@@ -49,7 +50,6 @@ public class DatabaseService(
         new TargetInstructionConfiguration().Configure(builder.Entity<TargetInstruction>());
         new UserConfiguration().Configure(builder.Entity<User>());
         new UserEmailConfiguration().Configure(builder.Entity<UserEmail>());
-        new VisitConfiguration().Configure(builder.Entity<Visit>());
     }
 
     public async Task SaveAsync(IUserToken userToken)

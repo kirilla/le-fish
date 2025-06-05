@@ -65,7 +65,7 @@ public class ScriptPageModel(
             AttackId = attack.Id,
         };
 
-        database.Visits.Add(visit);
+        database.AttackEvents.Add(visit);
 
         await database.SaveAsync(UserToken);
     }

@@ -13,13 +13,13 @@ public class RemoveVisitsCommand(IDatabaseService database) : IRemoveVisitsComma
 
         if (model.EmailTargetId.HasValue)
         {
-            await database.Visits
+            await database.AttackEvents
                 .Where(x => x.Attack.EmailTargetId == model.EmailTargetId!.Value)
                 .ExecuteDeleteAsync();
         }
         else
         {
-            await database.Visits.ExecuteDeleteAsync();
+            await database.AttackEvents.ExecuteDeleteAsync();
         }
     }
 

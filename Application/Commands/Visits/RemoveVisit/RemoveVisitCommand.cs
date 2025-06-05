@@ -11,12 +11,12 @@ public class RemoveVisitCommand(IDatabaseService database) : IRemoveVisitCommand
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var visit = await database.Visits
+        var visit = await database.AttackEvents
             .Where(x => x.Id == model.VisitId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.Visits.Remove(visit);
+        database.AttackEvents.Remove(visit);
 
         await database.SaveAsync(userToken);
     }

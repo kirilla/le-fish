@@ -5,6 +5,7 @@ namespace Lefish.Application.Interfaces;
 public interface IDatabaseService
 {
     DbSet<Attack> Attacks { get; set; }
+    DbSet<Visit> AttackEvents { get; set; }
     DbSet<BlockedRequest> BlockedRequests { get; set; }
     DbSet<DataDump> DataDumps { get; set; }
     DbSet<EmailAccount> EmailAccounts { get; set; }
@@ -21,8 +22,7 @@ public interface IDatabaseService
     DbSet<TargetInstruction> TargetInstructions { get; set; }
     DbSet<User> Users { get; set; }
     DbSet<UserEmail> UserEmails { get; set; }
-    DbSet<Visit> Visits { get; set; }
-
+    
     Task SaveAsync(IUserToken userToken);
 
     ChangeTracker ChangeTracker { get; }

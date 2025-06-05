@@ -21,7 +21,7 @@ public class RemoveVisitModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            Visit = await database.Visits
+            Visit = await database.AttackEvents
                 .Where(x => x.Id == id)
                 .Select(x => new VisitPlus()
                 {
@@ -69,7 +69,7 @@ public class RemoveVisitModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            Visit = await database.Visits
+            Visit = await database.AttackEvents
                 .Where(x => x.Id == CommandModel.VisitId)
                 .Select(x => new VisitPlus()
                 {

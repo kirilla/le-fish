@@ -64,7 +64,7 @@ public class ShowAttackModel(
                 })
                 .ToListAsync();
 
-            Visits = await database.Visits
+            Visits = await database.AttackEvents
                 .Where(x => x.AttackId == id)
                 .OrderBy(x => x.Created)
                 .ToListAsync();

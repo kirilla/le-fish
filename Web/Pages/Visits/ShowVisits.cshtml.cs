@@ -13,7 +13,7 @@ public class ShowVisitsModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            Visits = await database.Visits
+            Visits = await database.AttackEvents
                 .OrderByDescending(x => x.Created)
                 .Select(x => new VisitPlus()
                 {
