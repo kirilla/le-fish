@@ -1,21 +1,27 @@
-namespace Lefish.Web.Pages.Visits;
+﻿using Lefish.Application.Commands.AttackEvents.RemoveAttackEvent;
 
-public class ShowVisitsModel(
+namespace Lefish.Web.Pages.AttackEvents;
+
+public class ShowVisitModel(
     IUserToken userToken,
-    IDatabaseService database) : UserTokenPageModel(userToken)
+    IDatabaseService database,
+    IRemoveAttackEventCommand removeVisitCommand) : UserTokenPageModel(userToken)
 {
-    public List<VisitPlus> Visits { get; set; }
+    public AttackEventPlus AttackEvent { get; set; }
 
-    public async Task<IActionResult> OnGetAsync()
+    public bool CanRemoveVisit { get; set; }
+        = removeVisitCommand.IsPermitted(userToken);
+
+    public async Task<IActionResult> OnGetAsync(int id)
     {
         try
         {
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            Visits = await database.AttackEvents
-                .OrderByDescending(x => x.Created)
-                .Select(x => new VisitPlus()
+            AttackEvent = await database.AttackEvents
+                .Where(x => x.Id == id)
+                .Select(x => new AttackEventPlus()
                 {
                     Id = x.Id,
                     Url = x.Url,
@@ -28,9 +34,14 @@ public class ShowVisitsModel(
                     TargetAddress = x.Attack.EmailTarget.Address,
                     EmailTargetId = x.Attack.EmailTargetId,
                 })
-                .ToListAsync();
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
 
             return Page();
+        }
+        catch (NotFoundException)
+        {
+            return Redirect("/help/notfound");
         }
         catch
         {

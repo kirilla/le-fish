@@ -4,7 +4,7 @@ public class AttackEvent : ICreatedDateTime
 {
     public int Id { get; set; }
 
-    public VisitKind VisitKind { get; set; }
+    public AttackEventKind VisitKind { get; set; }
 
     public DateTime? Created { get; set; }
 

@@ -1,4 +1,4 @@
-﻿@page "/show-visit/{id:int}"
+﻿@page "/show-attack-event/{id:int}"
 @model ShowVisitModel
 @{
 }
@@ -15,34 +15,34 @@
 
     <h4>
         🛎️
-        @(Model.Visit.TargetName)
-        @(Model.Visit.TargetAddress)
+        @(Model.AttackEvent.TargetName)
+        @(Model.AttackEvent.TargetAddress)
     </h4>
 
     <dl class="notice">
         <dt>När</dt>
-        <dd>@(Model.Visit.Created.ToFixedFormatDateShortTime())</dd>
+        <dd>@(Model.AttackEvent.Created.ToFixedFormatDateShortTime())</dd>
 
         @* <dt>Sida</dt>
-        <dd>@(Model.Visit.PayloadPage.Comment)</dd> *@
+        <dd>@(Model.AttackEvent.PayloadPage.Comment)</dd> *@
 
         <dt>URL</dt>
-        <dd>@(Model.Visit.Url)</dd>
+        <dd>@(Model.AttackEvent.Url)</dd>
 
         @* <dt>Metod</dt>
-        <dd>@(Model.Visit.Method)</dd> *@
+        <dd>@(Model.AttackEvent.Method)</dd> *@
 
         <dt>UserAgent</dt>
-        <dd>@(Model.Visit.UserAgent)</dd>
+        <dd>@(Model.AttackEvent.UserAgent)</dd>
 
         <dt>Ip-nummer</dt>
-        <dd>@(Model.Visit.IpAddress)</dd>
+        <dd>@(Model.AttackEvent.IpAddress)</dd>
     </dl>
 
     <p>
         @if (Model.CanRemoveVisit)
         {
-            <a class="button" href="/remove-visit/@(Model.Visit.Id)">
+            <a class="button" href="/remove-attack-event/@(Model.AttackEvent.Id)">
                 Ta bort
             </a>
         }

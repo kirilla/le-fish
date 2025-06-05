@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Common.Enums;
 
-public enum VisitKind
+public enum AttackEventKind
 {
     PageVisit = 0,
     ScriptDownload = 1,

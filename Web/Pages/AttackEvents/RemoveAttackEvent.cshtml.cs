@@ -1,18 +1,18 @@
-using Lefish.Application.Commands.Visits.RemoveVisit;
+using Lefish.Application.Commands.AttackEvents.RemoveAttackEvent;
 
-namespace Lefish.Web.Pages.Visits;
+namespace Lefish.Web.Pages.AttackEvents;
 
 public class RemoveVisitModel(
     IUserToken userToken,
     IDatabaseService database,
-    IRemoveVisitCommand command) : UserTokenPageModel(userToken)
+    IRemoveAttackEventCommand command) : UserTokenPageModel(userToken)
 {
-    public VisitPlus Visit { get; set; }
+    public AttackEventPlus AttackEvent { get; set; }
 
     public Attack Attack { get; set; }
 
     [BindProperty]
-    public RemoveVisitCommandModel CommandModel { get; set; }
+    public RemoveAttackEventCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -21,9 +21,9 @@ public class RemoveVisitModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            Visit = await database.AttackEvents
+            AttackEvent = await database.AttackEvents
                 .Where(x => x.Id == id)
-                .Select(x => new VisitPlus()
+                .Select(x => new AttackEventPlus()
                 {
                     Id = x.Id,
                     Url = x.Url,
@@ -41,13 +41,13 @@ public class RemoveVisitModel(
                 throw new NotFoundException();
 
             Attack = await database.Attacks
-                .Where(x => x.Id == Visit.AttackId)
+                .Where(x => x.Id == AttackEvent.AttackId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new RemoveVisitCommandModel()
+            CommandModel = new RemoveAttackEventCommandModel()
             {
-                VisitId = Visit.Id,
+                VisitId = AttackEvent.Id,
             };
 
             return Page();
@@ -69,9 +69,9 @@ public class RemoveVisitModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            Visit = await database.AttackEvents
+            AttackEvent = await database.AttackEvents
                 .Where(x => x.Id == CommandModel.VisitId)
-                .Select(x => new VisitPlus()
+                .Select(x => new AttackEventPlus()
                 {
                     Url = x.Url,
                     Method = x.Method,
@@ -88,7 +88,7 @@ public class RemoveVisitModel(
                 throw new NotFoundException();
 
             Attack = await database.Attacks
-                .Where(x => x.Id == Visit.AttackId)
+                .Where(x => x.Id == AttackEvent.AttackId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

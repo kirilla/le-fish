@@ -33,7 +33,7 @@ public class DatabaseService(
         base.OnModelCreating(builder);
 
         new AttackConfiguration().Configure(builder.Entity<Attack>());
-        new VisitConfiguration().Configure(builder.Entity<AttackEvent>());
+        new AttackEventConfiguration().Configure(builder.Entity<AttackEvent>());
         new BlockedRequestConfiguration().Configure(builder.Entity<BlockedRequest>());
         new DataDumpConfiguration().Configure(builder.Entity<DataDump>());
         new EmailAccountConfiguration().Configure(builder.Entity<EmailAccount>());

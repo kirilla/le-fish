@@ -1,9 +1,9 @@
-﻿namespace Lefish.Application.Commands.Visits.RemoveVisit;
+﻿namespace Lefish.Application.Commands.AttackEvents.RemoveAttackEvent;
 
-public class RemoveVisitCommand(IDatabaseService database) : IRemoveVisitCommand
+public class RemoveAttackEventCommand(IDatabaseService database) : IRemoveAttackEventCommand
 {
     public async Task Execute(
-        IUserToken userToken, RemoveVisitCommandModel model)
+        IUserToken userToken, RemoveAttackEventCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
@@ -11,12 +11,12 @@ public class RemoveVisitCommand(IDatabaseService database) : IRemoveVisitCommand
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var visit = await database.AttackEvents
+        var evt = await database.AttackEvents
             .Where(x => x.Id == model.VisitId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.AttackEvents.Remove(visit);
+        database.AttackEvents.Remove(evt);
 
         await database.SaveAsync(userToken);
     }

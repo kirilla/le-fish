@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Persistence.Configuration;
 
-class VisitConfiguration : IEntityTypeConfiguration<AttackEvent>
+class AttackEventConfiguration : IEntityTypeConfiguration<AttackEvent>
 {
     public void Configure(EntityTypeBuilder<AttackEvent> builder)
     {

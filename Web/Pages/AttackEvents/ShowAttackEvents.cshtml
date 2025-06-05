@@ -1,4 +1,4 @@
-﻿@page "/show-visits"
+﻿@page "/show-attack-events"
 @model ShowVisitsModel
 @{
 }
@@ -23,22 +23,22 @@
     <div class="notice">
 
         <ul>
-            @foreach (var visit in Model.Visits)
+            @foreach (var evt in Model.AttackEvents)
             {
                 <li>
                     🛎️
                     &thinsp;
-                    <a href="/show-visit/@(visit.Id)">
-                        @(visit.TargetAddress)
+                    <a href="/show-attack-event/@(evt.Id)">
+                        @(evt.TargetAddress)
                         &thinsp;
-                        @(visit.PageName)
+                        @(evt.PageName)
                         &thinsp;
-                        @(visit.Created.ToFixedFormatDateShortTime())
+                        @(evt.Created.ToFixedFormatDateShortTime())
                     </a>
                 </li>
             }
 
-            @if (!Model.Visits.Any())
+            @if (!Model.AttackEvents.Any())
             {
                 <li>
                     🛎️
@@ -51,7 +51,7 @@
     </div>
 
     <p>
-        <a class="button" href="/remove-visits">
+        <a class="button" href="/remove-attack-events">
             Ta bort sidbesök
         </a>
     </p>

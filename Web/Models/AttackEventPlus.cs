@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Web.Models;
 
-public class VisitPlus
+public class AttackEventPlus
 {
     public int Id { get; set; }
 

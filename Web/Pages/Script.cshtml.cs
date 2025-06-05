@@ -57,7 +57,7 @@ public class ScriptPageModel(
     {
         var visit = new AttackEvent()
         {
-            VisitKind = VisitKind.ScriptDownload,
+            VisitKind = AttackEventKind.ScriptDownload,
             Url = context.Request.GetDisplayUrl(),
             Method = context.Request.Method,
             IpAddress = context.Connection.RemoteIpAddress?.ToString(),

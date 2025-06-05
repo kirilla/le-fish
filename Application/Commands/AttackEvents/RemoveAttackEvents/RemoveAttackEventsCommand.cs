@@ -1,9 +1,9 @@
-﻿namespace Lefish.Application.Commands.Visits.RemoveVisits;
+﻿namespace Lefish.Application.Commands.AttackEvents.RemoveAttackEvents;
 
-public class RemoveVisitsCommand(IDatabaseService database) : IRemoveVisitsCommand
+public class RemoveAttackEventsCommand(IDatabaseService database) : IRemoveAttackEventsCommand
 {
     public async Task Execute(
-        IUserToken userToken, RemoveVisitsCommandModel model)
+        IUserToken userToken, RemoveAttackEventsCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();

@@ -111,25 +111,25 @@
             {
                 <tr>
                     <td>
-                        @if (visit.VisitKind == VisitKind.PageVisit)
+                        @if (visit.VisitKind == AttackEventKind.PageVisit)
                         {
                             <span>📄</span>
                         }
-                        @if (visit.VisitKind == VisitKind.ScriptDownload)
+                        @if (visit.VisitKind == AttackEventKind.ScriptDownload)
                         {
                             <span>📜</span>
                         }
-                        @if (visit.VisitKind == VisitKind.FetchInstruction)
+                        @if (visit.VisitKind == AttackEventKind.FetchInstruction)
                         {
                             <span>❇️</span>
                         }
-                        @if (visit.VisitKind == VisitKind.UploadData)
+                        @if (visit.VisitKind == AttackEventKind.UploadData)
                         {
                             <span>🧺</span>
                         }
                     </td>
                     <td>
-                        <a href="/show-visit/@(visit.Id)">
+                        <a href="/show-attack-event/@(visit.Id)">
                             @(visit.Created.ToFixedFormatDateShortTime())
                         </a>
                     </td>

@@ -1,14 +1,14 @@
-using Lefish.Application.Commands.Visits.RemoveVisits;
+using Lefish.Application.Commands.AttackEvents.RemoveAttackEvents;
 
-namespace Lefish.Web.Pages.Visits;
+namespace Lefish.Web.Pages.AttackEvents;
 
 public class RemoveVisitsModel(
     IUserToken userToken,
     IDatabaseService database,
-    IRemoveVisitsCommand command) : UserTokenPageModel(userToken)
+    IRemoveAttackEventsCommand command) : UserTokenPageModel(userToken)
 {
     [BindProperty]
-    public RemoveVisitsCommandModel CommandModel { get; set; }
+    public RemoveAttackEventsCommandModel CommandModel { get; set; }
 
     public List<EmailTarget> EmailTargets { get; set; }
 
@@ -23,7 +23,7 @@ public class RemoveVisitsModel(
                 .OrderBy(x => x.Address)
                 .ToListAsync();
 
-            CommandModel = new RemoveVisitsCommandModel();
+            CommandModel = new RemoveAttackEventsCommandModel();
 
             return Page();
         }
@@ -53,7 +53,7 @@ public class RemoveVisitsModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect("/show-visits");
+            return Redirect("/show-attack-events");
         }
         catch (ConfirmationRequiredException)
         {

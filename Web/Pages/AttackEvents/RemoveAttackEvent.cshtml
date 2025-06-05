@@ -1,5 +1,5 @@
-﻿@page "/remove-visits"
-@model RemoveVisitsModel
+﻿@page "/remove-attack-event/{id:int}"
+@model RemoveVisitModel
 @{
 }
 
@@ -16,28 +16,16 @@
 
 <main>
     <h4>
-        Ta bort sidbesök
+        Ta bort sidbesöket:<br />
+        @(Model.AttackEvent.TargetName)
+        @(Model.AttackEvent.TargetAddress)<br />
+        @(Model.AttackEvent.PageName)<br />
+        @(Model.AttackEvent.Created.ToFixedFormatDateShortTime())
     </h4>
 
     <form method="post">
 
-        <label asp-for="CommandModel.EmailTargetId">
-            Mål
-        </label>
-
-        <select asp-for="CommandModel.EmailTargetId">
-            <option value="">–</option>
-            @foreach (var target in Model.EmailTargets)
-            {
-                <option value="@(target.Id)">
-                    @(target.Name), @(target.Address)
-                </option>
-            }
-        </select>
-
-        <p>
-            Lämna tomt för att ta bort alla.
-        </p>
+        <input type="hidden" asp-for="CommandModel.VisitId" />
 
         <p>
             <label asp-for="CommandModel.Confirmed">
@@ -52,10 +40,9 @@
             Ta bort
         </button>
 
-        <a class="button" href="/show-visits">
+        <a class="button" href="/show-attack-event/@(Model.AttackEvent.Id)">
             Avbryt
         </a>
-
     </form>
 
 </main>

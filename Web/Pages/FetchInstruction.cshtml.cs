@@ -65,7 +65,7 @@ public class FetchInstructionModel(
     {
         var visit = new AttackEvent()
         {
-            VisitKind = VisitKind.FetchInstruction,
+            VisitKind = AttackEventKind.FetchInstruction,
             Url = context.Request.GetDisplayUrl(),
             Method = context.Request.Method,
             IpAddress = context.Connection.RemoteIpAddress?.ToString(),

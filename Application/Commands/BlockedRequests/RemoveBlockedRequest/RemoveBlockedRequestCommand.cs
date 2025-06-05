@@ -11,12 +11,12 @@ public class RemoveBlockedRequestCommand(IDatabaseService database) : IRemoveBlo
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var visit = await database.BlockedRequests
+        var evt = await database.BlockedRequests
             .Where(x => x.Id == model.BlockedRequestId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.BlockedRequests.Remove(visit);
+        database.BlockedRequests.Remove(evt);
 
         await database.SaveAsync(userToken);
     }
