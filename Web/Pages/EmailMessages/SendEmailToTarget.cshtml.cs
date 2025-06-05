@@ -13,7 +13,7 @@ public class SendEmailToTargetModel(
     public List<EmailTemplate> EmailTemplates { get; set; }
 
     public List<SimplePayloadPage> PayloadPages { get; set; }
-    public List<PageScriptSummary> PayloadScripts { get; set; }
+    public List<PageScriptSummary> PageScripts { get; set; }
 
     [BindProperty]
     public SendEmailToTargetCommandModel CommandModel { get; set; }
@@ -41,7 +41,7 @@ public class SendEmailToTargetModel(
                 })
                 .ToListAsync();
 
-            PayloadScripts = await database.PageScripts
+            PageScripts = await database.PageScripts
                 .Select(x => new PageScriptSummary()
                 {
                     Id = x.Id,
@@ -94,7 +94,7 @@ public class SendEmailToTargetModel(
                 })
                 .ToListAsync();
 
-            PayloadScripts = await database.PageScripts
+            PageScripts = await database.PageScripts
                 .Select(x => new PageScriptSummary()
                 {
                     Id = x.Id,

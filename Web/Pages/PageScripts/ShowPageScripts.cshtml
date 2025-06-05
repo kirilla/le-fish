@@ -23,7 +23,7 @@
     <div class="notice">
 
         <ul>
-            @foreach (var page in Model.PayloadScripts)
+            @foreach (var page in Model.PageScripts)
             {
                 <li>
                     📜
@@ -32,7 +32,7 @@
                 </li>
             }
 
-            @if (!Model.PayloadScripts.Any())
+            @if (!Model.PageScripts.Any())
             {
                 <li>
                     📜
@@ -44,7 +44,7 @@
 
     </div>
 
-    @if (Model.CanAddPayloadScript)
+    @if (Model.CanAddPageScript)
     {
         <p>
             <a class="button" href="/add-payload-script">

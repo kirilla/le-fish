@@ -7,7 +7,7 @@ public class EditPageScriptModel(
     IDatabaseService database,
     IEditPageScriptCommand command) : UserTokenPageModel(userToken)
 {
-    public PageScript PayloadScript { get; set; }
+    public PageScript PageScript { get; set; }
 
     [BindProperty]
     public EditPageScriptCommandModel CommandModel { get; set; }
@@ -19,16 +19,16 @@ public class EditPageScriptModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PayloadScript = await database.PageScripts
+            PageScript = await database.PageScripts
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             CommandModel = new EditPageScriptCommandModel()
             {
-                Id = PayloadScript.Id,
-				Name = PayloadScript.Name,
-				Script = PayloadScript.Script,
+                Id = PageScript.Id,
+				Name = PageScript.Name,
+				Script = PageScript.Script,
             };
 
             return Page();
@@ -50,7 +50,7 @@ public class EditPageScriptModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PayloadScript = await database.PageScripts
+            PageScript = await database.PageScripts
                 .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

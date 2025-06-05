@@ -15,7 +15,7 @@ class PageScriptConfiguration : IEntityTypeConfiguration<PageScript>
             .HasMaxLength(MaxLengths.Domain.PageScript.Script);
 
         builder.HasMany(x => x.Attacks)
-            .WithOne(x => x.PayloadScript)
+            .WithOne(x => x.PageScript)
             .HasForeignKey(x => x.PageScriptId);
     }
 }

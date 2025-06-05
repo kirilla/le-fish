@@ -7,23 +7,23 @@ namespace Lefish.Web.Pages.PageScripts;
 public class ShowPageScriptModel(
     IUserToken userToken,
     IDatabaseService database,
-    IClonePageScriptCommand clonePayloadScriptCommand,
-    IEditPageScriptCommand editPayloadScriptCommand,
-    IRemovePageScriptCommand removePayloadScriptCommand,
+    IClonePageScriptCommand clonePageScriptCommand,
+    IEditPageScriptCommand editPageScriptCommand,
+    IRemovePageScriptCommand removePageScriptCommand,
     IOptions<TemplateConfiguration> templateConfiguration) : UserTokenPageModel(userToken)
 {
     public readonly TemplateConfiguration Config = templateConfiguration.Value;
 
-    public PageScript PayloadScript { get; set; }
+    public PageScript PageScript { get; set; }
 
-    public bool CanClonePayloadScript { get; set; }
-        = clonePayloadScriptCommand.IsPermitted(userToken);
+    public bool CanClonePageScript { get; set; }
+        = clonePageScriptCommand.IsPermitted(userToken);
 
-    public bool CanEditPayloadScript { get; set; }
-        = editPayloadScriptCommand.IsPermitted(userToken);
+    public bool CanEditPageScript { get; set; }
+        = editPageScriptCommand.IsPermitted(userToken);
 
-    public bool CanRemovePayloadScript { get; set; }
-        = removePayloadScriptCommand.IsPermitted(userToken);
+    public bool CanRemovePageScript { get; set; }
+        = removePageScriptCommand.IsPermitted(userToken);
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -32,7 +32,7 @@ public class ShowPageScriptModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PayloadScript = await database.PageScripts
+            PageScript = await database.PageScripts
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

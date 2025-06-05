@@ -16,7 +16,7 @@ public class ScriptPageModel(
 
     public Target Target { get; set; }
     public Attack Attack { get; set; }
-    public PageScript PayloadScript { get; set; }
+    public PageScript PageScript { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int token)
     {
@@ -28,7 +28,7 @@ public class ScriptPageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            PayloadScript = await database.PageScripts
+            PageScript = await database.PageScripts
                 .AsNoTracking()
                 .Where(x => x.Id == Attack.PageScriptId)
                 .SingleOrDefaultAsync() ??
@@ -40,7 +40,7 @@ public class ScriptPageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            var script = PayloadScript.ReplaceVariables(_config, Target, Attack);
+            var script = PageScript.ReplaceVariables(_config, Target, Attack);
 
             await LogEvent(HttpContext, Attack);
 

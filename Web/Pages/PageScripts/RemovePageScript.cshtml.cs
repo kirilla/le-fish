@@ -7,7 +7,7 @@ public class RemovePageScriptModel(
     IDatabaseService database,
     IRemovePageScriptCommand command) : UserTokenPageModel(userToken)
 {
-    public PageScript PayloadScript { get; set; }
+    public PageScript PageScript { get; set; }
 
     [BindProperty]
     public RemovePageScriptCommandModel CommandModel { get; set; }
@@ -19,14 +19,14 @@ public class RemovePageScriptModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PayloadScript = await database.PageScripts
+            PageScript = await database.PageScripts
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             CommandModel = new RemovePageScriptCommandModel()
             {
-                Id = PayloadScript.Id,
+                Id = PageScript.Id,
             };
 
             return Page();
@@ -48,7 +48,7 @@ public class RemovePageScriptModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PayloadScript = await database.PageScripts
+            PageScript = await database.PageScripts
                 .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

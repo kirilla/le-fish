@@ -31,7 +31,7 @@ public class SendEmailCommand(
              throw new NotFoundException();
 
         var script = await database.PageScripts
-            .Where(x => x.Id == model.PayloadScriptId!.Value)
+            .Where(x => x.Id == model.PageScriptId!.Value)
             .SingleOrDefaultAsync() ??
              throw new NotFoundException();
 

@@ -15,7 +15,7 @@
 
     <h4>
         📜
-        @(Model.PayloadScript.Name)
+        @(Model.PageScript.Name)
     </h4>
 
     <h5>
@@ -28,26 +28,26 @@
     <h5>
         Skript
     </h5>
-    <pre class="notice">@(Model.PayloadScript.Script)</pre>
+    <pre class="notice">@(Model.PageScript.Script)</pre>
 
     <p>
-        @if (Model.CanClonePayloadScript)
+        @if (Model.CanClonePageScript)
         {
-            <a class="button" href="/clone-payload-script/@(Model.PayloadScript.Id)">
+            <a class="button" href="/clone-payload-script/@(Model.PageScript.Id)">
                 Klona
             </a>
         }
 
-        @if (Model.CanEditPayloadScript)
+        @if (Model.CanEditPageScript)
         {
-            <a class="button" href="/edit-payload-script/@(Model.PayloadScript.Id)">
+            <a class="button" href="/edit-payload-script/@(Model.PageScript.Id)">
                 Redigera
             </a>
         }
 
-        @if (Model.CanRemovePayloadScript)
+        @if (Model.CanRemovePageScript)
         {
-            <a class="button" href="/remove-payload-script/@(Model.PayloadScript.Id)">
+            <a class="button" href="/remove-payload-script/@(Model.PageScript.Id)">
                 Ta bort
             </a>
         }

@@ -5,12 +5,12 @@ namespace Lefish.Web.Pages.PageScripts;
 public class ShowPageScriptsModel(
     IUserToken userToken,
     IDatabaseService database,
-    IAddPageScriptCommand addPayloadScriptCommand) : UserTokenPageModel(userToken)
+    IAddPageScriptCommand addPageScriptCommand) : UserTokenPageModel(userToken)
 {
-    public List<PageScript> PayloadScripts { get; set; }
+    public List<PageScript> PageScripts { get; set; }
 
-    public bool CanAddPayloadScript { get; set; }
-        = addPayloadScriptCommand.IsPermitted(userToken);
+    public bool CanAddPageScript { get; set; }
+        = addPageScriptCommand.IsPermitted(userToken);
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -19,7 +19,7 @@ public class ShowPageScriptsModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PayloadScripts = await database.PageScripts
+            PageScripts = await database.PageScripts
                 .AsNoTracking()
                 .OrderBy(x => x.Name)
                 .ToListAsync();

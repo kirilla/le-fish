@@ -7,7 +7,7 @@ public class ClonePageScriptModel(
     IDatabaseService database,
     IClonePageScriptCommand command) : UserTokenPageModel(userToken)
 {
-    public PageScript PayloadScript { get; set; }
+    public PageScript PageScript { get; set; }
 
     [BindProperty]
     public ClonePageScriptCommandModel CommandModel { get; set; }
@@ -19,15 +19,15 @@ public class ClonePageScriptModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PayloadScript = await database.PageScripts
+            PageScript = await database.PageScripts
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             CommandModel = new ClonePageScriptCommandModel()
             {
-                Id = PayloadScript.Id,
-                Name = PayloadScript.Name,
+                Id = PageScript.Id,
+                Name = PageScript.Name,
             };
 
             return Page();
@@ -49,7 +49,7 @@ public class ClonePageScriptModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PayloadScript = await database.PageScripts
+            PageScript = await database.PageScripts
                 .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

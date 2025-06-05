@@ -77,13 +77,13 @@
             }
         </select>
 
-        <label asp-for="CommandModel.PayloadScriptId">
+        <label asp-for="CommandModel.PageScriptId">
             Skript på sidan
         </label>
 
-        <select asp-for="CommandModel.PayloadScriptId">
+        <select asp-for="CommandModel.PageScriptId">
             <option value="">–</option>
-            @foreach (var script in Model.PayloadScripts)
+            @foreach (var script in Model.PageScripts)
             {
                 <option value="@(script.Id)">
                     @(script.Name)
