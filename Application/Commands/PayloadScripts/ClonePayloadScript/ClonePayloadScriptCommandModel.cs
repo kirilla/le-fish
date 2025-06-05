@@ -9,7 +9,7 @@ public class ClonePayloadScriptCommandModel
     [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Ange namn.")]
     [StringLength(
-        MaxLengths.Domain.PayloadScript.Name,
+        MaxLengths.Domain.PageScript.Name,
         ErrorMessage = "Skriv kortare.")]
     public string Name { get; set; }
 }

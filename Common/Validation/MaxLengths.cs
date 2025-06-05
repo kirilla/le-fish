@@ -125,7 +125,7 @@ public static class MaxLengths
             public const int Html = Common.DbSuperSize;
         }
 
-        public static class PayloadScript
+        public static class PageScript
         {
             public const int Name = 50;
 

@@ -14,7 +14,7 @@ public class ShowPayloadScriptModel(
 {
     public readonly TemplateConfiguration Config = templateConfiguration.Value;
 
-    public PayloadScript PayloadScript { get; set; }
+    public PageScript PayloadScript { get; set; }
 
     public bool CanClonePayloadScript { get; set; }
         = clonePayloadScriptCommand.IsPermitted(userToken);

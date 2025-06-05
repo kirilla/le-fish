@@ -7,7 +7,7 @@ public class ClonePayloadScriptModel(
     IDatabaseService database,
     IClonePayloadScriptCommand command) : UserTokenPageModel(userToken)
 {
-    public PayloadScript PayloadScript { get; set; }
+    public PageScript PayloadScript { get; set; }
 
     [BindProperty]
     public ClonePayloadScriptCommandModel CommandModel { get; set; }

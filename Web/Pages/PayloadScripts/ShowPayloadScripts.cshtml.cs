@@ -7,7 +7,7 @@ public class ShowPayloadScriptsModel(
     IDatabaseService database,
     IAddPayloadScriptCommand addPayloadScriptCommand) : UserTokenPageModel(userToken)
 {
-    public List<PayloadScript> PayloadScripts { get; set; }
+    public List<PageScript> PayloadScripts { get; set; }
 
     public bool CanAddPayloadScript { get; set; }
         = addPayloadScriptCommand.IsPermitted(userToken);

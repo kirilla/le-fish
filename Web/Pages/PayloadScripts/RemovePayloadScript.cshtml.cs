@@ -7,7 +7,7 @@ public class RemovePayloadScriptModel(
     IDatabaseService database,
     IRemovePayloadScriptCommand command) : UserTokenPageModel(userToken)
 {
-    public PayloadScript PayloadScript { get; set; }
+    public PageScript PayloadScript { get; set; }
 
     [BindProperty]
     public RemovePayloadScriptCommandModel CommandModel { get; set; }

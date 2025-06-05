@@ -7,7 +7,7 @@ public class EditPayloadScriptModel(
     IDatabaseService database,
     IEditPayloadScriptCommand command) : UserTokenPageModel(userToken)
 {
-    public PayloadScript PayloadScript { get; set; }
+    public PageScript PayloadScript { get; set; }
 
     [BindProperty]
     public EditPayloadScriptCommandModel CommandModel { get; set; }

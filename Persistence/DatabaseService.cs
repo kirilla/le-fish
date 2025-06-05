@@ -21,7 +21,7 @@ public class DatabaseService(
     public DbSet<Instruction> Instructions { get; set; }
     public DbSet<IpRange> IpRanges { get; set; }
     public DbSet<PayloadPage> PayloadPages { get; set; }
-    public DbSet<PayloadScript> PageScripts { get; set; }
+    public DbSet<PageScript> PageScripts { get; set; }
     public DbSet<Session> Sessions { get; set; }
     public DbSet<Target> Targets { get; set; }
     public DbSet<TargetInstruction> TargetInstructions { get; set; }
@@ -44,7 +44,7 @@ public class DatabaseService(
         new InstructionConfiguration().Configure(builder.Entity<Instruction>());
         new IpRangeConfiguration().Configure(builder.Entity<IpRange>());
         new PayloadPageConfiguration().Configure(builder.Entity<PayloadPage>());
-        new PayloadScriptConfiguration().Configure(builder.Entity<PayloadScript>());
+        new PageScriptConfiguration().Configure(builder.Entity<PageScript>());
         new SessionConfiguration().Configure(builder.Entity<Session>());
         new TargetConfiguration().Configure(builder.Entity<Target>());
         new TargetInstructionConfiguration().Configure(builder.Entity<TargetInstruction>());

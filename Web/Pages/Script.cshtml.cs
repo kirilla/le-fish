@@ -16,7 +16,7 @@ public class ScriptPageModel(
 
     public Target Target { get; set; }
     public Attack Attack { get; set; }
-    public PayloadScript PayloadScript { get; set; }
+    public PageScript PayloadScript { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int token)
     {

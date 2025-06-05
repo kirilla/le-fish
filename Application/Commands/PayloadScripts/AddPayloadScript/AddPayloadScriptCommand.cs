@@ -16,7 +16,7 @@ public class AddPayloadScriptCommand(IDatabaseService database) : IAddPayloadScr
             .AnyAsync(x => x.Name == model.Name))
             throw new BlockedByExistingException();
 
-        var page = new PayloadScript()
+        var page = new PageScript()
         {
             Name = model.Name,
             Script = model.Script,

@@ -1,7 +1,7 @@
 ﻿
 namespace Lefish.Domain.Entities;
 
-public class PayloadScript : ICreatedDateTime
+public class PageScript : ICreatedDateTime
 {
     public int Id { get; set; }
 
