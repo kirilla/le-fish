@@ -7,7 +7,7 @@ public class SendEmailToTargetModel(
     IDatabaseService database,
     ISendEmailToTargetCommand command) : UserTokenPageModel(userToken)
 {
-    public Target EmailTarget { get; set; }
+    public Target Target { get; set; }
 
     public List<EmailAccount> EmailAccounts { get; set; }
     public List<EmailTemplate> EmailTemplates { get; set; }
@@ -25,7 +25,7 @@ public class SendEmailToTargetModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            EmailTarget = await database.Targets
+            Target = await database.Targets
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -78,7 +78,7 @@ public class SendEmailToTargetModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            EmailTarget = await database.Targets
+            Target = await database.Targets
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

@@ -53,14 +53,14 @@ public class RemoveAttackModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            var emailTargetId = Attack.TargetId;
+            var targetId = Attack.TargetId;
 
             if (!ModelState.IsValid)
                 return Page();
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-email-target/{emailTargetId}");
+            return Redirect($"/show-email-target/{targetId}");
         }
         catch (ConfirmationRequiredException)
         {

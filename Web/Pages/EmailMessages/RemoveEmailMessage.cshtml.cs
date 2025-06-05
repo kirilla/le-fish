@@ -55,14 +55,14 @@ public class RemoveEmailMessageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            var emailTargetId = EmailMessage.Attack.TargetId;
+            var targetId = EmailMessage.Attack.TargetId;
 
             if (!ModelState.IsValid)
                 return Page();
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-email-target/{emailTargetId}");
+            return Redirect($"/show-email-target/{targetId}");
         }
         catch (ConfirmationRequiredException)
         {

@@ -31,13 +31,13 @@ public class PayloadPageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            var emailTarget = await database.Targets
+            var target = await database.Targets
                 .AsNoTracking()
                 .Where(x => x.Id == attack.TargetId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            HtmlPage = payloadPage.ReplaceVariables(_config, emailTarget, attack);
+            HtmlPage = payloadPage.ReplaceVariables(_config, target, attack);
 
             await LogEvent(HttpContext, attack);
 

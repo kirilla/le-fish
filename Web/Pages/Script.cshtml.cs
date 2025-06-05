@@ -14,7 +14,7 @@ public class ScriptPageModel(
 {
     private readonly TemplateConfiguration _config = templateConfiguration.Value;
 
-    public Target EmailTarget { get; set; }
+    public Target Target { get; set; }
     public Attack Attack { get; set; }
     public PayloadScript PayloadScript { get; set; }
 
@@ -34,13 +34,13 @@ public class ScriptPageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            EmailTarget = await database.Targets
+            Target = await database.Targets
                 .AsNoTracking()
                 .Where(x => x.Id == Attack.TargetId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            var script = PayloadScript.ReplaceVariables(_config, EmailTarget, Attack);
+            var script = PayloadScript.ReplaceVariables(_config, Target, Attack);
 
             await LogEvent(HttpContext, Attack);
 

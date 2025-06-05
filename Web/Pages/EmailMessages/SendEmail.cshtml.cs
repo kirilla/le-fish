@@ -8,7 +8,7 @@ public class SendEmailModel(
     ISendEmailCommand command) : UserTokenPageModel(userToken)
 {
     public List<EmailAccount> EmailAccounts { get; set; }
-    public List<Target> EmailTargets { get; set; }
+    public List<Target> Targets { get; set; }
     public List<EmailTemplate> EmailTemplates { get; set; }
 
     public List<SimplePayloadPage> PayloadPages { get; set; }
@@ -25,7 +25,7 @@ public class SendEmailModel(
                 throw new NotPermittedException();
 
             EmailAccounts = await database.EmailAccounts.ToListAsync();
-            EmailTargets = await database.Targets.ToListAsync();
+            Targets = await database.Targets.ToListAsync();
             EmailTemplates = await database.EmailTemplates.ToListAsync();
 
             PayloadPages = await database.PayloadPages
@@ -71,7 +71,7 @@ public class SendEmailModel(
                 throw new NotPermittedException();
 
             EmailAccounts = await database.EmailAccounts.ToListAsync();
-            EmailTargets = await database.Targets.ToListAsync();
+            Targets = await database.Targets.ToListAsync();
             EmailTemplates = await database.EmailTemplates.ToListAsync();
 
             PayloadPages = await database.PayloadPages
