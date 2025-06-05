@@ -6,7 +6,7 @@ public class ShowAttackModel(
 {
     public AttackSummary Attack { get; set; }
 
-    public List<DataResult> DataDumps { get; set; }
+    public List<DataResult> DataResults { get; set; }
     public List<EmailHeader> EmailHeaders { get; set; }
     public List<TargetInstructionSummary> TargetInstructions { get; set; }
     public List<AttackEvent> AttackEvents { get; set; }
@@ -39,7 +39,7 @@ public class ShowAttackModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            DataDumps = await database.DataResults
+            DataResults = await database.DataResults
                 .Where(x => x.AttackId == id)
                 .OrderBy(x => x.Created)
                 .ToListAsync();

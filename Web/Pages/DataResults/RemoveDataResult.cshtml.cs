@@ -1,23 +1,33 @@
-using Lefish.Application.Commands.DataDumps.RemoveDataDumps;
+using Lefish.Application.Commands.DataResults.RemoveDataResult;
 
-namespace Lefish.Web.Pages.DataDumps;
+namespace Lefish.Web.Pages.DataResults;
 
-public class RemoveDataDumpsModel(
+public class RemoveDataResultModel(
     IUserToken userToken,
     IDatabaseService database,
-    IRemoveDataDumpsCommand command) : UserTokenPageModel(userToken)
+    IRemoveDataResultCommand command) : UserTokenPageModel(userToken)
 {
-    [BindProperty]
-    public RemoveDataDumpsCommandModel CommandModel { get; set; }
+    public DataResult DataResult { get; set; }
 
-    public async Task<IActionResult> OnGetAsync()
+    [BindProperty]
+    public RemoveDataResultCommandModel CommandModel { get; set; }
+
+    public async Task<IActionResult> OnGetAsync(int id)
     {
         try
         {
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            CommandModel = new RemoveDataDumpsCommandModel();
+            DataResult = await database.DataResults
+                .Where(x => x.Id == id)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            CommandModel = new RemoveDataResultCommandModel()
+            {
+                Id = DataResult.Id,
+            };
 
             return Page();
         }
@@ -38,12 +48,17 @@ public class RemoveDataDumpsModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
+            DataResult = await database.DataResults
+                .Where(x => x.Id == CommandModel.Id)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
             if (!ModelState.IsValid)
                 return Page();
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect("/show-data-dumps");
+            return Redirect($"/show-data-results");
         }
         catch (ConfirmationRequiredException)
         {

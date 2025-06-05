@@ -1,5 +1,5 @@
-﻿@page "/show-data-dumps"
-@model ShowDataDumpsModel
+﻿@page "/show-data-results"
+@model ShowDataResultsModel
 @{
 }
 
@@ -23,18 +23,18 @@
     <div class="notice">
 
         <ul>
-            @foreach (var dump in Model.DataDumps)
+            @foreach (var result in Model.DataResults)
             {
                 <li>
                     📦
                     &thinsp;
-                    <a href="/show-data-dump/@(dump.Id)">
-                        @(dump.Created.ToFixedFormatDateShortTime())
+                    <a href="/show-data-result/@(result.Id)">
+                        @(result.Created.ToFixedFormatDateShortTime())
                     </a>
                 </li>
             }
 
-            @if (!Model.DataDumps.Any())
+            @if (!Model.DataResults.Any())
             {
                 <li>
                     📦
@@ -47,7 +47,7 @@
     </div>
 
     <p>
-        <a class="button" href="/remove-data-dumps">
+        <a class="button" href="/remove-data-results">
             Ta bort
         </a>
     </p>

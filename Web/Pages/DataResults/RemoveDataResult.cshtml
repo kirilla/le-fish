@@ -1,11 +1,11 @@
-﻿@page "/edit-data-dump/{id:int}"
-@model EditDataDumpModel
+﻿@page "/remove-data-result/{id:int}"
+@model RemoveDataResultModel
 @{
 }
 
 @section Meta {
     <title>
-        Redigera datadump -
+        Ta bort data -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -16,25 +16,27 @@
 
 <main>
     <h4>
-        Redigera datadump
+        Ta bort data
     </h4>
 
     <form method="post">
 
         <input type="hidden" asp-for="CommandModel.Id" />
 
-        <label asp-for="CommandModel.JsonData">
-            Data
-        </label>
-        <input asp-for="CommandModel.JsonData" />
+        <p>
+            <label asp-for="CommandModel.Confirmed">
+                <input asp-for="CommandModel.Confirmed" type="checkbox" />
+                Ja, jag är säker
+            </label>
+        </p>
 
         <div asp-validation-summary="All"></div>
 
         <button type="submit">
-            Spara
+            Ta bort
         </button>
 
-        <a class="button" href="/show-data-dump/@(Model.DataDump.Id)">
+        <a class="button" href="/show-data-result/@(Model.CommandModel.Id)">
             Avbryt
         </a>
     </form>

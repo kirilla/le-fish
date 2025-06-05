@@ -1,9 +1,9 @@
-﻿namespace Lefish.Application.Commands.DataDumps.RemoveDataDump;
+﻿namespace Lefish.Application.Commands.DataResults.RemoveDataResult;
 
-public class RemoveDataDumpCommand(IDatabaseService database) : IRemoveDataDumpCommand
+public class RemoveDataResultCommand(IDatabaseService database) : IRemoveDataResultCommand
 {
     public async Task Execute(
-        IUserToken userToken, RemoveDataDumpCommandModel model)
+        IUserToken userToken, RemoveDataResultCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
@@ -11,12 +11,12 @@ public class RemoveDataDumpCommand(IDatabaseService database) : IRemoveDataDumpC
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var dump = await database.DataResults
+        var result = await database.DataResults
             .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.DataResults.Remove(dump);
+        database.DataResults.Remove(result);
 
         await database.SaveAsync(userToken);
     }

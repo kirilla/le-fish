@@ -1,9 +1,9 @@
-﻿namespace Lefish.Application.Commands.DataDumps.RemoveDataDumps;
+﻿namespace Lefish.Application.Commands.DataResults.RemoveDataResults;
 
-public class RemoveDataDumpsCommand(IDatabaseService database) : IRemoveDataDumpsCommand
+public class RemoveDataResultsCommand(IDatabaseService database) : IRemoveDataResultsCommand
 {
     public async Task Execute(
-        IUserToken userToken, RemoveDataDumpsCommandModel model)
+        IUserToken userToken, RemoveDataResultsCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();

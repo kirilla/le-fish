@@ -1,0 +1,44 @@
+﻿@page "/show-data-result/{id:int}"
+@model ShowDataResultModel
+@{
+}
+
+@section Meta {
+    <title>Data - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Data
+    </h4>
+
+    <div class="notice">
+        <p>
+            Skapad: @(Model.DataResult.Created.ToFixedFormatDateShortTime())
+        </p>
+    </div>
+
+    <pre class="notice">@(Model.DataResult.JsonData)</pre>
+
+    <p>
+        @if (Model.CanEditDataResult)
+        {
+            <a class="button" href="/edit-data-result/@(Model.DataResult.Id)">
+                Redigera
+            </a>
+        }
+
+        @if (Model.CanRemoveDataResult)
+        {
+            <a class="button" href="/remove-data-result/@(Model.DataResult.Id)">
+                Ta bort
+            </a>
+        }
+    </p>
+
+</main>

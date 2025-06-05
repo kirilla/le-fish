@@ -1,16 +1,16 @@
-using Lefish.Application.Commands.DataDumps.RemoveDataDump;
+ï»¿using Lefish.Application.Commands.DataResults.EditDataResult;
 
-namespace Lefish.Web.Pages.DataDumps;
+namespace Lefish.Web.Pages.DataResults;
 
-public class RemoveDataDumpModel(
+public class EditDataResultModel(
     IUserToken userToken,
     IDatabaseService database,
-    IRemoveDataDumpCommand command) : UserTokenPageModel(userToken)
+    IEditDataResultCommand command) : UserTokenPageModel(userToken)
 {
-    public DataResult DataDump { get; set; }
+    public DataResult DataResult { get; set; }
 
     [BindProperty]
-    public RemoveDataDumpCommandModel CommandModel { get; set; }
+    public EditDataResultCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -19,14 +19,15 @@ public class RemoveDataDumpModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            DataDump = await database.DataResults
+            DataResult = await database.DataResults
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new RemoveDataDumpCommandModel()
+            CommandModel = new EditDataResultCommandModel()
             {
-                Id = DataDump.Id,
+                Id = DataResult.Id,
+                JsonData = DataResult.JsonData,
             };
 
             return Page();
@@ -41,14 +42,14 @@ public class RemoveDataDumpModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(int id)
     {
         try
         {
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            DataDump = await database.DataResults
+            DataResult = await database.DataResults
                 .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -58,15 +59,7 @@ public class RemoveDataDumpModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-data-dumps");
-        }
-        catch (ConfirmationRequiredException)
-        {
-            ModelState.AddModelError(
-                nameof(CommandModel.Confirmed),
-                "Bekräfta att du verkligen vill ta bort.");
-
-            return Page();
+            return Redirect($"/show-data-result/{id}");
         }
         catch
         {

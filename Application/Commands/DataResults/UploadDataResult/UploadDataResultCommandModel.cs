@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Lefish.Application.Commands.DataDumps.UploadDataDump;
+namespace Lefish.Application.Commands.DataResults.UploadDataResult;
 
-public class UploadDataDumpCommandModel
+public class UploadDataResultCommandModel
 {
     [RegularExpression(Pattern.Common.AnythingMultiLine)]
     [Required(ErrorMessage = "Något innehåll krävs.")]

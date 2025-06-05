@@ -1,9 +1,9 @@
-﻿namespace Lefish.Application.Commands.DataDumps.EditDataDump;
+﻿namespace Lefish.Application.Commands.DataResults.EditDataResult;
 
-public class EditDataDumpCommand(IDatabaseService database) : IEditDataDumpCommand
+public class EditDataResultCommand(IDatabaseService database) : IEditDataResultCommand
 {
     public async Task Execute(
-        IUserToken userToken, EditDataDumpCommandModel model)
+        IUserToken userToken, EditDataResultCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
@@ -11,12 +11,12 @@ public class EditDataDumpCommand(IDatabaseService database) : IEditDataDumpComma
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        var dump = await database.DataResults
+        var result = await database.DataResults
             .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        dump.JsonData = model.JsonData;
+        result.JsonData = model.JsonData;
 
         await database.SaveAsync(userToken);
     }

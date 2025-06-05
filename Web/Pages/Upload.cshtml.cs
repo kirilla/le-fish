@@ -1,4 +1,4 @@
-﻿using Lefish.Application.Commands.DataDumps.UploadDataDump;
+﻿using Lefish.Application.Commands.DataResults.UploadDataResult;
 using Lefish.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -10,7 +10,7 @@ namespace Lefish.Web.Pages;
 public class UploadPageModel(
     IUserToken userToken,
     IDatabaseService database,
-    IUploadDataDumpCommand command) : UserTokenPageModel(userToken)
+    IUploadDataResultCommand command) : UserTokenPageModel(userToken)
 {
     public async Task<IActionResult> OnPostAsync(int token)
     {
@@ -29,7 +29,7 @@ public class UploadPageModel(
                 requestBody = await reader.ReadToEndAsync();
             }
 
-            var commandModel = new UploadDataDumpCommandModel()
+            var commandModel = new UploadDataResultCommandModel()
             {
                 JsonData = requestBody,
 

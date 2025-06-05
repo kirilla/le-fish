@@ -1,10 +1,10 @@
-﻿namespace Lefish.Application.Commands.DataDumps.UploadDataDump;
+﻿namespace Lefish.Application.Commands.DataResults.UploadDataResult;
 
-public class UploadDataDumpCommand(IDatabaseService database) : IUploadDataDumpCommand
+public class UploadDataResultCommand(IDatabaseService database) : IUploadDataResultCommand
 {
     public async Task Execute(
         IUserToken userToken,
-        UploadDataDumpCommandModel model,
+        UploadDataResultCommandModel model,
         int attackToken)
     {
         if (!IsPermitted(userToken))
@@ -19,13 +19,13 @@ public class UploadDataDumpCommand(IDatabaseService database) : IUploadDataDumpC
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        var dump = new DataResult()
+        var result = new DataResult()
         {
             AttackId = attack.Id,
             JsonData = model.JsonData,
         };
 
-        database.DataResults.Add(dump);
+        database.DataResults.Add(result);
 
         var evt = new AttackEvent()
         {

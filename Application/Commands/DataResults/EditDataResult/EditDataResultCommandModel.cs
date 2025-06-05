@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Lefish.Application.Commands.DataDumps.EditDataDump;
+namespace Lefish.Application.Commands.DataResults.EditDataResult;
 
-public class EditDataDumpCommandModel
+public class EditDataResultCommandModel
 {
     public int Id { get; set; }
 
