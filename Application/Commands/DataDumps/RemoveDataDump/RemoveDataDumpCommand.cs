@@ -11,12 +11,12 @@ public class RemoveDataDumpCommand(IDatabaseService database) : IRemoveDataDumpC
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var dump = await database.DataDumps
+        var dump = await database.DataResults
             .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.DataDumps.Remove(dump);
+        database.DataResults.Remove(dump);
 
         await database.SaveAsync(userToken);
     }

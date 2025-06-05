@@ -11,7 +11,7 @@ public class EditDataDumpCommand(IDatabaseService database) : IEditDataDumpComma
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        var dump = await database.DataDumps
+        var dump = await database.DataResults
             .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();

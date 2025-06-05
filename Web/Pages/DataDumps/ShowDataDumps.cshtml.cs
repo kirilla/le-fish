@@ -13,7 +13,7 @@ public class ShowDataDumpsModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            DataDumps = await database.DataDumps
+            DataDumps = await database.DataResults
                 .AsNoTracking()
                 //.OrderBy(x => x.Created)
                 //.ThenBy(x => x.Name)

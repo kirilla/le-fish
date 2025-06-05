@@ -11,7 +11,7 @@ public class RemoveDataDumpsCommand(IDatabaseService database) : IRemoveDataDump
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        await database.DataDumps.ExecuteDeleteAsync();
+        await database.DataResults.ExecuteDeleteAsync();
     }
 
     public bool IsPermitted(IUserToken userToken)

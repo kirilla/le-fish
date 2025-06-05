@@ -39,7 +39,7 @@ public class ShowAttackModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            DataDumps = await database.DataDumps
+            DataDumps = await database.DataResults
                 .Where(x => x.AttackId == id)
                 .OrderBy(x => x.Created)
                 .ToListAsync();

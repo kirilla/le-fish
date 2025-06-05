@@ -24,7 +24,7 @@ public class ShowDataDumpModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            DataDump = await database.DataDumps
+            DataDump = await database.DataResults
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

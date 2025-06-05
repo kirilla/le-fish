@@ -19,7 +19,7 @@ public class RemoveDataDumpModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            DataDump = await database.DataDumps
+            DataDump = await database.DataResults
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -48,7 +48,7 @@ public class RemoveDataDumpModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            DataDump = await database.DataDumps
+            DataDump = await database.DataResults
                 .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

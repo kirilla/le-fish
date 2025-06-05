@@ -25,7 +25,7 @@ public class UploadDataDumpCommand(IDatabaseService database) : IUploadDataDumpC
             JsonData = model.JsonData,
         };
 
-        database.DataDumps.Add(dump);
+        database.DataResults.Add(dump);
 
         var evt = new AttackEvent()
         {
