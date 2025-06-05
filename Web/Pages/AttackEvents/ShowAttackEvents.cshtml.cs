@@ -24,8 +24,8 @@ public class ShowAttackEventsModel(
                     UserAgent = x.UserAgent,
                     PageName = x.Attack.PayloadPage.Name,
                     PayloadPageId = x.Attack.PayloadPageId,
-                    TargetName = x.Attack.EmailTarget.Name,
-                    TargetAddress = x.Attack.EmailTarget.Address,
+                    TargetName = x.Attack.Target.Name,
+                    TargetAddress = x.Attack.Target.Address,
                     EmailTargetId = x.Attack.EmailTargetId,
                 })
                 .ToListAsync();

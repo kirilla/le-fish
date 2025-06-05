@@ -1,17 +1,17 @@
 ﻿using Lefish.Application.Commands.EmailMessages.SendEmailToTarget;
-using Lefish.Application.Commands.EmailTargets.EditEmailTarget;
-using Lefish.Application.Commands.EmailTargets.RemoveEmailTarget;
+using Lefish.Application.Commands.Targets.EditTarget;
+using Lefish.Application.Commands.Targets.RemoveTarget;
 
-namespace Lefish.Web.Pages.EmailTargets;
+namespace Lefish.Web.Pages.Targets;
 
-public class ShowEmailTargetModel(
+public class ShowTargetModel(
     IUserToken userToken,
     IDatabaseService database,
-    IEditEmailTargetCommand editTargetCommand,
-    IRemoveEmailTargetCommand removeTargetCommand,
+    IEditTargetCommand editTargetCommand,
+    IRemoveTargetCommand removeTargetCommand,
     ISendEmailToTargetCommand sendEmailToTargetCommand) : UserTokenPageModel(userToken)
 {
-    public EmailTarget EmailTarget { get; set; }
+    public Target Target { get; set; }
 
     public List<Attack> Attacks { get; set; }
 
@@ -31,7 +31,7 @@ public class ShowEmailTargetModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            EmailTarget = await database.Targets
+            Target = await database.Targets
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

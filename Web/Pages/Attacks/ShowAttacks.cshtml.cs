@@ -23,8 +23,8 @@ public class ShowAttacksModel(
                     Created = x.Created,
                     PageName = x.PayloadPage.Name,
                     PayloadPageId = x.PayloadPageId,
-                    TargetName = x.EmailTarget.Name,
-                    TargetAddress = x.EmailTarget.Address,
+                    TargetName = x.Target.Name,
+                    TargetAddress = x.Target.Address,
                     EmailTargetId = x.EmailTargetId,
                 })
                 .ToListAsync();

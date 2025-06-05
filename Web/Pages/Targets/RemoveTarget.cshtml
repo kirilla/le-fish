@@ -1,5 +1,5 @@
 ﻿@page "/remove-email-target/{id:int}"
-@model RemoveEmailTargetModel
+@model RemoveTargetModel
 @{
 }
 
@@ -17,12 +17,12 @@
 <main>
     <h4>
         Ta bort målkontot:
-        @(Model.EmailTarget.Address)
+        @(Model.Target.Address)
     </h4>
 
     <form method="post">
 
-        <input type="hidden" asp-for="CommandModel.EmailTargetId" />
+        <input type="hidden" asp-for="CommandModel.Id" />
 
         <p>
             <label asp-for="CommandModel.Confirmed">
@@ -37,7 +37,7 @@
             Ta bort
         </button>
 
-        <a class="button" href="/show-email-target/@(Model.CommandModel.EmailTargetId)">
+        <a class="button" href="/show-email-target/@(Model.CommandModel.Id)">
             Avbryt
         </a>
     </form>

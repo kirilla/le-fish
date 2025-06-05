@@ -1,14 +1,14 @@
-﻿using Lefish.Application.Commands.EmailTargets.AddEmailTarget;
+﻿using Lefish.Application.Commands.Targets.AddTarget;
 
-namespace Lefish.Web.Pages.EmailTargets;
+namespace Lefish.Web.Pages.Targets;
 
-public class AddEmailTargetModel(
+public class AddTargetModel(
     IUserToken userToken,
     IDatabaseService database,
-    IAddEmailTargetCommand command) : UserTokenPageModel(userToken)
+    IAddTargetCommand command) : UserTokenPageModel(userToken)
 {
     [BindProperty]
-    public AddEmailTargetCommandModel CommandModel { get; set; }
+    public AddTargetCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -17,7 +17,7 @@ public class AddEmailTargetModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            CommandModel = new AddEmailTargetCommandModel();
+            CommandModel = new AddTargetCommandModel();
 
             return Page();
         }

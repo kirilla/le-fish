@@ -103,12 +103,6 @@ public static class MaxLengths
             public const int TextBody = Common.DbSuperSize;
         }
 
-        public static class EmailTarget
-        {
-            public const int Name = Common.Person.Name;
-            public const int Address = Common.Email.Address;
-        }
-
         public static class EmailTemplate
         {
             public const int Subject = 300;
@@ -136,6 +130,12 @@ public static class MaxLengths
             public const int Name = 50;
 
             public const int Script = Common.DbSuperSize;
+        }
+
+        public static class Target
+        {
+            public const int Name = Common.Person.Name;
+            public const int Address = Common.Email.Address;
         }
 
         public static class TargetInstruction

@@ -7,7 +7,7 @@ public static class PayloadPageExtensions
     public static string ReplaceVariables(
         this PayloadPage page,
         TemplateConfiguration templateConfiguration,
-        EmailTarget target, 
+        Target target, 
         Attack attack)
     {
         string s = page.Html;

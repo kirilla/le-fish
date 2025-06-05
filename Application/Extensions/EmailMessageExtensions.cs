@@ -7,7 +7,7 @@ public static class EmailMessageExtensions
     public static void ReplaceVariables(
         this EmailMessage message,
         TemplateConfiguration templateConfiguration,
-        EmailTarget target, 
+        Target target, 
         Attack attack)
     {
         // Step 1

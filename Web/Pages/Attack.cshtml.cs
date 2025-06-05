@@ -7,7 +7,7 @@ public class AttackModel(
     IDatabaseService database,
     ISendEmailCommand sendEmailCommand) : UserTokenPageModel(userToken)
 {
-    public List<EmailTarget> EmailTargets { get; set; }
+    public List<Target> EmailTargets { get; set; }
     public List<Attack> Attacks { get; set; }
 
     public bool CanSendEmail { get; set; }

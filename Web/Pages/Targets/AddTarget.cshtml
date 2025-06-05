@@ -1,11 +1,11 @@
-﻿@page "/edit-email-target/{id:int}"
-@model EditEmailTargetModel
+﻿@page "/add-email-target"
+@model AddTargetModel
 @{
 }
 
 @section Meta {
     <title>
-        Redigera målkonto -
+        Lägg till målkonto -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -16,14 +16,10 @@
 
 <main>
     <h4>
-        Redigera målkonto:
-        @(Model.EmailTarget.Name)
-        @(Model.EmailTarget.Address)
+        Lägg till ett målkonto
     </h4>
 
     <form method="post">
-
-        <input type="hidden" asp-for="CommandModel.EmailTargetId" />
 
         <label asp-for="CommandModel.Name">
             Namn
@@ -38,10 +34,10 @@
         <div asp-validation-summary="All"></div>
 
         <button type="submit">
-            Spara
+            Lägg till
         </button>
 
-        <a class="button" href="/show-email-target/@(Model.EmailTarget.Id)">
+        <a class="button" href="/show-email-targets">
             Avbryt
         </a>
     </form>

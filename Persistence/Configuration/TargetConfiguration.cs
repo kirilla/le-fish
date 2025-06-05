@@ -1,21 +1,21 @@
 ﻿namespace Lefish.Persistence.Configuration;
 
-class EmailTargetConfiguration : IEntityTypeConfiguration<EmailTarget>
+class TargetConfiguration : IEntityTypeConfiguration<Target>
 {
-    public void Configure(EntityTypeBuilder<EmailTarget> builder)
+    public void Configure(EntityTypeBuilder<Target> builder)
     {
         builder.HasKey(p => p.Id);
 
         builder.Property(p => p.Name)
             .IsRequired()
-            .HasMaxLength(MaxLengths.Domain.EmailTarget.Name);
+            .HasMaxLength(MaxLengths.Domain.Target.Name);
 
         builder.Property(p => p.Address)
             .IsRequired()
-            .HasMaxLength(MaxLengths.Domain.EmailTarget.Address);
+            .HasMaxLength(MaxLengths.Domain.Target.Address);
 
         builder.HasMany(x => x.Attacks)
-            .WithOne(x => x.EmailTarget)
+            .WithOne(x => x.Target)
             .HasForeignKey(x => x.EmailTargetId);
     }
 }

@@ -7,7 +7,7 @@ public static class TargetInstructionExtensions
     public static string ReplaceVariables(
         this TargetInstruction instruction,
         TemplateConfiguration templateConfiguration,
-        EmailTarget target, 
+        Target target, 
         Attack attack)
     {
         string s = instruction.Script;

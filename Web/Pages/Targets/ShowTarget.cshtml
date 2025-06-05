@@ -1,10 +1,10 @@
 ﻿@page "/show-email-target/{id:int}"
-@model ShowEmailTargetModel
+@model ShowTargetModel
 @{
 }
 
 @section Meta {
-    <title>Mål - @(Model.EmailTarget.Name) - @(Branding.WebsiteTitle)</title>
+    <title>Mål - @(Model.Target.Name) - @(Branding.WebsiteTitle)</title>
 }
 
 @section Header {
@@ -15,13 +15,13 @@
 
     <h4>
         🎯
-        @(Model.EmailTarget.Name)
+        @(Model.Target.Name)
     </h4>
 
     <div class="notice">
         <ul>
             <li>
-                @(Model.EmailTarget.Address)
+                @(Model.Target.Address)
             </li>
         </ul>
     </div>
@@ -29,14 +29,14 @@
     <p>
         @if (Model.CanEditTarget)
         {
-            <a class="button" href="/edit-email-target/@(Model.EmailTarget.Id)">
+            <a class="button" href="/edit-email-target/@(Model.Target.Id)">
                 Redigera
             </a>
         }
 
         @if (Model.CanRemoveTarget)
         {
-            <a class="button" href="/remove-email-target/@(Model.EmailTarget.Id)">
+            <a class="button" href="/remove-email-target/@(Model.Target.Id)">
                 Ta bort
             </a>
         }
@@ -75,7 +75,7 @@
     <p>
         @if (Model.CanSendEmailToTarget)
         {
-            <a class="button" href="/send-email-to-target/@(Model.EmailTarget.Id)">
+            <a class="button" href="/send-email-to-target/@(Model.Target.Id)">
                 Skicka meddelande
             </a>
         }

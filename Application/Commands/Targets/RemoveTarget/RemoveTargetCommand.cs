@@ -1,9 +1,9 @@
-﻿namespace Lefish.Application.Commands.EmailTargets.RemoveEmailTarget;
+﻿namespace Lefish.Application.Commands.Targets.RemoveTarget;
 
-public class RemoveEmailTargetCommand(IDatabaseService database) : IRemoveEmailTargetCommand
+public class RemoveTargetCommand(IDatabaseService database) : IRemoveTargetCommand
 {
     public async Task Execute(
-        IUserToken userToken, RemoveEmailTargetCommandModel model)
+        IUserToken userToken, RemoveTargetCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
@@ -12,7 +12,7 @@ public class RemoveEmailTargetCommand(IDatabaseService database) : IRemoveEmailT
             throw new ConfirmationRequiredException();
 
         var target = await database.Targets
-            .Where(x => x.Id == model.EmailTargetId)
+            .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 

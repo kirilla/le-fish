@@ -1,16 +1,16 @@
-using Lefish.Application.Commands.EmailTargets.RemoveEmailTarget;
+﻿using Lefish.Application.Commands.Targets.EditTarget;
 
-namespace Lefish.Web.Pages.EmailTargets;
+namespace Lefish.Web.Pages.Targets;
 
-public class RemoveEmailTargetModel(
+public class EditTargetModel(
     IUserToken userToken,
     IDatabaseService database,
-    IRemoveEmailTargetCommand command) : UserTokenPageModel(userToken)
+    IEditTargetCommand command) : UserTokenPageModel(userToken)
 {
-    public EmailTarget EmailTarget { get; set; }
+    public Target Target { get; set; }
 
     [BindProperty]
-    public RemoveEmailTargetCommandModel CommandModel { get; set; }
+    public EditTargetCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -19,14 +19,16 @@ public class RemoveEmailTargetModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            EmailTarget = await database.Targets
+            Target = await database.Targets
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new RemoveEmailTargetCommandModel()
+            CommandModel = new EditTargetCommandModel()
             {
-                EmailTargetId = EmailTarget.Id,
+                Id = Target.Id,
+                Name = Target.Name,
+                Address = Target.Address,
             };
 
             return Page();
@@ -41,15 +43,15 @@ public class RemoveEmailTargetModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(int id)
     {
         try
         {
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            EmailTarget = await database.Targets
-                .Where(x => x.Id == CommandModel.EmailTargetId)
+            Target = await database.Targets
+                .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -58,13 +60,13 @@ public class RemoveEmailTargetModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-email-targets");
+            return Redirect($"/show-email-target/{id}");
         }
-        catch (ConfirmationRequiredException)
+        catch (BlockedByAddressException)
         {
             ModelState.AddModelError(
-                nameof(CommandModel.Confirmed),
-                "Bekr�fta att du verkligen vill ta bort.");
+                nameof(CommandModel.Address),
+                "Det finns ett annat målkonto med samma adress.");
 
             return Page();
         }

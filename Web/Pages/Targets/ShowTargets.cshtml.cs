@@ -1,13 +1,13 @@
-using Lefish.Application.Commands.EmailTargets.AddEmailTarget;
+using Lefish.Application.Commands.Targets.AddTarget;
 
-namespace Lefish.Web.Pages.EmailTargets;
+namespace Lefish.Web.Pages.Targets;
 
-public class ShowEmailTargetsModel(
+public class ShowTargetsModel(
     IUserToken userToken,
     IDatabaseService database,
-    IAddEmailTargetCommand addTargetCommand) : UserTokenPageModel(userToken)
+    IAddTargetCommand addTargetCommand) : UserTokenPageModel(userToken)
 {
-    public List<EmailTarget> EmailTargets { get; set; }
+    public List<Target> Targets { get; set; }
 
     public bool CanAddTarget { get; set; }
         = addTargetCommand.IsPermitted(userToken);
@@ -19,7 +19,7 @@ public class ShowEmailTargetsModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            EmailTargets = await database.Targets
+            Targets = await database.Targets
                 .AsNoTracking()
                 .OrderBy(x => x.Address)
                 .ThenBy(x => x.Name)

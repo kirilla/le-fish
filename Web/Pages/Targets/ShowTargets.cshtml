@@ -1,5 +1,5 @@
 ﻿@page "/show-email-targets"
-@model ShowEmailTargetsModel
+@model ShowTargetsModel
 @{
 }
 
@@ -23,7 +23,7 @@
     <div class="notice">
 
         <ul>
-            @foreach (var target in Model.EmailTargets)
+            @foreach (var target in Model.Targets)
             {
                 <li>
                     🎯
@@ -34,7 +34,7 @@
                 </li>
             }
 
-            @if (!Model.EmailTargets.Any())
+            @if (!Model.Targets.Any())
             {
                 <li>
                     🎯

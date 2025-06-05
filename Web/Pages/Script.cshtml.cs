@@ -14,7 +14,7 @@ public class ScriptPageModel(
 {
     private readonly TemplateConfiguration _config = templateConfiguration.Value;
 
-    public EmailTarget EmailTarget { get; set; }
+    public Target EmailTarget { get; set; }
     public Attack Attack { get; set; }
     public PayloadScript PayloadScript { get; set; }
 

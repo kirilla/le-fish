@@ -1,9 +1,9 @@
-﻿namespace Lefish.Application.Commands.EmailTargets.AddEmailTarget;
+﻿namespace Lefish.Application.Commands.Targets.AddTarget;
 
-public class AddEmailTargetCommand(IDatabaseService database) : IAddEmailTargetCommand
+public class AddTargetCommand(IDatabaseService database) : IAddTargetCommand
 {
     public async Task<int> Execute(
-        IUserToken userToken, AddEmailTargetCommandModel model)
+        IUserToken userToken, AddTargetCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
@@ -15,7 +15,7 @@ public class AddEmailTargetCommand(IDatabaseService database) : IAddEmailTargetC
             .AnyAsync(x => x.Address == model.Address))
             throw new BlockedByAddressException();
 
-        var target = new EmailTarget()
+        var target = new Target()
         {
             Name = model.Name,
             Address = model.Address,

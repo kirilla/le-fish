@@ -22,13 +22,13 @@ public class VisitPayloadPageAsModel(
 
             Attacks = await database.Attacks
                 .Where(x => x.PayloadPageId == id)
-                .OrderBy(x => x.EmailTarget.Name)
+                .OrderBy(x => x.Target.Name)
                 .ThenBy(x => x.Value)
                 .Select(x => new AttackSummary()
                 {
                     Id = x.Id,
-                    TargetName = x.EmailTarget.Name,
-                    TargetAddress = x.EmailTarget.Address,
+                    TargetName = x.Target.Name,
+                    TargetAddress = x.Target.Address,
                     Value = x.Value,
                 })
                 .ToListAsync();

@@ -8,7 +8,7 @@ public class SendEmailModel(
     ISendEmailCommand command) : UserTokenPageModel(userToken)
 {
     public List<EmailAccount> EmailAccounts { get; set; }
-    public List<EmailTarget> EmailTargets { get; set; }
+    public List<Target> EmailTargets { get; set; }
     public List<EmailTemplate> EmailTemplates { get; set; }
 
     public List<SimplePayloadPage> PayloadPages { get; set; }

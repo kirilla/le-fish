@@ -7,7 +7,7 @@ public class SendEmailToTargetModel(
     IDatabaseService database,
     ISendEmailToTargetCommand command) : UserTokenPageModel(userToken)
 {
-    public EmailTarget EmailTarget { get; set; }
+    public Target EmailTarget { get; set; }
 
     public List<EmailAccount> EmailAccounts { get; set; }
     public List<EmailTemplate> EmailTemplates { get; set; }

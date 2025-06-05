@@ -10,7 +10,7 @@ public class RemoveAttackEventsModel(
     [BindProperty]
     public RemoveAttackEventsCommandModel CommandModel { get; set; }
 
-    public List<EmailTarget> EmailTargets { get; set; }
+    public List<Target> EmailTargets { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {

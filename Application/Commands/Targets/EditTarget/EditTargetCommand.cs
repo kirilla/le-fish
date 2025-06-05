@@ -1,9 +1,9 @@
-﻿namespace Lefish.Application.Commands.EmailTargets.EditEmailTarget;
+﻿namespace Lefish.Application.Commands.Targets.EditTarget;
 
-public class EditEmailTargetCommand(IDatabaseService database) : IEditEmailTargetCommand
+public class EditTargetCommand(IDatabaseService database) : IEditTargetCommand
 {
     public async Task Execute(
-        IUserToken userToken, EditEmailTargetCommandModel model)
+        IUserToken userToken, EditTargetCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
@@ -12,14 +12,14 @@ public class EditEmailTargetCommand(IDatabaseService database) : IEditEmailTarge
         model.SetEmptyStringsToNull();
 
         var target = await database.Targets
-            .Where(x => x.Id == model.EmailTargetId)
+            .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
         if (await database.Targets
             .AnyAsync(x =>
                 x.Address == model.Address &&
-                x.Id != model.EmailTargetId))
+                x.Id != model.Id))
             throw new BlockedByAddressException();
 
         target.Name = model.Name;

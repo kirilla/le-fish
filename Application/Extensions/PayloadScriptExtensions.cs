@@ -7,7 +7,7 @@ public static class PayloadScriptExtensions
     public static string ReplaceVariables(
         this PayloadScript script,
         TemplateConfiguration templateConfiguration,
-        EmailTarget target, 
+        Target target, 
         Attack attack)
     {
         string s = script.Script;

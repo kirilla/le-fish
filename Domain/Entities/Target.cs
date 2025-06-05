@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Domain.Entities;
 
-public class EmailTarget
+public class Target
 {
     public int Id { get; set; }
 
