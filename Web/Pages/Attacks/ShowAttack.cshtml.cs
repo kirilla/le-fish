@@ -32,7 +32,7 @@ public class ShowAttackModel(
                     PayloadPageId = x.PayloadPageId,
                     TargetName = x.Target.Name,
                     TargetAddress = x.Target.Address,
-                    EmailTargetId = x.EmailTargetId,
+                    EmailTargetId = x.TargetId,
                     ScriptName = x.PayloadScript.Name,
                     PayloadScriptId = x.PayloadScriptId,
                 })

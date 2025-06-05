@@ -33,7 +33,7 @@ public class PayloadPageModel(
 
             var emailTarget = await database.Targets
                 .AsNoTracking()
-                .Where(x => x.Id == attack.EmailTargetId)
+                .Where(x => x.Id == attack.TargetId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

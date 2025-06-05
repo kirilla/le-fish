@@ -53,7 +53,7 @@ public class RemoveAttackModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            var emailTargetId = Attack.EmailTargetId;
+            var emailTargetId = Attack.TargetId;
 
             if (!ModelState.IsValid)
                 return Page();

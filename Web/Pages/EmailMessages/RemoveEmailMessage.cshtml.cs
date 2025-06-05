@@ -55,7 +55,7 @@ public class RemoveEmailMessageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            var emailTargetId = EmailMessage.Attack.EmailTargetId;
+            var emailTargetId = EmailMessage.Attack.TargetId;
 
             if (!ModelState.IsValid)
                 return Page();

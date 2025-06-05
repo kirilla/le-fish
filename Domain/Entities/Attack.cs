@@ -8,7 +8,7 @@ public class Attack : ICreatedDateTime
 
     public DateTime? Created { get; set; }
 
-    public int EmailTargetId { get; set; }
+    public int TargetId { get; set; }
     public int PayloadPageId { get; set; }
     public int PayloadScriptId { get; set; }
 

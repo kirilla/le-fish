@@ -16,6 +16,6 @@ class TargetConfiguration : IEntityTypeConfiguration<Target>
 
         builder.HasMany(x => x.Attacks)
             .WithOne(x => x.Target)
-            .HasForeignKey(x => x.EmailTargetId);
+            .HasForeignKey(x => x.TargetId);
     }
 }

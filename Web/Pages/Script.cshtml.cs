@@ -36,7 +36,7 @@ public class ScriptPageModel(
 
             EmailTarget = await database.Targets
                 .AsNoTracking()
-                .Where(x => x.Id == Attack.EmailTargetId)
+                .Where(x => x.Id == Attack.TargetId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

@@ -55,7 +55,7 @@ public class SendEmailCommand(
 
         var attack = new Attack()
         {
-            EmailTargetId = target.Id,
+            TargetId = target.Id,
             PayloadPageId = page.Id,
             PayloadScriptId = script.Id,
             Value = Random.Shared.Next(),

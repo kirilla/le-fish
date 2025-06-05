@@ -37,7 +37,7 @@ public class ShowTargetModel(
                 throw new NotFoundException();
 
             Attacks = await database.Attacks
-                .Where(x => x.EmailTargetId == id)
+                .Where(x => x.TargetId == id)
                 .OrderBy(x => x.Created)
                 .ToListAsync();
 

@@ -14,7 +14,7 @@ public class RemoveAttackEventsCommand(IDatabaseService database) : IRemoveAttac
         if (model.EmailTargetId.HasValue)
         {
             await database.AttackEvents
-                .Where(x => x.Attack.EmailTargetId == model.EmailTargetId!.Value)
+                .Where(x => x.Attack.TargetId == model.EmailTargetId!.Value)
                 .ExecuteDeleteAsync();
         }
         else
