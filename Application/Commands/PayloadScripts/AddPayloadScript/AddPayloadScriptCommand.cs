@@ -12,7 +12,7 @@ public class AddPayloadScriptCommand(IDatabaseService database) : IAddPayloadScr
         model.SetEmptyStringsToNull();
         model.TruncateByStringLength();
 
-        if (await database.PayloadScripts
+        if (await database.PageScripts
             .AnyAsync(x => x.Name == model.Name))
             throw new BlockedByExistingException();
 
@@ -22,7 +22,7 @@ public class AddPayloadScriptCommand(IDatabaseService database) : IAddPayloadScr
             Script = model.Script,
         };
 
-        database.PayloadScripts.Add(page);
+        database.PageScripts.Add(page);
 
         await database.SaveAsync(userToken);
 

@@ -16,7 +16,7 @@ public interface IDatabaseService
     DbSet<Instruction> Instructions { get; set; }
     DbSet<IpRange> IpRanges { get; set; }
     DbSet<PayloadPage> PayloadPages { get; set; }
-    DbSet<PayloadScript> PayloadScripts { get; set; }
+    DbSet<PayloadScript> PageScripts { get; set; }
     DbSet<Session> Sessions { get; set; }
     DbSet<Target> Targets { get; set; }
     DbSet<TargetInstruction> TargetInstructions { get; set; }

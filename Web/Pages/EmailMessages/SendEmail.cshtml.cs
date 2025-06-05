@@ -36,7 +36,7 @@ public class SendEmailModel(
                 })
                 .ToListAsync();
 
-            PayloadScripts = await database.PayloadScripts
+            PayloadScripts = await database.PageScripts
                 .Select(x => new SimplePayloadScript()
                 {
                     Id = x.Id,
@@ -82,7 +82,7 @@ public class SendEmailModel(
                 })
                 .ToListAsync();
 
-            PayloadScripts = await database.PayloadScripts
+            PayloadScripts = await database.PageScripts
                 .Select(x => new SimplePayloadScript()
                 {
                     Id = x.Id,

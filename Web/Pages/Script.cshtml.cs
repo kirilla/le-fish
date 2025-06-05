@@ -28,7 +28,7 @@ public class ScriptPageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            PayloadScript = await database.PayloadScripts
+            PayloadScript = await database.PageScripts
                 .AsNoTracking()
                 .Where(x => x.Id == Attack.PayloadScriptId)
                 .SingleOrDefaultAsync() ??

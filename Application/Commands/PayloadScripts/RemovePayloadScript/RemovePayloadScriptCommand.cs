@@ -11,12 +11,12 @@ public class RemovePayloadScriptCommand(IDatabaseService database) : IRemovePayl
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var page = await database.PayloadScripts
+        var page = await database.PageScripts
             .Where(x => x.Id == model.PayloadScriptId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.PayloadScripts.Remove(page);
+        database.PageScripts.Remove(page);
 
         await database.SaveAsync(userToken);
     }

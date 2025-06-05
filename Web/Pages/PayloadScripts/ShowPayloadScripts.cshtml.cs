@@ -19,7 +19,7 @@ public class ShowPayloadScriptsModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PayloadScripts = await database.PayloadScripts
+            PayloadScripts = await database.PageScripts
                 .AsNoTracking()
                 .OrderBy(x => x.Name)
                 .ToListAsync();

@@ -19,7 +19,7 @@ public class ClonePayloadScriptModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PayloadScript = await database.PayloadScripts
+            PayloadScript = await database.PageScripts
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -49,7 +49,7 @@ public class ClonePayloadScriptModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PayloadScript = await database.PayloadScripts
+            PayloadScript = await database.PageScripts
                 .Where(x => x.Id == CommandModel.PayloadScriptId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

@@ -32,7 +32,7 @@ public class ShowPayloadScriptModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PayloadScript = await database.PayloadScripts
+            PayloadScript = await database.PageScripts
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

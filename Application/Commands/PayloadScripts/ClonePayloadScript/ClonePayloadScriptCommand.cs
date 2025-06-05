@@ -11,13 +11,13 @@ public class ClonePayloadScriptCommand(IDatabaseService database) : IClonePayloa
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        var page = await database.PayloadScripts
+        var page = await database.PageScripts
             .AsNoTracking()
             .Where(x => x.Id == model.PayloadScriptId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        if (await database.PayloadScripts
+        if (await database.PageScripts
             .AnyAsync(x => x.Name == model.Name))
             throw new BlockedByExistingException();
 
@@ -27,7 +27,7 @@ public class ClonePayloadScriptCommand(IDatabaseService database) : IClonePayloa
             Script = page.Script,
         };
 
-        database.PayloadScripts.Add(newPage);
+        database.PageScripts.Add(newPage);
 
         await database.SaveAsync(userToken);
 
