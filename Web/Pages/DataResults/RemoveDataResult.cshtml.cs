@@ -53,12 +53,14 @@ public class RemoveDataResultModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
+            var attackId = DataResult.AttackId;
+
             if (!ModelState.IsValid)
                 return Page();
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-data-results");
+            return Redirect($"/show-attack/{attackId}");
         }
         catch (ConfirmationRequiredException)
         {
