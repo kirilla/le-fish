@@ -1,16 +1,16 @@
-﻿using Lefish.Application.Commands.PageScripts.ClonePageScript;
+﻿using Lefish.Application.Commands.PageScripts.EditPageScript;
 
-namespace Lefish.Web.Pages.PayloadScripts;
+namespace Lefish.Web.Pages.PageScripts;
 
-public class ClonePageScriptModel(
+public class EditPageScriptModel(
     IUserToken userToken,
     IDatabaseService database,
-    IClonePageScriptCommand command) : UserTokenPageModel(userToken)
+    IEditPageScriptCommand command) : UserTokenPageModel(userToken)
 {
     public PageScript PayloadScript { get; set; }
 
     [BindProperty]
-    public ClonePageScriptCommandModel CommandModel { get; set; }
+    public EditPageScriptCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -24,10 +24,11 @@ public class ClonePageScriptModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new ClonePageScriptCommandModel()
+            CommandModel = new EditPageScriptCommandModel()
             {
                 PayloadScriptId = PayloadScript.Id,
-                Name = PayloadScript.Name,
+				Name = PayloadScript.Name,
+				Script = PayloadScript.Script,
             };
 
             return Page();
@@ -57,15 +58,15 @@ public class ClonePageScriptModel(
             if (!ModelState.IsValid)
                 return Page();
 
-            var cloneId = await command.Execute(UserToken, CommandModel);
+            await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-payload-script/{cloneId}");
+            return Redirect($"/show-payload-script/{id}");
         }
         catch (BlockedByExistingException)
         {
             ModelState.AddModelError(
                 nameof(CommandModel.Name),
-                "Det finns ett skript med samma namn.");
+                "Det finns ett annat skript med samma namn.");
 
             return Page();
         }

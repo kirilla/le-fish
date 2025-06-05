@@ -1,16 +1,16 @@
-using Lefish.Application.Commands.PageScripts.RemovePageScript;
+ï»¿using Lefish.Application.Commands.PageScripts.ClonePageScript;
 
-namespace Lefish.Web.Pages.PayloadScripts;
+namespace Lefish.Web.Pages.PageScripts;
 
-public class RemovePageScriptModel(
+public class ClonePageScriptModel(
     IUserToken userToken,
     IDatabaseService database,
-    IRemovePageScriptCommand command) : UserTokenPageModel(userToken)
+    IClonePageScriptCommand command) : UserTokenPageModel(userToken)
 {
     public PageScript PayloadScript { get; set; }
 
     [BindProperty]
-    public RemovePageScriptCommandModel CommandModel { get; set; }
+    public ClonePageScriptCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -24,9 +24,10 @@ public class RemovePageScriptModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new RemovePageScriptCommandModel()
+            CommandModel = new ClonePageScriptCommandModel()
             {
                 PayloadScriptId = PayloadScript.Id,
+                Name = PayloadScript.Name,
             };
 
             return Page();
@@ -41,7 +42,7 @@ public class RemovePageScriptModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(int id)
     {
         try
         {
@@ -56,15 +57,15 @@ public class RemovePageScriptModel(
             if (!ModelState.IsValid)
                 return Page();
 
-            await command.Execute(UserToken, CommandModel);
+            var cloneId = await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-payload-scripts");
+            return Redirect($"/show-payload-script/{cloneId}");
         }
-        catch (ConfirmationRequiredException)
+        catch (BlockedByExistingException)
         {
             ModelState.AddModelError(
-                nameof(CommandModel.Confirmed),
-                "Bekräfta att du verkligen vill ta bort.");
+                nameof(CommandModel.Name),
+                "Det finns ett skript med samma namn.");
 
             return Page();
         }

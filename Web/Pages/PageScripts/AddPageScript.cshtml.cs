@@ -1,6 +1,6 @@
 ﻿using Lefish.Application.Commands.PageScripts.AddPageScript;
 
-namespace Lefish.Web.Pages.PayloadScripts;
+namespace Lefish.Web.Pages.PageScripts;
 
 public class AddPageScriptModel(
     IUserToken userToken,

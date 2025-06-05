@@ -1,16 +1,16 @@
-ï»¿using Lefish.Application.Commands.PageScripts.EditPageScript;
+using Lefish.Application.Commands.PageScripts.RemovePageScript;
 
-namespace Lefish.Web.Pages.PayloadScripts;
+namespace Lefish.Web.Pages.PageScripts;
 
-public class EditPageScriptModel(
+public class RemovePageScriptModel(
     IUserToken userToken,
     IDatabaseService database,
-    IEditPageScriptCommand command) : UserTokenPageModel(userToken)
+    IRemovePageScriptCommand command) : UserTokenPageModel(userToken)
 {
     public PageScript PayloadScript { get; set; }
 
     [BindProperty]
-    public EditPageScriptCommandModel CommandModel { get; set; }
+    public RemovePageScriptCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -24,11 +24,9 @@ public class EditPageScriptModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new EditPageScriptCommandModel()
+            CommandModel = new RemovePageScriptCommandModel()
             {
                 PayloadScriptId = PayloadScript.Id,
-				Name = PayloadScript.Name,
-				Script = PayloadScript.Script,
             };
 
             return Page();
@@ -43,7 +41,7 @@ public class EditPageScriptModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync(int id)
+    public async Task<IActionResult> OnPostAsync()
     {
         try
         {
@@ -60,13 +58,13 @@ public class EditPageScriptModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-payload-script/{id}");
+            return Redirect($"/show-payload-scripts");
         }
-        catch (BlockedByExistingException)
+        catch (ConfirmationRequiredException)
         {
             ModelState.AddModelError(
-                nameof(CommandModel.Name),
-                "Det finns ett annat skript med samma namn.");
+                nameof(CommandModel.Confirmed),
+                "Bekräfta att du verkligen vill ta bort.");
 
             return Page();
         }

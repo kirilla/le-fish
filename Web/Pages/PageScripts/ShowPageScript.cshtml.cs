@@ -2,7 +2,7 @@
 using Lefish.Application.Commands.PageScripts.EditPageScript;
 using Lefish.Application.Commands.PageScripts.RemovePageScript;
 
-namespace Lefish.Web.Pages.PayloadScripts;
+namespace Lefish.Web.Pages.PageScripts;
 
 public class ShowPageScriptModel(
     IUserToken userToken,
