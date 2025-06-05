@@ -51,7 +51,7 @@ public class SendEmailToTargetModel(
 
             CommandModel = new SendEmailToTargetCommandModel()
             {
-                EmailTargetId = id,
+                TargetId = id,
             };
 
             if (EmailAccounts.Count == 1)

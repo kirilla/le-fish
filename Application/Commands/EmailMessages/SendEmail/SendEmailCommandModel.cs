@@ -5,7 +5,7 @@ namespace Lefish.Application.Commands.EmailMessages.SendEmail;
 public class SendEmailCommandModel
 {
     [Required]
-    public int? EmailTargetId { get; set; }
+    public int? TargetId { get; set; }
 
     [Required]
     public int? EmailTemplateId { get; set; }

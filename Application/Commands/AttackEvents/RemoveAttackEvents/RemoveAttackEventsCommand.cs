@@ -11,10 +11,10 @@ public class RemoveAttackEventsCommand(IDatabaseService database) : IRemoveAttac
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        if (model.EmailTargetId.HasValue)
+        if (model.TargetId.HasValue)
         {
             await database.AttackEvents
-                .Where(x => x.Attack.TargetId == model.EmailTargetId!.Value)
+                .Where(x => x.Attack.TargetId == model.TargetId!.Value)
                 .ExecuteDeleteAsync();
         }
         else

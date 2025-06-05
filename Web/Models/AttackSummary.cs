@@ -15,5 +15,5 @@ public class AttackSummary
     
     public int PayloadPageId { get; set; }
     public int PayloadScriptId { get; set; }
-    public int EmailTargetId { get; set; }
+    public int TargetId { get; set; }
 }

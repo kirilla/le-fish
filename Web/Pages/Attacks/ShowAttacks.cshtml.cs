@@ -25,7 +25,7 @@ public class ShowAttacksModel(
                     PayloadPageId = x.PayloadPageId,
                     TargetName = x.Target.Name,
                     TargetAddress = x.Target.Address,
-                    EmailTargetId = x.TargetId,
+                    TargetId = x.TargetId,
                 })
                 .ToListAsync();
 

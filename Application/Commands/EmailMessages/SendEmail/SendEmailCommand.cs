@@ -36,7 +36,7 @@ public class SendEmailCommand(
              throw new NotFoundException();
 
         var target = await database.Targets
-            .Where(x => x.Id == model.EmailTargetId!.Value)
+            .Where(x => x.Id == model.TargetId!.Value)
             .SingleOrDefaultAsync() ??
              throw new NotFoundException();
 

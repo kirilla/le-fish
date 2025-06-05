@@ -21,11 +21,11 @@
 
     <form method="post">
 
-        <label asp-for="CommandModel.EmailTargetId">
+        <label asp-for="CommandModel.TargetId">
             Mål
         </label>
 
-        <select asp-for="CommandModel.EmailTargetId">
+        <select asp-for="CommandModel.TargetId">
             <option value="">–</option>
             @foreach (var target in Model.EmailTargets)
             {

@@ -8,13 +8,13 @@ public class Attack : ICreatedDateTime
 
     public DateTime? Created { get; set; }
 
-    public int TargetId { get; set; }
     public int PayloadPageId { get; set; }
     public int PayloadScriptId { get; set; }
+    public int TargetId { get; set; }
 
-    public Target Target { get; set; }
     public PayloadPage PayloadPage { get; set; }
     public PayloadScript PayloadScript { get; set; }
+    public Target Target { get; set; }
 
     public List<AttackEvent> AttackEvents { get; set; }
     public List<DataResult> DataResults { get; set; }

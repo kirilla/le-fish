@@ -2,7 +2,7 @@
 
 public class RemoveAttackEventsCommandModel
 {
-    public int? EmailTargetId { get; set; }
+    public int? TargetId { get; set; }
 
     public bool Confirmed { get; set; }
 }
