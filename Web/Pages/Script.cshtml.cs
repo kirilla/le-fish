@@ -30,7 +30,7 @@ public class ScriptPageModel(
 
             PayloadScript = await database.PageScripts
                 .AsNoTracking()
-                .Where(x => x.Id == Attack.PayloadScriptId)
+                .Where(x => x.Id == Attack.PageScriptId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

@@ -9,7 +9,7 @@ public class Attack : ICreatedDateTime
     public DateTime? Created { get; set; }
 
     public int PayloadPageId { get; set; }
-    public int PayloadScriptId { get; set; }
+    public int PageScriptId { get; set; }
     public int TargetId { get; set; }
 
     public PayloadPage PayloadPage { get; set; }

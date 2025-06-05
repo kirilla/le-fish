@@ -34,7 +34,7 @@ public class ShowAttackModel(
                     TargetAddress = x.Target.Address,
                     TargetId = x.TargetId,
                     ScriptName = x.PayloadScript.Name,
-                    PayloadScriptId = x.PayloadScriptId,
+                    PayloadScriptId = x.PageScriptId,
                 })
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

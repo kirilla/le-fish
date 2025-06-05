@@ -57,7 +57,7 @@ public class SendEmailCommand(
         {
             TargetId = target.Id,
             PayloadPageId = page.Id,
-            PayloadScriptId = script.Id,
+            PageScriptId = script.Id,
             Value = Random.Shared.Next(),
         };
 

@@ -16,6 +16,6 @@ class PageScriptConfiguration : IEntityTypeConfiguration<PageScript>
 
         builder.HasMany(x => x.Attacks)
             .WithOne(x => x.PayloadScript)
-            .HasForeignKey(x => x.PayloadScriptId);
+            .HasForeignKey(x => x.PageScriptId);
     }
 }
