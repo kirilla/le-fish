@@ -1,0 +1,40 @@
+﻿@page "/add-instruction-set"
+@model AddInstructionSetModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ny samling -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Ny samling av instruktioner
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Skapa
+        </button>
+
+        <a class="button" href="/show-instruction-sets">
+            Avbryt
+        </a>
+    </form>
+
+</main>

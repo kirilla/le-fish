@@ -1,0 +1,43 @@
+﻿@page "/edit-instruction-set/{id:int}"
+@model EditInstructionSetModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera samling -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Redigera samlingen:
+        @(Model.InstructionSet.Name)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-instruction-set/@(Model.InstructionSet.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

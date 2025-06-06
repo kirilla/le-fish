@@ -1,0 +1,74 @@
+﻿@page "/show-instruction-set/{id:int}"
+@model ShowInstructionSetModel
+@{
+}
+
+@section Meta {
+    <title>Samling av instruktioner - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        ✴️
+        @(Model.InstructionSet.Name)
+    </h4>
+
+    <h5>
+        Instruktioner
+    </h5>
+    
+    <div class="notice">
+
+        <ul>
+            @foreach (var attachment in Model.Instructions)
+            {
+                <li>
+                    ❇️
+                    &thinsp;
+                    <a href="/show-instruction/@(attachment.Id)">
+                        @(attachment.Name)
+                    </a>
+                </li>
+            }
+
+            @if (!Model.Instructions.Any())
+            {
+                <li>
+                    ❇️
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    <p>
+        @if (Model.CanEditInstructionSet)
+        {
+            <a class="button" href="/edit-instruction-set/@(Model.InstructionSet.Id)">
+                Redigera
+            </a>
+        }
+
+        @if (Model.CanCloneInstructionSet)
+        {
+            <a class="button" href="/clone-instruction-set/@(Model.InstructionSet.Id)">
+                Klona
+            </a>
+        }
+
+        @if (Model.CanRemoveInstructionSet)
+        {
+            <a class="button" href="/remove-instruction-set/@(Model.InstructionSet.Id)">
+                Ta bort
+            </a>
+        }
+    </p>
+
+</main>

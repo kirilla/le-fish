@@ -19,6 +19,7 @@ public class DatabaseService(
     public DbSet<EmailMessage> EmailMessages { get; set; }
     public DbSet<EmailTemplate> EmailTemplates { get; set; }
     public DbSet<Instruction> Instructions { get; set; }
+    public DbSet<InstructionSet> InstructionSets { get; set; }
     public DbSet<IpRange> IpRanges { get; set; }
     public DbSet<PageScript> PageScripts { get; set; }
     public DbSet<Session> Sessions { get; set; }
@@ -42,6 +43,7 @@ public class DatabaseService(
         new EmailMessageConfiguration().Configure(builder.Entity<EmailMessage>());
         new EmailTemplateConfiguration().Configure(builder.Entity<EmailTemplate>());
         new InstructionConfiguration().Configure(builder.Entity<Instruction>());
+        new InstructionSetConfiguration().Configure(builder.Entity<InstructionSet>());
         new IpRangeConfiguration().Configure(builder.Entity<IpRange>());
         new PageScriptConfiguration().Configure(builder.Entity<PageScript>());
         new SessionConfiguration().Configure(builder.Entity<Session>());

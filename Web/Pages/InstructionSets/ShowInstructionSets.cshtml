@@ -1,0 +1,58 @@
+﻿@page "/show-instruction-sets"
+@model ShowInstructionSetsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Samlingar av instruktioner -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Samlingar av instruktioner
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var set in Model.InstructionSets)
+            {
+                <li>
+                    ✴️
+                    &thinsp;
+                    <a href="/show-instruction-set/@(set.Id)">
+                        @(set.Name)
+                    </a>
+                </li>
+            }
+
+            @if (!Model.InstructionSets.Any())
+            {
+                <li>
+                    ✴️
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    @if (Model.CanAddInstructionSet)
+    {
+        <p>
+            <a class="button" href="/add-instruction-set">
+                Ny samling
+            </a>
+        </p>
+    }
+
+</main>
