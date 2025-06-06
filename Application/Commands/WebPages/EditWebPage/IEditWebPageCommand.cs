@@ -1,4 +1,4 @@
-﻿namespace Lefish.Application.Commands.PayloadPages.EditWebPage;
+﻿namespace Lefish.Application.Commands.WebPages.EditWebPage;
 
 public interface IEditWebPageCommand
 {

@@ -1,4 +1,4 @@
-﻿namespace Lefish.Application.Commands.PayloadPages.EditWebPage;
+﻿namespace Lefish.Application.Commands.WebPages.EditWebPage;
 
 public class EditWebPageCommand(IDatabaseService database) : IEditWebPageCommand
 {
@@ -13,14 +13,14 @@ public class EditWebPageCommand(IDatabaseService database) : IEditWebPageCommand
         model.TruncateByStringLength();
 
         var page = await database.WebPages
-            .Where(x => x.Id == model.PayloadPageId)
+            .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
         if (await database.WebPages
             .AnyAsync(x =>
                 x.Name == model.Name &&
-                x.Id != model.PayloadPageId))
+                x.Id != model.Id))
             throw new BlockedByExistingException();
 
         page.Name = model.Name;

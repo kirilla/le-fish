@@ -1,4 +1,4 @@
-﻿namespace Lefish.Application.Commands.PayloadPages.RemovePayloadPage;
+﻿namespace Lefish.Application.Commands.WebPages.RemoveWebPage;
 
 public interface IRemoveWebPageCommand
 {

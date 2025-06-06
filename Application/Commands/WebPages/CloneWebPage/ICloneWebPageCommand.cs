@@ -1,4 +1,4 @@
-﻿namespace Lefish.Application.Commands.PayloadPages.CloneWebPage;
+﻿namespace Lefish.Application.Commands.WebPages.CloneWebPage;
 
 public interface ICloneWebPageCommand
 {

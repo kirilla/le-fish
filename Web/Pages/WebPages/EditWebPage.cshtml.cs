@@ -1,13 +1,13 @@
-﻿using Lefish.Application.Commands.PayloadPages.EditWebPage;
+﻿using Lefish.Application.Commands.WebPages.EditWebPage;
 
-namespace Lefish.Web.Pages.PayloadPages;
+namespace Lefish.Web.Pages.WebPages;
 
-public class EditPayloadPageModel(
+public class EditWebPageModel(
     IUserToken userToken,
     IDatabaseService database,
     IEditWebPageCommand command) : UserTokenPageModel(userToken)
 {
-    public WebPage PayloadPage { get; set; }
+    public WebPage WebPage { get; set; }
 
     [BindProperty]
     public EditWebPageCommandModel CommandModel { get; set; }
@@ -19,16 +19,16 @@ public class EditPayloadPageModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PayloadPage = await database.WebPages
+            WebPage = await database.WebPages
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             CommandModel = new EditWebPageCommandModel()
             {
-                PayloadPageId = PayloadPage.Id,
-				Name = PayloadPage.Name,
-				Html = PayloadPage.Html,
+                Id = WebPage.Id,
+				Name = WebPage.Name,
+				Html = WebPage.Html,
             };
 
             return Page();
@@ -50,8 +50,8 @@ public class EditPayloadPageModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PayloadPage = await database.WebPages
-                .Where(x => x.Id == CommandModel.PayloadPageId)
+            WebPage = await database.WebPages
+                .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

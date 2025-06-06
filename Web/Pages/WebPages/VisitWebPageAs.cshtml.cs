@@ -1,10 +1,10 @@
-﻿namespace Lefish.Web.Pages.PayloadPages;
+﻿namespace Lefish.Web.Pages.WebPages;
 
-public class VisitPayloadPageAsModel(
+public class VisitWebPageAsModel(
     IUserToken userToken,
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
-    public WebPage PayloadPage { get; set; }
+    public WebPage WebPage { get; set; }
 
     public List<AttackSummary> Attacks { get; set; }
 
@@ -15,13 +15,13 @@ public class VisitPayloadPageAsModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PayloadPage = await database.WebPages
+            WebPage = await database.WebPages
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             Attacks = await database.Attacks
-                .Where(x => x.PayloadPageId == id)
+                .Where(x => x.WebPageId == id)
                 .OrderBy(x => x.Target.Name)
                 .ThenBy(x => x.Value)
                 .Select(x => new AttackSummary()

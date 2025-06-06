@@ -1,4 +1,4 @@
-﻿namespace Lefish.Application.Commands.PayloadPages.AddWebPage;
+﻿namespace Lefish.Application.Commands.WebPages.AddWebPage;
 
 public class AddWebPageCommand(IDatabaseService database) : IAddWebPageCommand
 {

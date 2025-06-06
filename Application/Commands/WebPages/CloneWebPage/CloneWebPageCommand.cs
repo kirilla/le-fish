@@ -1,4 +1,4 @@
-﻿namespace Lefish.Application.Commands.PayloadPages.CloneWebPage;
+﻿namespace Lefish.Application.Commands.WebPages.CloneWebPage;
 
 public class CloneWebPageCommand(IDatabaseService database) : ICloneWebPageCommand
 {
@@ -13,7 +13,7 @@ public class CloneWebPageCommand(IDatabaseService database) : ICloneWebPageComma
 
         var page = await database.WebPages
             .AsNoTracking()
-            .Where(x => x.Id == model.PayloadPageId)
+            .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 

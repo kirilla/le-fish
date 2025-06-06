@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Lefish.Application.Commands.PayloadPages.AddWebPage;
+namespace Lefish.Application.Commands.WebPages.AddWebPage;
 
 public class AddWebPageCommandModel
 {

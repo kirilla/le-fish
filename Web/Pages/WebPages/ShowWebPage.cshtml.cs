@@ -1,29 +1,29 @@
-﻿using Lefish.Application.Commands.PayloadPages.CloneWebPage;
-using Lefish.Application.Commands.PayloadPages.EditWebPage;
-using Lefish.Application.Commands.PayloadPages.RemovePayloadPage;
+﻿using Lefish.Application.Commands.WebPages.CloneWebPage;
+using Lefish.Application.Commands.WebPages.EditWebPage;
+using Lefish.Application.Commands.WebPages.RemoveWebPage;
 
-namespace Lefish.Web.Pages.PayloadPages;
+namespace Lefish.Web.Pages.WebPages;
 
-public class ShowPayloadPageModel(
+public class ShowWebPageModel(
     IUserToken userToken,
     IDatabaseService database,
-    ICloneWebPageCommand clonePayloadPageCommand,
-    IEditWebPageCommand editPayloadPageCommand,
-    IRemoveWebPageCommand removePayloadPageCommand,
+    ICloneWebPageCommand cloneWebPageCommand,
+    IEditWebPageCommand editWebPageCommand,
+    IRemoveWebPageCommand removeWebPageCommand,
     IOptions<TemplateConfiguration> templateConfiguration) : UserTokenPageModel(userToken)
 {
     public readonly TemplateConfiguration Config = templateConfiguration.Value;
 
-    public WebPage PayloadPage { get; set; }
+    public WebPage WebPage { get; set; }
 
-    public bool CanClonePayloadPage { get; set; }
-        = clonePayloadPageCommand.IsPermitted(userToken);
+    public bool CanCloneWebPage { get; set; }
+        = cloneWebPageCommand.IsPermitted(userToken);
 
-    public bool CanEditPayloadPage { get; set; }
-        = editPayloadPageCommand.IsPermitted(userToken);
+    public bool CanEditWebPage { get; set; }
+        = editWebPageCommand.IsPermitted(userToken);
 
-    public bool CanRemovePayloadPage { get; set; }
-        = removePayloadPageCommand.IsPermitted(userToken);
+    public bool CanRemoveWebPage { get; set; }
+        = removeWebPageCommand.IsPermitted(userToken);
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -32,7 +32,7 @@ public class ShowPayloadPageModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PayloadPage = await database.WebPages
+            WebPage = await database.WebPages
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

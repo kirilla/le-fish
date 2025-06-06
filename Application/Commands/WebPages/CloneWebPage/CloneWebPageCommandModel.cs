@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Lefish.Application.Commands.PayloadPages.CloneWebPage;
+namespace Lefish.Application.Commands.WebPages.CloneWebPage;
 
 public class CloneWebPageCommandModel
 {
-    public int PayloadPageId { get; set; }
+    public int Id { get; set; }
 
     [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Ange namn.")]

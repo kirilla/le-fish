@@ -1,13 +1,13 @@
-using Lefish.Application.Commands.PayloadPages.RemovePayloadPage;
+using Lefish.Application.Commands.WebPages.RemoveWebPage;
 
-namespace Lefish.Web.Pages.PayloadPages;
+namespace Lefish.Web.Pages.WebPages;
 
-public class RemovePayloadPageModel(
+public class RemoveWebPageModel(
     IUserToken userToken,
     IDatabaseService database,
     IRemoveWebPageCommand command) : UserTokenPageModel(userToken)
 {
-    public WebPage PayloadPage { get; set; }
+    public WebPage WebPage { get; set; }
 
     [BindProperty]
     public RemoveWebPageCommandModel CommandModel { get; set; }
@@ -19,14 +19,14 @@ public class RemovePayloadPageModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PayloadPage = await database.WebPages
+            WebPage = await database.WebPages
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             CommandModel = new RemoveWebPageCommandModel()
             {
-                PayloadPageId = PayloadPage.Id,
+                Id = WebPage.Id,
             };
 
             return Page();
@@ -48,8 +48,8 @@ public class RemovePayloadPageModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PayloadPage = await database.WebPages
-                .Where(x => x.Id == CommandModel.PayloadPageId)
+            WebPage = await database.WebPages
+                .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

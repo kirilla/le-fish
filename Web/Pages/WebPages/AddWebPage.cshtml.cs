@@ -1,8 +1,8 @@
-﻿using Lefish.Application.Commands.PayloadPages.AddWebPage;
+﻿using Lefish.Application.Commands.WebPages.AddWebPage;
 
-namespace Lefish.Web.Pages.PayloadPages;
+namespace Lefish.Web.Pages.WebPages;
 
-public class AddPayloadPageModel(
+public class AddWebPageModel(
     IUserToken userToken,
     IDatabaseService database,
     IAddWebPageCommand command) : UserTokenPageModel(userToken)

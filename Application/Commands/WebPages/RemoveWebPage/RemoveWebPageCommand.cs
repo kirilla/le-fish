@@ -1,4 +1,4 @@
-﻿namespace Lefish.Application.Commands.PayloadPages.RemovePayloadPage;
+﻿namespace Lefish.Application.Commands.WebPages.RemoveWebPage;
 
 public class RemoveWebPageCommand(IDatabaseService database) : IRemoveWebPageCommand
 {
@@ -12,7 +12,7 @@ public class RemoveWebPageCommand(IDatabaseService database) : IRemoveWebPageCom
             throw new ConfirmationRequiredException();
 
         var page = await database.WebPages
-            .Where(x => x.Id == model.PayloadPageId)
+            .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 

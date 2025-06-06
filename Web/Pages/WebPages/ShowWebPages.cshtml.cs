@@ -1,16 +1,16 @@
-using Lefish.Application.Commands.PayloadPages.AddWebPage;
+using Lefish.Application.Commands.WebPages.AddWebPage;
 
-namespace Lefish.Web.Pages.PayloadPages;
+namespace Lefish.Web.Pages.WebPages;
 
-public class ShowPayloadPagesModel(
+public class ShowWebPagesModel(
     IUserToken userToken,
     IDatabaseService database,
-    IAddWebPageCommand addPayloadPageCommand) : UserTokenPageModel(userToken)
+    IAddWebPageCommand addWebPageCommand) : UserTokenPageModel(userToken)
 {
-    public List<WebPage> PayloadPages { get; set; }
+    public List<WebPage> WebPages { get; set; }
 
-    public bool CanAddPayloadPage { get; set; }
-        = addPayloadPageCommand.IsPermitted(userToken);
+    public bool CanAddWebPage { get; set; }
+        = addWebPageCommand.IsPermitted(userToken);
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -19,7 +19,7 @@ public class ShowPayloadPagesModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PayloadPages = await database.WebPages
+            WebPages = await database.WebPages
                 .AsNoTracking()
                 .OrderBy(x => x.Name)
                 .ToListAsync();

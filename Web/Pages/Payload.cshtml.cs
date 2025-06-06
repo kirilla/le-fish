@@ -27,7 +27,7 @@ public class PayloadPageModel(
 
             var payloadPage = await database.WebPages
                 .AsNoTracking()
-                .Where(x => x.Id == attack.PayloadPageId)
+                .Where(x => x.Id == attack.WebPageId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

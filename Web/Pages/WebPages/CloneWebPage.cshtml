@@ -1,5 +1,5 @@
 ﻿@page "/clone-payload-page/{id:int}"
-@model ClonePayloadPageModel
+@model CloneWebPageModel
 @{
 }
 
@@ -17,12 +17,12 @@
 <main>
     <h4>
         Klona sidan:
-        @(Model.PayloadPage.Name)
+        @(Model.WebPage.Name)
     </h4>
 
     <form method="post">
 
-        <input type="hidden" asp-for="CommandModel.PayloadPageId" />
+        <input type="hidden" asp-for="CommandModel.Id" />
 
         <label asp-for="CommandModel.Name">
             Namn
@@ -35,7 +35,7 @@
             Klona
         </button>
 
-        <a class="button" href="/show-payload-page/@(Model.PayloadPage.Id)">
+        <a class="button" href="/show-payload-page/@(Model.WebPage.Id)">
             Avbryt
         </a>
     </form>

@@ -1,8 +1,8 @@
-﻿namespace Lefish.Application.Commands.PayloadPages.RemovePayloadPage;
+﻿namespace Lefish.Application.Commands.WebPages.RemoveWebPage;
 
 public class RemoveWebPageCommandModel
 {
-    public int PayloadPageId { get; set; }
+    public int Id { get; set; }
 
     public bool Confirmed { get; set; }
 }

@@ -1,5 +1,5 @@
 ﻿@page "/show-payload-pages"
-@model ShowPayloadPagesModel
+@model ShowWebPagesModel
 @{
 }
 
@@ -23,7 +23,7 @@
     <div class="notice">
 
         <ul>
-            @foreach (var page in Model.PayloadPages)
+            @foreach (var page in Model.WebPages)
             {
                 <li>
                     📄
@@ -32,7 +32,7 @@
                 </li>
             }
 
-            @if (!Model.PayloadPages.Any())
+            @if (!Model.WebPages.Any())
             {
                 <li>
                     📄
@@ -44,7 +44,7 @@
 
     </div>
 
-    @if (Model.CanAddPayloadPage)
+    @if (Model.CanAddWebPage)
     {
         <p>
             <a class="button" href="/add-payload-page">

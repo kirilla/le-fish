@@ -1,5 +1,5 @@
 ﻿@page "/show-payload-page/{id:int}"
-@model ShowPayloadPageModel
+@model ShowWebPageModel
 @{
 }
 
@@ -15,14 +15,14 @@
 
     <h4>
         📄 Sida: 
-        @(Model.PayloadPage.Name)
+        @(Model.WebPage.Name)
     </h4>
 
     <h5>
         URL
     </h5>
     <p class="notice">
-        <a href="/visit-payload-page-as/@(Model.PayloadPage.Id)">
+        <a href="/visit-payload-page-as/@(Model.WebPage.Id)">
             @(Model.Config.PageUrl ?? "Missing config, see appsettings.json")
         </a>
     </p>
@@ -30,26 +30,26 @@
     <h5>
         HTML
     </h5>
-    <pre class="notice">@(Model.PayloadPage.Html)</pre>
+    <pre class="notice">@(Model.WebPage.Html)</pre>
 
     <p>
-        @if (Model.CanClonePayloadPage)
+        @if (Model.CanCloneWebPage)
         {
-            <a class="button" href="/clone-payload-page/@(Model.PayloadPage.Id)">
+            <a class="button" href="/clone-payload-page/@(Model.WebPage.Id)">
                 Klona
             </a>
         }
 
-        @if (Model.CanEditPayloadPage)
+        @if (Model.CanEditWebPage)
         {
-            <a class="button" href="/edit-payload-page/@(Model.PayloadPage.Id)">
+            <a class="button" href="/edit-payload-page/@(Model.WebPage.Id)">
                 Redigera
             </a>
         }
 
-        @if (Model.CanRemovePayloadPage)
+        @if (Model.CanRemoveWebPage)
         {
-            <a class="button" href="/remove-payload-page/@(Model.PayloadPage.Id)">
+            <a class="button" href="/remove-payload-page/@(Model.WebPage.Id)">
                 Ta bort
             </a>
         }

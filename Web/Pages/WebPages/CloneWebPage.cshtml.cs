@@ -1,13 +1,13 @@
-﻿using Lefish.Application.Commands.PayloadPages.CloneWebPage;
+﻿using Lefish.Application.Commands.WebPages.CloneWebPage;
 
-namespace Lefish.Web.Pages.PayloadPages;
+namespace Lefish.Web.Pages.WebPages;
 
-public class ClonePayloadPageModel(
+public class CloneWebPageModel(
     IUserToken userToken,
     IDatabaseService database,
     ICloneWebPageCommand command) : UserTokenPageModel(userToken)
 {
-    public WebPage PayloadPage { get; set; }
+    public WebPage WebPage { get; set; }
 
     [BindProperty]
     public CloneWebPageCommandModel CommandModel { get; set; }
@@ -19,15 +19,15 @@ public class ClonePayloadPageModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PayloadPage = await database.WebPages
+            WebPage = await database.WebPages
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             CommandModel = new CloneWebPageCommandModel()
             {
-                PayloadPageId = PayloadPage.Id,
-                Name = PayloadPage.Name,
+                Id = WebPage.Id,
+                Name = WebPage.Name,
             };
 
             return Page();
@@ -49,8 +49,8 @@ public class ClonePayloadPageModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PayloadPage = await database.WebPages
-                .Where(x => x.Id == CommandModel.PayloadPageId)
+            WebPage = await database.WebPages
+                .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

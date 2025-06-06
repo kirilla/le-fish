@@ -15,7 +15,7 @@ class WebPageConfiguration : IEntityTypeConfiguration<WebPage>
             .HasMaxLength(MaxLengths.Domain.PayloadPage.Html);
 
         builder.HasMany(x => x.Attacks)
-            .WithOne(x => x.PayloadPage)
-            .HasForeignKey(x => x.PayloadPageId);
+            .WithOne(x => x.WebPage)
+            .HasForeignKey(x => x.WebPageId);
     }
 }
