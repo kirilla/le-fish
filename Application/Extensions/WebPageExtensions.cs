@@ -2,7 +2,7 @@
 
 namespace Lefish.Application.Extensions;
 
-public static class PayloadPageExtensions
+public static class WebPageExtensions
 {
     public static string ReplaceVariables(
         this WebPage page,

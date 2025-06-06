@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Web.Models;
 
-public class SimplePayloadPage
+public class WebPageSummary
 {
     public int Id { get; set; }
 
