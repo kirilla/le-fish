@@ -1,5 +1,5 @@
-﻿using Lefish.Application.Commands.PayloadPages.ClonePayloadPage;
-using Lefish.Application.Commands.PayloadPages.EditPayloadPage;
+﻿using Lefish.Application.Commands.PayloadPages.CloneWebPage;
+using Lefish.Application.Commands.PayloadPages.EditWebPage;
 using Lefish.Application.Commands.PayloadPages.RemovePayloadPage;
 
 namespace Lefish.Web.Pages.PayloadPages;
@@ -7,9 +7,9 @@ namespace Lefish.Web.Pages.PayloadPages;
 public class ShowPayloadPageModel(
     IUserToken userToken,
     IDatabaseService database,
-    IClonePayloadPageCommand clonePayloadPageCommand,
-    IEditPayloadPageCommand editPayloadPageCommand,
-    IRemovePayloadPageCommand removePayloadPageCommand,
+    ICloneWebPageCommand clonePayloadPageCommand,
+    IEditWebPageCommand editPayloadPageCommand,
+    IRemoveWebPageCommand removePayloadPageCommand,
     IOptions<TemplateConfiguration> templateConfiguration) : UserTokenPageModel(userToken)
 {
     public readonly TemplateConfiguration Config = templateConfiguration.Value;

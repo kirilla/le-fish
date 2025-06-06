@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Lefish.Application.Commands.PayloadPages.ClonePayloadPage;
+namespace Lefish.Application.Commands.PayloadPages.CloneWebPage;
 
-public class ClonePayloadPageCommandModel
+public class CloneWebPageCommandModel
 {
     public int PayloadPageId { get; set; }
 

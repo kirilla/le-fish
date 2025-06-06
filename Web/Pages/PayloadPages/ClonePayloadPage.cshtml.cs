@@ -1,16 +1,16 @@
-﻿using Lefish.Application.Commands.PayloadPages.ClonePayloadPage;
+﻿using Lefish.Application.Commands.PayloadPages.CloneWebPage;
 
 namespace Lefish.Web.Pages.PayloadPages;
 
 public class ClonePayloadPageModel(
     IUserToken userToken,
     IDatabaseService database,
-    IClonePayloadPageCommand command) : UserTokenPageModel(userToken)
+    ICloneWebPageCommand command) : UserTokenPageModel(userToken)
 {
     public WebPage PayloadPage { get; set; }
 
     [BindProperty]
-    public ClonePayloadPageCommandModel CommandModel { get; set; }
+    public CloneWebPageCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -24,7 +24,7 @@ public class ClonePayloadPageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new ClonePayloadPageCommandModel()
+            CommandModel = new CloneWebPageCommandModel()
             {
                 PayloadPageId = PayloadPage.Id,
                 Name = PayloadPage.Name,

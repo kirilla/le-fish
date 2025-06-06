@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Lefish.Application.Commands.PayloadPages.AddPayloadPage;
+namespace Lefish.Application.Commands.PayloadPages.EditWebPage;
 
-public class AddPayloadPageCommandModel
+public class EditWebPageCommandModel
 {
+    public int PayloadPageId { get; set; }
+
     [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Ange namn.")]
     [StringLength(

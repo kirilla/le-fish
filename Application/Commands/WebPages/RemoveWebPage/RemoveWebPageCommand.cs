@@ -1,9 +1,9 @@
 ﻿namespace Lefish.Application.Commands.PayloadPages.RemovePayloadPage;
 
-public class RemovePayloadPageCommand(IDatabaseService database) : IRemovePayloadPageCommand
+public class RemoveWebPageCommand(IDatabaseService database) : IRemoveWebPageCommand
 {
     public async Task Execute(
-        IUserToken userToken, RemovePayloadPageCommandModel model)
+        IUserToken userToken, RemoveWebPageCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();

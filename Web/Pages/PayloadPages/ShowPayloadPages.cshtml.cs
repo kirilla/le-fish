@@ -1,11 +1,11 @@
-using Lefish.Application.Commands.PayloadPages.AddPayloadPage;
+using Lefish.Application.Commands.PayloadPages.AddWebPage;
 
 namespace Lefish.Web.Pages.PayloadPages;
 
 public class ShowPayloadPagesModel(
     IUserToken userToken,
     IDatabaseService database,
-    IAddPayloadPageCommand addPayloadPageCommand) : UserTokenPageModel(userToken)
+    IAddWebPageCommand addPayloadPageCommand) : UserTokenPageModel(userToken)
 {
     public List<WebPage> PayloadPages { get; set; }
 

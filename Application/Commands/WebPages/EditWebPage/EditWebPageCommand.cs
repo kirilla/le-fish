@@ -1,37 +1,32 @@
-﻿namespace Lefish.Application.Commands.PayloadPages.ClonePayloadPage;
+﻿namespace Lefish.Application.Commands.PayloadPages.EditWebPage;
 
-public class ClonePayloadPageCommand(IDatabaseService database) : IClonePayloadPageCommand
+public class EditWebPageCommand(IDatabaseService database) : IEditWebPageCommand
 {
-    public async Task<int> Execute(
-        IUserToken userToken, ClonePayloadPageCommandModel model)
+    public async Task Execute(
+        IUserToken userToken, EditWebPageCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
 
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
+        model.TruncateByStringLength();
 
         var page = await database.WebPages
-            .AsNoTracking()
             .Where(x => x.Id == model.PayloadPageId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
         if (await database.WebPages
-            .AnyAsync(x => x.Name == model.Name))
+            .AnyAsync(x =>
+                x.Name == model.Name &&
+                x.Id != model.PayloadPageId))
             throw new BlockedByExistingException();
 
-        var newPage = new WebPage()
-        {
-            Name = model.Name,
-            Html = page.Html,
-        };
-
-        database.WebPages.Add(newPage);
+        page.Name = model.Name;
+        page.Html = model.Html;
 
         await database.SaveAsync(userToken);
-
-        return newPage.Id;
     }
 
     public bool IsPermitted(IUserToken userToken)

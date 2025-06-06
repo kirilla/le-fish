@@ -1,16 +1,16 @@
-﻿using Lefish.Application.Commands.PayloadPages.EditPayloadPage;
+﻿using Lefish.Application.Commands.PayloadPages.EditWebPage;
 
 namespace Lefish.Web.Pages.PayloadPages;
 
 public class EditPayloadPageModel(
     IUserToken userToken,
     IDatabaseService database,
-    IEditPayloadPageCommand command) : UserTokenPageModel(userToken)
+    IEditWebPageCommand command) : UserTokenPageModel(userToken)
 {
     public WebPage PayloadPage { get; set; }
 
     [BindProperty]
-    public EditPayloadPageCommandModel CommandModel { get; set; }
+    public EditWebPageCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -24,7 +24,7 @@ public class EditPayloadPageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new EditPayloadPageCommandModel()
+            CommandModel = new EditWebPageCommandModel()
             {
                 PayloadPageId = PayloadPage.Id,
 				Name = PayloadPage.Name,

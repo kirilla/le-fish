@@ -1,14 +1,14 @@
-﻿using Lefish.Application.Commands.PayloadPages.AddPayloadPage;
+﻿using Lefish.Application.Commands.PayloadPages.AddWebPage;
 
 namespace Lefish.Web.Pages.PayloadPages;
 
 public class AddPayloadPageModel(
     IUserToken userToken,
     IDatabaseService database,
-    IAddPayloadPageCommand command) : UserTokenPageModel(userToken)
+    IAddWebPageCommand command) : UserTokenPageModel(userToken)
 {
     [BindProperty]
-    public AddPayloadPageCommandModel CommandModel { get; set; }
+    public AddWebPageCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -17,7 +17,7 @@ public class AddPayloadPageModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            CommandModel = new AddPayloadPageCommandModel()
+            CommandModel = new AddWebPageCommandModel()
             {
                 Name = "Förslag",
                 Html = GetDefaultTemplate(),

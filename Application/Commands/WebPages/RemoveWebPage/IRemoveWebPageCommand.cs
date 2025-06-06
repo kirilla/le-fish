@@ -1,8 +1,8 @@
 ﻿namespace Lefish.Application.Commands.PayloadPages.RemovePayloadPage;
 
-public interface IRemovePayloadPageCommand
+public interface IRemoveWebPageCommand
 {
-    Task Execute(IUserToken userToken, RemovePayloadPageCommandModel model);
+    Task Execute(IUserToken userToken, RemoveWebPageCommandModel model);
 
     bool IsPermitted(IUserToken userToken);
 }

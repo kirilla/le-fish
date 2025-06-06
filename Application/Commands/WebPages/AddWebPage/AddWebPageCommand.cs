@@ -1,9 +1,9 @@
-﻿namespace Lefish.Application.Commands.PayloadPages.AddPayloadPage;
+﻿namespace Lefish.Application.Commands.PayloadPages.AddWebPage;
 
-public class AddPayloadPageCommand(IDatabaseService database) : IAddPayloadPageCommand
+public class AddWebPageCommand(IDatabaseService database) : IAddWebPageCommand
 {
     public async Task<int> Execute(
-        IUserToken userToken, AddPayloadPageCommandModel model)
+        IUserToken userToken, AddWebPageCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();

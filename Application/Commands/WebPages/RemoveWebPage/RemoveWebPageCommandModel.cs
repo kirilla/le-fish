@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Application.Commands.PayloadPages.RemovePayloadPage;
 
-public class RemovePayloadPageCommandModel
+public class RemoveWebPageCommandModel
 {
     public int PayloadPageId { get; set; }
 

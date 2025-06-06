@@ -5,12 +5,12 @@ namespace Lefish.Web.Pages.PayloadPages;
 public class RemovePayloadPageModel(
     IUserToken userToken,
     IDatabaseService database,
-    IRemovePayloadPageCommand command) : UserTokenPageModel(userToken)
+    IRemoveWebPageCommand command) : UserTokenPageModel(userToken)
 {
     public WebPage PayloadPage { get; set; }
 
     [BindProperty]
-    public RemovePayloadPageCommandModel CommandModel { get; set; }
+    public RemoveWebPageCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -24,7 +24,7 @@ public class RemovePayloadPageModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new RemovePayloadPageCommandModel()
+            CommandModel = new RemoveWebPageCommandModel()
             {
                 PayloadPageId = PayloadPage.Id,
             };
