@@ -1,5 +1,4 @@
 ﻿using Lefish.Application.Commands.DataResults.UploadDataResult;
-using Lefish.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
 
@@ -7,7 +6,7 @@ namespace Lefish.Web.Pages;
 
 [IgnoreAntiforgeryToken]
 [AllowAnonymous]
-public class UploadPageModel(
+public class UploadDataResultModel(
     IUserToken userToken,
     IDatabaseService database,
     IUploadDataResultCommand command) : UserTokenPageModel(userToken)
