@@ -12,7 +12,7 @@ public class Attack : ICreatedDateTime
     public int PageScriptId { get; set; }
     public int TargetId { get; set; }
 
-    public PayloadPage PayloadPage { get; set; }
+    public WebPage PayloadPage { get; set; }
     public PageScript PageScript { get; set; }
     public Target Target { get; set; }
 

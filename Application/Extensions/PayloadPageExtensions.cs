@@ -5,7 +5,7 @@ namespace Lefish.Application.Extensions;
 public static class PayloadPageExtensions
 {
     public static string ReplaceVariables(
-        this PayloadPage page,
+        this WebPage page,
         TemplateConfiguration templateConfiguration,
         Target target, 
         Attack attack)

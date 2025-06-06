@@ -7,7 +7,7 @@ public class RemovePayloadPageModel(
     IDatabaseService database,
     IRemovePayloadPageCommand command) : UserTokenPageModel(userToken)
 {
-    public PayloadPage PayloadPage { get; set; }
+    public WebPage PayloadPage { get; set; }
 
     [BindProperty]
     public RemovePayloadPageCommandModel CommandModel { get; set; }

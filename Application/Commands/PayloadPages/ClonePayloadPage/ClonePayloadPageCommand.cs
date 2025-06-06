@@ -21,7 +21,7 @@ public class ClonePayloadPageCommand(IDatabaseService database) : IClonePayloadP
             .AnyAsync(x => x.Name == model.Name))
             throw new BlockedByExistingException();
 
-        var newPage = new PayloadPage()
+        var newPage = new WebPage()
         {
             Name = model.Name,
             Html = page.Html,

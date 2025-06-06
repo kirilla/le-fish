@@ -1,8 +1,8 @@
 ﻿namespace Lefish.Persistence.Configuration;
 
-class PayloadPageConfiguration : IEntityTypeConfiguration<PayloadPage>
+class WebPageConfiguration : IEntityTypeConfiguration<WebPage>
 {
-    public void Configure(EntityTypeBuilder<PayloadPage> builder)
+    public void Configure(EntityTypeBuilder<WebPage> builder)
     {
         builder.HasKey(p => p.Id);
 

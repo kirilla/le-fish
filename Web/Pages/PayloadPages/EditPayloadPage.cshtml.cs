@@ -7,7 +7,7 @@ public class EditPayloadPageModel(
     IDatabaseService database,
     IEditPayloadPageCommand command) : UserTokenPageModel(userToken)
 {
-    public PayloadPage PayloadPage { get; set; }
+    public WebPage PayloadPage { get; set; }
 
     [BindProperty]
     public EditPayloadPageCommandModel CommandModel { get; set; }

@@ -21,7 +21,7 @@ public interface IDatabaseService
     DbSet<TargetInstruction> TargetInstructions { get; set; }
     DbSet<User> Users { get; set; }
     DbSet<UserEmail> UserEmails { get; set; }
-    DbSet<PayloadPage> WebPages { get; set; }
+    DbSet<WebPage> WebPages { get; set; }
 
     Task SaveAsync(IUserToken userToken);
 

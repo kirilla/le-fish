@@ -4,7 +4,7 @@ public class VisitPayloadPageAsModel(
     IUserToken userToken,
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
-    public PayloadPage PayloadPage { get; set; }
+    public WebPage PayloadPage { get; set; }
 
     public List<AttackSummary> Attacks { get; set; }
 

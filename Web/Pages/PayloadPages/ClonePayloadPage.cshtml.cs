@@ -7,7 +7,7 @@ public class ClonePayloadPageModel(
     IDatabaseService database,
     IClonePayloadPageCommand command) : UserTokenPageModel(userToken)
 {
-    public PayloadPage PayloadPage { get; set; }
+    public WebPage PayloadPage { get; set; }
 
     [BindProperty]
     public ClonePayloadPageCommandModel CommandModel { get; set; }

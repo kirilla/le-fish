@@ -16,7 +16,7 @@ public class AddPayloadPageCommand(IDatabaseService database) : IAddPayloadPageC
             .AnyAsync(x => x.Name == model.Name))
             throw new BlockedByExistingException();
 
-        var page = new PayloadPage()
+        var page = new WebPage()
         {
             Name = model.Name,
             Html = model.Html,

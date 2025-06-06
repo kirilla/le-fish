@@ -7,7 +7,7 @@ public class ShowPayloadPagesModel(
     IDatabaseService database,
     IAddPayloadPageCommand addPayloadPageCommand) : UserTokenPageModel(userToken)
 {
-    public List<PayloadPage> PayloadPages { get; set; }
+    public List<WebPage> PayloadPages { get; set; }
 
     public bool CanAddPayloadPage { get; set; }
         = addPayloadPageCommand.IsPermitted(userToken);

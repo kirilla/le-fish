@@ -1,7 +1,7 @@
 ﻿
 namespace Lefish.Domain.Entities;
 
-public class PayloadPage : ICreatedDateTime
+public class WebPage : ICreatedDateTime
 {
     public int Id { get; set; }
 

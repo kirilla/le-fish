@@ -14,7 +14,7 @@ public class ShowPayloadPageModel(
 {
     public readonly TemplateConfiguration Config = templateConfiguration.Value;
 
-    public PayloadPage PayloadPage { get; set; }
+    public WebPage PayloadPage { get; set; }
 
     public bool CanClonePayloadPage { get; set; }
         = clonePayloadPageCommand.IsPermitted(userToken);
