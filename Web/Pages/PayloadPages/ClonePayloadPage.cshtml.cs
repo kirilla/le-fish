@@ -19,7 +19,7 @@ public class ClonePayloadPageModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PayloadPage = await database.PayloadPages
+            PayloadPage = await database.WebPages
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -49,7 +49,7 @@ public class ClonePayloadPageModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            PayloadPage = await database.PayloadPages
+            PayloadPage = await database.WebPages
                 .Where(x => x.Id == CommandModel.PayloadPageId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

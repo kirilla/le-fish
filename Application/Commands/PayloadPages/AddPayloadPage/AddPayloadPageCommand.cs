@@ -12,7 +12,7 @@ public class AddPayloadPageCommand(IDatabaseService database) : IAddPayloadPageC
         model.SetEmptyStringsToNull();
         model.TruncateByStringLength();
 
-        if (await database.PayloadPages
+        if (await database.WebPages
             .AnyAsync(x => x.Name == model.Name))
             throw new BlockedByExistingException();
 
@@ -22,7 +22,7 @@ public class AddPayloadPageCommand(IDatabaseService database) : IAddPayloadPageC
             Html = model.Html,
         };
 
-        database.PayloadPages.Add(page);
+        database.WebPages.Add(page);
 
         await database.SaveAsync(userToken);
 

@@ -12,12 +12,12 @@ public class EditPayloadPageCommand(IDatabaseService database) : IEditPayloadPag
         model.SetEmptyStringsToNull();
         model.TruncateByStringLength();
 
-        var page = await database.PayloadPages
+        var page = await database.WebPages
             .Where(x => x.Id == model.PayloadPageId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        if (await database.PayloadPages
+        if (await database.WebPages
             .AnyAsync(x =>
                 x.Name == model.Name &&
                 x.Id != model.PayloadPageId))

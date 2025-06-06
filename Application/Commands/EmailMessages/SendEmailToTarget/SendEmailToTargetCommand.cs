@@ -25,7 +25,7 @@ public class SendEmailToTargetCommand(
             .SingleOrDefaultAsync() ??
              throw new NotFoundException();
 
-        var page = await database.PayloadPages
+        var page = await database.WebPages
             .Where(x => x.Id == model.PayloadPageId!.Value)
             .SingleOrDefaultAsync() ??
              throw new NotFoundException();

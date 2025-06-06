@@ -15,14 +15,14 @@ public interface IDatabaseService
     DbSet<EmailTemplate> EmailTemplates { get; set; }
     DbSet<Instruction> Instructions { get; set; }
     DbSet<IpRange> IpRanges { get; set; }
-    DbSet<PayloadPage> PayloadPages { get; set; }
     DbSet<PageScript> PageScripts { get; set; }
     DbSet<Session> Sessions { get; set; }
     DbSet<Target> Targets { get; set; }
     DbSet<TargetInstruction> TargetInstructions { get; set; }
     DbSet<User> Users { get; set; }
     DbSet<UserEmail> UserEmails { get; set; }
-    
+    DbSet<PayloadPage> WebPages { get; set; }
+
     Task SaveAsync(IUserToken userToken);
 
     ChangeTracker ChangeTracker { get; }

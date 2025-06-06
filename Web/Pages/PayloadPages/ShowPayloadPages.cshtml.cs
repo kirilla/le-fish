@@ -19,7 +19,7 @@ public class ShowPayloadPagesModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PayloadPages = await database.PayloadPages
+            PayloadPages = await database.WebPages
                 .AsNoTracking()
                 .OrderBy(x => x.Name)
                 .ToListAsync();

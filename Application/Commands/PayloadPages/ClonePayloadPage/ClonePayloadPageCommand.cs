@@ -11,13 +11,13 @@ public class ClonePayloadPageCommand(IDatabaseService database) : IClonePayloadP
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        var page = await database.PayloadPages
+        var page = await database.WebPages
             .AsNoTracking()
             .Where(x => x.Id == model.PayloadPageId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        if (await database.PayloadPages
+        if (await database.WebPages
             .AnyAsync(x => x.Name == model.Name))
             throw new BlockedByExistingException();
 
@@ -27,7 +27,7 @@ public class ClonePayloadPageCommand(IDatabaseService database) : IClonePayloadP
             Html = page.Html,
         };
 
-        database.PayloadPages.Add(newPage);
+        database.WebPages.Add(newPage);
 
         await database.SaveAsync(userToken);
 

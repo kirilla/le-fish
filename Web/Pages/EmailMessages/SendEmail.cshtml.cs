@@ -28,7 +28,7 @@ public class SendEmailModel(
             Targets = await database.Targets.ToListAsync();
             EmailTemplates = await database.EmailTemplates.ToListAsync();
 
-            PayloadPages = await database.PayloadPages
+            PayloadPages = await database.WebPages
                 .Select(x => new SimplePayloadPage()
                 {
                     Id = x.Id,
@@ -74,7 +74,7 @@ public class SendEmailModel(
             Targets = await database.Targets.ToListAsync();
             EmailTemplates = await database.EmailTemplates.ToListAsync();
 
-            PayloadPages = await database.PayloadPages
+            PayloadPages = await database.WebPages
                 .Select(x => new SimplePayloadPage()
                 {
                     Id = x.Id,

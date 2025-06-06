@@ -32,7 +32,7 @@ public class ShowPayloadPageModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            PayloadPage = await database.PayloadPages
+            PayloadPage = await database.WebPages
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

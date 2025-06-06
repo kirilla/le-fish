@@ -11,12 +11,12 @@ public class RemovePayloadPageCommand(IDatabaseService database) : IRemovePayloa
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var page = await database.PayloadPages
+        var page = await database.WebPages
             .Where(x => x.Id == model.PayloadPageId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.PayloadPages.Remove(page);
+        database.WebPages.Remove(page);
 
         await database.SaveAsync(userToken);
     }
