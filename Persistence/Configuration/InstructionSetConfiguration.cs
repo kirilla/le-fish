@@ -10,8 +10,8 @@ class InstructionSetConfiguration : IEntityTypeConfiguration<InstructionSet>
             .IsRequired()
             .HasMaxLength(MaxLengths.Domain.InstructionSet.Name);
 
-        //builder.HasMany(x => x.Instructions)
-        //    .WithOne(x => x.InstructionSet)
-        //    .HasForeignKey(x => x.InstructionSetId);
+        builder.HasMany(x => x.Instructions)
+            .WithOne(x => x.InstructionSet)
+            .HasForeignKey(x => x.InstructionSetId);
     }
 }

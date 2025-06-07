@@ -6,5 +6,5 @@ public class InstructionSet
 
     public string Name { get; set; }
 
-    //public List<Instruction> Instructions { get; set; }
+    public List<Instruction> Instructions { get; set; }
 }
