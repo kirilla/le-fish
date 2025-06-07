@@ -7,20 +7,28 @@ public class AddInstructionModel(
     IDatabaseService database,
     IAddInstructionCommand command) : UserTokenPageModel(userToken)
 {
+    public InstructionSet InstructionSet { get; set; }
+
     [BindProperty]
     public AddInstructionCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync()
+    public async Task<IActionResult> OnGetAsync(int id)
     {
         try
         {
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
+            InstructionSet = await database.InstructionSets
+                .Where(x => x.Id == id)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
             CommandModel = new AddInstructionCommandModel()
             {
                 Name = "Instruktion A",
                 Script = GetDefaultTemplate(),
+                InstructionSetId = id,
             };
 
             return Page();
@@ -31,27 +39,24 @@ public class AddInstructionModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(int id)
     {
         try
         {
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
+            InstructionSet = await database.InstructionSets
+                .Where(x => x.Id == id)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
             if (!ModelState.IsValid)
                 return Page();
 
-            var id = await command.Execute(UserToken, CommandModel);
+            await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-instruction/{id}");
-        }
-        catch (BlockedByExistingException)
-        {
-            ModelState.AddModelError(
-                nameof(CommandModel.Name),
-                "Det finns ett annat skript med samma namn.");
-
-            return Page();
+            return Redirect($"/show-instruction-set/{InstructionSet.Id}");
         }
         catch
         {
@@ -64,7 +69,7 @@ public class AddInstructionModel(
         return """
             (function() { 
                 alert('Instruktion A'); 
-            })()
+            })();
             """;
     }
 }

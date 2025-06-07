@@ -16,7 +16,7 @@
 
 <main>
     <h4>
-        Klona samlingen:
+        ✴️
         @(Model.InstructionSet.Name)
     </h4>
 
@@ -25,14 +25,14 @@
         <input type="hidden" asp-for="CommandModel.Id" />
 
         <label asp-for="CommandModel.Name">
-            Namn
+            Namn på den nya samlingen
         </label>
         <input asp-for="CommandModel.Name" />
 
         <div asp-validation-summary="All"></div>
 
         <button type="submit">
-            Klona
+            Skapa
         </button>
 
         <a class="button" href="/show-instruction-set/@(Model.InstructionSet.Id)">

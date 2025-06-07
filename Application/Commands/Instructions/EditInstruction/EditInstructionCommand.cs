@@ -17,12 +17,6 @@ public class EditInstructionCommand(IDatabaseService database) : IEditInstructio
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        if (await database.Instructions
-            .AnyAsync(x =>
-                x.Name == model.Name &&
-                x.Id != model.InstructionId))
-            throw new BlockedByExistingException();
-
         page.Name = model.Name;
         page.Script = model.Script;
 

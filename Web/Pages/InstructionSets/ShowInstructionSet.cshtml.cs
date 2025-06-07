@@ -1,4 +1,5 @@
-﻿using Lefish.Application.Commands.InstructionSets.CloneInstructionSet;
+﻿using Lefish.Application.Commands.Instructions.AddInstruction;
+using Lefish.Application.Commands.InstructionSets.CloneInstructionSet;
 using Lefish.Application.Commands.InstructionSets.EditInstructionSet;
 using Lefish.Application.Commands.InstructionSets.RemoveInstructionSet;
 
@@ -7,6 +8,7 @@ namespace Lefish.Web.Pages.InstructionSets;
 public class ShowInstructionSetModel(
     IUserToken userToken,
     IDatabaseService database,
+    IAddInstructionCommand addInstructionCommand,
     ICloneInstructionSetCommand cloneInstructionSetCommand,
     IEditInstructionSetCommand editInstructionSetCommand,
     IRemoveInstructionSetCommand removeInstructionSetCommand) : UserTokenPageModel(userToken)
@@ -14,6 +16,9 @@ public class ShowInstructionSetModel(
     public InstructionSet InstructionSet { get; set; }
 
     public List<Instruction> Instructions { get; set; } = new List<Instruction>();
+
+    public bool CanAddInstruction { get; set; }
+        = addInstructionCommand.IsPermitted(userToken);
 
     public bool CanCloneInstructionSet { get; set; }
         = cloneInstructionSetCommand.IsPermitted(userToken);
@@ -36,9 +41,9 @@ public class ShowInstructionSetModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            //Instructions = await database.Instructions
-            //    .Where(x => x.InstructionSetId == id)
-            //    .ToListAsync();
+            Instructions = await database.Instructions
+                .Where(x => x.InstructionSetId == id)
+                .ToListAsync();
 
             return Page();
         }

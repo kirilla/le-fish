@@ -23,7 +23,6 @@
     </h5>
     
     <div class="notice">
-
         <ul>
             @foreach (var attachment in Model.Instructions)
             {
@@ -46,9 +45,19 @@
             }
         </ul>
 
+        @if (Model.CanAddInstruction)
+        {
+            <p>
+                <a class="button" href="/add-instruction/@(Model.InstructionSet.Id)">
+                    Ny instruktion
+                </a>
+            </p>
+        }
     </div>
 
     <p>
+        
+
         @if (Model.CanEditInstructionSet)
         {
             <a class="button" href="/edit-instruction-set/@(Model.InstructionSet.Id)">

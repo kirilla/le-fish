@@ -16,9 +16,19 @@
 
 <main>
     <h4>
-        Ta bort instruktionen:
+        ✴️
+        <a href="/show-instruction-set/@(Model.InstructionSet.Id)">
+            @(Model.InstructionSet.Name)
+        </a>
+        <br />
+        &thinsp;
+        ❇️
         @(Model.Instruction.Name)
     </h4>
+
+    <h5>
+        Vill du ta bort instruktionen?
+    </h5>
 
     <form method="post">
 

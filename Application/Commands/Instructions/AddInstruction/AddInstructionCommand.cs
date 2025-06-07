@@ -12,14 +12,16 @@ public class AddInstructionCommand(IDatabaseService database) : IAddInstructionC
         model.SetEmptyStringsToNull();
         model.TruncateByStringLength();
 
-        if (await database.Instructions
-            .AnyAsync(x => x.Name == model.Name))
-            throw new BlockedByExistingException();
+        var set = await database.InstructionSets
+            .Where(x => x.Id == model.InstructionSetId)
+            .SingleOrDefaultAsync() ??
+            throw new NotFoundException();
 
         var page = new Instruction()
         {
             Name = model.Name,
             Script = model.Script,
+            InstructionSetId = set.Id,
         };
 
         database.Instructions.Add(page);

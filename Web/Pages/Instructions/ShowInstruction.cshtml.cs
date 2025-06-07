@@ -1,5 +1,4 @@
-﻿using Lefish.Application.Commands.Instructions.CloneInstruction;
-using Lefish.Application.Commands.Instructions.EditInstruction;
+﻿using Lefish.Application.Commands.Instructions.EditInstruction;
 using Lefish.Application.Commands.Instructions.RemoveInstruction;
 
 namespace Lefish.Web.Pages.Instructions;
@@ -7,7 +6,6 @@ namespace Lefish.Web.Pages.Instructions;
 public class ShowInstructionModel(
     IUserToken userToken,
     IDatabaseService database,
-    ICloneInstructionCommand cloneInstructionCommand,
     IEditInstructionCommand editInstructionCommand,
     IRemoveInstructionCommand removeInstructionCommand,
     IOptions<TemplateConfiguration> templateConfiguration) : UserTokenPageModel(userToken)
@@ -15,9 +13,7 @@ public class ShowInstructionModel(
     public readonly TemplateConfiguration Config = templateConfiguration.Value;
 
     public Instruction Instruction { get; set; }
-
-    public bool CanCloneInstruction { get; set; }
-        = cloneInstructionCommand.IsPermitted(userToken);
+    public InstructionSet InstructionSet { get; set; }
 
     public bool CanEditInstruction { get; set; }
         = editInstructionCommand.IsPermitted(userToken);
@@ -34,6 +30,11 @@ public class ShowInstructionModel(
 
             Instruction = await database.Instructions
                 .Where(x => x.Id == id)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            InstructionSet = await database.InstructionSets
+                .Where(x => x.Id == Instruction.InstructionSetId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

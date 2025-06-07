@@ -8,6 +8,7 @@ public class RemoveInstructionModel(
     IRemoveInstructionCommand command) : UserTokenPageModel(userToken)
 {
     public Instruction Instruction { get; set; }
+    public InstructionSet InstructionSet { get; set; }
 
     [BindProperty]
     public RemoveInstructionCommandModel CommandModel { get; set; }
@@ -21,6 +22,11 @@ public class RemoveInstructionModel(
 
             Instruction = await database.Instructions
                 .Where(x => x.Id == id)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            InstructionSet = await database.InstructionSets
+                .Where(x => x.Id == Instruction.InstructionSetId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -53,12 +59,17 @@ public class RemoveInstructionModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
+            InstructionSet = await database.InstructionSets
+                .Where(x => x.Id == Instruction.InstructionSetId)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
             if (!ModelState.IsValid)
                 return Page();
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-instructions");
+            return Redirect($"/show-instruction-set/{InstructionSet.Id}");
         }
         catch (ConfirmationRequiredException)
         {

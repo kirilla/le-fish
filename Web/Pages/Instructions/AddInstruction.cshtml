@@ -1,4 +1,4 @@
-﻿@page "/add-instruction"
+﻿@page "/add-instruction/{id:int}"
 @model AddInstructionModel
 @{
 }
@@ -16,10 +16,18 @@
 
 <main>
     <h4>
-        Lägg till en instruktion
+        ✴️
+        <a href="/show-instruction-set/@(Model.InstructionSet.Id)">
+            @(Model.InstructionSet.Name)</a>
+        <br />
+        &thinsp;
+        ❇️
+        Ny instruktion
     </h4>
 
     <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.InstructionSetId" />
 
         <label asp-for="CommandModel.Name">
             Namn
@@ -34,10 +42,10 @@
         <div asp-validation-summary="All"></div>
 
         <button type="submit">
-            Lägg till
+            Spara
         </button>
 
-        <a class="button" href="/show-instructions">
+        <a class="button" href="/show-instruction-set/@(Model.InstructionSet.Id)">
             Avbryt
         </a>
     </form>

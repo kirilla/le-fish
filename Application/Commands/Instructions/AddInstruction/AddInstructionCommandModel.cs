@@ -4,6 +4,8 @@ namespace Lefish.Application.Commands.Instructions.AddInstruction;
 
 public class AddInstructionCommandModel
 {
+    public int InstructionSetId { get; set; }
+
     [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Ange namn.")]
     [StringLength(
