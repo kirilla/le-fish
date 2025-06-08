@@ -1,4 +1,4 @@
-﻿@page "/show-payload-scripts"
+﻿@page "/show-page-scripts"
 @model ShowPageScriptsModel
 @{
 }
@@ -28,7 +28,7 @@
                 <li>
                     📜
                     &thinsp;
-                    <a href="/show-payload-script/@(page.Id)">@(page.Name)</a>
+                    <a href="/show-page-script/@(page.Id)">@(page.Name)</a>
                 </li>
             }
 
@@ -47,7 +47,7 @@
     @if (Model.CanAddPageScript)
     {
         <p>
-            <a class="button" href="/add-payload-script">
+            <a class="button" href="/add-page-script">
                 Lägg till ett skript
             </a>
         </p>

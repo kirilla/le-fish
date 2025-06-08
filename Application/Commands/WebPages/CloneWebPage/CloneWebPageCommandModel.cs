@@ -9,7 +9,7 @@ public class CloneWebPageCommandModel
     [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Ange namn.")]
     [StringLength(
-        MaxLengths.Domain.PayloadPage.Name,
+        MaxLengths.Domain.WebPage.Name,
         ErrorMessage = "Skriv kortare.")]
     public string Name { get; set; }
 }

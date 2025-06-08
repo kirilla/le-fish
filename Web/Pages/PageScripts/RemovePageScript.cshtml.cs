@@ -58,7 +58,7 @@ public class RemovePageScriptModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-payload-scripts");
+            return Redirect($"/show-page-scripts");
         }
         catch (ConfirmationRequiredException)
         {

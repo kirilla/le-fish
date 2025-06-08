@@ -123,13 +123,6 @@ public static class MaxLengths
             public const int Name = 50;
         }
 
-        public static class PayloadPage
-        {
-            public const int Name = 50;
-
-            public const int Html = Common.DbSuperSize;
-        }
-
         public static class PageScript
         {
             public const int Name = 50;
@@ -148,6 +141,13 @@ public static class MaxLengths
             public const int Name = 50;
 
             public const int Script = Common.DbSuperSize;
+        }
+
+        public static class WebPage
+        {
+            public const int Name = 50;
+
+            public const int Html = Common.DbSuperSize;
         }
     }
 }

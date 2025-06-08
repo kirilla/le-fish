@@ -8,11 +8,11 @@ class WebPageConfiguration : IEntityTypeConfiguration<WebPage>
 
         builder.Property(p => p.Name)
             .IsRequired()
-            .HasMaxLength(MaxLengths.Domain.PayloadPage.Name);
+            .HasMaxLength(MaxLengths.Domain.WebPage.Name);
 
         builder.Property(p => p.Html)
             .IsRequired()
-            .HasMaxLength(MaxLengths.Domain.PayloadPage.Html);
+            .HasMaxLength(MaxLengths.Domain.WebPage.Html);
 
         builder.HasMany(x => x.Attacks)
             .WithOne(x => x.WebPage)

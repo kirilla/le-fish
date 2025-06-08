@@ -1,4 +1,4 @@
-﻿@page "/show-payload-script/{id:int}"
+﻿@page "/show-page-script/{id:int}"
 @model ShowPageScriptModel
 @{
 }
@@ -33,21 +33,21 @@
     <p>
         @if (Model.CanClonePageScript)
         {
-            <a class="button" href="/clone-payload-script/@(Model.PageScript.Id)">
+            <a class="button" href="/clone-page-script/@(Model.PageScript.Id)">
                 Klona
             </a>
         }
 
         @if (Model.CanEditPageScript)
         {
-            <a class="button" href="/edit-payload-script/@(Model.PageScript.Id)">
+            <a class="button" href="/edit-page-script/@(Model.PageScript.Id)">
                 Redigera
             </a>
         }
 
         @if (Model.CanRemovePageScript)
         {
-            <a class="button" href="/remove-payload-script/@(Model.PageScript.Id)">
+            <a class="button" href="/remove-page-script/@(Model.PageScript.Id)">
                 Ta bort
             </a>
         }

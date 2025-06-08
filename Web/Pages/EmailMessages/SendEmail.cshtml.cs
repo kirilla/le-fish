@@ -11,7 +11,7 @@ public class SendEmailModel(
     public List<Target> Targets { get; set; }
     public List<EmailTemplate> EmailTemplates { get; set; }
 
-    public List<WebPageSummary> PayloadPages { get; set; }
+    public List<WebPageSummary> WebPages { get; set; }
     public List<PageScriptSummary> PageScripts { get; set; }
 
     [BindProperty]
@@ -28,7 +28,7 @@ public class SendEmailModel(
             Targets = await database.Targets.ToListAsync();
             EmailTemplates = await database.EmailTemplates.ToListAsync();
 
-            PayloadPages = await database.WebPages
+            WebPages = await database.WebPages
                 .Select(x => new WebPageSummary()
                 {
                     Id = x.Id,
@@ -74,7 +74,7 @@ public class SendEmailModel(
             Targets = await database.Targets.ToListAsync();
             EmailTemplates = await database.EmailTemplates.ToListAsync();
 
-            PayloadPages = await database.WebPages
+            WebPages = await database.WebPages
                 .Select(x => new WebPageSummary()
                 {
                     Id = x.Id,

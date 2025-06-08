@@ -69,7 +69,7 @@
 
         <select asp-for="CommandModel.WebPageId">
             <option value="">–</option>
-            @foreach (var page in Model.PayloadPages)
+            @foreach (var page in Model.WebPages)
             {
                 <option value="@(page.Id)">
                     @(page.Name)

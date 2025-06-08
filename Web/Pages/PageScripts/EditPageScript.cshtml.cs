@@ -60,7 +60,7 @@ public class EditPageScriptModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-payload-script/{id}");
+            return Redirect($"/show-page-script/{id}");
         }
         catch (BlockedByExistingException)
         {
