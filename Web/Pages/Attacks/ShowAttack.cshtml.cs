@@ -15,6 +15,8 @@ public class ShowAttackModel(
     public List<string> IpAddresses { get; set; }
     public List<string> UserAgents { get; set; }
 
+
+    public int AttackEventCount { get; set; }
     public async Task<IActionResult> OnGetAsync(int id)
     {
         try
@@ -69,6 +71,10 @@ public class ShowAttackModel(
                     Sent = x.Sent,
                 })
                 .ToListAsync();
+
+            AttackEventCount = await database.AttackEvents
+                .Where(x => x.AttackId == id)
+                .CountAsync();
 
             AttackEvents = await database.AttackEvents
                 .Where(x => x.AttackId == id)
