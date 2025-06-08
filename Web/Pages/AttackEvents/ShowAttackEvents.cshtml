@@ -1,4 +1,4 @@
-﻿@page "/show-attack-events"
+﻿@page "/show-attack-events/{id:int}"
 @model ShowAttackEventsModel
 @{
 }
@@ -17,42 +17,57 @@
 <main>
 
     <h4>
-        Sidbesök
+        🎯
+        <a href="/show-target/@(Model.Target.Id)">@(Model.Target.Name)</a>
+        <br />
+        🔥
+        <a href="/show-attack/@(Model.Attack.Id)">@(Model.Attack.Value)</a>
+        <br />
+        🛎️
+        Händelser
     </h4>
 
-    <div class="notice">
+    <ul class="notice">
+        @if (Model.AttackEventKindSummary.Total == 0)
+        {
+            <li>
+                Inga
+            </li>
+        }
+        else
+        {
+            <li>
+                📄
+                &thinsp;
+                @(Model.AttackEventKindSummary.PageVisitCount)
+                sidbesök
+            </li>
+            <li>
+                📜
+                &thinsp;
+                @(Model.AttackEventKindSummary.ScriptDownloadCount)
+                hämtade sidskript
+            </li>
+            <li>
+                ❇️
+                &thinsp;
+                @(Model.AttackEventKindSummary.FetchInstructionCount)
+                hämtade instruktioner
+            </li>
+            <li>
+                🧺
+                &thinsp;
+                @(Model.AttackEventKindSummary.UploadDataCount)
+                avlämnade data
+            </li>
+        }
+    </ul>
 
-        <ul>
-            @foreach (var evt in Model.AttackEvents)
-            {
-                <li>
-                    🛎️
-                    &thinsp;
-                    <a href="/show-attack-event/@(evt.Id)">
-                        @(evt.TargetAddress)
-                        &thinsp;
-                        @(evt.PageName)
-                        &thinsp;
-                        @(evt.Created.ToFixedFormatDateShortTime())
-                    </a>
-                </li>
-            }
 
-            @if (!Model.AttackEvents.Any())
-            {
-                <li>
-                    🛎️
-                    &thinsp;
-                    &ndash;
-                </li>
-            }
-        </ul>
-
-    </div>
 
     <p>
-        <a class="button" href="/remove-attack-events">
-            Ta bort sidbesök
+        <a class="button" href="/remove-attack-events/@(Model.Attack.Id)">
+            Ta bort händelser
         </a>
     </p>
 

@@ -1,11 +1,11 @@
-﻿@page "/remove-attack-events"
+﻿@page "/remove-attack-events/{id:int}"
 @model RemoveAttackEventsModel
 @{
 }
 
 @section Meta {
     <title>
-        Ta bort sidbesök -
+        Ta bort händelser -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -15,29 +15,22 @@
 }
 
 <main>
+
     <h4>
-        Ta bort sidbesök
+        🎯
+        <a href="/show-target/@(Model.Target.Id)">@(Model.Target.Name)</a>
+        <br />
+        🔥
+        <a href="/show-attack/@(Model.Attack.Id)">@(Model.Attack.Value)</a>
     </h4>
+
+    <h5>
+        Ta bort händelser
+    </h5>
 
     <form method="post">
 
-        <label asp-for="CommandModel.TargetId">
-            Mål
-        </label>
-
-        <select asp-for="CommandModel.TargetId">
-            <option value="">–</option>
-            @foreach (var target in Model.Targets)
-            {
-                <option value="@(target.Id)">
-                    @(target.Name), @(target.Address)
-                </option>
-            }
-        </select>
-
-        <p>
-            Lämna tomt för att ta bort alla.
-        </p>
+        <input type="hidden" asp-for="CommandModel.AttackId" />
 
         <p>
             <label asp-for="CommandModel.Confirmed">
@@ -52,7 +45,7 @@
             Ta bort
         </button>
 
-        <a class="button" href="/show-attack-events">
+        <a class="button" href="/show-attack-events/@(Model.Attack.Id)">
             Avbryt
         </a>
 

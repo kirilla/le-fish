@@ -7,23 +7,33 @@ public class RemoveAttackEventsModel(
     IDatabaseService database,
     IRemoveAttackEventsCommand command) : UserTokenPageModel(userToken)
 {
+    public Attack Attack { get; set; }
+    public Target Target { get; set; }
+
     [BindProperty]
     public RemoveAttackEventsCommandModel CommandModel { get; set; }
 
-    public List<Target> Targets { get; set; }
-
-    public async Task<IActionResult> OnGetAsync()
+    public async Task<IActionResult> OnGetAsync(int id)
     {
         try
         {
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            Targets = await database.Targets
-                .OrderBy(x => x.Address)
-                .ToListAsync();
+            Attack = await database.Attacks
+                .Where(x => x.Id == id)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
 
-            CommandModel = new RemoveAttackEventsCommandModel();
+            Target = await database.Targets
+                .Where(x => x.Id == Attack.TargetId)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            CommandModel = new RemoveAttackEventsCommandModel()
+            {
+                AttackId = Attack.Id,
+            };
 
             return Page();
         }
@@ -37,29 +47,35 @@ public class RemoveAttackEventsModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(int id)
     {
         try
         {
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            Targets = await database.Targets
-                .OrderBy(x => x.Address)
-                .ToListAsync();
+            Attack = await database.Attacks
+                .Where(x => x.Id == id)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            Target = await database.Targets
+                .Where(x => x.Id == Attack.TargetId)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
 
             if (!ModelState.IsValid)
                 return Page();
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect("/show-attack-events");
+            return Redirect($"/show-attack-events/{Attack.Id}");
         }
         catch (ConfirmationRequiredException)
         {
             ModelState.AddModelError(
                 nameof(CommandModel.Confirmed),
-                "Bekräfta att du verkligen vill ta bort.");
+                "Bekräfta att du vill ta bort händelserna.");
 
             return Page();
         }
