@@ -42,7 +42,7 @@
             @foreach (var attack in Model.Attacks
                .Where(x => x.TargetId == target.Id))
             {
-                <div style="padding-left:1.5em;">
+                <div style="padding-left:0.6em;">
                     🔥
                     &thinsp;
                     <a href="/show-attack/@(attack.Id)">@(attack.Value)</a>
