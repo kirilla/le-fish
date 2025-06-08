@@ -9,11 +9,8 @@ public class ShowWebPageModel(
     IDatabaseService database,
     ICloneWebPageCommand cloneWebPageCommand,
     IEditWebPageCommand editWebPageCommand,
-    IRemoveWebPageCommand removeWebPageCommand,
-    IOptions<TemplateConfiguration> templateConfiguration) : UserTokenPageModel(userToken)
+    IRemoveWebPageCommand removeWebPageCommand) : UserTokenPageModel(userToken)
 {
-    public readonly TemplateConfiguration Config = templateConfiguration.Value;
-
     public WebPage WebPage { get; set; }
 
     public bool CanCloneWebPage { get; set; }
