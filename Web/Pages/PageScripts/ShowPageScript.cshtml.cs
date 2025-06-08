@@ -9,11 +9,8 @@ public class ShowPageScriptModel(
     IDatabaseService database,
     IClonePageScriptCommand clonePageScriptCommand,
     IEditPageScriptCommand editPageScriptCommand,
-    IRemovePageScriptCommand removePageScriptCommand,
-    IOptions<TemplateConfiguration> templateConfiguration) : UserTokenPageModel(userToken)
+    IRemovePageScriptCommand removePageScriptCommand) : UserTokenPageModel(userToken)
 {
-    public readonly TemplateConfiguration Config = templateConfiguration.Value;
-
     public PageScript PageScript { get; set; }
 
     public bool CanClonePageScript { get; set; }
