@@ -5,6 +5,7 @@ public class ShowAttackModel(
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
     public AttackSummary Attack { get; set; }
+    public Target Target { get; set; }
 
     public List<DataResult> DataResults { get; set; }
     public List<EmailHeader> EmailHeaders { get; set; }
@@ -36,6 +37,11 @@ public class ShowAttackModel(
                     ScriptName = x.PageScript.Name,
                     PageScriptId = x.PageScriptId,
                 })
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            Target = await database.Targets
+                .Where(x => x.Id == Attack.TargetId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
