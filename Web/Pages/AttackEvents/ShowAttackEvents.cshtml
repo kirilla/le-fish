@@ -63,7 +63,103 @@
         }
     </ul>
 
+    <h5>
+        Händelser
+    </h5>
 
+    <figure>
+        <table>
+            <tr>
+                <th></th>
+                <th>Tid</th>
+                <th>IP-nummer</th>
+                <th>UserAgent</th>
+            </tr>
+            @foreach (var evt in Model.AttackEvents)
+            {
+                <tr>
+                    <td>
+                        @if (evt.AttackEventKind == AttackEventKind.PageVisit)
+                        {
+                            <span>📄</span>
+                        }
+                        @if (evt.AttackEventKind == AttackEventKind.ScriptDownload)
+                        {
+                            <span>📜</span>
+                        }
+                        @if (evt.AttackEventKind == AttackEventKind.FetchInstruction)
+                        {
+                            <span>❇️</span>
+                        }
+                        @if (evt.AttackEventKind == AttackEventKind.UploadData)
+                        {
+                            <span>🧺</span>
+                        }
+                    </td>
+                    <td>
+                        <a href="/show-attack-event/@(evt.Id)">
+                            @(evt.Created.ToFixedFormatDateShortTime())
+                        </a>
+                    </td>
+                    <td>
+                        @(evt.IpAddress)
+                    </td>
+                    <td>
+                        @(evt.UserAgent)
+                    </td>
+                </tr>
+            }
+            @if (!Model.AttackEvents.Any())
+            {
+                <tr>
+                    <td colspan="3">
+                        Inga
+                    </td>
+                </tr>
+            }
+        </table>
+    </figure>
+
+    <br />
+
+    
+    <h5>
+        Agent
+    </h5>
+
+    <ul class="notice">
+        @foreach (var agent in Model.UserAgents)
+        {
+            <li>
+                @(agent)
+            </li>
+        }
+        @if (!Model.UserAgents.Any())
+        {
+            <li>
+                Inga
+            </li>
+        }
+    </ul>
+
+    <h5>
+        IP-nummer
+    </h5>
+
+    <ul class="notice">
+        @foreach (var address in Model.IpAddresses)
+        {
+            <li>
+                @(address)
+            </li>
+        }
+        @if (!Model.IpAddresses.Any())
+        {
+            <li>
+                Inga
+            </li>
+        }
+    </ul>
 
     <p>
         <a class="button" href="/remove-attack-events/@(Model.Attack.Id)">

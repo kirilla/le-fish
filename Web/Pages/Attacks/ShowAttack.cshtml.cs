@@ -10,13 +10,9 @@ public class ShowAttackModel(
     public List<DataResult> DataResults { get; set; }
     public List<EmailHeader> EmailHeaders { get; set; }
     public List<TargetInstructionSummary> TargetInstructions { get; set; }
-    public List<AttackEvent> AttackEvents { get; set; }
-
-    public List<string> IpAddresses { get; set; }
-    public List<string> UserAgents { get; set; }
-
 
     public int AttackEventCount { get; set; }
+
     public async Task<IActionResult> OnGetAsync(int id)
     {
         try
@@ -76,11 +72,6 @@ public class ShowAttackModel(
                 .Where(x => x.AttackId == id)
                 .CountAsync();
 
-            AttackEvents = await database.AttackEvents
-                .Where(x => x.AttackId == id)
-                .OrderBy(x => x.Created)
-                .ToListAsync();
-
             TargetInstructions = await database.TargetInstructions
                 .Where(x => x.AttackId == id)
                 .OrderBy(x => x.Created)
@@ -94,20 +85,6 @@ public class ShowAttackModel(
                     InstructionStatus = x.InstructionStatus,
                 })
                 .ToListAsync();
-
-            IpAddresses = AttackEvents
-                .Select(x => x.IpAddress)
-                .Where(x => x != null)
-                .Cast<string>()
-                .Distinct()
-                .ToList();
-
-            UserAgents = AttackEvents
-                .Select(x => x.UserAgent)
-                .Where(x => x != null)
-                .Cast<string>()
-                .Distinct()
-                .ToList();
 
             return Page();
         }
