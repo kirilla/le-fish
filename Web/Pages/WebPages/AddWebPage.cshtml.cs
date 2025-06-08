@@ -43,7 +43,7 @@ public class AddWebPageModel(
 
             var id = await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-payload-page/{id}");
+            return Redirect($"/show-web-page/{id}");
         }
         catch (BlockedByExistingException)
         {

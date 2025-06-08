@@ -14,7 +14,7 @@ public class SendEmailCommandModel
     public int? EmailAccountId { get; set; }
 
     [Required]
-    public int? PayloadPageId { get; set; }
+    public int? WebPageId { get; set; }
 
     [Required]
     public int? PageScriptId { get; set; }

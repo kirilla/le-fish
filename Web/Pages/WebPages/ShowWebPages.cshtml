@@ -1,4 +1,4 @@
-﻿@page "/show-payload-pages"
+﻿@page "/show-web-pages"
 @model ShowWebPagesModel
 @{
 }
@@ -28,7 +28,7 @@
                 <li>
                     📄
                     &thinsp;
-                    <a href="/show-payload-page/@(page.Id)">@(page.Name)</a>
+                    <a href="/show-web-page/@(page.Id)">@(page.Name)</a>
                 </li>
             }
 
@@ -47,7 +47,7 @@
     @if (Model.CanAddWebPage)
     {
         <p>
-            <a class="button" href="/add-payload-page">
+            <a class="button" href="/add-web-page">
                 Lägg till en sida
             </a>
         </p>

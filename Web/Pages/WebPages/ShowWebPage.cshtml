@@ -1,4 +1,4 @@
-﻿@page "/show-payload-page/{id:int}"
+﻿@page "/show-web-page/{id:int}"
 @model ShowWebPageModel
 @{
 }
@@ -26,21 +26,21 @@
     <p>
         @if (Model.CanCloneWebPage)
         {
-            <a class="button" href="/clone-payload-page/@(Model.WebPage.Id)">
+            <a class="button" href="/clone-web-page/@(Model.WebPage.Id)">
                 Klona
             </a>
         }
 
         @if (Model.CanEditWebPage)
         {
-            <a class="button" href="/edit-payload-page/@(Model.WebPage.Id)">
+            <a class="button" href="/edit-web-page/@(Model.WebPage.Id)">
                 Redigera
             </a>
         }
 
         @if (Model.CanRemoveWebPage)
         {
-            <a class="button" href="/remove-payload-page/@(Model.WebPage.Id)">
+            <a class="button" href="/remove-web-page/@(Model.WebPage.Id)">
                 Ta bort
             </a>
         }

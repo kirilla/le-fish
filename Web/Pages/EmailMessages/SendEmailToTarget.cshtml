@@ -53,11 +53,11 @@
             }
         </select>
 
-        <label asp-for="CommandModel.PayloadPageId">
+        <label asp-for="CommandModel.WebPageId">
             Länk till sida
         </label>
 
-        <select asp-for="CommandModel.PayloadPageId">
+        <select asp-for="CommandModel.WebPageId">
             <option value="">–</option>
             @foreach (var page in Model.PayloadPages)
             {

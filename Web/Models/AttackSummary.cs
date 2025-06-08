@@ -13,7 +13,7 @@ public class AttackSummary
     public string TargetName { get; set; }
     public string TargetAddress { get; set; }
     
-    public int PayloadPageId { get; set; }
+    public int WebPageId { get; set; }
     public int PageScriptId { get; set; }
     public int TargetId { get; set; }
 }

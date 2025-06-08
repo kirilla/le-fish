@@ -29,7 +29,7 @@ public class ShowAttackEventModel(
                     IpAddress = x.IpAddress,
                     UserAgent = x.UserAgent,
                     PageName = x.Attack.WebPage.Name,
-                    PayloadPageId = x.Attack.WebPageId,
+                    WebPageId = x.Attack.WebPageId,
                     TargetName = x.Attack.Target.Name,
                     TargetAddress = x.Attack.Target.Address,
                     TargetId = x.Attack.TargetId,

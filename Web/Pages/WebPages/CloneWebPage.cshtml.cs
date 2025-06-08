@@ -59,7 +59,7 @@ public class CloneWebPageModel(
 
             var cloneId = await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-payload-page/{cloneId}");
+            return Redirect($"/show-web-page/{cloneId}");
         }
         catch (BlockedByExistingException)
         {

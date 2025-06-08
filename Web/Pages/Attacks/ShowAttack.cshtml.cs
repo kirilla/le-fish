@@ -28,7 +28,7 @@ public class ShowAttackModel(
                     Value = x.Value,
                     Created = x.Created,
                     PageName = x.WebPage.Name,
-                    PayloadPageId = x.WebPageId,
+                    WebPageId = x.WebPageId,
                     TargetName = x.Target.Name,
                     TargetAddress = x.Target.Address,
                     TargetId = x.TargetId,

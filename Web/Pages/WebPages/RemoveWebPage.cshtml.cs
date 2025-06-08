@@ -58,7 +58,7 @@ public class RemoveWebPageModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-payload-pages");
+            return Redirect($"/show-web-pages");
         }
         catch (ConfirmationRequiredException)
         {
