@@ -95,7 +95,7 @@ public class SendEmailModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect("/attack");
+            return Redirect("/show-attacks");
         }
         catch
         {
