@@ -1,8 +1,8 @@
 ﻿using Lefish.Application.Commands.EmailMessages.SendEmail;
 
-namespace Lefish.Web.Pages;
+namespace Lefish.Web.Pages.Attacks;
 
-public class AttackModel(
+public class ShowAttacksModel(
     IUserToken userToken,
     IDatabaseService database,
     ISendEmailCommand sendEmailCommand) : UserTokenPageModel(userToken)
