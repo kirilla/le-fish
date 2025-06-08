@@ -8,6 +8,7 @@ public class ShowInstructionSetsModel(
     IAddInstructionSetCommand addInstructionSetCommand) : UserTokenPageModel(userToken)
 {
     public List<InstructionSet> InstructionSets { get; set; }
+    public List<InstructionSummary> Instructions { get; set; }
 
     public bool CanAddInstructionSet { get; set; }
         = addInstructionSetCommand.IsPermitted(userToken);
@@ -22,6 +23,18 @@ public class ShowInstructionSetsModel(
             InstructionSets = await database.InstructionSets
                 .AsNoTracking()
                 .OrderBy(x => x.Name)
+                .ToListAsync();
+
+            Instructions = await database.Instructions
+                .AsNoTracking()
+                .OrderBy(x => x.Name)
+                .Select(x => new InstructionSummary
+                {
+                    Id = x.Id,
+                    InstructionSetId = x.InstructionSetId,
+                    Name = x.Name,
+                    Created = x.Created,
+                })
                 .ToListAsync();
 
             return Page();

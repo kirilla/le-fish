@@ -17,31 +17,47 @@
 <main>
 
     <h4>
-        Samlingar av instruktioner
+        Instruktioner
     </h4>
 
     <div class="notice">
-        <ul>
-            @foreach (var set in Model.InstructionSets)
+        @if (!Model.InstructionSets.Any())
+        {
+            <div>
+                ✴️
+                &thinsp;
+                &ndash;
+            </div>
+        }
+
+        @foreach (var set in Model.InstructionSets)
+        {
+            <div>
+                ✴️
+                &thinsp;
+                <a href="/show-instruction-set/@(set.Id)">
+                    @(set.Name)
+                </a>
+            </div>
+
+            var subset = Model.Instructions
+                .Where(x => x.InstructionSetId == set.Id)
+                .ToList();
+
+            @foreach (var instruction in subset)
             {
-                <li>
-                    ✴️
+                <div>
+                    ❇️
                     &thinsp;
-                    <a href="/show-instruction-set/@(set.Id)">
-                        @(set.Name)
-                    </a>
-                </li>
+                    <a href="/show-instruction/@(instruction.Id)">@(instruction.Name)</a>
+                </div>
             }
 
-            @if (!Model.InstructionSets.Any())
+            @if (subset.Any())
             {
-                <li>
-                    ✴️
-                    &thinsp;
-                    &ndash;
-                </li>
+                <br />
             }
-        </ul>
+        }
     </div>
 
     @if (Model.CanAddInstructionSet)
