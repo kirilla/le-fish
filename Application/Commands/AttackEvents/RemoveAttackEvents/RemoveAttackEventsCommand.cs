@@ -11,16 +11,9 @@ public class RemoveAttackEventsCommand(IDatabaseService database) : IRemoveAttac
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        if (model.TargetId.HasValue)
-        {
-            await database.AttackEvents
-                .Where(x => x.Attack.TargetId == model.TargetId!.Value)
-                .ExecuteDeleteAsync();
-        }
-        else
-        {
-            await database.AttackEvents.ExecuteDeleteAsync();
-        }
+        await database.AttackEvents
+            .Where(x => x.AttackId == model.AttackId)
+            .ExecuteDeleteAsync();
     }
 
     public bool IsPermitted(IUserToken userToken)
