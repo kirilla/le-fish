@@ -31,13 +31,6 @@
     <pre class="notice">@(Model.TargetInstruction.Script)</pre>
 
     <p>
-        @if (Model.CanCloneTargetInstruction)
-        {
-            <a class="button" href="/clone-target-instruction/@(Model.TargetInstruction.Id)">
-                Klona
-            </a>
-        }
-
         @if (Model.CanEditTargetInstruction)
         {
             <a class="button" href="/edit-target-instruction/@(Model.TargetInstruction.Id)">
