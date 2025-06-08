@@ -39,10 +39,13 @@
                 </span>
             </div>
 
-            @foreach (var attack in Model.Attacks
-               .Where(x => x.TargetId == target.Id))
+            var attacks = Model.Attacks
+               .Where(x => x.TargetId == target.Id)
+               .ToList();
+
+            @foreach (var attack in attacks)
             {
-                <div style="padding-left:0.6em;">
+                <div>
                     🔥
                     &thinsp;
                     <a href="/show-attack/@(attack.Id)">@(attack.Value)</a>
@@ -51,6 +54,11 @@
                         @(attack.Created.ToFixedFormatDateShortTime())
                     </span>
                 </div>
+            }
+
+            @if (attacks.Any())
+            {
+                <br />
             }
         }
     </div>

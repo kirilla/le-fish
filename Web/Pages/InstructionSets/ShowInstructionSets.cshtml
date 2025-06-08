@@ -40,11 +40,11 @@
                 </a>
             </div>
 
-            var subset = Model.Instructions
+            var instructions = Model.Instructions
                 .Where(x => x.InstructionSetId == set.Id)
                 .ToList();
 
-            @foreach (var instruction in subset)
+            @foreach (var instruction in instructions)
             {
                 <div>
                     ❇️
@@ -53,7 +53,7 @@
                 </div>
             }
 
-            @if (subset.Any())
+            @if (instructions.Any())
             {
                 <br />
             }
