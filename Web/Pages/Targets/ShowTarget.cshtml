@@ -1,4 +1,4 @@
-﻿@page "/show-email-target/{id:int}"
+﻿@page "/show-target/{id:int}"
 @model ShowTargetModel
 @{
 }
@@ -29,14 +29,14 @@
     <p>
         @if (Model.CanEditTarget)
         {
-            <a class="button" href="/edit-email-target/@(Model.Target.Id)">
+            <a class="button" href="/edit-target/@(Model.Target.Id)">
                 Redigera
             </a>
         }
 
         @if (Model.CanRemoveTarget)
         {
-            <a class="button" href="/remove-email-target/@(Model.Target.Id)">
+            <a class="button" href="/remove-target/@(Model.Target.Id)">
                 Ta bort
             </a>
         }

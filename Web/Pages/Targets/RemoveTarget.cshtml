@@ -1,4 +1,4 @@
-﻿@page "/remove-email-target/{id:int}"
+﻿@page "/remove-target/{id:int}"
 @model RemoveTargetModel
 @{
 }
@@ -37,7 +37,7 @@
             Ta bort
         </button>
 
-        <a class="button" href="/show-email-target/@(Model.CommandModel.Id)">
+        <a class="button" href="/show-target/@(Model.CommandModel.Id)">
             Avbryt
         </a>
     </form>

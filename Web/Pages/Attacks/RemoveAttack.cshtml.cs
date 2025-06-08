@@ -60,7 +60,7 @@ public class RemoveAttackModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-email-target/{targetId}");
+            return Redirect($"/show-target/{targetId}");
         }
         catch (ConfirmationRequiredException)
         {

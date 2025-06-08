@@ -60,7 +60,7 @@ public class EditTargetModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-email-target/{id}");
+            return Redirect($"/show-target/{id}");
         }
         catch (BlockedByAddressException)
         {

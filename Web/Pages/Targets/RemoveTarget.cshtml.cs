@@ -58,7 +58,7 @@ public class RemoveTargetModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-email-targets");
+            return Redirect($"/show-targets");
         }
         catch (ConfirmationRequiredException)
         {
