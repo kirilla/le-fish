@@ -1,0 +1,55 @@
+﻿@page "/show-attack-urls/{id:int}"
+@model ShowAttackUrlsModel
+@{
+}
+
+@section Meta {
+    <title>Attack URL:s - @(Model.Attack.Value) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        🎯
+        <a href="/show-target/@(Model.Target.Id)">@(Model.Target.Name)</a>
+        <br />
+        🔥
+        @(Model.Attack.Value)
+    </h4>
+
+    <h5>
+        URL:er
+    </h5>
+
+    <ul class="notice">
+        <li>
+            📄
+            &thinsp;
+            <a href="@(Model.PageUrl)">@(Model.PageUrl)</a> 
+        </li>
+        <li>
+            📜
+            &thinsp;
+            <a href="@(Model.PageScriptUrl)">@(Model.PageScriptUrl)</a> 
+        </li>
+        <li>
+            ❇️
+            &thinsp;
+            <a href="@(Model.FetchInstructionUrl)">@(Model.FetchInstructionUrl)</a> 
+        </li>
+        <li>
+            🧺
+            &thinsp;
+            <a href="@(Model.UploadDataUrl)">@(Model.UploadDataUrl)</a> 
+        </li>
+    </ul>
+
+    <a class="button" href="/show-attack/@(Model.Attack.Id)">
+        Tillbaka
+    </a>
+
+</main>
