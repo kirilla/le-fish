@@ -1,5 +1,4 @@
-﻿using Lefish.Application.Commands.TargetInstructions.CloneTargetInstruction;
-using Lefish.Application.Commands.TargetInstructions.EditTargetInstruction;
+﻿using Lefish.Application.Commands.TargetInstructions.EditTargetInstruction;
 using Lefish.Application.Commands.TargetInstructions.RemoveTargetInstruction;
 
 namespace Lefish.Web.Pages.TargetInstructions;
@@ -7,17 +6,10 @@ namespace Lefish.Web.Pages.TargetInstructions;
 public class ShowTargetInstructionModel(
     IUserToken userToken,
     IDatabaseService database,
-    ICloneTargetInstructionCommand cloneTargetInstructionCommand,
     IEditTargetInstructionCommand editTargetInstructionCommand,
-    IRemoveTargetInstructionCommand removeTargetInstructionCommand,
-    IOptions<TemplateConfiguration> templateConfiguration) : UserTokenPageModel(userToken)
+    IRemoveTargetInstructionCommand removeTargetInstructionCommand) : UserTokenPageModel(userToken)
 {
-    public readonly TemplateConfiguration Config = templateConfiguration.Value;
-
     public TargetInstruction TargetInstruction { get; set; }
-
-    public bool CanCloneTargetInstruction { get; set; }
-        = cloneTargetInstructionCommand.IsPermitted(userToken);
 
     public bool CanEditTargetInstruction { get; set; }
         = editTargetInstructionCommand.IsPermitted(userToken);
