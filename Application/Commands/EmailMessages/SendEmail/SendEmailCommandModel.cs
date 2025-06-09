@@ -18,4 +18,6 @@ public class SendEmailCommandModel
 
     [Required]
     public int? PageScriptId { get; set; }
+
+    public int? InstructionSetId { get; set; }
 }

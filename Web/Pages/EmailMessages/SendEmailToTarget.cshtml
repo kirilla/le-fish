@@ -81,6 +81,20 @@
             }
         </select>
 
+        <label asp-for="CommandModel.InstructionSetId">
+            Instruktioner
+        </label>
+
+        <select asp-for="CommandModel.InstructionSetId">
+            <option value="">–</option>
+            @foreach (var set in Model.InstructionSets)
+            {
+                <option value="@(set.Id)">
+                    @(set.Name)
+                </option>
+            }
+        </select>
+
         <div asp-validation-summary="All"></div>
 
         <button type="submit">

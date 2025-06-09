@@ -63,6 +63,27 @@ public class SendEmailCommand(
 
         database.Attacks.Add(attack);
 
+        if (model.InstructionSetId.HasValue)
+        {
+            var instructions =
+                (await database.Instructions
+                    .Where(x => x.InstructionSetId == model.InstructionSetId!.Value)
+                    .ToListAsync())
+                .Select(x => new TargetInstruction()
+                {
+                    Name = x.Name,
+                    Script = x.Script,
+                    Created = x.Created,
+                    Fetched = null,
+                    Reference = 0,
+                    InstructionStatus = InstructionStatus.Waiting,
+                    Attack = attack,
+                })
+                .ToList();
+
+            database.TargetInstructions.AddRange(instructions);
+        }
+
         var message = new EmailMessage()
         {
             ToName = target.Name,

@@ -14,6 +14,8 @@ public class SendEmailModel(
     public List<WebPageSummary> WebPages { get; set; }
     public List<PageScriptSummary> PageScripts { get; set; }
 
+    public List<InstructionSet> InstructionSets { get; set; }
+
     [BindProperty]
     public SendEmailCommandModel CommandModel { get; set; }
 
@@ -24,11 +26,20 @@ public class SendEmailModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            EmailAccounts = await database.EmailAccounts.ToListAsync();
-            Targets = await database.Targets.ToListAsync();
-            EmailTemplates = await database.EmailTemplates.ToListAsync();
+            Targets = await database.Targets
+                .OrderBy(x => x.Name)
+                .ToListAsync();
+
+            EmailAccounts = await database.EmailAccounts
+                .OrderBy(x => x.FromAddress)
+                .ToListAsync();
+            
+            EmailTemplates = await database.EmailTemplates
+                .OrderBy(x => x.Subject)
+                .ToListAsync();
 
             WebPages = await database.WebPages
+                .OrderBy(x => x.Name)
                 .Select(x => new WebPageSummary()
                 {
                     Id = x.Id,
@@ -37,11 +48,16 @@ public class SendEmailModel(
                 .ToListAsync();
 
             PageScripts = await database.PageScripts
+                .OrderBy(x => x.Name)
                 .Select(x => new PageScriptSummary()
                 {
                     Id = x.Id,
                     Name = x.Name,
                 })
+                .ToListAsync();
+
+            InstructionSets = await database.InstructionSets
+                .OrderBy(x => x.Name)
                 .ToListAsync();
 
             CommandModel = new SendEmailCommandModel();
@@ -70,11 +86,20 @@ public class SendEmailModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            EmailAccounts = await database.EmailAccounts.ToListAsync();
-            Targets = await database.Targets.ToListAsync();
-            EmailTemplates = await database.EmailTemplates.ToListAsync();
+            EmailAccounts = await database.EmailAccounts
+                .OrderBy(x => x.FromAddress)
+                .ToListAsync();
+            
+            Targets = await database.Targets
+                .OrderBy(x => x.Name)
+                .ToListAsync();
+            
+            EmailTemplates = await database.EmailTemplates
+                .OrderBy(x => x.Subject)
+                .ToListAsync();
 
             WebPages = await database.WebPages
+                .OrderBy(x => x.Name)
                 .Select(x => new WebPageSummary()
                 {
                     Id = x.Id,
@@ -83,11 +108,16 @@ public class SendEmailModel(
                 .ToListAsync();
 
             PageScripts = await database.PageScripts
+                .OrderBy(x => x.Name)
                 .Select(x => new PageScriptSummary()
                 {
                     Id = x.Id,
                     Name = x.Name,
                 })
+                .ToListAsync();
+
+            InstructionSets = await database.InstructionSets
+                .OrderBy(x => x.Name)
                 .ToListAsync();
 
             if (!ModelState.IsValid)
