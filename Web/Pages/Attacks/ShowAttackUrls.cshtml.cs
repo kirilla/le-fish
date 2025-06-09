@@ -34,7 +34,7 @@ public class ShowAttackUrlsModel(
 
             PageUrl = $"/page/{Attack.Value}";
             PageScriptUrl = $"/script/{Attack.Value}";
-            FetchInstructionUrl = $"/fetch-instruction/{Attack.Value}";
+            FetchInstructionUrl = $"/instruction/{Attack.Value}";
             UploadDataUrl = $"/upload/{Attack.Value}";
 
             return Page();
