@@ -1,6 +1,6 @@
 ﻿namespace Lefish.Domain.Entities;
 
-public class TargetInstruction : ICreatedDateTime
+public class TargetInstruction : ICreatedDateTime, IFormatOnSave
 {
     public int Id { get; set; }
 
@@ -16,4 +16,12 @@ public class TargetInstruction : ICreatedDateTime
 
     public Attack Attack { get; set; }
     public int AttackId { get; set; }
+
+    public void FormatOnSave()
+    {
+        if (Reference == 0)
+        {
+            Reference = Random.Shared.Next();
+        }
+    }
 }
