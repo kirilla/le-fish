@@ -23,10 +23,6 @@
         @(Model.InstructionSet.Name)
     </h4>
 
-    <h5>
-        Instruktioner
-    </h5>
-    
     <div class="notice">
         <ul>
             @foreach (var attachment in Model.Instructions)
@@ -61,19 +57,10 @@
     </div>
 
     <p>
-        
-
         @if (Model.CanEditInstructionSet)
         {
             <a class="button" href="/edit-instruction-set/@(Model.InstructionSet.Id)">
                 Redigera
-            </a>
-        }
-
-        @if (Model.CanCloneInstructionSet)
-        {
-            <a class="button" href="/clone-instruction-set/@(Model.InstructionSet.Id)">
-                Klona
             </a>
         }
 

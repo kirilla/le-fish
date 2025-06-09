@@ -1,5 +1,4 @@
 ﻿using Lefish.Application.Commands.Instructions.AddInstruction;
-using Lefish.Application.Commands.InstructionSets.CloneInstructionSet;
 using Lefish.Application.Commands.InstructionSets.EditInstructionSet;
 using Lefish.Application.Commands.InstructionSets.RemoveInstructionSet;
 
@@ -9,7 +8,6 @@ public class ShowInstructionSetModel(
     IUserToken userToken,
     IDatabaseService database,
     IAddInstructionCommand addInstructionCommand,
-    ICloneInstructionSetCommand cloneInstructionSetCommand,
     IEditInstructionSetCommand editInstructionSetCommand,
     IRemoveInstructionSetCommand removeInstructionSetCommand) : UserTokenPageModel(userToken)
 {
@@ -19,9 +17,6 @@ public class ShowInstructionSetModel(
 
     public bool CanAddInstruction { get; set; }
         = addInstructionCommand.IsPermitted(userToken);
-
-    public bool CanCloneInstructionSet { get; set; }
-        = cloneInstructionSetCommand.IsPermitted(userToken);
 
     public bool CanEditInstructionSet { get; set; }
         = editInstructionSetCommand.IsPermitted(userToken);

@@ -1,17 +1,22 @@
 using Lefish.Application.Commands.InstructionSets.AddInstructionSet;
+using Lefish.Application.Commands.InstructionSets.CloneInstructionSet;
 
 namespace Lefish.Web.Pages.InstructionSets;
 
-public class ShowInstructionSetsModel(
+public class ShowInstructionsModel(
     IUserToken userToken,
     IDatabaseService database,
-    IAddInstructionSetCommand addInstructionSetCommand) : UserTokenPageModel(userToken)
+    IAddInstructionSetCommand addInstructionSetCommand,
+    ICloneInstructionSetCommand cloneInstructionSetCommand) : UserTokenPageModel(userToken)
 {
     public List<InstructionSet> InstructionSets { get; set; }
     public List<InstructionSummary> Instructions { get; set; }
 
     public bool CanAddInstructionSet { get; set; }
         = addInstructionSetCommand.IsPermitted(userToken);
+
+    public bool CanCloneInstructionSet { get; set; }
+        = cloneInstructionSetCommand.IsPermitted(userToken);
 
     public async Task<IActionResult> OnGetAsync()
     {

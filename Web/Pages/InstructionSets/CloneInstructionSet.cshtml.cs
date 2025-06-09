@@ -7,27 +7,26 @@ public class CloneInstructionSetModel(
     IDatabaseService database,
     ICloneInstructionSetCommand command) : UserTokenPageModel(userToken)
 {
-    public InstructionSet InstructionSet { get; set; }
+    public List<InstructionSet> InstructionSets { get; set; }
 
     [BindProperty]
     public CloneInstructionSetCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int id)
+    public async Task<IActionResult> OnGetAsync()
     {
         try
         {
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            InstructionSet = await database.InstructionSets
-                .Where(x => x.Id == id)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
+            InstructionSets = await database.InstructionSets
+                .AsNoTracking()
+                .OrderBy(x => x.Name)
+                .ToListAsync();
 
             CommandModel = new CloneInstructionSetCommandModel()
             {
-                Id = InstructionSet.Id,
-                Name = InstructionSet.Name,
+                Name = "Ny samling",
             };
 
             return Page();
@@ -42,24 +41,32 @@ public class CloneInstructionSetModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync(int id)
+    public async Task<IActionResult> OnPostAsync()
     {
         try
         {
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            InstructionSet = await database.InstructionSets
-                .Where(x => x.Id == CommandModel.Id)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
+            InstructionSets = await database.InstructionSets
+                .AsNoTracking()
+                .OrderBy(x => x.Name)
+                .ToListAsync();
 
             if (!ModelState.IsValid)
                 return Page();
 
-            var cloneId = await command.Execute(UserToken, CommandModel);
+            await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-instruction-set/{cloneId}");
+            return Redirect($"/show-instructions");
+        }
+        catch (BlockedByExistingException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.Name),
+                "Ge samlingen ett unikt namn.");
+
+            return Page();
         }
         catch
         {

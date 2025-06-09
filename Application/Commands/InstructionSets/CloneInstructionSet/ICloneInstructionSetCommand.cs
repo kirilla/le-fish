@@ -2,7 +2,7 @@
 
 public interface ICloneInstructionSetCommand
 {
-    Task<int> Execute(IUserToken userToken, CloneInstructionSetCommandModel model);
+    Task Execute(IUserToken userToken, CloneInstructionSetCommandModel model);
 
     bool IsPermitted(IUserToken userToken);
 }

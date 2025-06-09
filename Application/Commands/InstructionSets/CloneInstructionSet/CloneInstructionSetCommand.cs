@@ -2,7 +2,7 @@
 
 public class CloneInstructionSetCommand(IDatabaseService database) : ICloneInstructionSetCommand
 {
-    public async Task<int> Execute(
+    public async Task Execute(
         IUserToken userToken, CloneInstructionSetCommandModel model)
     {
         if (!IsPermitted(userToken))
@@ -17,10 +17,15 @@ public class CloneInstructionSetCommand(IDatabaseService database) : ICloneInstr
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        //var instructions = await database.Instructions
-        //    .AsNoTracking()
-        //    .Where(x => x.InstructionSetId == model.Id)
-        //    .ToListAsync();
+        if (await database.InstructionSets
+            .AnyAsync(x => x.Name == model.Name))
+            throw new BlockedByExistingException();
+
+        var instructions = await database.Instructions
+            .AsNoTracking()
+            .Where(x => x.InstructionSetId == model.Id)
+            .OrderBy(x => x.Created)
+            .ToListAsync();
 
         var newSet = new InstructionSet()
         {
@@ -29,23 +34,19 @@ public class CloneInstructionSetCommand(IDatabaseService database) : ICloneInstr
 
         database.InstructionSets.Add(newSet);
 
-        //foreach (var instruction in instructions)
-        //{
-        //    var newInstruction = new Instruction()
-        //    {
-        //        Name = instruction.Name,
-        //        Script = instruction.Script,
-        //        Name = instruction.Name,
-        //        Created = instruction.Created,
-        //        //InstructionSet = newSet,
-        //    };
+        var newInstructions = instructions
+            .Select(x => new Instruction()
+            {
+                Name = x.Name,
+                Script = x.Script,
+                Created = x.Created,
+                InstructionSet = newSet,
+            })
+            .ToList();
 
-        //    database.Instructions.Add(newInstruction);
-        //}
+        database.Instructions.AddRange(newInstructions);
 
         await database.SaveAsync(userToken);
-
-        return newSet.Id;
     }
 
     public bool IsPermitted(IUserToken userToken)

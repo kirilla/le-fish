@@ -1,4 +1,4 @@
-﻿@page "/clone-instruction-set/{id:int}"
+﻿@page "/clone-instruction-set/"
 @model CloneInstructionSetModel
 @{
 }
@@ -17,12 +17,24 @@
 <main>
     <h4>
         ✴️
-        @(Model.InstructionSet.Name)
+        Klona samling
     </h4>
 
     <form method="post">
 
-        <input type="hidden" asp-for="CommandModel.Id" />
+        <label asp-for="CommandModel.Id">
+            Samling
+        </label>
+
+        <select asp-for="CommandModel.Id">
+            <option value="">–</option>
+            @foreach (var set in Model.InstructionSets)
+            {
+                <option value="@(set.Id)">
+                    @(set.Name)
+                </option>
+            }
+        </select>
 
         <label asp-for="CommandModel.Name">
             Namn på den nya samlingen
@@ -35,7 +47,7 @@
             Skapa
         </button>
 
-        <a class="button" href="/show-instruction-set/@(Model.InstructionSet.Id)">
+        <a class="button" href="/show-instructions">
             Avbryt
         </a>
     </form>

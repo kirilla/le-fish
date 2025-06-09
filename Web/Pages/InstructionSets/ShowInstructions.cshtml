@@ -1,5 +1,5 @@
 ﻿@page "/show-instructions"
-@model ShowInstructionSetsModel
+@model ShowInstructionsModel
 @{
 }
 
@@ -17,6 +17,7 @@
 <main>
 
     <h4>
+        ❇️
         Instruktioner
     </h4>
 
@@ -60,13 +61,20 @@
         }
     </div>
 
-    @if (Model.CanAddInstructionSet)
-    {
-        <p>
+    <p>
+        @if (Model.CanAddInstructionSet)
+        {
             <a class="button" href="/add-instruction-set">
                 Ny samling
             </a>
-        </p>
-    }
+        }
+        
+        @if (Model.CanCloneInstructionSet)
+        {
+            <a class="button" href="/clone-instruction-set">
+                Klona samling
+            </a>
+        }
+    </p>
 
 </main>
