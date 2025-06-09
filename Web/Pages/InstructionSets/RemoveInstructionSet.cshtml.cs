@@ -58,7 +58,7 @@ public class RemoveInstructionSetModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-instruction-sets");
+            return Redirect($"/show-instructions");
         }
         catch (ConfirmationRequiredException)
         {
