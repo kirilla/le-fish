@@ -1,0 +1,95 @@
+﻿@page "/info"
+@model InfoModel
+@{
+}
+
+@section Meta {
+    <title>Info - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Info
+    </h4>
+
+    <div class="notice">
+
+        <h5>
+            Syfte
+        </h5>
+
+        <p>
+            Syftet med den här programvaran är att via epostutskick lura
+            mottagaren att öppna en webbsida som vi kontrollerar, 
+            och som ger oss möjlighet att köra kod i mottagarens
+            webbläsare, på ett semi-interaktivt vis.            
+        </p>
+        <p>
+            Lösningen är inspirerad av så kallad C2-programvara, 
+            Command & Control, som används för fjärrexekvering, 
+            men är mer begränsad till sin natur, eftersom webbläsaren är en
+            teknisk sandlåda.
+        </p>
+        <p>
+            Syftet är primärt att skapa ett verktyg med vilket vi kan
+            undersöka vad som är möjligt att göra i en webbläsare,
+            som angripare.
+        </p>
+        <p>
+            Tekniken som används är vanlig webbteknik. 
+            Den här typen av angrepp skulle kunna utföras av en vanlig webbsajt
+            eller av javascript-kod förmedlad via reklam- eller CDN-nätverk.
+            Det som vår lösning tillför, är främst interaktiviteten.
+        </p>
+    </div>
+
+    <div class="notice">
+
+        <h5>
+            Förberedelser
+        </h5>
+
+        <p>
+
+        </p>
+    </div>
+
+    <div class="notice">
+
+        <h5>
+            Operationell säkerhet
+        </h5>
+
+        <p>
+            För att undvika att bli analyserade och igenkända som
+            en skadlig webbsajt så ingår det en brandvägg i lösningen.
+        </p>
+        <p>
+            Åtkomstregler kan sättas upp för enskilda IP-nätverk.
+            Brandväggen har en grundinställning i appsettings-profilen,
+            som kan antingen blockera eller tillåta trafik.
+        </p>
+        <p>
+            Blockerad trafik loggas, och kan ge kunskap om IP-adresser 
+            som man skulle vilja öppna för åtkomst.
+            Vid spjutfiskande mot en enskild organsation är det troligt
+            att trafik kommer från organisationens egna IP-nummer.
+        </p>
+        <p>
+            För att undvika att väcka epostmottagarens misstänksamhet 
+            bör man försöka se till att ingen önskad trafik går förlorad,
+            samtidigt som man filtrerar bort oönskad trafik.
+        </p>
+        <p>
+            Under uppsättningsfasen kan det vara en god idé att blockera
+            alla nätverk utom ens egna. Om man råkar låsa sig ute går det
+            att stänga av brandväggen via appsettings-profilen.
+        </p>
+    </div>
+
+</main>
