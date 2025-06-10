@@ -13,7 +13,7 @@ public class ShowInstructionSetModel(
 {
     public InstructionSet InstructionSet { get; set; }
 
-    public List<Instruction> Instructions { get; set; } = new List<Instruction>();
+    public List<InstructionSummary> Instructions { get; set; }
 
     public bool CanAddInstruction { get; set; }
         = addInstructionCommand.IsPermitted(userToken);
@@ -38,6 +38,13 @@ public class ShowInstructionSetModel(
 
             Instructions = await database.Instructions
                 .Where(x => x.InstructionSetId == id)
+                .Select(x => new InstructionSummary()
+                {
+                    Id = x.Id,
+                    InstructionSetId = x.InstructionSetId,
+                    Name = x.Name,
+                    Created = x.Created,
+                })
                 .ToListAsync();
 
             return Page();
