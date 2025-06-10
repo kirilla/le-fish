@@ -32,7 +32,7 @@ public class ShowInstructionsModel(
 
             Instructions = await database.Instructions
                 .AsNoTracking()
-                .OrderBy(x => x.Name)
+                .OrderBy(x => x.Created)
                 .Select(x => new InstructionSummary
                 {
                     Id = x.Id,
