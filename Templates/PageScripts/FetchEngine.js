@@ -39,7 +39,7 @@ lefish = (function() {
         fetch('/instruction/[[attack_token]]', {
             method: 'GET'
         })
-        .then(response => response.data())
+        .then(response => response.text())
         .then(data => console.log('Response:', data))
         .catch(error => console.error('Error:', error));
     }
